@@ -1,13 +1,9 @@
 import Vue from 'vue';
 
-import VHeader from '~components/VHeader';
-import VPageBottom from '~components/VPageBottom';
-import VDownload from '~components/VDownload';
-import VToast from '~components/VToast';
+import VHeader from '~components/v-header';
+import VToast from '~components/v-toast';
 
 Vue.component('VHeader', VHeader);
-Vue.component('VPageBottom', VPageBottom);
-Vue.component('VDownload', VDownload);
 
 let ToastConstructor = Vue.extend(VToast);
 Vue.prototype.$toast = function(txt, timeout = 2300) {

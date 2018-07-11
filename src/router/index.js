@@ -8,26 +8,9 @@ const router = new Router({
     path: '/',
     name: 'home',
     component: () =>
-      import ( /* webpackChunkName: "home" */ "~components/home"),
+      import ( /* webpackChunkName: "home" */ "~views/home/home"),
     meta: {
       title: '阿拉私家 - 商家端'
-    }
-  }, {
-    path: '/store',
-    name: 'store',
-    component: () =>
-      import ( /* webpackChunkName: "store" */ "~views/store/Store"),
-    meta: {
-      title: '阿拉私家 - 店铺主页',
-      keepAlive: true
-    }
-  }, {
-    path: '/product',
-    name: 'product-detail',
-    component: () =>
-      import ( /* webpackChunkName: "product-detail" */ "~views/product/ProductDetail"),
-    meta: {
-      title: '阿拉私家 - 产品详情'
     }
   }, {
     path: '*',

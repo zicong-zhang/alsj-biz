@@ -5,6 +5,7 @@ import VueLazyload from 'vue-lazyload'
 import AlloyFinger from 'alloyfinger'
 import AlloyFingerPlugin from 'alloyfinger/vue/alloy_finger.vue'
 import VueAwesomeSwiper from 'vue-awesome-swiper'
+import FastClick from 'fastclick'
 
 // 工具类
 import router from './router';
@@ -22,6 +23,7 @@ import './sass/base.scss';
 import '~assets/font/iconfont.css';
 
 Vue.config.productionTip = false;
+Vue.config.devtools = true;
 
 Vue.use(Vuex);
 Vue.use(VueLazyload);
@@ -32,6 +34,8 @@ Vue.use(AlloyFingerPlugin, {
 
 Vue.prototype.$utils = utils;
 Vue.prototype.$http = http;
+
+FastClick.attach(document.body);
 
 
 let store = new Vuex.Store(vx);
