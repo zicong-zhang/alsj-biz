@@ -1,0 +1,26 @@
+@function e($px) {
+	@return ($px / 2);
+}
+
+@function r($px) {
+  @return (($px / 75px) * 1rem);
+}
+
+@mixin over($num) {
+	@if $num==1 {
+		overflow: hidden;
+		text-overflow: ellipsis;
+		white-space: nowrap;
+	}
+	@else {
+		display: -webkit-box;
+		-webkit-box-orient: vertical;
+		-webkit-line-clamp: $num;
+		overflow: hidden;
+	}
+}
+
+
+$font: #404040 !default;
+$main: #cc2828 !default;
+$shadow1: 0 0 e(10px) 0 rgba(0, 0, 0, 0.1) !default;
