@@ -1,12 +1,14 @@
 <template>
   <div class="order-list">
-
     <OrderListHeader/>
-    <div class="content">
+    <div class="content"
+      ref="content">
       <ul>
         <OrderListItem v-for="(item, idx) in dataList"
           :item="{item}"
-          :key="idx" />
+          :idx="idx"
+          :key="idx"
+          @log-scrolltop="logScrollTop" />
       </ul>
     </div>
   </div>
@@ -23,8 +25,21 @@ export default {
   },
   data() {
     return {
-      dataList: 5
+      dataList: 5,
+      scrollTop: 0
     };
+  },
+  watch: {
+    $route(to, from) {
+      if (from.name == "order-detail") {
+        this.$refs.content.scrollTop = this.$route.meta.scrollTop;
+      }
+    }
+  },
+  methods: {
+    logScrollTop() {
+      this.$route.meta.scrollTop = this.$refs.content.scrollTop;
+    }
   }
 };
 </script>
@@ -32,7 +47,7 @@ export default {
 .order-list {
   display: flex;
   flex-flow: column;
-  background: #F0F4F7;
+  background: #f0f4f7;
 
   .content {
     flex: 1;

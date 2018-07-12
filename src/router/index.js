@@ -5,12 +5,16 @@ Vue.use(Router);
 
 const router = new Router({
   routes: [{
-    path: '/home',
+    path: '/',
     name: 'home',
+    redirect: {
+      name: 'worker'
+    },
     component: () =>
       import ( /* webpackChunkName: "home" */ "~views/home/home"),
     meta: {
-      title: '阿拉私家 - 商家端'
+      title: '阿拉私家 - 商家端',
+      scrollTop: 0
     },
     children: [{
       path: 'worker',
@@ -21,13 +25,30 @@ const router = new Router({
         title: '阿拉私家 - 工作台'
       }
     }, {
-      path: 'order',
-      name: 'order',
+      path: 'order-list',
+      name: 'order-list',
       component: () =>
         import ( /* webpackChunkName: "order" */ "~views/order/order-list"),
       meta: {
         title: '阿拉私家 - 商家端'
       }
+    }]
+  }, {
+    path: '/order',
+    name: 'order',
+    redirect: {
+      name: 'order-detail'
+    },
+    component: () =>
+      import ( /* webpackChunkName: "no-found" */ "~views/order/order-index"),
+    children: [{
+      path: 'detail',
+      name: 'order-detail',
+      component: () =>
+        import ( /* webpackChunkName: "no-found" */ "~views/order/order-detail"),
+        meta: {
+          title: '阿拉私家 - 订单详情'
+        }
     }]
   }, {
     path: '*',
@@ -37,7 +58,7 @@ const router = new Router({
     meta: {
       title: '阿拉私家 - 找不到页面'
     }
-  }],
+  }]
 });
 
 router.beforeEach((to, from, next) => {

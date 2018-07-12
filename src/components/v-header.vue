@@ -4,7 +4,7 @@
     <slot name="back">
       <span class="back-btn btn"
         v-finger:tap="back">
-        <i class="iconfont icon-icon_stores_back"></i>
+        <i class="iconfont icon-back"></i>
       </span>
     </slot>
     <slot name="right-one"></slot>
@@ -56,19 +56,20 @@ export default {
     line-height: r(88px);
     font-size: r(30px);
     font-weight: normal;
+    background: #fff;
     // color: $font;
     text-align: center;
   }
 }
 i {
   font-size: r(30px);
-  color: #fff;
+  color: #333;
   display: block;
-  width: r(50px);
+  // width: r(50px);
   height: r(50px);
   line-height: r(50px);
   text-align: center;
-  background: rgba(0, 0, 0, 0.2);
+  // background: rgba(0, 0, 0, 0.2);
   border-radius: 50%;
 }
 .btn {

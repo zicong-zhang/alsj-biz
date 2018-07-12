@@ -30,7 +30,7 @@ export default {
         },
         {
           name: "订单",
-          routeName: "order",
+          routeName: "order-list",
           icon: "icon-icon_my_orrders"
         }
       ]

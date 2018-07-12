@@ -1,5 +1,5 @@
 <template>
-  <li class="order-list-item">
+  <li class="order-list-item" @click="toDetail">
     <div class="list-item-title">
       <i class="iconfont icon-icon_my_orrders"></i>
       <h3>订单：8555883654789</h3>
@@ -46,6 +46,17 @@ export default {
   methods: {
     finish() {
 
+    },
+    toDetail() {
+      console.log('213:_____', 213);
+      this.$emit('log-scrolltop');
+      this.$store.commit('bb', 'on');
+      this.$router.push({
+        name: 'order',
+        query: {
+          id: this.idx
+        }
+      })
     }
   }
 };
