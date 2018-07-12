@@ -5,21 +5,30 @@ Vue.use(Router);
 
 const router = new Router({
   routes: [{
-    path: '/',
+    path: '/home',
     name: 'home',
     component: () =>
       import ( /* webpackChunkName: "home" */ "~views/home/home"),
     meta: {
       title: '阿拉私家 - 商家端'
-    }
-  }, {
-    path: '/order',
-    name: 'order',
-    component: () =>
-      import ( /* webpackChunkName: "order" */ "~views/order/order-list"),
-    meta: {
-      title: '阿拉私家 - 商家端'
-    }
+    },
+    children: [{
+      path: 'worker',
+      name: 'worker',
+      component: () =>
+        import ( /* webpackChunkName: "worker" */ "~views/worker/worker"),
+      meta: {
+        title: '阿拉私家 - 工作台'
+      }
+    }, {
+      path: 'order',
+      name: 'order',
+      component: () =>
+        import ( /* webpackChunkName: "order" */ "~views/order/order-list"),
+      meta: {
+        title: '阿拉私家 - 商家端'
+      }
+    }]
   }, {
     path: '*',
     name: '404',

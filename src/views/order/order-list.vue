@@ -5,12 +5,10 @@
     <div class="content">
       <ul>
         <OrderListItem v-for="(item, idx) in dataList"
-          :item="item"
+          :item="{item}"
           :key="idx" />
       </ul>
     </div>
-
-    <VFooter/>
   </div>
 </template>
 <script>
@@ -25,7 +23,7 @@ export default {
   },
   data() {
     return {
-      dataList: 15
+      dataList: 5
     };
   }
 };
@@ -34,6 +32,7 @@ export default {
 .order-list {
   display: flex;
   flex-flow: column;
+  background: #F0F4F7;
 
   .content {
     flex: 1;

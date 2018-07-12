@@ -8,8 +8,11 @@
         @click="changeActive(idx)">
         <p>{{ item }}</p>
       </li>
-      <li>
-        <p>更多状态</p>
+      <li :class="{last: true, active: active === 3}" @click="showMoreStatus">
+        <p><span>{{ statusName }}</span><i class="iconfont icon-bottomnew"></i></p>
+        <VPopup :list="moreStatus" 
+        v-if="isShowPopup"
+        @select="selectMoreStatus"/>
       </li>
     </ul>
   </header>
@@ -21,17 +24,28 @@ export default {
   data() {
     return {
       active: 0,
-      list: ["上门量尺", "设计方案", "签订合同"]
+      isShowPopup: false,
+      list: ["上门量尺", "设计方案", "签订合同"],
+      moreStatus: ["上门量尺", "设计方案", "签订合同"],
+      statusName: '更多状态'
     };
   },
   methods: {
     changeActive(idx) {
       this.active = idx;
+    },
+    showMoreStatus() {
+      this.isShowPopup = true;
+    },
+    selectMoreStatus(item) {
+      this.active = 3;
+      this.isShowPopup = false;
+      this.statusName = item;
     }
   }
 };
 </script>
-<style lang="scss">
+<style lang="scss" scoped>
 .order-list-header {
   flex: none;
   height: r(88px + 55px);
@@ -63,9 +77,11 @@ export default {
         position: absolute;
         right: 0;
         top: 0;
-
       }
     }
+  }
+  .last {
+    position: relative;
   }
   p {
     height: r(50px);
@@ -74,6 +90,9 @@ export default {
     border-bottom: r(4px) solid transparent;
     margin: 0 r(10px);
     transition: all .2s;
+  }
+  i {
+    font-size: r(24px);
   }
   .active {
     color: $main;

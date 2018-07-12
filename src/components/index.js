@@ -2,10 +2,12 @@ import Vue from 'vue';
 
 import VHeader from '~components/v-header';
 import VFooter from '~components/v-footer';
+import VPopup from '~components/v-popup';
 import VToast from '~components/v-toast';
 
 Vue.component('VHeader', VHeader);
 Vue.component('VFooter', VFooter);
+Vue.component('VPopup', VPopup);
 
 let ToastConstructor = Vue.extend(VToast);
 Vue.prototype.$toast = function(txt, timeout = 2300) {

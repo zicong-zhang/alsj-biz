@@ -3,7 +3,7 @@
     <ul>
       <li v-for="(item, idx) in list"
         :key="idx"
-        :class="{active: active === idx}"
+        :class="{active: routeName === item.routeName}"
         @click="changeActive(item, idx)">
         <i :class="['iconfont', item.icon]"></i>
         <p>{{ item.name }}</p>
@@ -20,7 +20,7 @@ export default {
       list: [
         {
           name: "工作台",
-          routeName: "home",
+          routeName: "worker",
           icon: "icon-classification"
         },
         {
@@ -36,12 +36,16 @@ export default {
       ]
     };
   },
+  computed: {
+    routeName() {
+      return this.$route.name;
+    }
+  },
   methods: {
     changeActive(item, idx) {
-      console.log('item, idx:_____', item, idx);
       if (this.active === idx) return false;
       this.active = idx;
-      this.$store.commit("bb", "");
+      this.$store.commit("bb", "on");
       this.$router.push({
         name: item.routeName
       });
@@ -67,6 +71,7 @@ export default {
     flex-flow: column;
     align-items: center;
     justify-content: center;
+    width: 100%;
     height: r(98px);
   }
   i {

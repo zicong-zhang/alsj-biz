@@ -32,7 +32,7 @@ Vue.directive('scroll', {
  * 获取焦点
  */
 Vue.directive('focus', {
-  inserted(el) {
+  bind(el, binding, vNode) {
     el.focus();
   }
 })
@@ -40,21 +40,9 @@ Vue.directive('focus', {
  * 返回上一页
  */
 Vue.directive('back', {
-  bind(el, binding) {
+  bind(el, binding, vNode) {
     el.addEventListener('click', e => {
-      window.history.go(-1);
-      /*e.preventDefault();
-      e.stopPropagation();*/
-
-
-      if (binding.value) {
-        let timer = setTimeout(() => {
-          clearTimeout(timer);
-          timer = null;
-          window.location.href = binding.value;
-        }, 300)
-      }
-      return false;
+      vNode.$router.back();
     })
   }
 })

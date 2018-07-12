@@ -3,7 +3,7 @@
     <div class="list-item-title">
       <i class="iconfont icon-icon_my_orrders"></i>
       <h3>订单：8555883654789</h3>
-      <span class="label">完成量尺</span>
+      <span class="label" @click="finish">完成量尺</span>
     </div>
     <ul class="customer-info">
       <li>
@@ -23,10 +23,10 @@
         <p class="budget">120,000.00</p>
       </li>
     </ul>
-    <p class="create-date">
+    <div class="create-date">
       <i class="iconfont icon-icon_my_orrders"></i>
       <span>2018.5.20 16:12:10</span>
-    </p>
+    </div>
   </li>
 </template>
 <script>
@@ -34,13 +34,20 @@ export default {
   name: "OrderListItem",
   props: {
     item: {
-      // type: Object
+      type: Object
+    },
+    idx: {
+      type: Number
     }
   },
   data() {
     return {};
   },
-  methods: {}
+  methods: {
+    finish() {
+
+    }
+  }
 };
 </script>
 <style lang="scss">
@@ -115,11 +122,11 @@ export default {
   }
   .create-date {
     span {
-      font-size: r(12px);
+      font-size: r(24px);
       color: #999;
     }
     i {
-      font-size: r(12px);
+      font-size: r(24px);
       color: #999;
     }
   }
