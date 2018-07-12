@@ -37,6 +37,8 @@ export default {
 </script>
 <style lang="scss">
 .home-header {
+  -webkit-box-flex: 1;
+  flex: none;
   height: r(112px);
   flex: none;
   display: flex;

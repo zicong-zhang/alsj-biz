@@ -13,6 +13,14 @@ const router = new Router({
       title: '阿拉私家 - 商家端'
     }
   }, {
+    path: '/order',
+    name: 'order',
+    component: () =>
+      import ( /* webpackChunkName: "order" */ "~views/order/order-list"),
+    meta: {
+      title: '阿拉私家 - 商家端'
+    }
+  }, {
     path: '*',
     name: '404',
     component: () =>

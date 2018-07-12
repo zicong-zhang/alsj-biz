@@ -1,9 +1,11 @@
 import Vue from 'vue';
 
 import VHeader from '~components/v-header';
+import VFooter from '~components/v-footer';
 import VToast from '~components/v-toast';
 
 Vue.component('VHeader', VHeader);
+Vue.component('VFooter', VFooter);
 
 let ToastConstructor = Vue.extend(VToast);
 Vue.prototype.$toast = function(txt, timeout = 2300) {

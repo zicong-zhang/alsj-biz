@@ -1,0 +1,113 @@
+<template>
+  <div class="home-sale-target">
+    <div class="title">
+      <h3>目标进度</h3>
+      <p>设置
+        <i class="iconfont icon-rightBtn"></i>
+      </p>
+    </div>
+    <p class="tip">
+      <span>本月</span>
+      <span>已完成/目标</span>
+    </p>
+    <div class="plan">
+      <p><span>8.9</span>/12万</p>
+      <h4>82%</h4>
+    </div>
+    <div class="rate">
+      <p></p>
+    </div>
+  </div>
+</template>
+
+<script>
+export default {
+  name: "HomeSaleTarget",
+  data() {
+    return {};
+  }
+};
+</script>
+<style lang="scss">
+.home-sale-target {
+  background: #fff;
+  padding: 0 r(36px);
+  padding-bottom: r(32px);
+  margin-bottom: r(16px);
+  .title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: r(43px);
+    h3 {
+      font-size: r(32px);
+      padding-left: r(16px);
+      padding-top: r(33px);
+      position: relative;
+      &:before {
+        content: "";
+        width: r(4px);
+        height: r(28px);
+        background: #333;
+        border-radius: r(4px);
+        position: absolute;
+        left: 0;
+        top: calc(50% + #{r(16px)});
+        transform: translateY(-50%);
+      }
+    }
+    p {
+      color: #999;
+      font-size: r(24px);
+      padding-top: r(40px);
+    }
+    i {
+      font-size: r(24px);
+    }
+  }
+  .tip {
+    font-size: r(20px);
+    color: #999;
+    margin-bottom: r(8px);
+    span {
+      &:first-child {
+        color: #333;
+      }
+    }
+  }
+  .plan {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: r(23px);
+    p {
+      font-size: r(40px);
+      color: #333;
+    }
+    span {
+      color: #39f;
+    }
+    h4 {
+      color: #39f;
+      font-size: r(32px);
+      font-weight: normal;
+    }
+  }
+  .rate {
+    width: 100%;
+    height: r(12px);
+    background: #E5F2FF;
+    border-radius: r(12px);
+    position: relative;
+    p {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 40%;
+      height: 100%;
+      border-radius: r(12px);
+      background: linear-gradient(to right, #2985FF , #3DADFF);
+    }
+  }
+}
+</style>
