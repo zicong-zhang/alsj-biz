@@ -41,12 +41,13 @@ export const formatRequestData = data => {
 
 // 获取token
 function getToken() {
-  var token = utils.getUserInfo();
+  return 'YWxhc2dhLmFwcC5nYXRld2F5LTExLTE1MzAxNjUxOTIwNjYtMTEtYWJj'
+  /* var token = utils.getUserInfo();
   if (token) {
     return JSON.parse(token).token;
   } else {
     return '';
-  }
+  } */
 }
 
 // 判断平台 ios / Android

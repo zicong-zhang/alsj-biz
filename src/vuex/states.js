@@ -1,5 +1,6 @@
 const states = {
-  a: ''
+  a: '',
+  storeId: 1
 }
 
 export default states;

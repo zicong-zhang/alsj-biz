@@ -1,5 +1,5 @@
-import Vue from 'vue';
-import Router from 'vue-router';
+import Vue from '../../node_modules/_vue@2.5.16@vue';
+import Router from '../../node_modules/_vue-router@3.0.1@vue-router';
 
 Vue.use(Router);
 
@@ -30,7 +30,7 @@ const router = new Router({
       component: () =>
         import ( /* webpackChunkName: "order" */ "~views/order/order-list"),
       meta: {
-        title: '阿拉私家 - 商家端'
+        title: '阿拉私家 - 订单列表'
       }
     }]
   }, {

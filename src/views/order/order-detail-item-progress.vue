@@ -8,16 +8,14 @@
     </div>
     <div class="progress">
       <ul>
-        <li v-for="(item, idx) in 9"
+        <li v-for="(item, idx) in progressList"
           :key="idx"
           :class="{active: idx < active, doing: idx == active}">
           <div>
-            <h5>创建订单</h5>
+            <h5>{{ item.name }}</h5>
             <i></i>
             <p v-if="idx < active">
-              <span>2018.5.20</span>
-              <br />
-              <span>16:32:56</span>
+              <span v-html="replaceBr(item.date)"></span>
             </p>
           </div>
         </li>
@@ -30,8 +28,51 @@ export default {
   name: "OrderDetailItemProgress",
   data() {
     return {
-      active: 3
+      active: 3,
+      progressList: [
+        {
+          name: "创建订单",
+          date: "2018-05-14 00:00:00"
+        },
+        {
+          name: "上门量尺",
+          date: ""
+        },
+        {
+          name: "设计方案",
+          date: ""
+        },
+        {
+          name: "签订合同",
+          date: ""
+        },
+        {
+          name: "复尺",
+          date: ""
+        },
+        {
+          name: "下单",
+          date: ""
+        },
+        {
+          name: "生产",
+          date: ""
+        },
+        {
+          name: "送货安装",
+          date: ""
+        },
+        {
+          name: "订单已完成",
+          date: ""
+        }
+      ]
     };
+  },
+  methods: {
+    replaceBr(date = "") {
+      return date.replace(/\s/, "<br />").replace(/\-/g, '.');
+    }
   }
 };
 </script>
@@ -108,13 +149,14 @@ export default {
     background: #fff;
     border-radius: 50%;
   }
-  h5, p {
+  h5,
+  p {
     position: absolute;
     left: 50%;
     bottom: r(40px);
     transform: translate(-50%, 0);
     text-align: center;
-    width: r(100px);
+    width: r(118px);
     color: #fff;
     font-size: r(24px);
     font-weight: normal;
@@ -135,8 +177,7 @@ export default {
   }
   .doing {
     i {
-
-      box-shadow: 0 0 0 r(8px) rgba(255, 255, 255, .2);
+      box-shadow: 0 0 0 r(8px) rgba(255, 255, 255, 0.2);
     }
   }
 }

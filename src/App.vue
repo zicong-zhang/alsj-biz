@@ -10,8 +10,6 @@
 </template>
 
 <script>
-import * as API from "./axios/api";
-import http from "./axios";
 
 export default {
   name: "App",

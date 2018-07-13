@@ -11,6 +11,8 @@
 import WorkerTips from "~views/worker/worker-tips";
 import OrderDetailItemProgress from './order-detail-item-progress';
 
+import { mapState, mapActions, mapMutations } from 'vuex';
+
 export default {
   name: "OrderDetail",
   components: {
@@ -18,10 +20,23 @@ export default {
     OrderDetailItemProgress
   },
   data() {
-    return {};
+    return {
+      orderId: ''
+    };
   },
-  created() {},
-  methods: {}
+  computed: {
+    ...mapState({
+      storeId: state => state.storeId
+    })
+  },
+  created() {
+    this.SET_ORDER_ID(this.$route.params.id);
+    this.getOrderDetailInfo()
+  }, 
+  methods: {
+    ...mapActions(['getOrderDetailInfo']),
+    ...mapMutations(['SET_ORDER_ID'])
+  }
 };
 </script>
 <style lang="scss" scoped>

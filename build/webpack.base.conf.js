@@ -39,7 +39,8 @@ module.exports = {
       '~views': resolve('src/views'),
       '~assets': resolve('src/assets'),
       '~img': resolve('src/assets/img'),
-      '~commonSass': resolve('src/sass')
+      '~apis': resolve('src/apis'),
+      '~axios': resolve('src/axios'),
     }
   },
   module: {

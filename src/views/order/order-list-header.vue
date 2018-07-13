@@ -1,44 +1,59 @@
 <template>
   <header class="order-list-header">
-    <h2>订单列表</h2>
+    <h2>订单详情</h2>
     <ul>
       <li v-for="(item, idx) in list"
-        :class="{active: active === idx}"
+        :class="{active: status === idx}"
         :key="idx"
         @click="changeActive(idx)">
         <p>{{ item }}</p>
       </li>
-      <li :class="{last: true, active: active === 3}" @click="showMoreStatus">
-        <p><span>{{ statusName }}</span><i class="iconfont icon-bottomnew"></i></p>
-        <VPopup :list="moreStatus" 
-        v-if="isShowPopup"
-        @select="selectMoreStatus"/>
+      <li :class="{last: true, active: status === 3}"
+        @click="showMoreStatus">
+        <p>
+          <span>{{ statusName }}</span>
+          <i class="iconfont icon-bottomnew"></i>
+        </p>
+        <VPopup :list="moreStatus"
+          v-if="isShowPopup"
+          @select="selectMoreStatus" />
       </li>
     </ul>
   </header>
 </template>
 
 <script>
+import { mapState, mapActions, mapMutations } from "vuex";
+
 export default {
   name: "OrderListHeader",
   data() {
     return {
-      active: 0,
       isShowPopup: false,
       list: ["上门量尺", "设计方案", "签订合同"],
       moreStatus: ["上门量尺", "设计方案", "签订合同"],
-      statusName: '更多状态'
+      statusName: "更多状态"
     };
   },
+  computed: {
+    ...mapState({
+      status: state => state.OrderListModule.status
+    })
+  },
   methods: {
+    ...mapActions(["getListByStatus"]),
+    ...mapMutations(["CHANGE_STATUS"]),
     changeActive(idx) {
-      this.active = idx;
+      if (this.status === idx) return false;
+      this.CHANGE_STATUS(idx);
+      this.getListByStatus(1);
     },
     showMoreStatus() {
-      this.isShowPopup = true;
+      this.isShowPopup = !this.isShowPopup;
     },
     selectMoreStatus(item) {
-      this.active = 3;
+      this.CHANGE_STATUS(3);
+      this.getListByStatus(1);
       this.isShowPopup = false;
       this.statusName = item;
     }
@@ -69,7 +84,7 @@ export default {
     position: relative;
     &:not(:last-child) {
       &:before {
-        content: '';
+        content: "";
         display: block;
         width: r(2px);
         height: r(24px);
@@ -84,12 +99,12 @@ export default {
     position: relative;
   }
   p {
-    height: r(50px);
+    height: r(51px);
     text-align: center;
     font-size: r(24px);
     border-bottom: r(4px) solid transparent;
     margin: 0 r(10px);
-    transition: all .2s;
+    transition: all 0.2s;
   }
   i {
     font-size: r(24px);

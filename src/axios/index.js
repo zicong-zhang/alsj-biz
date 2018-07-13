@@ -1,6 +1,6 @@
 import Axios from 'axios'
-import config from './config.js'
-import * as API from './api.js'
+import config from './config'
+import * as API from './apis'
 
 let ajaxArr = {}; // 放于 store
 
@@ -12,14 +12,14 @@ let http = function(url, data = {}, opt = {}) {
 
   ajaxArr[url] = true; */
 
-  
-  
+
+
 
   return Axios({
     method: 'post',
-    url: API[url],
+    url: `/api${url}`,
     data: data,
-    transformRequest: [function (data) {
+    transformRequest: [function(data) {
       return JSON.stringify(data);
     }]
   })

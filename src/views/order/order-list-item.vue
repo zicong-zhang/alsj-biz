@@ -2,25 +2,25 @@
   <li class="order-list-item" @click="toDetail">
     <div class="list-item-title">
       <i class="iconfont icon-icon_my_orrders"></i>
-      <h3>订单：8555883654789</h3>
-      <span class="label" @click="finish">完成量尺</span>
+      <h3>订单：{{ item.orderCode }}</h3>
+      <span class="label" @click="finish">{{ item.orderStatusName }}</span>
     </div>
     <ul class="customer-info">
       <li>
         <h5>客户姓名</h5>
-        <p>张三</p>
+        <p>{{ item.linkmanName }}</p>
       </li>
       <li>
         <h5>客户手机</h5>
-        <p>16866668888</p>
+        <p>{{ item.linkmanPhone }}</p>
       </li>
       <li>
         <h5>客户地址</h5>
-        <p>天河区教育路秦天大厦A座2308</p>
+        <p>{{ item.linkmanAddress }}</p>
       </li>
       <li>
         <h5>客户预算</h5>
-        <p class="budget">120,000.00</p>
+        <p class="budget">{{ item.linkmanBudget }}</p>
       </li>
     </ul>
     <div class="create-date">
@@ -35,26 +35,25 @@ export default {
   props: {
     item: {
       type: Object
-    },
-    idx: {
-      type: Number
     }
   },
   data() {
     return {};
+  },
+  created() {
+    console.log('this.item:_____', this.item);
   },
   methods: {
     finish() {
 
     },
     toDetail() {
-      console.log('213:_____', 213);
       this.$emit('log-scrolltop');
       this.$store.commit('bb', 'on');
       this.$router.push({
         name: 'order',
-        query: {
-          id: this.idx
+        params: {
+          id: this.item.id
         }
       })
     }
@@ -107,6 +106,7 @@ export default {
   .budget {
     &:before {
       content: "¥";
+      margin-right: r(6px);
     }
   }
   .customer-info {

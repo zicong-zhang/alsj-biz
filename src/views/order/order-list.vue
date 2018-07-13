@@ -3,11 +3,10 @@
     <OrderListHeader/>
     <div class="content"
       ref="content">
-      <ul>
-        <OrderListItem v-for="(item, idx) in dataList"
-          :item="{item}"
-          :idx="idx"
-          :key="idx"
+      <ul v-if="orderList.length" key="order-list">
+        <OrderListItem v-for="item in orderList"
+          :item="item"
+          :key="item.id"
           @log-scrolltop="logScrollTop" />
       </ul>
     </div>
@@ -16,6 +15,8 @@
 <script>
 import OrderListHeader from "./order-list-header";
 import OrderListItem from "./order-list-item";
+
+import { mapState, mapActions } from 'vuex';
 
 export default {
   name: "OrderList",
@@ -29,6 +30,12 @@ export default {
       scrollTop: 0
     };
   },
+  computed: {
+    ...mapState({
+      status: 'status',
+      orderList: state => state.OrderListModule.orderList
+    })
+  },
   watch: {
     $route(to, from) {
       if (from.name == "order-detail") {
@@ -36,7 +43,14 @@ export default {
       }
     }
   },
+  created() {
+    console.log('this.orderList:_____', this.orderList);
+    this.getListByStatus(1);
+  },
   methods: {
+    // 根据订单状态获取订单列表
+    ...mapActions(['getListByStatus']),
+    // 记录滚动高度
     logScrollTop() {
       this.$route.meta.scrollTop = this.$refs.content.scrollTop;
     }

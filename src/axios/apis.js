@@ -1,5 +1,8 @@
 /* 注册登录 start */
 
+  /* 订单 */
+  export const GET_ORDER_LIST_BY_STATUS = '/order/listByStatus';
+
 	// 获取 登录验证码
 	export const getLoginCaptCha = '/api/user/getLoginCaptcha';
 	// 通过验证码登录
