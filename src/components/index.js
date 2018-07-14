@@ -3,11 +3,13 @@ import Vue from '../../node_modules/_vue@2.5.16@vue';
 import VHeader from '~components/v-header';
 import VFooter from '~components/v-footer';
 import VPopup from '~components/v-popup';
+import VInfoList from '~components/v-info-list';
 import VToast from '~components/v-toast';
 
 Vue.component('VHeader', VHeader);
 Vue.component('VFooter', VFooter);
 Vue.component('VPopup', VPopup);
+Vue.component('VInfoList', VInfoList);
 
 let ToastConstructor = Vue.extend(VToast);
 Vue.prototype.$toast = function(txt, timeout = 2300) {

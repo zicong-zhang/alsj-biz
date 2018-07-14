@@ -1,0 +1,6 @@
+.common-rmb {
+  &:before {
+    content: '¥';
+    margin-right: r(6px);
+  }
+}

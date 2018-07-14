@@ -44,7 +44,6 @@ export default {
     }
   },
   created() {
-    console.log('this.orderList:_____', this.orderList);
     this.getListByStatus(1);
   },
   methods: {

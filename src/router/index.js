@@ -28,7 +28,7 @@ const router = new Router({
       path: 'order-list',
       name: 'order-list',
       component: () =>
-        import ( /* webpackChunkName: "order" */ "~views/order/order-list"),
+        import ( /* webpackChunkName: "order" */ "~views/order/order-list/order-list"),
       meta: {
         title: '阿拉私家 - 订单列表'
       }
@@ -45,7 +45,7 @@ const router = new Router({
       path: 'detail',
       name: 'order-detail',
       component: () =>
-        import ( /* webpackChunkName: "no-found" */ "~views/order/order-detail"),
+        import ( /* webpackChunkName: "no-found" */ "~views/order/order-detail/order-detail"),
         meta: {
           title: '阿拉私家 - 订单详情'
         }
@@ -63,7 +63,7 @@ const router = new Router({
 
 router.beforeEach((to, from, next) => {
   document.title = to.meta.title;
-  console.log('to, from:_____', to, from);
+  // console.log('to, from:_____', to, from);
   if (to.meta.needLogin) {
     // if (store.state.token) { // 通过vuex state获取当前的token是否存在
     if (1) {

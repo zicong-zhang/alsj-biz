@@ -3,12 +3,12 @@
     <h2>订单详情</h2>
     <ul>
       <li v-for="(item, idx) in list"
-        :class="{active: status === idx}"
+        :class="{active: active === idx}"
         :key="idx"
         @click="changeActive(idx)">
         <p>{{ item }}</p>
       </li>
-      <li :class="{last: true, active: status === 3}"
+      <li :class="{last: true, active: active === 3}"
         @click="showMoreStatus">
         <p>
           <span>{{ statusName }}</span>
@@ -29,6 +29,7 @@ export default {
   name: "OrderListHeader",
   data() {
     return {
+      active: 0,
       isShowPopup: false,
       list: ["上门量尺", "设计方案", "签订合同"],
       moreStatus: ["上门量尺", "设计方案", "签订合同"],
@@ -44,8 +45,9 @@ export default {
     ...mapActions(["getListByStatus"]),
     ...mapMutations(["CHANGE_STATUS"]),
     changeActive(idx) {
-      if (this.status === idx) return false;
-      this.CHANGE_STATUS(idx);
+      if (this.active === idx) return false;
+      this.active = idx;
+      this.CHANGE_STATUS(idx + 1);
       this.getListByStatus(1);
     },
     showMoreStatus() {

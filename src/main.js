@@ -20,7 +20,8 @@ import '~components';
 
 // 全局样式
 import './sass/base.scss';
-import '~assets/font/iconfont.css';
+import './sass/common.scss';
+import './assets/font/iconfont.css';
 
 Vue.config.productionTip = false;
 Vue.config.devtools = true;

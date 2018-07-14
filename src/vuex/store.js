@@ -4,8 +4,8 @@ import actions from './actions';
 import mutations from './mutations';
 
 import storeModule from '~views/store/store';
-import OrderListModule from '~views/order/order-list-store';
-import OrderDetailModule from '~views/order/order-detail-store';
+import OrderListModule from '~views/order/order-list/order-list-store';
+import OrderDetailModule from '~views/order/order-detail/order-detail-store';
 
 
 const store  = {

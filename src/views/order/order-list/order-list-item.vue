@@ -16,11 +16,11 @@
       </li>
       <li>
         <h5>客户地址</h5>
-        <p>{{ item.linkmanAddress }}</p>
+        <p class="address">{{ item.linkmanAddress }}</p>
       </li>
       <li>
         <h5>客户预算</h5>
-        <p class="budget">{{ item.linkmanBudget }}</p>
+        <p class="budget">{{ item.linkmanBudget || 0 }}</p>
       </li>
     </ul>
     <div class="create-date">
@@ -41,7 +41,6 @@ export default {
     return {};
   },
   created() {
-    console.log('this.item:_____', this.item);
   },
   methods: {
     finish() {
@@ -52,7 +51,7 @@ export default {
       this.$store.commit('bb', 'on');
       this.$router.push({
         name: 'order',
-        params: {
+        query: {
           id: this.item.id
         }
       })
@@ -103,6 +102,9 @@ export default {
     background: $main;
     padding: 0 r(23px);
   }
+  .address {
+    @include over(1);
+  }
   .budget {
     &:before {
       content: "¥";
@@ -121,12 +123,14 @@ export default {
       line-height: r(48px);
     }
     h5 {
+      flex: none;
       color: #999;
       font-weight: normal;
       font-size: r(24px);
       margin: 0;
     }
     p {
+      max-width: 80%;
       text-align: right;
       font-size: r(24px);
     }

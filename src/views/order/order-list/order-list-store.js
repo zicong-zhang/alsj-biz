@@ -2,7 +2,7 @@ import * as api from '~apis/order';
 
 export default {
   state: {
-    status: 0,
+    status: 1,
     storeId: 1,
     orderList: []
   },
