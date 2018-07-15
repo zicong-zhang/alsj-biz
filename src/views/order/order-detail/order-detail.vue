@@ -10,6 +10,7 @@
       <KeeperList/>
       <Contract/>
       <Design/>
+      <Remark/>
     </div>
   </div>
 </template>
@@ -22,6 +23,7 @@ import CustomDemand from './order-detail-item-demand';
 import KeeperList from './order-detail-item-keeper';
 import Contract from './order-detail-item-contract';
 import Design from './order-detail-item-design';
+import Remark from './order-detail-item-remark'
 
 import { mapState, mapActions, mapMutations } from "vuex";
 
@@ -35,7 +37,8 @@ export default {
     CustomDemand,
     KeeperList,
     Contract,
-    Design
+    Design,
+    Remark
   },
   watch: {
     $route(to, from) {

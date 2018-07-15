@@ -36,7 +36,11 @@ Vue.use(AlloyFingerPlugin, {
 Vue.prototype.$utils = utils;
 Vue.prototype.$http = http;
 
-FastClick.attach(document.body);
+if ('addEventListener' in document) {
+  document.addEventListener('DOMContentLoaded', function() {
+    FastClick.attach(document.body);
+  }, false);
+}
 
 
 let store = new Vuex.Store(vx);
