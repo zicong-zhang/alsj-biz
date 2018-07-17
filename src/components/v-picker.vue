@@ -13,7 +13,7 @@
     </div>
 
     <div class="input-container">
-      <p :class="{placeholder: !select.value}" @click="showPicker">{{ select.value || $attrs.placeholder }}</p>
+      <p :class="{placeholder: !value}" @click="showPicker">{{ value || $attrs.placeholder }}</p>
       <i class="iconfont icon-bottomnew"></i>
     </div>
 
@@ -70,6 +70,7 @@ export default {
   data() {
     return {
       isShowPicker: false,
+      value: '',
       select: {}
     };
   },
@@ -85,6 +86,7 @@ export default {
     },
     onSelect() {
       this.hidePicker();
+      this.value = this.select.value;
       this.$emit("select", this.select);
     }
   }

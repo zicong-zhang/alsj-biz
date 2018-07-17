@@ -10,48 +10,45 @@
 
     <div class="form">
       <i class="gap"></i>
-      <VInput v-model="name"
-        label="客户姓名"
-        placeholder="输入客户姓名"
-        max="20"
-        required="客户姓名不能为空"
-        :rule="rules.name" />
-      <VInput v-model="phone"
-        label="联系电话"
-        placeholder="输入客户联系电话"
-        max="11"
-        :rule="rules.phone" />
-      <VInput v-model="sex"
-        class="sex"
-        label="性别"
-        placeholder="选择客户性别"
-        max="4"
-        @focus="showPicker"
-        @blur="hidePicker">
-        <i class="iconfont icon-bottomnew"></i>
-      </VInput>
-      <VInput v-model="address"
-        label="详细地址"
-        placeholder="输入详细地址"
-        max="20"
-        :rule="rules.name" />
-      <VInput v-model="budget"
-        label="客户预算"
-        placeholder="输入客户预算"
-        max="20"
-        :rule="rules.name" />
-      <VPicker label="性别"
-        :list="slots"
-        @select="selectSex"
-        placeholder="选择性别"
-        title="选择性别" />
-    </div>
+      <div>
 
-    <!-- <mt-picker value-key="value"
-      :slots="slots"
-      v-if="isShowPicker"
-      :visibleItemCount="3"
-      @change="pickChange"></mt-picker> -->
+        <!-- 客户姓名 -->
+        <VInput v-model="name"
+          label="客户姓名"
+          placeholder="输入客户姓名"
+          max="20"
+          required="客户姓名不能为空"
+          :rule="rules.name" />
+
+        <!-- 联系电话 -->
+        <VInput v-model="phone"
+          label="联系电话"
+          placeholder="输入客户联系电话"
+          max="11"
+          :rule="rules.phone" />
+
+        <!-- 性别 -->
+        <VPicker label="性别"
+          :list="slots"
+          @select="selectSex"
+          placeholder="选择客户性别"
+          title="选择性别" />
+
+        <!-- 详细地址 -->
+        <VInput v-model="address"
+          label="详细地址"
+          placeholder="输入详细地址"
+          max="20"
+          :rule="rules.name" />
+          
+        <!-- 客户预算 -->
+        <VInput v-model="budget"
+          label="客户预算"
+          placeholder="输入客户预算"
+          max="20"
+          :rule="rules.name" />
+      </div>
+    </div>
   </div>
 </template>
 <script>
@@ -103,30 +100,6 @@ export default {
             {
               value: "女",
               key: "1"
-            },
-            {
-              value: "女",
-              key: "1"
-            },
-            {
-              value: "女",
-              key: "1"
-            },
-            {
-              value: "女",
-              key: "1"
-            },
-            {
-              value: "女",
-              key: "1"
-            },
-            {
-              value: "女",
-              key: "1"
-            },
-            {
-              value: "女",
-              key: "1"
             }
           ]
         }
@@ -155,6 +128,7 @@ export default {
     },
     selectSex(item) {
       console.log("item:_____", item);
+      this.sex = item.value;
     },
     submit() {}
   }
@@ -183,8 +157,10 @@ export default {
   }
   .form {
     flex: 1;
-    padding: 0 e(36px);
     position: relative;
+    & > div {
+      padding: 0 e(36px);
+    }
   }
   .sex {
     i {
