@@ -7,21 +7,21 @@
           <h5>其他</h5>
           <span>2018.9.22 20:08:00</span>
         </div>
-        <p>择浅灰色调作为主色调，然后用深浅不同的黄色作为亮色用在某一面墙上或者家具、织物上面，比如沙发、窗帘以及具有装饰性的开关插座等</p>
+        <p>aa222aa啊啊啊啊</p>
       </li>
       <li>
         <div class="label">
           <h5>其他</h5>
           <span>2018.9.22 20:08:00</span>
         </div>
-        <p>择浅灰色调作为主色调，然后用深浅不同的黄色作为亮色用在某一面墙上或者家具、织物上面，比如沙发、窗帘以及具有装饰性的开关插座等</p>
+        <p>aa222aa啊啊啊啊</p>
       </li>
       <li>
         <div class="label">
           <h5>其他</h5>
           <span>2018.9.22 20:08:00</span>
         </div>
-        <p>择浅灰色调作为主色调，然后用深浅不同的黄色作为亮色用在某一面墙上或者家具、织物上面，比如沙发、窗帘以及具有装饰性的开关插座等</p>
+        <p>aa222aa啊啊啊啊</p>
       </li>
     </ul>
     <p class="add-remark">
@@ -49,44 +49,44 @@ export default {
 <style lang="scss">
 .order-detail-item-remark {
   background: #fff;
-  padding: 0 r(36px);
-  padding-bottom: r(137px);
+  padding: 0 e(36px);
+  padding-bottom:e(137px);
   ul {
-    padding-top: r(24px);
+    padding-top:e(24px);
   }
   li {
     background: RGBA(229, 242, 255, 1);
-    border-radius: r(8px);
-    padding: r(36px);
-    margin-bottom: r(24px);
+    border-radius:e(8px);
+    padding:e(36px);
+    margin-bottom:e(24px);
   }
   .label {
     display: flex;
   }
   h5, span {
     font-weight: normal;
-    font-size: r(24px);
+    font-size:e(24px);
   }
   h5 {
-    margin-bottom: r(16px);
+    margin-bottom:e(16px);
   }
   p {
-    font-size: r(24px);
-    line-height: r(36px);
+    font-size:e(24px);
+    line-height:e(36px);
   }
 }
 .add-remark {
-  height: r(118px);
+  height:e(118px);
   display: flex;
   flex-flow: column;
   justify-content: center;
   align-items: center;
   background: RGBA(229, 242, 255, 1);
-  border-radius: r(8px);
+  border-radius:e(8px);
   color: $main;
   i {
-    font-size: r(30px);
-    margin-bottom: r(6px);
+    font-size:e(30px);
+    margin-bottom:e(6px);
   }
 }
 </style>

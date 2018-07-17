@@ -23,14 +23,14 @@ export default {
 </script>
 <style lang="scss">
 .home-header-tips {
-  height: r(110px);
+  height: e(110px);
   color: #fff;
-  font-size: r(24px);
-  border-bottom: r(16px) solid transparent;
+  font-size: e(24px);
+  border-bottom: e(16px) solid transparent;
   h3 {
-    font-size: r(24px);
+    font-size: e(24px);
     font-weight: normal;
-    line-height: r(32px);
+    line-height: e(32px);
   }
   span {
     font-weight: bold;
@@ -44,16 +44,16 @@ export default {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0 r(36px);
+  padding: 0 e(36px);
   & > i {
-    font-size: r(32px);
-    margin-right: r(12px);
+    font-size: e(32px);
+    margin-right: e(12px);
   }
   h3 {
     flex: 1;
-    margin-right: r(28px);
+    margin-right: e(28px);
     i {
-      font-size: r(20px);
+      font-size: e(20px);
     }
   }
   &.blue {
@@ -61,29 +61,29 @@ export default {
   }
 }
 .auth-btn {
-  height: r(52px);
+  height: e(52px);
   position: relative;
   display: flex;
   align-items: center;
-  padding-left: r(33px);
+  padding-left: e(33px);
   &:before {
     position: absolute;
     left: 0;
     top: 0;
     content: "";
-    width: 1px;
+    width:e(1px);
     height: 100%;
     background: #fff;
     transform: scaleX(0.5);
   }
   span {
     display: block;
-    line-height: r(44px);
-    border-radius: r(8px);
-    border: 1px solid #fff;
-    font-size: r(24px);
+    line-height: e(44px);
+    border-radius: e(8px);
+    border:e(1px) solid #fff;
+    font-size: e(24px);
     font-weight: normal;
-    padding: 0 r(22px);
+    padding: 0 e(22px);
   }
 }
 </style>

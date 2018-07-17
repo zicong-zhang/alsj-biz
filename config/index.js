@@ -12,7 +12,7 @@ module.exports = {
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
     proxyTable: {
-      '/api': 'http://test.alasga.cn/proxy/web'
+      '/api': 'http://test.alasga.cn/proxy/web/gateway/'
     },
 
     // Various Dev Server settings

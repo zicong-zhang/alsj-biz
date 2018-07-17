@@ -32,25 +32,25 @@ export default {
 <style lang="scss">
 .order-detail-item-design {
   background: #fff;
-  padding: 0 r(36px);
-  margin-bottom: r(16px);
+  padding: 0 e(36px);
+  margin-bottom: e(16px);
   span {
     color: $main;
   }
   ul {
     display: flex;
-    padding-top: r(22px);
-    padding-bottom: r(36px);
+    padding-top: e(22px);
+    padding-bottom: e(36px);
   }
   li {
     flex: none;
-    width: r(240px);
-    height: r(160px);
+    width: e(240px);
+    height: e(160px);
     box-sizing: border-box;
-    border: r(2px) solid #e5f2ff;
-    border-radius: r(16px);
-    margin-right: r(16px);
-    margin-bottom: r(16px);
+    border: e(2px) solid #e5f2ff;
+    border-radius: e(16px);
+    margin-right: e(16px);
+    margin-bottom: e(16px);
     position: relative;
     overflow: hidden;
   }

@@ -49,6 +49,14 @@ const router = new Router({
         meta: {
           title: '阿拉私家 - 订单详情'
         }
+    }, {
+      path: 'edit-customer',
+      name: 'order-edit-customer',
+      component: () =>
+        import ( /* webpackChunkName: "no-found" */ "~views/order/edit-customer/edit-customer"),
+        meta: {
+          title: '阿拉私家 - 编辑客户信息'
+        }
     }]
   }, {
     path: '*',

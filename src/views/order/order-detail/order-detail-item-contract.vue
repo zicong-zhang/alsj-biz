@@ -37,25 +37,25 @@ export default {
 <style lang="scss">
 .order-detail-item-contract {
   background: #fff;
-  padding: 0 r(36px);
-  margin-bottom: r(16px);
+  padding: 0 e(36px);
+  margin-bottom: e(16px);
   span {
     color: $main;
   }
   ul {
     display: flex;
     flex-flow: wrap;
-    padding-top: r(22px);
-    padding-bottom: r(36px);
+    padding-top: e(22px);
+    padding-bottom: e(36px);
   }
   li {
-    width: r(160px);
-    height: r(160px);
+    width: e(160px);
+    height: e(160px);
     box-sizing: border-box;
-    border: r(2px) solid #E5F2FF;
-    border-radius: r(16px);
-    margin-right: r(16px);
-    margin-bottom: r(16px);
+    border: e(2px) solid #E5F2FF;
+    border-radius: e(16px);
+    margin-right: e(16px);
+    margin-bottom: e(16px);
     position: relative;
     overflow: hidden;
   }
@@ -66,6 +66,12 @@ export default {
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
+  }
+  .order-detail-item-h2 {
+    p {
+      font-size: e(24px);
+      line-height: e(96px);
+    }
   }
 }
 </style>

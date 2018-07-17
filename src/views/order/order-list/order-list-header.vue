@@ -65,12 +65,12 @@ export default {
 <style lang="scss" scoped>
 .order-list-header {
   flex: none;
-  height: r(88px + 55px);
+  height: r(88px +e(55px));
   background: #fff;
   h2 {
-    height: r(88px);
-    line-height: r(88px);
-    font-size: r(32px);
+    height: e(88px);
+    line-height: e(88px);
+    font-size: e(32px);
     text-align: center;
   }
   ul {
@@ -88,8 +88,8 @@ export default {
       &:before {
         content: "";
         display: block;
-        width: r(2px);
-        height: r(24px);
+        width: e(2px);
+        height: e(24px);
         background: #ddd;
         position: absolute;
         right: 0;
@@ -101,15 +101,15 @@ export default {
     position: relative;
   }
   p {
-    height: r(51px);
+    height: e(51px);
     text-align: center;
-    font-size: r(24px);
-    border-bottom: r(4px) solid transparent;
-    margin: 0 r(10px);
+    font-size: e(24px);
+    border-bottom: e(4px) solid transparent;
+    margin: 0 e(10px);
     transition: all 0.2s;
   }
   i {
-    font-size: r(24px);
+    font-size: e(24px);
   }
   .active {
     color: $main;

@@ -3,7 +3,10 @@
 }
 
 @function r($px) {
-  @return (($px / 75px) * 1rem);
+  @return (($px /e(75px)) * 1rem);
+}
+@function r2($px) {
+  @return (($px /e(75px)) * 2rem);
 }
 
 @mixin over($num) {
@@ -23,4 +26,5 @@
 
 $font: #404040 !default;
 $main: #39f !default;
+$bg: #F0F4F7 !default;
 $shadow1: 0 0 e(10px) 0 rgba(0, 0, 0, 0.1) !default;

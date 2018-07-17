@@ -1,15 +1,23 @@
-import Vue from '../../node_modules/_vue@2.5.16@vue';
+import Vue from 'vue';
 
 import VHeader from '~components/v-header';
 import VFooter from '~components/v-footer';
 import VPopup from '~components/v-popup';
 import VInfoList from '~components/v-info-list';
 import VToast from '~components/v-toast';
+import VInput from '~components/v-input';
+import VPicker from '~components/v-picker';
+
+import { DatetimePicker, Picker } from 'mint-ui';
+Vue.component(Picker.name, Picker);
+Vue.component(DatetimePicker.name, DatetimePicker);
 
 Vue.component('VHeader', VHeader);
 Vue.component('VFooter', VFooter);
 Vue.component('VPopup', VPopup);
 Vue.component('VInfoList', VInfoList);
+Vue.component('VInput', VInput);
+Vue.component('VPicker', VPicker);
 
 let ToastConstructor = Vue.extend(VToast);
 Vue.prototype.$toast = function(txt, timeout = 2300) {

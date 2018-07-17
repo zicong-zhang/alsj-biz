@@ -1,19 +1,20 @@
 <template>
-  <div class="customer-info">
+  <div class="customer-info"
+    @click="toEditCustomer">
     <H2 :title="title">
       <i class="iconfont icon-btn_all_next"></i>
     </H2>
 
     <ul>
-      <VInfoList label="客户姓名" 
+      <VInfoList label="客户姓名"
         align="left"
         :value="info.linkmanName" />
-      <VInfoList class="blue" 
+      <VInfoList class="blue"
         align="left"
         label="客户手机"
         :value="info.linkmanPhone"
         @handler="call" />
-      <VInfoList class="address" 
+      <VInfoList class="address"
         align="left"
         label="客户地址"
         :value="info.linkmanAddress" />
@@ -49,6 +50,12 @@ export default {
   methods: {
     call() {
       alert("打电话");
+    },
+    toEditCustomer() {
+      this.$store.commit("bb", "on");
+      this.$router.push({
+        name: "order-edit-customer"
+      });
     }
   }
 };
@@ -57,29 +64,29 @@ export default {
 <style lang="scss">
 .customer-info {
   background: #fff;
-  padding: 0 r(36px);
-  margin-bottom: r(16px);
+  padding: 0 e(36px);
+  margin-bottom: e(16px);
   ul {
-    padding-top: r(22px);
-    padding-bottom: r(36px);
+    padding-top: e(22px);
+    padding-bottom: e(36px);
   }
   li {
     display: flex;
     // justify-content: space-between;
     align-items: center;
-    line-height: r(48px);
+    line-height: e(48px);
   }
   h5 {
     flex: none;
     color: #999;
     font-weight: normal;
-    font-size: r(24px);
+    font-size: e(24px);
     margin: 0;
-    margin-right: r(22px);
+    margin-right: e(22px);
   }
   p {
-    font-size: r(24px);
-    line-height: r(48px);
+    font-size: e(24px);
+    line-height: e(48px);
   }
 }
 .blue {

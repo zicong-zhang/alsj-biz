@@ -88,7 +88,7 @@ ul {
 }
 li {
   display: inline-block;
-  margin: 0 10px;
+  margin: e(10px);
 }
 a {
   color: #42b983;

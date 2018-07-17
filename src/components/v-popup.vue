@@ -44,36 +44,36 @@ export default {
   }
   ul {
     position: absolute;
-    right: r(36px);
+    right: e(36px);
     bottom: 0;
     z-index: 20;
     transform: translateY(100%);
-    width: r(264px);
+    width: e(264px);
     background: #fff;
-    box-shadow: 0 0 r(20px) 0 rgba(0, 0, 0, 0.3);
-    border-radius: r(12px);
+    box-shadow: 0 0 e(20px) 0 rgba(0, 0, 0, 0.3);
+    border-radius: e(12px);
     &:before {
       content: "";
       display: block;
       width: 0;
       height: 0;
-      border: r(10px) solid transparent;
+      border: e(10px) solid transparent;
       border-bottom-color: #fff;
       position: absolute;
-      right: r(24px);
+      right: e(24px);
       top: 0;
       transform: translateY(-100%);
     }
   }
   li {
-    height: r(80px);
-    font-size: r(24px);
+    height: e(80px);
+    font-size: e(24px);
     color: #404040;
-    border-bottom: 1px solid #f5f5f5;
-    padding-left: r(36px);
+    border-bottom:e(1px) solid #f5f5f5;
+    padding-left: e(36px);
   }
   p {
-    line-height: r(80px);
+    line-height: e(80px);
   }
 }
 </style>

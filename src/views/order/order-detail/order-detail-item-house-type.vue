@@ -61,29 +61,29 @@ export default {
 <style lang="scss" scoped>
 .order-detail-item-house-type {
   background: #fff;
-  padding: 0 r(36px);
-  margin-bottom: r(16px);
+  padding: 0 e(36px);
+  margin-bottom:e(16px);
   ul {
-    padding-top: r(22px);
-    padding-bottom: r(36px);
+    padding-top:e(22px);
+    padding-bottom:e(36px);
   }
 }
 .no-type {
-  height: r(94px);
+  height:e(94px);
   display: flex;
   justify-content: space-between;
   align-items: center;
   h3 {
-    font-size: r(24px);
+    font-size:e(24px);
     font-weight: normal;
     color: #333;
-    padding-left: r(14px);
+    padding-left:e(14px);
     position: relative;
     &:before {
       content: "";
       display: block;
-      width: r(4px);
-      height: r(24px);
+      width:e(4px);
+      height:e(24px);
       background: #333;
       position: absolute;
       left: 0;
@@ -92,7 +92,7 @@ export default {
     }
   }
   i {
-    font-size: r(22px);
+    font-size:e(22px);
     color: #c7c7c7;
   }
 }

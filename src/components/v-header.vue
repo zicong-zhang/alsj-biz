@@ -7,9 +7,9 @@
         <i class="iconfont icon-back"></i>
       </span>
     </slot>
-    <slot name="right-one"></slot>
     <slot name="right-two"></slot>
     <h1 :style="{ opacity }">{{ title }}</h1>
+    <slot name="right-one"></slot>
   </header>
 </template>
 
@@ -39,7 +39,7 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 .header-component {
   display: -webkit-box;
   display: flex;
@@ -49,44 +49,44 @@ export default {
   /* start | end | center | baseline | stretch */
   -webkit-box-align: center;
   align-items: center;
-  height: r(88px);
+  height:e(88px);
   h1 {
     width: 100%;
-    height: r(88px);
-    line-height: r(88px);
-    font-size: r(30px);
-    font-weight: normal;
+    height:e(88px);
+    line-height:e(88px);
+    font-size:e(30px);
     background: #fff;
     // color: $font;
     text-align: center;
   }
+  i {
+    font-size:e(30px);
+    color: #333;
+    display: block;
+    // width:e(50px);
+    height:e(50px);
+    line-height:e(50px);
+    text-align: center;
+    // background: rgba(0, 0, 0, 0.2);
+    border-radius: 50%;
+  }
 }
-i {
-  font-size: r(30px);
-  color: #333;
-  display: block;
-  // width: r(50px);
-  height: r(50px);
-  line-height: r(50px);
-  text-align: center;
-  // background: rgba(0, 0, 0, 0.2);
-  border-radius: 50%;
-}
+
 .btn {
   position: absolute;
   left: 0;
   z-index: 51;
-  height: r(88px);
+  height:e(88px);
   display: flex;
   justify-content: center;
   align-items: center;
 }
 .back-btn {
-  width: r(100px);
-  padding-left: r(36px);
+  width:e(100px);
+  padding-left:e(36px);
   justify-content: flex-start;
   i {
-    font-size: r(24px);
+    font-size:e(24px);
   }
 }
 .fixed {
