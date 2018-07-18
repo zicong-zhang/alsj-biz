@@ -34,7 +34,7 @@ export default {
   props: {
     // 绑定值
     value: {
-      type: String,
+      type: [String, Number],
       required: true
     },
     // 最大长度
@@ -58,15 +58,16 @@ export default {
     };
   },
   computed: {
-    // 替换字符串规则
-    replaceRule() {
-      if (this.replace) return new RegExp(this.replace, "g");
+    inputVal() {
+      // 存值，供父组件调用验证方法
+      console.log("this.value:_____", this.value);
+      return this.value;
     }
   },
   methods: {
     focus() {
       this.isFocus = true;
-      this.$emit('focus');
+      this.$emit("focus");
     },
     showWarn(txt) {
       this.warn = false;
@@ -76,16 +77,40 @@ export default {
         clearTimeout(this.timer);
         this.timer = null;
       }, 100);
+      return false;
     },
     onInput(e) {
       let value = e.target.value;
 
       // 限制输入
       if (this.replace) {
-        value = value.replace(this.replaceRule, "");
-        e.target.value = value.replace(this.replaceRule, "");
+        const rule = this.getReplaceRegExp(this.replace);
+        value = value.replace(rule, "");
+        e.target.value = value.replace(rule, "");
       }
       this.$emit("input", value.trim());
+    },
+    // 获取替换正则
+    getReplaceRegExp(rule) {
+      let regExp = null;
+      switch (rule) {
+        case "number":
+          regExp = /\D/g;
+          break;
+        case "cn":
+          regExp = /[^\u4E00-\u9FA5\'a-zA-Z]/g;
+          break;
+        case "en":
+          regExp = /[^a-zA-Z]/g;
+          break;
+        case "en-number":
+          regExp = /[^a-zA-Z\d]/g;
+          break;
+        default:
+          regExp = rule; // 自定义正则
+          break;
+      }
+      return regExp;
     },
     //获取验证正则
     getValidatorRegExp(rule) {
@@ -103,8 +128,9 @@ export default {
       }
       return regExp;
     },
+    // 失去焦点验证正则
     blur(e) {
-      this.$emit('blur', e);
+      this.$emit("blur", e);
       this.isFocus = false;
       let value = e.target.value;
 
@@ -112,22 +138,36 @@ export default {
         this.showWarn(this.required);
         return;
       }
-      if (this.rule) this.validator(value);
+      if (this.rule) this.validator();
     },
     // 验证
-    validator(value) {
-      let warn = false;
-      for (let item of this.rule) {
-        warn = !this.getValidatorRegExp(item.regExp).test(value);
-        // 如果正则不通过，则停止循环，并抛出警告
-        if (warn) {
-          this.showWarn(item.warn);
-          break;
+    validator() {
+      let pass = false;
+
+      // 验证必填项
+      if (this.required) {
+        if (this.inputVal.toString().trim()) {
+          pass = true;
         } else {
-          this.warn = "";
+          return this.showWarn(this.required);
         }
       }
-      return this.warn;
+
+      // 验证自定义规则
+      if (this.rule) {
+        for (let item of this.rule) {
+          pass = !this.getValidatorRegExp(item.regExp).test(this.inputVal);
+          // 如果正则不通过，则停止循环，并抛出警告
+          if (pass) {
+            return this.showWarn(item.warn);
+          } else {
+            this.warn = "";
+            pass = true;
+          }
+        }
+      }
+
+      return pass;
     }
   }
 };
@@ -173,6 +213,4 @@ export default {
     transition: all 0.2s;
   }
 }
-
-
 </style>

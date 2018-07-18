@@ -13,9 +13,19 @@ export const getOrderListByStatus = ({
     pageSize: 10,
   })
 }
-
+// 获取订单详情信息
 export const getOrderDetailInfo = id => {
   return http('/order/getOrderInfo', {
     orderId: id
+  })
+}
+
+// 提交修改客户信息
+export const updateCustomerInfo = params => {
+  /* let {
+     
+  } = params; */
+  return http('/order/getOrderInfo', {
+    orderId: params
   })
 }

@@ -30,64 +30,77 @@
         <!-- 性别 -->
         <VPicker label="性别"
           :list="slots"
+          :index="sex"
           @select="selectSex"
-          placeholder="选择客户性别"
+          :default-value="sex === 1 ? '男' : '女'"
           title="选择性别" />
 
         <!-- 详细地址 -->
         <VInput v-model="address"
           label="详细地址"
           placeholder="输入详细地址"
-          max="20"
-          :rule="rules.name" />
-          
+          required="请输入详细地址"
+          max="30" />
+
         <!-- 客户预算 -->
         <VInput v-model="budget"
           label="客户预算"
           placeholder="输入客户预算"
-          max="20"
-          :rule="rules.name" />
+          required="请输入客户预算"
+          max="10"
+          replace="number">
+          <span class="budget">元</span>
+        </VInput>
       </div>
     </div>
   </div>
 </template>
 <script>
+import { mapState, mapActions } from "vuex";
+
 export default {
   name: "OrderEditCustomer",
   data() {
+    const rules = {
+      name: [
+        {
+          regExp: "name",
+          warn: "请输入中文名"
+        }
+      ],
+      phone: [
+        {
+          regExp: "phone",
+          warn: "请输入正确的11位手机号"
+        }
+      ],
+      sex: [
+        {
+          regExp: "sex",
+          warn: ""
+        }
+      ],
+      sex: [
+        {
+          regExp: "sex",
+          warn: ""
+        }
+      ],
+      budget: [
+        {
+          regExp: "",
+          warn: ""
+        }
+      ]
+    };
     return {
       name: "",
       phone: "",
-      sex: "男",
+      sex: 1,
       address: "",
       budget: "",
       linkmanGender: 0, // 默认0
-      rules: {
-        name: [
-          {
-            regExp: "name",
-            warn: "请输入中文名"
-          }
-        ],
-        phone: [
-          {
-            regExp: "phone",
-            warn: "请输入正确的11位手机号"
-          }
-        ],
-        sex: [
-          {
-            regExp: "sex",
-            warn: ""
-          }
-        ],
-        sex: [
-          {
-            regExp: "sex",
-            warn: ""
-          }
-        ]
-      },
+      rules,
       isShowPicker: false,
       slots: [
         {
@@ -95,42 +108,52 @@ export default {
           values: [
             {
               value: "男",
-              key: "0"
+              key: "1"
             },
             {
               value: "女",
-              key: "1"
+              key: "2"
             }
           ]
         }
       ]
     };
   },
-  watch: {
-    budget(newVal) {
-      console.log("newVal:_____", newVal);
-    }
+  computed: {
+    ...mapState({
+      info: state => state.OrderDetailModule.orderInfo
+    })
   },
-  mounted() {
-    console.log("this.$children:_____", this.$children);
+  created() {
+    let {
+      linkmanAddress,
+      linkmanBudget,
+      linkmanGender,
+      linkmanName,
+      linkmanPhone
+    } = this.info;
+    this.name = linkmanName;
+    this.sex = linkmanGender;
+    this.phone = linkmanPhone;
+    this.address = linkmanAddress;
+    this.budget = linkmanBudget;
   },
+  mounted() {},
   methods: {
-    showPicker() {
-      this.isShowPicker = true;
-    },
-    hidePicker() {
-      this.isShowPicker = false;
-    },
-    pickChange(picker, valArr) {
-      let { key, value } = valArr[0];
-      this.sex = value;
-      this.linkmanGender = key;
-    },
+    // 选择器回调
     selectSex(item) {
-      console.log("item:_____", item);
-      this.sex = item.value;
+      this.sex = item.key;
     },
-    submit() {}
+    submit() {
+      let pass = false;
+      this.$children.forEach(item => {
+        if (item.validator) pass = item.validator();
+      });
+
+      if (pass) {
+        // mapActions
+      }
+    }
   }
 };
 </script>
@@ -162,14 +185,12 @@ export default {
       padding: 0 e(36px);
     }
   }
-  .sex {
-    i {
-      position: absolute;
-      right: e(24px);
-      top: 50%;
-      transform: translateY(-50%);
-      color: #c7c7c7;
-    }
+  .budget {
+    position: absolute;
+    right: e(24px);
+    top: 50%;
+    transform: translateY(-50%);
+    color: #c7c7c7;
   }
 }
 /* .picker-item {

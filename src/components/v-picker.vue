@@ -13,7 +13,8 @@
     </div>
 
     <div class="input-container">
-      <p :class="{placeholder: !value}" @click="showPicker">{{ value || $attrs.placeholder }}</p>
+      <p :class="{placeholder: $attrs.placeholder}"
+        @click="showPicker">{{ value || $attrs['default-value'] || $attrs.placeholder }}</p>
       <i class="iconfont icon-bottomnew"></i>
     </div>
 
@@ -67,10 +68,13 @@ export default {
       default: ""
     }
   },
+  created() {
+    console.log("this.index:_____", this.$attrs);
+  },
   data() {
     return {
       isShowPicker: false,
-      value: '',
+      value: "",
       select: {}
     };
   },
@@ -110,7 +114,7 @@ export default {
     }
   }
   .input-container {
-      color: #333;
+    color: #333;
     position: relative;
     p {
       display: block;

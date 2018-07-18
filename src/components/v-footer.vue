@@ -49,7 +49,7 @@ export default {
       console.log('item.routeName, idx:_____', item.routeName, idx);
       if (this.active === idx) return false;
       this.active = idx;
-      this.$store.commit("bb", "on");
+      this.$store.commit("TURN", "on");
       this.$router.push({
         name: item.routeName
       });

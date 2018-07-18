@@ -30,20 +30,33 @@ export default {
     }
   },
   actions: {
+    // 获取订单详情信息
     getOrderDetailInfo(ctx) {
       api.getOrderDetailInfo(ctx.state.orderId)
         .then(data => {
           ctx.commit('SET_ORDER_DETAIL_INFO', data.data.orderExt)
         })
+    },
+    // 修改客户信息
+    updateCustomerInfo(ctx, params) {
+      api.updateCustomerInfo(params)
+        .then(data => {
+          ctx.UPDATE_CUSTOMER_INFO(params);
+        })
     }
   },
   mutations: {
+    // 设置订单 id
     SET_ORDER_ID(state, id) {
       state.orderId = id;
     },
     // 设置订单信息
     SET_ORDER_DETAIL_INFO(state, info) {
       state.orderInfo = info;
+    },
+    // 修改客户信息
+    UPDATE_CUSTOMER_INFO(state, params) {
+
     }
   }
 }

@@ -1,6 +1,7 @@
 const mutations = {
-  bb(state, a) {
-    state.a = a;
+  // 转场动画
+  TURN(state, status) {
+    state.turn = status;
   }
 }
 export default mutations;

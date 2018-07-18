@@ -32,7 +32,7 @@ export default {
   },
   methods: {
     back() {
-      this.$store.commit("bb", "off");
+      this.$store.commit("TURN", "off");
       this.$router.back(-1);
     }
   }

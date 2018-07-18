@@ -48,7 +48,7 @@ export default {
     },
     toDetail() {
       this.$emit('log-scrolltop');
-      this.$store.commit('bb', 'on');
+      this.$store.commit('TURN', 'on');
       this.$router.push({
         name: 'order',
         query: {

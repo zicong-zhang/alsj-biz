@@ -52,7 +52,7 @@ export default {
       alert("打电话");
     },
     toEditCustomer() {
-      this.$store.commit("bb", "on");
+      this.$store.commit("TURN", "on");
       this.$router.push({
         name: "order-edit-customer"
       });

@@ -1,5 +1,5 @@
 const states = {
-  a: '',
+  turn: '',
   storeId: 1
 }
 
