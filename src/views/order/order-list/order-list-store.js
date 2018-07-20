@@ -35,7 +35,7 @@ export default {
       state.orderList = [];
     },
     CONCAT_ORDER_LIST(state, newList) {
-      state.orderList = state.orderList.concat(newList);
+      state.orderList = newList;
     }
   }
 }

@@ -2,21 +2,24 @@
   <div id="app"
     v-cloak>
     <transition :name="$store.state.turn">
-      <keep-alive v-if="$route.meta.keep" :key="$route.name">
+      <keep-alive :exclude="exclude">
         <router-view></router-view>
       </keep-alive>
-      <router-view v-else :key="$route.name"></router-view>
     </transition>
   </div>
 </template>
 
 <script>
-
 export default {
   name: "App",
+  data() {
+    return {
+      // 排除缓存路由
+      exclude: ["OrderEditCustomer"]
+    };
+  },
   created() {},
-  mounted() {
-  }
+  mounted() {}
 };
 </script>
 

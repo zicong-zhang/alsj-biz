@@ -1,5 +1,5 @@
 <template>
-  <div class="order-detail-item-h2">
+  <div class="order-detail-item-h2" @click="$emit('click', $event)">
     <h3>{{ title }}</h3>
     <span>
       <slot></slot>

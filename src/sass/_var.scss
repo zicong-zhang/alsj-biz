@@ -1,5 +1,5 @@
 @function e($px) {
-	@return ($px / 2);
+	@return $px;
 }
 
 @function r($px) {

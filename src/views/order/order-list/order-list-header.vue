@@ -32,7 +32,7 @@ export default {
       active: 0,
       isShowPopup: false,
       list: ["上门量尺", "设计方案", "签订合同"],
-      moreStatus: ["上门量尺", "设计方案", "签订合同"],
+      moreStatus: ["复尺", "下单", "生产", "送货安装", "待确认", "完成", "已取消"],
       statusName: "更多状态"
     };
   },
@@ -53,11 +53,14 @@ export default {
     showMoreStatus() {
       this.isShowPopup = !this.isShowPopup;
     },
-    selectMoreStatus(item) {
-      this.CHANGE_STATUS(3);
-      this.getListByStatus(1);
+    selectMoreStatus(item, idx) {
+      console.log('item, idx:_____', item, idx);
       this.isShowPopup = false;
       this.statusName = item;
+      this.active = 3;
+      let status = item === '已取消' ? 0 : idx + 4;
+      this.CHANGE_STATUS(status);
+      this.getListByStatus(1);
     }
   }
 };
@@ -68,7 +71,7 @@ export default {
   height: r(88px +e(55px));
   background: #fff;
   h2 {
-    height: e(88px);
+    height: e(68px);
     line-height: e(88px);
     font-size: e(32px);
     text-align: center;
@@ -83,6 +86,7 @@ export default {
     display: flex;
     justify-content: center;
     color: #999;
+    padding-top: 20px;
     position: relative;
     &:not(:last-child) {
       &:before {
@@ -93,12 +97,15 @@ export default {
         background: #ddd;
         position: absolute;
         right: 0;
-        top: 0;
+        top: 20px;
       }
     }
   }
   .last {
-    position: relative;
+    p {
+      position: relative;
+      margin-right: 20px;
+    }
   }
   p {
     height: e(51px);
@@ -110,6 +117,10 @@ export default {
   }
   i {
     font-size: e(24px);
+    position: absolute;
+    right: 0;
+    top: 0;
+    transform: translate(100%, 0%);
   }
   .active {
     color: $main;

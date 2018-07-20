@@ -31,14 +31,15 @@ body,
 html {
   background: #F0F4F7;
   color: #333;
-  font-size:e(28px);
+  font-size: e(28px);
   word-break: break-all;
   height: 100%; // font-family: "Helvetica Neue", Helvetica, Arial, "Microsoft Yahei", "Hiragino Sans GB", "Heiti SC", "WenQuanYi Micro Hei", "PingFang SC Regular", "微软雅黑", "黑体", sans-serif;
   font-family: "PingFang SC Regular", "-apple-system", BlinkMacSystemFont, "PingFang SC", "Helvetica Neue", STHeiti, "Microsoft Yahei", Tahoma, Simsun, sans-serif;
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
 
-body>div {
+#app {
+  background: #F0F4F7;
   height: 100%;
   overflow: hidden;
   &>div {
@@ -49,9 +50,6 @@ body>div {
     width: 100%;
     height: 100%;
   }
-}
-#app {
-  background: #F0F4F7;
 }
 
 img {
@@ -86,6 +84,7 @@ textarea {
     color: #c7c7c7;
   }
 }
+
 //自动填写密码出现的黄色背景
 input:-webkit-autofill {
   -webkit-box-shadow: 0 e(0px)e(1000px) white inset !important;
@@ -98,8 +97,8 @@ button {
 }
 
 ::-webkit-scrollbar {
-  height:e(0px);
-  width:e(0px);
+  height: e(0px);
+  width: e(0px);
   color: transparent;
 }
 

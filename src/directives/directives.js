@@ -42,6 +42,7 @@ Vue.directive('focus', {
 Vue.directive('back', {
   bind(el, binding, vNode) {
     el.addEventListener('click', e => {
+      vNode.$store.commit('turn', 'on');
       vNode.$router.back();
     })
   }

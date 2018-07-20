@@ -5,7 +5,7 @@
     <ul>
       <li v-for="(item, idx) in list"
         :key="idx"
-        @click.stop="select(item)">
+        @click.stop="select(item, idx)">
         <p>{{ item }}</p>
         <!-- <i class="horizon-bar"></i> -->
       </li>
@@ -26,8 +26,8 @@ export default {
     }
   },
   methods: {
-    select(item) {
-      this.$emit('select', item);
+    select(item, idx) {
+      this.$emit('select', item, idx);
     }
   }
 };

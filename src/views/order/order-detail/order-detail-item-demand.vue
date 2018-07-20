@@ -44,7 +44,6 @@ export default {
   watch: {
     demands(val) {
       this.$set(this.$data, 'list', val);
-      console.log('val:_____', val);
     }
   },
   created() {

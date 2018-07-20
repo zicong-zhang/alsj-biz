@@ -42,7 +42,7 @@ export default {
   },
   watch: {
     $route(to, from) {
-      if (from.name === "order-list") this.init();
+      if (from.name === "order-list" && from.name === 'order-detail') this.init();
     }
   },
   created() {

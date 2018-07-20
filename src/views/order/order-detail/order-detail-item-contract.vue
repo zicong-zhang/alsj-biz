@@ -1,5 +1,5 @@
 <template>
-  <div class="order-detail-item-contract">
+  <div class="order-detail-item-contract" v-if="orderDetailStatus >= 3">
     <H2 title="定制合同">
       <p slot="right">如有疑问，
         <span>请联系客服</span>
@@ -29,7 +29,7 @@ export default {
     };
   },
   computed: {
-    ...mapGetters(["contractList"])
+    ...mapGetters(["contractList", 'orderDetailStatus'])
   }
 };
 </script>
@@ -60,8 +60,8 @@ export default {
     overflow: hidden;
   }
   img {
-    width: auto;
-    height: 100%;
+    width: 100%;
+    height: auto;
     position: absolute;
     left: 50%;
     top: 50%;

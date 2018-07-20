@@ -1,9 +1,17 @@
 <template>
-  <li class="order-list-item" @click="toDetail">
+  <li class="order-list-item"
+    @click="toDetail">
+    <div class="cancel-cover"
+      v-if="status === 0">
+      <img :src="cancelIcon" />
+      <p>取消原因：{{ (item.cancelTagNameList && item.cancelTagNameList.join('、')) || '无' }}</p>
+    </div>
     <div class="list-item-title">
       <i class="iconfont icon-icon_my_orrders"></i>
       <h3>订单：{{ item.orderCode }}</h3>
-      <span class="label" @click="finish">{{ item.orderStatusName }}</span>
+      <span class="label"
+        v-if="status !== 0"
+        @click="finish">{{ item.orderStatusName }}</span>
     </div>
     <ul class="customer-info">
       <li>
@@ -30,6 +38,9 @@
   </li>
 </template>
 <script>
+import { mapState } from "vuex";
+import cancelIcon from "~img/order/icon_cancelorder_white@2x.png";
+
 export default {
   name: "OrderListItem",
   props: {
@@ -38,23 +49,25 @@ export default {
     }
   },
   data() {
-    return {};
+    return {
+      cancelIcon
+    };
   },
-  created() {
-  },
+  computed: mapState({
+    status: state => state.OrderListModule.status
+  }),
+  created() {},
   methods: {
-    finish() {
-
-    },
+    finish() {},
     toDetail() {
-      this.$emit('log-scrolltop');
-      this.$store.commit('TURN', 'on');
+      this.$emit("log-scrolltop");
+      this.$store.commit("TURN", "on");
       this.$router.push({
-        name: 'order',
+        name: "order-detail",
         query: {
           id: this.item.id
         }
-      })
+      });
     }
   }
 };
@@ -65,6 +78,7 @@ export default {
   padding: 0 r(36px);
   padding-bottom: r(35px);
   margin-bottom: r(16px);
+      position: relative;
   .list-item-title {
     display: flex;
     justify-content: space-between;
@@ -125,6 +139,7 @@ export default {
     h5 {
       flex: none;
       color: #999;
+      line-height: r(48px);
       font-weight: normal;
       font-size: r(24px);
       margin: 0;
@@ -133,6 +148,7 @@ export default {
       max-width: 80%;
       text-align: right;
       font-size: r(24px);
+      line-height: r(48px);
     }
   }
   .create-date {
@@ -143,6 +159,31 @@ export default {
     i {
       font-size: r(24px);
       color: #999;
+    }
+  }
+  .cancel-cover {
+    display: block;
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    right: 0px;
+    bottom: 0px;
+    z-index: 20;
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    justify-content: center;
+    background: RGBA(113, 128, 143, 0.8);
+    img {
+      width: 157px;
+      height: 119px;
+      margin-bottom: 17px;
+    }
+    p {
+      color: #fff;
+      font-size: 24px;
+      text-align: center;
+      padding: 0 36px;
     }
   }
 }

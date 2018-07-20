@@ -7,15 +7,13 @@ import VInfoList from '~components/v-info-list';
 import VToast from '~components/v-toast';
 import VInput from '~components/v-input';
 import VPicker from '~components/v-picker';
-
-import { DatetimePicker, Picker } from 'mint-ui';
-Vue.component(Picker.name, Picker);
-Vue.component(DatetimePicker.name, DatetimePicker);
+import VForm from '~components/v-form';
 
 Vue.component('VHeader', VHeader);
 Vue.component('VFooter', VFooter);
 Vue.component('VPopup', VPopup);
 Vue.component('VInfoList', VInfoList);
+Vue.component('VForm', VForm);
 Vue.component('VInput', VInput);
 Vue.component('VPicker', VPicker);
 

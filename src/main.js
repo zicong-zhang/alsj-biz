@@ -1,4 +1,5 @@
-import 'babel-polyfill';
+import 'babel-polyfill'
+import 'lib-flexible/flexible'
 // 第三方库
 import Vue from 'vue'
 import Vuex from 'vuex'
@@ -7,6 +8,8 @@ import AlloyFinger from 'alloyfinger'
 import AlloyFingerPlugin from 'alloyfinger/vue/alloy_finger.vue'
 import VueAwesomeSwiper from 'vue-awesome-swiper'
 import FastClick from 'fastclick'
+import Cube from 'cube-ui'
+
 
 // 工具类
 import router from './router';
@@ -30,6 +33,7 @@ Vue.config.devtools = true;
 
 Vue.use(Vuex);
 Vue.use(VueLazyload);
+Vue.use(Cube);
 // Vue.use(Mint);
 Vue.use(VueAwesomeSwiper);
 Vue.use(AlloyFingerPlugin, {
@@ -56,14 +60,6 @@ new Vue({
   store,
   render: h => h(App)
 })
-
-
-
-/* const docWidth = document.documentElement.clientWidth > 700 ? 700 : document.documentElement.clientWidth;
-const wd = docWidth * window.devicePixelRatio / 10;
-document.querySelector("html").style.fontSize = `${wd}px`;
-const scale = (1 / window.devicePixelRatio);
-document.querySelector("#vp").content = `initial-scale=${scale}, maximum-scale=${scale}, minimum-scale=${scale}, user-scalable=no, width=device-width`; */
 
 Vue.prototype.$rem = (fz) => {
   return `${fz / 75 * window.devicePixelRatio}rem`;

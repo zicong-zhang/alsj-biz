@@ -1,9 +1,5 @@
 <template>
   <div class="v-picker">
-    <div class="cover"
-      v-stop-cover
-      @click="hidePicker"
-      v-show="isShowPicker"></div>
 
     <div class="label">
       <label v-if="label">{{ label }}</label>
@@ -13,38 +9,10 @@
     </div>
 
     <div class="input-container">
-      <p :class="{placeholder: $attrs.placeholder}"
+      <p :class="{placeholder: placeholder}"
         @click="showPicker">{{ value || $attrs['default-value'] || $attrs.placeholder }}</p>
       <i class="iconfont icon-bottomnew"></i>
     </div>
-
-    <transition name="v-picker">
-      <div class="v-picker-container"
-        v-if="isShowPicker">
-
-        <header>
-          <div>
-            <p class="close-btn"
-              @click="hidePicker">
-              <i class="iconfont icon-btn_all_close1"></i>
-            </p>
-            <h5>{{ title }}</h5>
-            <p class="save-btn"
-              @click="onSelect">
-              <span>保存</span>
-            </p>
-          </div>
-          <i class="horizon-bar"></i>
-        </header>
-
-        <mt-picker value-key="value"
-          :defaultIndex="index"
-          :slots="list"
-          :visibleItemCount="showQty"
-          @change="pickChange"></mt-picker>
-      </div>
-
-    </transition>
 
   </div>
 </template>
@@ -54,44 +22,66 @@ export default {
   name: "VPicker",
   props: {
     label: String,
-    warn: String,
     list: {
       type: Array
     },
-    index: {
+    defaultVal: {
       default: 0
-    },
-    showQty: {
-      default: 5
     },
     title: {
       default: ""
-    }
+    },
+    required: String
   },
   created() {
-    console.log("this.index:_____", this.$attrs);
+    this.init();
   },
   data() {
     return {
-      isShowPicker: false,
       value: "",
-      select: {}
+      warn: "",
+      picker: null,
+      timer: null
     };
   },
+  computed: {
+    placeholder() {
+      let placeholder = this.$attrs.placeholder;
+      return placeholder && !this.value && !this.$attrs["default-value"];
+    }
+  },
   methods: {
+    init() {
+      this.picker = this.$createPicker({
+        title: this.title,
+        data: this.list,
+        onSelect: (value, index, text) => {
+          console.log("value, index, text:_____", value, index, text);
+          this.value = text.join("");
+          this.$emit("select", value);
+        },
+        onCancel: () => {}
+      });
+    },
     showPicker() {
-      this.isShowPicker = true;
+      this.picker.show();
     },
-    hidePicker() {
-      this.isShowPicker = false;
+    showWarn() {
+      this.warn = false;
+      this.$nextTick(() => {});
+      this.timer = setTimeout(() => {
+        this.warn = this.required;
+        clearTimeout(this.timer);
+        this.timer = null;
+      }, 100);
+      return false;
     },
-    pickChange(picker, valArr) {
-      this.select = valArr[0];
-    },
-    onSelect() {
-      this.hidePicker();
-      this.value = this.select.value;
-      this.$emit("select", this.select);
+    validator() {
+      if (this.required) {
+        return this.value ? true : this.showWarn();
+      } else {
+        return true;
+      }
     }
   }
 };
@@ -134,6 +124,7 @@ export default {
       right: e(24px);
       top: 50%;
       transform: translateY(-50%);
+      font-size: 30px;
       color: #c7c7c7;
     }
   }

@@ -1,7 +1,7 @@
 <template>
-  <div class="customer-info"
+  <div class="customer-info">
+    <H2 :title="title"
     @click="toEditCustomer">
-    <H2 :title="title">
       <i class="iconfont icon-btn_all_next"></i>
     </H2>
 
@@ -18,12 +18,13 @@
         align="left"
         label="客户地址"
         :value="info.linkmanAddress" />
-      <li class="blue">
+      <li :class="{blue: !info.linkmanBudget}">
         <h5>客户预算</h5>
         <p class="common-rmb"
           v-if="info.linkmanBudget"
           key="hasLinkmanBudget">{{ info.linkmanBudget }}</p>
         <p v-else
+          @click="toEditCustomer"
           key="noLinkmanBudget">添加客户预算</p>
       </li>
     </ul>

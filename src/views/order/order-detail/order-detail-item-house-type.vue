@@ -2,7 +2,8 @@
   <div class="order-detail-item-house-type">
     <div class="no-type"
       key="no-type"
-      v-if="showType">
+      v-if="showType"
+      @click="toEditHouseType">
       <h3>添加户型信息,方便后续工作跟进</h3>
       <i class="iconfont icon-btn_all_next"></i>
     </div>
@@ -10,19 +11,20 @@
     <div class="has-type"
       key="has-type"
       v-else>
-      <H2 :title="title">
+      <H2 :title="title"
+        @click="toEditHouseType">
         <i class="iconfont icon-btn_all_next"></i>
       </H2>
       <ul>
         <VInfoList label="所在小区"
           align="left"
-          :value="info.linkmanResidence || '无'" />
+          :value="orderInfo.linkmanResidence || '无'" />
         <VInfoList label="户型"
           align="left"
-          :value="info.linkmanHouseType  || '无'" />
+          :value="orderInfo.linkmanHouseType  || '无'" />
         <VInfoList label="面积"
           align="left"
-          :value="info.measurement ?  `${info.measurement} ㎡` : '无'" />
+          :value="orderInfo.measurement ?  `${orderInfo.measurement} ㎡` : '无'" />
       </ul>
     </div>
   </div>
@@ -30,7 +32,7 @@
 
 <script>
 import H2 from "./order-detail-item-h2";
-import { mapState } from "vuex";
+import { mapGetters } from "vuex";
 
 export default {
   name: "OrderDetailItemHouseType",
@@ -43,16 +45,21 @@ export default {
     };
   },
   computed: {
-    ...mapState({
-      info: state => state.OrderDetailModule.orderInfo
-    }),
+    ...mapGetters(['orderInfo']),
     showType() {
       let {
         linkmanResidence,
         linkmanHouseType,
         measurement
-      } = this.info;
-      return !linkmanResidence && !linkmanHouseType && !measurement
+      } = this.orderInfo;
+      return !linkmanResidence && !linkmanHouseType && !measurement;
+    }
+  },
+  methods: {
+    toEditHouseType() {
+      this.$utils.go(this, {
+        name: 'order-edit-house-type'
+      })
     }
   }
 };

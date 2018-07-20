@@ -1,6 +1,6 @@
 
 <template>
-  <div class="order-detail-item-design">
+  <div class="order-detail-item-design" v-if="orderDetailStatus >= 2">
     <H2 title="上传设计方案"></H2>
 
     <div class="design-list">
@@ -24,7 +24,7 @@ export default {
     H2
   },
   computed: {
-    ...mapGetters(["designList"])
+    ...mapGetters(["designList", 'orderDetailStatus'])
   }
 };
 </script>

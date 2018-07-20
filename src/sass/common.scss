@@ -31,6 +31,44 @@
 .gap {
   display: block;
   width: 100%;
-  height: e(16px);
+  height: r(16px);
   background: $bg;
+}
+
+/* 覆盖选择器样式 */
+body {
+  .cube-picker-wheel-item {
+    height: r(80px);
+    line-height: r(80px);
+    font-size: r(32px);
+    // background: #eee;
+  }
+  .cube-picker-wheel-wrapper {
+    padding-top: r(30px);
+  }
+  .cube-picker-wheel-wrapper > div {
+    height: r(240px);
+  }
+  .cube-picker-panel {
+    height: r(600px);
+  }
+  .cube-picker-choose {
+    height: r(98px);
+    line-height: r(98px);
+  }
+  .cube-picker-content > i {
+    height: r(100px);
+    &:before, &:after {
+      transform: scale(1, 1);
+    }
+  }
+  .cube-picker-confirm, .cube-picker-cancel {
+    height: r(98px);
+    line-height: r(98px);
+    font-size: r(24px);
+    padding: 0 r(36px);
+  }
+  .cube-picker-title {
+    font-size: r(32px);
+  }
 }

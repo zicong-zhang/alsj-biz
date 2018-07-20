@@ -29,6 +29,10 @@ exports.cssLoaders = function(options) {
     }
   }
 
+  const stylusOptions = {
+    'resolve url': true
+  }
+
   function generateSassResourceLoader() {
     var loaders = [
       cssLoader,
@@ -84,8 +88,8 @@ exports.cssLoaders = function(options) {
     less: generateLoaders('less'),
     sass: generateSassResourceLoader(),
     scss: generateSassResourceLoader(),
-    stylus: generateLoaders('stylus'),
-    styl: generateLoaders('stylus')
+    stylus: generateLoaders('stylus', stylusOptions),
+    styl: generateLoaders('stylus', stylusOptions)
   }
 }
 

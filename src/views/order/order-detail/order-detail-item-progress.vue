@@ -8,14 +8,14 @@
     </div>
     <div class="progress">
       <ul>
-        <li v-for="(val, key, idx) in progressList"
-          :key="key"
-          :class="{active: idx < info.orderStatus, doing: idx == info.orderStatus}">
+        <li v-for="(value, key, idx) in orderProgress"
+          :key="value.id"
+          :class="{finish: value.finish, doing: idx === orderDetailStatus}">
           <div>
-            <h5>{{ val.name }}</h5>
-            <i :class="{ dot: true, iconfont: true, 'icon-index-gou': idx < info.orderStatus && idx !== 0}"></i>
-            <p v-if="idx < info.orderStatus">
-              <span v-html="replaceBr(val.date)"></span>
+            <h5>{{ value.name }}</h5>
+            <i :class="{ dot: true, iconfont: true, 'icon-index-gou': value.finish && idx !== 0}"></i>
+            <p v-if="value.orderStatus">
+              <span v-html="replaceBr(value.createDate)"></span>
             </p>
           </div>
         </li>
@@ -24,61 +24,41 @@
   </div>
 </template>
 <script>
-import { mapState } from "vuex";
+import { mapState, mapGetters, mapActions } from "vuex";
 
 export default {
   name: "OrderDetailItemProgress",
   data() {
-    return {
-      active: 3,
-      progressList: {
-        createDate: {
-          name: "创建订单",
-          date: ""
-        },
-        gagueMeasure: {
-          name: "上门量尺",
-          date: ""
-        },
-        design: {
-          name: "设计方案",
-          date: ""
-        },
-        signContract: {
-          name: "签订合同",
-          date: ""
-        },
-        repeatMeasure: {
-          name: "复尺",
-          date: ""
-        },
-        placeOrder: {
-          name: "下单",
-          date: ""
-        },
-        make: {
-          name: "生产",
-          date: ""
-        },
-        install: {
-          name: "送货安装",
-          date: ""
-        },
-        orderFinsih: {
-          name: "订单已完成",
-          date: ""
-        }
-      }
-    };
+    return {};
   },
   computed: {
     ...mapState({
-      info: state => state.OrderDetailModule.orderInfo
-    })
+      orderProgress: state => state.OrderDetailModule.orderProgress
+    }),
+    ...mapGetters(['orderDetailStatus']),
+    progress() {
+      return;
+    }
+  },
+  watch: {
+    $route(to, from) {
+      if (from.name === "order-list" && to.name === 'order-detail') {
+        console.log('33333333333333:_____', 33333333333333);
+        this.getProgreess('route');
+      }
+    }
+  },
+  created() {
+    this.getProgreess('created');
   },
   methods: {
+    ...mapActions(["getOrderDetailProgress"]),
     replaceBr(date = "") {
       return date.replace(/\s/, "<br />").replace(/\-/g, ".");
+    },
+    getProgreess(a) {
+      console.log('22222222:_____', a);
+      this.$store.dispatch("getOrderDetailProgress");
     }
   }
 };
@@ -92,7 +72,7 @@ export default {
   display: flex;
   justify-content: space-between;
   color: #fff;
-  border-bottom:e(1px) solid #fff;
+  border-bottom: e(1px) solid #fff;
   line-height: e(82px);
   margin: 0 e(36px);
   // padding-top: e(34px);
@@ -169,7 +149,7 @@ export default {
     bottom: auto;
     top: e(36px);
   }
-  .active {
+  .finish {
     div {
       &:before {
         background: #fff;

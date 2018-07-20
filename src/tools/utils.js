@@ -1,5 +1,19 @@
 export default {
   /**
+   * 路由跳转
+   */
+  go(vue, params) {
+    vue.$store.commit('TURN', 'on');
+    vue.$router.push(params);
+  },
+  /**
+   * 路由返回
+   */
+  back(vue) {
+    vue.$store.commit('TURN', 'off');
+    vue.$router.back(-1);
+  },
+  /**
    * 格式化 Url 参数
    */
   urlToObj() {
