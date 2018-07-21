@@ -67,3 +67,16 @@
 .v-picker-leave-active {
   transition: transform .25s, opacity .25s;
 }
+
+/* 客户定制需求选择器 */
+.show-picker-enter,
+.show-picker-leave-to {
+  z-index: 20;
+  opacity: 0;
+  transform: translate3d(0, 50%, 0);
+}
+.show-picker-enter-active,
+.show-picker-leave-active {
+  z-index: 20;
+  transition: transform .25s, opacity .25s;
+}

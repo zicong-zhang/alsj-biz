@@ -3,7 +3,7 @@
     <VHeader :title="'订单详情'" />
     <div class="content">
       <WorkerTips />
-      <Progress/>
+      <Progress :reload="reload"/>
       <CustomerInfo/>
       <HouseType/>
       <CustomDemand/>
@@ -11,6 +11,7 @@
       <Contract/>
       <Design/>
       <Remark/>
+      <DemandPicker/>
     </div>
   </div>
 </template>
@@ -24,6 +25,7 @@ import KeeperList from './order-detail-item-keeper';
 import Contract from './order-detail-item-contract';
 import Design from './order-detail-item-design';
 import Remark from './order-detail-item-remark'
+import DemandPicker from "./order-detail-item-demand-picker";
 
 import { mapState, mapActions, mapMutations } from "vuex";
 
@@ -38,11 +40,17 @@ export default {
     KeeperList,
     Contract,
     Design,
-    Remark
+    Remark,
+    DemandPicker
+  },
+  data() {
+    return {
+      reload: 0 // 用于触发子组件内部调用接口
+    }
   },
   watch: {
     $route(to, from) {
-      if (from.name === "order-list" && from.name === 'order-detail') this.init();
+      if (from.name === "order-list" && to.name === 'order-detail') this.init();
     }
   },
   created() {
@@ -54,6 +62,8 @@ export default {
     init() {
       this.SET_ORDER_ID(this.$route.query.id);
       this.getOrderDetailInfo();
+      this.reload++;
+      console.log('this.reload:_____', this.reload);
     }
   }
 };

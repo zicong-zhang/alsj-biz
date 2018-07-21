@@ -1,9 +1,11 @@
 <template>
   <div class="order-detail-item-demand">
+
     <!-- 没有需求数据 -->
     <div class="no-demand"
       v-if="list.length === 0"
-      key="no-demand">
+      key="no-demand"
+      @click="showDemandPicker">
       <h3>选择客户的定制需求</h3>
       <i class="iconfont icon-btn_all_next"></i>
     </div>
@@ -12,11 +14,13 @@
     <div class="has-demand"
       key="has-demand"
       v-else>
-      <H2 :title="title">
+      <H2 :title="title"
+        @click="showDemandPicker">
         <i class="iconfont icon-btn_all_next"></i>
       </H2>
       <ul>
-        <li v-for="item in list"
+        <li class="demand-function-list"
+          v-for="item in list"
           :key="item.id">{{ item.name }}</li>
       </ul>
     </div>
@@ -25,7 +29,7 @@
 
 <script>
 import H2 from "./order-detail-item-h2";
-import { mapGetters } from "vuex";
+import { mapGetters, mapMutations } from "vuex";
 
 export default {
   name: "OrderDetailItemDemand",
@@ -43,10 +47,15 @@ export default {
   },
   watch: {
     demands(val) {
-      this.$set(this.$data, 'list', val);
+      this.$set(this.$data, "list", val);
     }
   },
-  created() {
+  created() {},
+  methods: {
+    ...mapMutations(['SHOW_DEMAND_PICKER']),
+    showDemandPicker() {
+      this.SHOW_DEMAND_PICKER();
+    }
   }
 };
 </script>
@@ -55,22 +64,24 @@ export default {
   background: #fff;
   padding: 0 e(36px);
   margin-bottom: e(16px);
+}
+.has-demand {
   ul {
     display: flex;
     flex-flow: wrap;
     padding-top: e(22px);
     padding-bottom: e(36px);
   }
-  li {
-    color: #3380cc;
-    font-size: e(24px);
-    line-height: e(64px);
-    background: #e5f2ff;
-    border-radius: e(8px);
-    padding: 0 e(36px);
-    margin-right: e(16px);
-    margin-bottom: e(16px);
-  }
+}
+.demand-function-list {
+  color: #3380cc;
+  font-size: e(24px);
+  line-height: e(64px);
+  background: #e5f2ff;
+  border-radius: e(8px);
+  padding: 0 e(36px);
+  margin-right: e(16px);
+  margin-bottom: e(16px);
 }
 .no-demand {
   height: e(94px);

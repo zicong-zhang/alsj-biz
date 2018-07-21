@@ -28,6 +28,9 @@ import { mapState, mapGetters, mapActions } from "vuex";
 
 export default {
   name: "OrderDetailItemProgress",
+  props: {
+    reload: Number
+  },
   data() {
     return {};
   },
@@ -41,23 +44,19 @@ export default {
     }
   },
   watch: {
-    $route(to, from) {
-      if (from.name === "order-list" && to.name === 'order-detail') {
-        console.log('33333333333333:_____', 33333333333333);
-        this.getProgreess('route');
-      }
+    reload(newVal) {
+        this.getProgreess();
     }
   },
   created() {
-    this.getProgreess('created');
+    this.getProgreess();
   },
   methods: {
     ...mapActions(["getOrderDetailProgress"]),
     replaceBr(date = "") {
       return date.replace(/\s/, "<br />").replace(/\-/g, ".");
     },
-    getProgreess(a) {
-      console.log('22222222:_____', a);
+    getProgreess() {
       this.$store.dispatch("getOrderDetailProgress");
     }
   }

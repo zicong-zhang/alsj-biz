@@ -1,8 +1,6 @@
 <template>
   <div class="order-detail-item-keeper">
-    <H2 title="跟进人">
-      <i class="iconfont icon-btn_all_next"></i>
-    </H2>
+    <H2 title="跟进人" />
     <ul>
       <VInfoList v-for="item in list"
         :key="item.userId"
@@ -48,7 +46,6 @@ export default {
   padding: 0 r(36px);
   margin-bottom: r(16px);
   ul {
-    
     padding-top: r(22px);
     padding-bottom: r(36px);
   }

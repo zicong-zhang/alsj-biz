@@ -16,7 +16,18 @@ export const filterUrl = url => {
   }
 }
 
-export const formatRequestData = data => {
+export const setRequestData = (data, img) => {
+  return (img === 'img' ? formatRequestImgData(data) : formatRequestData(data));
+}
+
+function formatRequestImgData(data) {
+  let fd = new FormData();
+  fd.append('files', data);
+  fd.append('token', getToken());
+  return fd;
+}
+
+function formatRequestData(data) {
   let req = {
     client: {
       caller: "web",

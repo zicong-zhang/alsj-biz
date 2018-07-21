@@ -1,43 +1,25 @@
 import * as api from '~apis/order';
+import utils from '../../../tools/utils';
 
-let progressList = {
-  1: {
-    name: "创建订单"
-  },
-  2: {
-    name: "上门量尺"
-  },
-  3: {
-    name: "设计方案"
-  },
-  4: {
-    name: "签订合同"
-  },
-  5: {
-    name: "复尺"
-  },
-  6: {
-    name: "下单"
-  },
-  7: {
-    name: "生产"
-  },
-  8: {
-    name: "送货安装"
-  },
-  9: {
-    name: "订单已完成"
-  }
+// 订单流程对应名称
+const progressList = {
+  1: {name: "创建订单"},
+  2: {name: "上门量尺"},
+  3: {name: "设计方案"},
+  4: {name: "签订合同"},
+  5: {name: "复尺"},
+  6: {name: "下单"},
+  7: {name: "生产"},
+  8: {name: "送货安装"},
+  9: {name: "订单已完成"}
 }
 
 export default {
   state: {
-    orderId: '',
-    orderInfo: {
-      /* dimensionList: [],
-      orderKeeperList: [] */
-    },
-    orderProgress: progressList
+    orderId: '', // 订单id
+    orderInfo: {}, // 订单详情
+    orderProgress: [], // 订单进度
+    isShowDemandPicker: false // 是否展示定制需求选择器
   },
   getters: {
     // 订单信息
@@ -124,11 +106,9 @@ export default {
     },
     // 设置订单进度
     SET_ORDER_DETAIL_PROGRESS(state, arr) {
-      arr.forEach(item => {
-        Object.assign(state.orderProgress[item.orderStatus], item);
-        state.orderProgress[item.orderStatus].finish = true;
-      })
-      console.log('state.orderProgress:_____', state.orderProgress);
+      let newArr = JSON.parse(JSON.stringify(progressList));
+      arr.forEach(item => Object.assign(newArr[item.orderStatus], item, {finish: true}));
+      state.orderProgress = newArr;
     },
     // 设置订单信息
     SET_ORDER_DETAIL_INFO(state, info) {
@@ -143,6 +123,10 @@ export default {
     // 修改户型信息
     UPDATE_HOUSE_TYPE_INFO(state, params) {
       Object.assign(state.orderInfo, params);
+    },
+    // 展示定制需求选择器
+    SHOW_DEMAND_PICKER(state) {
+      state.isShowDemandPicker = !state.isShowDemandPicker;
     }
   }
 }

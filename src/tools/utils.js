@@ -1,3 +1,5 @@
+import Exif from 'exif-js'  
+
 export default {
   /**
    * 路由跳转
@@ -12,6 +14,21 @@ export default {
   back(vue) {
     vue.$store.commit('TURN', 'off');
     vue.$router.back(-1);
+  },
+  deepCopy(obj) {
+    var newObj = {};
+    var trigger = (obj, newObj) => {
+      for (var key in obj) {
+        if (typeof obj[key] === 'object') {
+          newObj[key] = obj[key];
+          trigger(obj[key], newObj[key]);
+        } else {
+          newObj[key] = obj[key]
+        }
+      }
+    }
+    trigger(obj, newObj);
+    return newObj;
   },
   /**
    * 格式化 Url 参数
@@ -410,7 +427,7 @@ export default {
     var ready = new FileReader();
     /*开始读取指定的Blob对象或File对象中的内容. 当读取操作完成时,readyState属性的值会成为DONE,如果设置了onloadend事件处理程序,则调用之.同时,result属性中将包含一个data: URL格式的字符串以表示所读取文件的内容.*/
     ready.readAsDataURL(file);
-    ready.onload = function() {
+    ready.onload = () => {
       var re = this.result;
       this.canvasDataURL(re, quality, file, cb)
     }
