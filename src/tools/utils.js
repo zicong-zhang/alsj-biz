@@ -1,4 +1,4 @@
-import Exif from 'exif-js'  
+import EXIF from 'exif-js'  
 
 export default {
   /**
@@ -428,19 +428,17 @@ export default {
     /*开始读取指定的Blob对象或File对象中的内容. 当读取操作完成时,readyState属性的值会成为DONE,如果设置了onloadend事件处理程序,则调用之.同时,result属性中将包含一个data: URL格式的字符串以表示所读取文件的内容.*/
     ready.readAsDataURL(file);
     ready.onload = () => {
-      var re = this.result;
-      this.canvasDataURL(re, quality, file, cb)
+      this.canvasDataURL(ready.result, quality, file, cb)
     }
   },
   canvasDataURL(path, quality, file, callback) {
     var img = new Image();
     img.src = path;
-    img.onload = function() {
-      var that = this;
+    img.onload = () => {
 
-      EXIF.getData(img, function() {
+      EXIF.getData(img, () => {
         EXIF.getAllTags(img);
-        Orientation = EXIF.getTag(img, 'Orientation');
+        let Orientation = EXIF.getTag(img, 'Orientation');
         switch (Orientation) {
           case 6:
             this.compressPic(img, 'left', quality, callback);

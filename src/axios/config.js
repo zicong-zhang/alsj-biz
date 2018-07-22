@@ -2,7 +2,7 @@ import Axios from 'axios'
 import * as utils from './utils';
 
 Axios.defaults.headers.post['Content-Type'] = 'application/json';
-Axios.defaults.timeout = 6000;
+Axios.defaults.timeout = 15000;
 
 // 请求拦截
 Axios.interceptors.request.use(function(config) {
