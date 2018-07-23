@@ -38,14 +38,14 @@ export default {
     ...mapState({
       orderProgress: state => state.OrderDetailModule.orderProgress
     }),
-    ...mapGetters(['orderDetailStatus']),
+    ...mapGetters(["orderDetailStatus"]),
     progress() {
       return;
     }
   },
   watch: {
     reload(newVal) {
-        this.getProgreess();
+      this.getProgreess();
     }
   },
   created() {
@@ -92,6 +92,9 @@ export default {
   width: 100%;
   -webkit-overflow-scrolling: touch;
   overflow-x: scroll;
+  &::-webkit-scrollbar {
+    display: none;
+  }
   ul {
     display: flex;
     width: e(1484px);

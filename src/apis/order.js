@@ -68,3 +68,10 @@ export const updateHouseTypeInfo = params => {
     orderId
   })
 }
+// 修改设计方案图片
+export const updateDesignPic = params => {
+  return http('/order/designPlan/update', {
+    designsUrl: params.imgs.join(','),
+    orderId: params.orderId
+  })
+}

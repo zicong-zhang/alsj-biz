@@ -50,6 +50,11 @@ if ('addEventListener' in document) {
   }, false);
 }
 
+import Vconsole from 'vconsole';
+if (process.env.NODE_ENV !== 'production') {
+  new Vconsole()
+}
+
 
 let store = new Vuex.Store(vx);
 
@@ -62,5 +67,5 @@ new Vue({
 })
 
 Vue.prototype.$rem = (fz) => {
-  return `${fz / 75 * window.devicePixelRatio}rem`;
+  return `${fz / 75}rem`;
 }

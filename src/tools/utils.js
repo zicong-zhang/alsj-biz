@@ -447,7 +447,6 @@ export default {
             this.compressPic(img, 'right', quality, callback);
             break;
           case 3:
-            // this.compressPic(img, 'right', quality, callback);
             this.compressPic(img, 'right', quality, callback);
             break;
           default:

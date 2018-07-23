@@ -12,7 +12,7 @@
     <i class="gap"></i>
     <VForm ref="form">
       <!-- 小区 -->
-      <VInput v-model="linkmanHouseType"
+      <VInput v-model="linkmanResidence"
         label="所在小区"
         placeholder="输入客户所在的小区"
         replace="all"
@@ -21,7 +21,7 @@
       <!-- 户型 -->
       <VPicker label="户型"
         :list="residenceList"
-        :default-value="linkmanResidence"
+        :default-value="linkmanHouseType"
         @select="selectResidence"
         placeholder="请选择户型"
         title="选择户型" />
@@ -91,7 +91,7 @@ export default {
     };
   },
   computed: {
-    ...mapGetters(["orderInfo", 'orderId'])
+    ...mapGetters(["orderInfo", "orderId"])
   },
   created() {
     Object.assign(this.$data, this.orderInfo);
@@ -99,7 +99,7 @@ export default {
   methods: {
     ...mapActions(["updateHouseTypeInfo"]),
     selectResidence(value) {
-      this.linkmanResidence = value.join("");
+      this.linkmanHouseType = value.join("");
     },
     submit() {
       this.updateHouseTypeInfo({
@@ -108,9 +108,9 @@ export default {
         measurement: this.measurement,
         orderId: this.orderId
       }).then(data => {
-        alert('修改成功');
+        this.$toast("修改成功");
         this.$utils.back(this);
-      })
+      });
     }
   }
 };

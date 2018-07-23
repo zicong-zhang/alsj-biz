@@ -8,6 +8,9 @@ import VToast from '~components/v-toast';
 import VInput from '~components/v-input';
 import VPicker from '~components/v-picker';
 import VForm from '~components/v-form';
+import VUpload from '~components/v-upload';
+import VDialog from '~components/v-dialog';
+
 
 Vue.component('VHeader', VHeader);
 Vue.component('VFooter', VFooter);
@@ -16,6 +19,8 @@ Vue.component('VInfoList', VInfoList);
 Vue.component('VForm', VForm);
 Vue.component('VInput', VInput);
 Vue.component('VPicker', VPicker);
+Vue.component('VUpload', VUpload);
+Vue.component('VDialog', VDialog);
 
 let ToastConstructor = Vue.extend(VToast);
 Vue.prototype.$toast = function(txt, timeout = 2300) {

@@ -3,27 +3,25 @@ body,
 div,
 ul,
 li,
-ol,
-dl,
-dt,
-p,
-dd,
-img,
-input,
-a,
-span,
 h1,
 h2,
 h3,
 h4,
 h5,
 h6,
-figure,
-video {
-  padding: 0;
-  margin: 0;
-  border: 0;
-  list-style: none;
+p,
+dl,
+dt,
+dd,
+ol,
+form,
+input,
+textarea,
+th,
+td,
+select button {
+	margin: 0;
+	padding: 0;
   line-height: 1;
 }
 
@@ -33,7 +31,9 @@ html {
   color: #333;
   font-size: e(28px);
   word-break: break-all;
-  height: 100%; // font-family: "Helvetica Neue", Helvetica, Arial, "Microsoft Yahei", "Hiragino Sans GB", "Heiti SC", "WenQuanYi Micro Hei", "PingFang SC Regular", "微软雅黑", "黑体", sans-serif;
+  -webkit-user-select: none;
+	word-break: break-all;
+  height: 100%;
   font-family: "PingFang SC Regular", "-apple-system", BlinkMacSystemFont, "PingFang SC", "Helvetica Neue", STHeiti, "Microsoft Yahei", Tahoma, Simsun, sans-serif;
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
@@ -52,6 +52,11 @@ html {
   }
 }
 
+ul,
+li {
+	list-style: none;
+}
+
 img {
   display: block;
   height: auto;
@@ -68,12 +73,16 @@ a {
 a:hover {
   text-decoration: none;
 }
-
-textarea {
-  font-family: inherit;
-  font-size: inherit;
+input,
+textarea,
+button {
+	outline: none;
+	box-shadow: none;
 }
-
+textarea {
+	resize: none;
+	overflow: auto;
+}
 input,
 textarea {
   font-family: "PingFang SC Regular", "-apple-system", BlinkMacSystemFont, "PingFang SC", "Helvetica Neue", STHeiti, "Microsoft Yahei", Tahoma, Simsun, sans-serif;
@@ -96,42 +105,22 @@ button {
   cursor: pointer;
 }
 
-::-webkit-scrollbar {
-  height: e(0px);
-  width: e(0px);
-  color: transparent;
+
+.clearfix {
+	zoom: 1;
 }
 
 .clearfix:after {
-  content: "微软雅黑";
-  display: block;
-  height: 0;
-  clear: both;
-  visibility: hidden;
-}
-
-.clearfix {
-  display: inline-table;
-}
-
-*html .clearfix {
-  height: 1%;
-}
-
-.clearfix {
-  display: block;
-}
-
-*+html .clearfix {
-  min-height: 1%;
+	content: ".";
+	width: 0;
+	height: 0;
+	visibility: hidden;
+	display: block;
+	clear: both;
 }
 
 i {
   font-style: normal;
-}
-
-.num {
-  font-family: arial;
 }
 
 [v-cloak] {

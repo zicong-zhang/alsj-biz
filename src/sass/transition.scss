@@ -80,3 +80,28 @@
   z-index: 20;
   transition: transform .25s, opacity .25s;
 }
+
+/* 展示选择图片菜单 */
+
+.photo-menu-enter,
+.photo-menu-leave-to {
+  opacity: 0;
+  transform: translate3d(0, 50%, 0);
+}
+.photo-menu-enter-active,
+.photo-menu-leave-active {
+  z-index: 20;
+  transition: transform .25s, opacity .1s;
+}
+/* 展示对话框 */
+
+.show-dialog-enter,
+.show-dialog-leave-to {
+  opacity: 0;
+  top: 46% !important;
+}
+.show-dialog-enter-active,
+.show-dialog-leave-active {
+  z-index: 20;
+  transition: top .25s, opacity .25s;
+}

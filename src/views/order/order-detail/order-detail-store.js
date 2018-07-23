@@ -1,17 +1,34 @@
 import * as api from '~apis/order';
-import utils from '../../../tools/utils';
 
 // 订单流程对应名称
 const progressList = {
-  1: {name: "创建订单"},
-  2: {name: "上门量尺"},
-  3: {name: "设计方案"},
-  4: {name: "签订合同"},
-  5: {name: "复尺"},
-  6: {name: "下单"},
-  7: {name: "生产"},
-  8: {name: "送货安装"},
-  9: {name: "订单已完成"}
+  1: {
+    name: "创建订单"
+  },
+  2: {
+    name: "上门量尺"
+  },
+  3: {
+    name: "设计方案"
+  },
+  4: {
+    name: "签订合同"
+  },
+  5: {
+    name: "复尺"
+  },
+  6: {
+    name: "下单"
+  },
+  7: {
+    name: "生产"
+  },
+  8: {
+    name: "送货安装"
+  },
+  9: {
+    name: "订单已完成"
+  }
 }
 
 export default {
@@ -55,6 +72,12 @@ export default {
     designList: state => {
       let designsUrl = state.orderInfo.designsUrl;
       if (designsUrl) {
+        /* return designsUrl.split(',').map(item => {
+          let obj = {
+            path: item
+          }
+          return obj
+        }) */
         return designsUrl.split(',');
       } else {
         return [];
@@ -96,6 +119,16 @@ export default {
           ctx.commit('UPDATE_HOUSE_TYPE_INFO', params);
           return Promise.resolve();
         })
+    },
+    // 修改设计方案图片
+    updateDesignPic(ctx, imgArr) {
+      api.updateDesignPic({
+          imgs: imgArr,
+          orderId: ctx.state.orderId
+        })
+        .then(data => {
+          ctx.commit('UPDATE_DESIGN_PIC', imgArr);
+        })
     }
   },
   mutations: {
@@ -107,7 +140,9 @@ export default {
     // 设置订单进度
     SET_ORDER_DETAIL_PROGRESS(state, arr) {
       let newArr = JSON.parse(JSON.stringify(progressList));
-      arr.forEach(item => Object.assign(newArr[item.orderStatus], item, {finish: true}));
+      arr.forEach(item => Object.assign(newArr[item.orderStatus], item, {
+        finish: true
+      }));
       state.orderProgress = newArr;
     },
     // 设置订单信息
@@ -127,6 +162,13 @@ export default {
     // 展示定制需求选择器
     SHOW_DEMAND_PICKER(state) {
       state.isShowDemandPicker = !state.isShowDemandPicker;
+    },
+    // 修改设计方案图片
+    UPDATE_DESIGN_PIC(state, imgArr) {
+      console.log('imgArr:_____', imgArr);
+      /* let arr = state.orderInfo.designsUrl.split(',');
+      arr.push(path); */
+      state.orderInfo.designsUrl = imgArr.join(',');
     }
   }
 }
