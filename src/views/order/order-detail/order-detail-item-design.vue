@@ -42,9 +42,8 @@ export default {
     },
     // 删除图片
     delPic(idx) {
-      let arr = this.designList.splice(idx, 1);
-      console.log('arr:_____', idx, arr);
-      this.updateDesignPic(arr);
+      this.designList.splice(idx, 1);
+      this.updateDesignPic(this.designList);
     }
   }
 };
@@ -53,11 +52,13 @@ export default {
 <style lang="scss">
 .order-detail-item-design {
   background: #fff;
-  padding: 0 e(36px);
-  margin-bottom: e(16px);
+  margin-bottom: 16px;
+  .order-detail-item-h2 {
+    margin: 0 36px;
+  }
 }
 .design-list {
   width: 100%;
-  padding-bottom: e(36px);
+  padding-bottom: 36px;
 }
 </style>

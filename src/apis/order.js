@@ -75,3 +75,25 @@ export const updateDesignPic = params => {
     orderId: params.orderId
   })
 }
+// 获取空间列表
+export const getSpaceList = () => {
+  return http('/dimension/listSpace', {
+    pageNum: 1,
+    pageSize: 0
+  })
+}
+// 根据空间id获取功能列表
+export const getFunctionListBySpaceId = spaceId => {
+  return http('/dimension/listActionBySpaceId', {
+    spaceId,
+    pageNum: 1,
+    pageSize: 0
+  })
+}
+// 修改定制需求
+export const updateDemand = (arr, orderId) => {
+  return http('/order/dimension/update', {
+    orderId,
+    dimensionId: arr
+  })
+}

@@ -49,23 +49,23 @@ export default {
   /* start | end | center | baseline | stretch */
   -webkit-box-align: center;
   align-items: center;
-  height:e(88px);
+  height:88px;
   h1 {
     width: 100%;
-    height:e(88px);
-    line-height:e(88px);
-    font-size:e(30px);
+    height:88px;
+    line-height:88px;
+    font-size:32px;
     background: #fff;
     // color: $font;
     text-align: center;
   }
   i {
-    font-size:e(30px);
+    font-size:30px;
     color: #333;
     display: block;
-    // width:e(50px);
-    height:e(50px);
-    line-height:e(50px);
+    // width:50px;
+    height:50px;
+    line-height:50px;
     text-align: center;
     // background: rgba(0, 0, 0, 0.2);
     border-radius: 50%;
@@ -76,17 +76,17 @@ export default {
   position: absolute;
   left: 0;
   z-index: 51;
-  height:e(88px);
+  height:88px;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 .back-btn {
-  width:e(100px);
-  padding-left:e(36px);
+  width:100px;
+  padding-left:36px;
   justify-content: flex-start;
   i {
-    font-size:e(24px);
+    font-size:24px;
   }
 }
 .fixed {

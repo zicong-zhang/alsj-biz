@@ -36,7 +36,9 @@ export default {
     orderId: '', // 订单id
     orderInfo: {}, // 订单详情
     orderProgress: [], // 订单进度
-    isShowDemandPicker: false // 是否展示定制需求选择器
+    isShowDemandPicker: false, // 是否展示定制需求选择器
+    spaceList: [], // 空间列表
+    functionList: [] // 功能列表
   },
   getters: {
     // 订单信息
@@ -56,7 +58,10 @@ export default {
       return state.orderInfo.orderStatus;
     },
     // 定制需求
-    demands: state => state.orderInfo.dimensionList,
+    demands: state => {
+      return state.orderInfo.dimensionList
+
+    },
     // 跟进人
     keepers: state => state.orderInfo.orderKeeperList,
     // 合同图片列表(目前只展示纸质合同)
@@ -68,20 +73,10 @@ export default {
         return [];
       }
     },
-    // 合同图片列表(目前只展示纸质合同)
+    // 设计方案图片列表
     designList: state => {
       let designsUrl = state.orderInfo.designsUrl;
-      if (designsUrl) {
-        /* return designsUrl.split(',').map(item => {
-          let obj = {
-            path: item
-          }
-          return obj
-        }) */
-        return designsUrl.split(',');
-      } else {
-        return [];
-      }
+      return (designsUrl ? designsUrl.split(',') : []);
     }
   },
   actions: {
@@ -115,7 +110,7 @@ export default {
     // 修改户型信息
     updateHouseTypeInfo(ctx, params) {
       api.updateHouseTypeInfo(params)
-        .then(data => {
+        .then(() => {
           ctx.commit('UPDATE_HOUSE_TYPE_INFO', params);
           return Promise.resolve();
         })
@@ -126,8 +121,33 @@ export default {
           imgs: imgArr,
           orderId: ctx.state.orderId
         })
+        .then(() => ctx.commit('UPDATE_DESIGN_PIC', imgArr))
+    },
+    // 获取空间列表
+    getSpaceList(ctx) {
+      api.getSpaceList().then(data => {
+        const list = data.data.list;
+        ctx.commit('SET_SPACE_LIST', list);
+
+        list.forEach((item, idx) => {
+          ctx.commit('SET_PLACEHOLDER_FUNCTION_LIST', list.length);
+          ctx.dispatch('getFunctionList', [item.id, idx]);
+        })
+      })
+    },
+    // 通过空间id获取功能列表
+    getFunctionList(ctx, [id, idx]) {
+      api.getFunctionListBySpaceId(id).then(data => {
+        ctx.commit('SET_FUNCTION_LIST', [data.data.list, idx]);
+      })
+    },
+    // 修改定制需求
+    updateDemand(ctx, activeList) {
+      let list = activeList.map(item => item.id);
+      api.updateDemand(list, ctx.state.orderId)
         .then(data => {
-          ctx.commit('UPDATE_DESIGN_PIC', imgArr);
+          ctx.commit('UPDATE_DEMAND', JSON.parse(JSON.stringify(activeList)));
+          return Promise.resolve();
         })
     }
   },
@@ -159,16 +179,43 @@ export default {
     UPDATE_HOUSE_TYPE_INFO(state, params) {
       Object.assign(state.orderInfo, params);
     },
-    // 展示定制需求选择器
-    SHOW_DEMAND_PICKER(state) {
-      state.isShowDemandPicker = !state.isShowDemandPicker;
-    },
     // 修改设计方案图片
     UPDATE_DESIGN_PIC(state, imgArr) {
-      console.log('imgArr:_____', imgArr);
-      /* let arr = state.orderInfo.designsUrl.split(',');
-      arr.push(path); */
       state.orderInfo.designsUrl = imgArr.join(',');
+    },
+    // 设置空间列表
+    SET_SPACE_LIST(state, list) {
+      state.spaceList = list;
+    },
+    // 设置默认占位的空间列表，以便通过下标插入对应的空间名
+    SET_PLACEHOLDER_FUNCTION_LIST(state, length) {
+      let arr = [];
+      for (let index = 0; index < length; index++) {
+        arr.push([]);
+      }
+      state.functionList = arr;
+    },
+    // 设置功能列表
+    SET_FUNCTION_LIST(state, [list, idx]) {
+      let demands = state.orderInfo.dimensionList;
+      if (demands.length !== 0) {
+        list.forEach(item => {
+          demands.forEach(value => {
+            item.active = item.id == value.id
+            if (item.active) {
+              console.log('item.name:_____', item.name, item.id);
+
+            }
+            console.log('item.name, item.active:_____', item.name, item.active);
+          });
+        })
+      }
+      state.functionList.splice(idx, 1, list);
+      console.log('state.functionList:_____', state.functionList);
+    },
+    // 修改定制需求展示列表
+    UPDATE_DEMAND(state, list) {
+      state.orderInfo.dimensionList = list;
     }
   }
 }

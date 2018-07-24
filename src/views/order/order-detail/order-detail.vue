@@ -11,7 +11,6 @@
       <Contract/>
       <Design/>
       <Remark/>
-      <DemandPicker/>
     </div>
   </div>
 </template>
@@ -25,7 +24,6 @@ import KeeperList from './order-detail-item-keeper';
 import Contract from './order-detail-item-contract';
 import Design from './order-detail-item-design';
 import Remark from './order-detail-item-remark'
-import DemandPicker from "./order-detail-item-demand-picker";
 
 import { mapState, mapActions, mapMutations } from "vuex";
 
@@ -40,8 +38,7 @@ export default {
     KeeperList,
     Contract,
     Design,
-    Remark,
-    DemandPicker
+    Remark
   },
   data() {
     return {

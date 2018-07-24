@@ -1,28 +1,44 @@
 @function e($px) {
-	@return $px;
+  @return $px;
 }
 
 @function r($px) {
   @return (($px /e(75px)) * 1rem);
 }
+
 @function r2($px) {
   @return (($px /e(75px)) * 2rem);
 }
 
+// 文本溢出
 @mixin over($num) {
-	@if $num==1 {
-		overflow: hidden;
-		text-overflow: ellipsis;
-		white-space: nowrap;
-	}
-	@else {
-		display: -webkit-box;
-		-webkit-box-orient: vertical;
-		-webkit-line-clamp: $num;
-		overflow: hidden;
-	}
+  @if $num==1 {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  @else {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: $num;
+    overflow: hidden;
+  }
 }
 
+// 滚动
+// x | y
+@mixin scroll($direction) {
+  @if $direction==x {
+    overflow-x: scroll;
+  }
+  @else {
+    overflow-y: scroll;
+  }
+  -webkit-overflow-scrolling: touch;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
 
 $font: #404040 !default;
 $main: #39f !default;

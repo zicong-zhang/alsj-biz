@@ -24,10 +24,11 @@
       </ul>
       <div class="upload-btn"
         v-if="showBtn"
-        :style="{width: $rem(width)}"
-        @click="showPhoto = true">
-        <i class="iconfont icon-btn_article_share"></i>
-        <span>上传</span>
+        :style="{width: $rem(width), paddingLeft: fileList.length ? 0 : $rem(36)}">
+        <p @click="showPhoto = true">
+          <i class="iconfont icon-btn_article_share"></i>
+          <span>上传</span>
+        </p>
 
       </div>
     </div>
@@ -106,15 +107,24 @@ export default {
       fileList: [],
       isShowDelBtn: false,
       isShowDelDialog: false,
-      delPicIdx: ''
+      delPicIdx: ""
     };
+  },
+  watch: {
+    files(newVal) {
+      this.fileList = newVal.map(item => {
+        return {
+          path: item
+        };
+      });
+    }
   },
   created() {
     this.fileList = this.files.map(item => {
-      return {
-        path: item
-      };
-    });
+        return {
+          path: item
+        };
+      });
   },
   methods: {
     // 隐藏菜单
@@ -212,7 +222,7 @@ export default {
     },
     // 取消弹出弹窗
     cancelDialog() {
-      this.delPicIdx = '';
+      this.delPicIdx = "";
       this.isShowDelDialog = false;
     },
     // 删除图片
@@ -229,6 +239,7 @@ export default {
   ul {
     display: flex;
     padding: 0;
+    padding-left: 36px;
   }
   li {
     width: 240px;
@@ -258,28 +269,31 @@ export default {
 .upload-wrapper {
   display: flex;
   align-items: center;
-  width: 100%;
+  // width: 100%;
   -webkit-overflow-scrolling: touch;
   overflow-x: scroll;
-  padding-top: e(22px);
+  padding-top: 22px;
   &::-webkit-scrollbar {
     display: none;
   }
 }
 .upload-btn {
-  flex: none;
-  width: 240px;
-  height: 160px;
-  box-sizing: border-box;
-  border: 2px solid #e5f2ff;
-  border-radius: 16px;
-  background: #e5f2ff;
-  position: relative;
-  display: flex;
-  flex-flow: column;
-  justify-content: center;
-  align-items: center;
-  overflow: hidden;
+  padding-right: 36px;
+  p {
+    flex: none;
+    width: 240px;
+    height: 160px;
+    box-sizing: border-box;
+    border: 2px solid #e5f2ff;
+    border-radius: 16px;
+    background: #e5f2ff;
+    position: relative;
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+  }
   i {
     color: #3380cc;
     font-size: 42px;
