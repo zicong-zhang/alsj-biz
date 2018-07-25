@@ -1,5 +1,5 @@
 <template>
-  <div class="order-detail-item-contract" v-if="orderDetailStatus >= 3">
+  <div class="order-detail-item-contract" v-if="orderDetailStatus > 3">
     <H2 title="定制合同">
       <p slot="right">如有疑问，
         <span>请联系客服</span>

@@ -145,9 +145,22 @@ export default {
     updateDemand(ctx, activeList) {
       let list = activeList.map(item => item.id);
       api.updateDemand(list, ctx.state.orderId)
-        .then(data => {
+        .then(() => {
           ctx.commit('UPDATE_DEMAND', JSON.parse(JSON.stringify(activeList)));
           return Promise.resolve();
+        })
+    },
+    // 更新订单进度
+    updateOrderDetailStatus(ctx) {
+      const { orderId } = ctx.state;
+      const { orderDetailStatus } = ctx.getters;
+      api.updateOrderDetailStatus(orderId, orderDetailStatus)
+        .then(() => {
+          ctx.dispatch('getOrderDetailProgress');
+          ctx.commit('UPDATE_ORDER_STATUS');
+          Promise.resolve();
+        }, err => {
+          Promise.reject(err);
         })
     }
   },
@@ -201,21 +214,19 @@ export default {
       if (demands.length !== 0) {
         list.forEach(item => {
           demands.forEach(value => {
-            item.active = item.id == value.id
-            if (item.active) {
-              console.log('item.name:_____', item.name, item.id);
-
-            }
-            console.log('item.name, item.active:_____', item.name, item.active);
+            if (item.id == value.id) item.active = true;
           });
         })
       }
       state.functionList.splice(idx, 1, list);
-      console.log('state.functionList:_____', state.functionList);
     },
     // 修改定制需求展示列表
     UPDATE_DEMAND(state, list) {
       state.orderInfo.dimensionList = list;
+    },
+    // 更改订单状态
+    UPDATE_ORDER_STATUS(state) {
+      state.orderInfo.orderStatus++;
     }
   }
 }

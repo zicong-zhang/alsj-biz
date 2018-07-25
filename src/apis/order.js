@@ -97,3 +97,37 @@ export const updateDemand = (arr, orderId) => {
     dimensionId: arr
   })
 }
+// 更新订单进度
+export const updateOrderDetailStatus = (orderId, orderStatus) => {
+  let status = '';
+  switch (orderStatus) {
+    case 1: // 完成量尺
+      status = 'measured';
+      break;
+    case 2: // 确认设计方案
+      status = 'designed';
+      break;
+    case 3: // 签订合同
+      status = 'contracted';
+      break;
+    case 4: // 完成复尺
+      status = 'againMeasured';
+      break;
+    case 5: // 完成下单
+      status = 'released';
+      break;
+    case 6: // 完成生产
+      status = 'produced';
+      break;
+    case 7: // 完成送货安装
+      status = 'Installed';
+      break;
+    case 8: // 完成结束订单
+      status = 'finished';
+      break;
+  }
+  return http(`/order/${status}/update`, {
+    orderId,
+    orderStatus
+  })
+}

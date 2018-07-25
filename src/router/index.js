@@ -13,7 +13,7 @@ const router = new Router({
     component: () =>
       import ( /* webpackChunkName: "home" */ "~views/home/home"),
     meta: {
-      title: '阿拉私家 - 商家端',
+      title: '商家端 - 阿拉私家',
       scrollTop: 0
     },
     children: [{
@@ -22,7 +22,7 @@ const router = new Router({
       component: () =>
         import ( /* webpackChunkName: "worker" */ "~views/worker/worker"),
       meta: {
-        title: '阿拉私家 - 工作台'
+        title: '工作台 - 阿拉私家'
       }
     }, {
       path: 'order-list',
@@ -30,7 +30,7 @@ const router = new Router({
       component: () =>
         import ( /* webpackChunkName: "order" */ "~views/order/order-list/order-list"),
       meta: {
-        title: '阿拉私家 - 订单列表'
+        title: '订单列表 - 阿拉私家'
       }
     }]
   }, {
@@ -39,7 +39,7 @@ const router = new Router({
     component: () =>
       import ( /* webpackChunkName: "order" */ "~views/order/order-detail/order-detail"),
     meta: {
-      title: '阿拉私家 - 订单详情'
+      title: '订单详情 - 阿拉私家'
     }
   }, {
     path: '/edit-customer',
@@ -47,7 +47,7 @@ const router = new Router({
     component: () =>
       import ( /* webpackChunkName: "order" */ "~views/order/edit/edit-customer"),
     meta: {
-      title: '阿拉私家 - 编辑客户信息'
+      title: '编辑客户信息 - 阿拉私家'
     }
   }, {
     path: '/edit-house-type',
@@ -55,7 +55,15 @@ const router = new Router({
     component: () =>
       import ( /* webpackChunkName: "order" */ "~views/order/edit/edit-house-type"),
     meta: {
-      title: '阿拉私家 - 编辑户型信息'
+      title: '编辑户型信息 - 阿拉私家'
+    }
+  }, {
+    path: '/edit-contract',
+    name: 'order-edit-contract',
+    component: () =>
+      import ( /* webpackChunkName: "order" */ "~views/order/edit/edit-contract"),
+    meta: {
+      title: '录入合同信息 - 阿拉私家'
     }
   }, {
     path: '*',
@@ -63,7 +71,7 @@ const router = new Router({
     component: () =>
       import ( /* webpackChunkName: "no-found" */ "~components/home"),
     meta: {
-      title: '阿拉私家 - 找不到页面'
+      title: '找不到页面 - 阿拉私家'
     }
   }]
 });

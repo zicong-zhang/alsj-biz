@@ -14,8 +14,13 @@ export default {
   name: "App",
   data() {
     return {
-      // 排除缓存路由
-      exclude: ["OrderEditCustomer"]
+      // 排除缓存
+      exclude: [
+        "OrderEditCustomer", // 编辑客户信息
+        "EditHouseType",  // 编辑户型信息
+        "OrderDetail", // 订单详情
+        "EditContract", // 录入合同信息
+      ]
     };
   },
   created() {},

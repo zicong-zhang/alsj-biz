@@ -1,5 +1,5 @@
 <template>
-  <div class="customer-info">
+  <div class="order-detail-item-customer-info">
     <H2 :title="title"
     @click="toEditCustomer">
       <i class="iconfont icon-btn_all_next"></i>
@@ -63,7 +63,7 @@ export default {
 </script>
 
 <style lang="scss">
-.customer-info {
+.order-detail-item-customer-info {
   background: #fff;
   padding: 0 e(36px);
   margin-bottom: e(16px);

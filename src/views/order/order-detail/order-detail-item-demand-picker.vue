@@ -70,17 +70,14 @@ export default {
   },
   computed: {
     spaces() {
-      return JSON.parse(
-        JSON.stringify(this.$store.state.OrderDetailModule.spaceList)
-      );
+      return this.$store.state.OrderDetailModule.spaceList
     },
     functions() {
-      return JSON.parse(
-        JSON.stringify(this.$store.state.OrderDetailModule.functionList)
-      );
+      return this.$store.state.OrderDetailModule.functionList
     }
   },
   watch: {
+    // 监听本组件是否第一次展示
     show(newVal) {
       if (!this.dataLoaded && newVal) {
         this.dataLoaded = true;
@@ -88,10 +85,10 @@ export default {
       }
     },
     spaces(newVal) {
-      this.spaceList = newVal;
+      this.spaceList = JSON.parse(JSON.stringify(newVal));
     },
     functions(newVal) {
-      this.functionList = newVal;
+      this.functionList = JSON.parse(JSON.stringify(newVal));
     }
   },
   methods: {
@@ -101,6 +98,7 @@ export default {
     ]),
     // 关闭选择器
     closePicker() {
+      this.functionList = JSON.parse(JSON.stringify(this.functions));
       this.$emit("close");
     },
     // 选中空间

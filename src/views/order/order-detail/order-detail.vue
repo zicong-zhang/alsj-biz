@@ -2,8 +2,8 @@
   <div class="order-detail">
     <VHeader :title="'订单详情'" />
     <div class="content">
-      <WorkerTips />
-      <Progress :reload="reload"/>
+      <WorkerTips v-if="false" />
+      <Progress/>
       <CustomerInfo/>
       <HouseType/>
       <CustomDemand/>
@@ -12,20 +12,22 @@
       <Design/>
       <Remark/>
     </div>
+    <NextBtn v-if="orderDetailStatus <= 7" />
   </div>
 </template>
 <script>
 import WorkerTips from "~views/worker/worker-tips";
 import Progress from "./order-detail-item-progress";
-import CustomerInfo from './order-detail-item-customer-info';
-import HouseType from './order-detail-item-house-type';
-import CustomDemand from './order-detail-item-demand';
-import KeeperList from './order-detail-item-keeper';
-import Contract from './order-detail-item-contract';
-import Design from './order-detail-item-design';
-import Remark from './order-detail-item-remark'
+import CustomerInfo from "./order-detail-item-customer-info";
+import HouseType from "./order-detail-item-house-type";
+import CustomDemand from "./order-detail-item-demand";
+import KeeperList from "./order-detail-item-keeper";
+import Contract from "./order-detail-item-contract";
+import Design from "./order-detail-item-design";
+import Remark from "./order-detail-item-remark";
+import NextBtn from "./order-detail-item-next-step-btn";
 
-import { mapState, mapActions, mapMutations } from "vuex";
+import { mapState, mapGetters, mapActions, mapMutations } from "vuex";
 
 export default {
   name: "OrderDetail",
@@ -38,20 +40,14 @@ export default {
     KeeperList,
     Contract,
     Design,
-    Remark
-  },
-  data() {
-    return {
-      reload: 0 // 用于触发子组件内部调用接口
-    }
-  },
-  watch: {
-    $route(to, from) {
-      if (from.name === "order-list" && to.name === 'order-detail') this.init();
-    }
+    Remark,
+    NextBtn
   },
   created() {
     this.init();
+  },
+  computed: {
+    ...mapGetters(["orderDetailStatus"])
   },
   methods: {
     ...mapActions(["getOrderDetailInfo"]),
@@ -59,8 +55,6 @@ export default {
     init() {
       this.SET_ORDER_ID(this.$route.query.id);
       this.getOrderDetailInfo();
-      this.reload++;
-      console.log('this.reload:_____', this.reload);
     }
   }
 };
@@ -73,7 +67,6 @@ export default {
 }
 .content {
   flex: 1;
-  -webkit-overflow-scrolling: touch;
-  overflow-y: scroll;
+  @include scroll(y);
 }
 </style>
