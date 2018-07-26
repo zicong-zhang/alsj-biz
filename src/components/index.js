@@ -10,6 +10,8 @@ import VPicker from '~components/v-picker';
 import VForm from '~components/v-form';
 import VUpload from '~components/v-upload';
 import VDialog from '~components/v-dialog';
+import VCover from '~components/v-cover';
+import VDatePicker from '~components/v-date-picker';
 
 
 Vue.component('VHeader', VHeader);
@@ -21,6 +23,8 @@ Vue.component('VInput', VInput);
 Vue.component('VPicker', VPicker);
 Vue.component('VUpload', VUpload);
 Vue.component('VDialog', VDialog);
+Vue.component('VCover', VCover);
+Vue.component('VDatePicker', VDatePicker);
 
 let ToastConstructor = Vue.extend(VToast);
 Vue.prototype.$toast = function(txt, timeout = 2300) {

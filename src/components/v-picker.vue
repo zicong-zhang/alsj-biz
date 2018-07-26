@@ -28,9 +28,11 @@ export default {
     defaultVal: {
       default: 0
     },
+    // 选择器标题
     title: {
       default: ""
     },
+    // 是否必填项, 传入值为未填写必填项时的警告语
     required: String
   },
   created() {

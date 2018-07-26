@@ -6,7 +6,6 @@ import Vuex from 'vuex'
 import VueLazyload from 'vue-lazyload'
 import AlloyFinger from 'alloyfinger'
 import AlloyFingerPlugin from 'alloyfinger/vue/alloy_finger.vue'
-import VueAwesomeSwiper from 'vue-awesome-swiper'
 import FastClick from 'fastclick'
 import Cube from 'cube-ui'
 
@@ -34,8 +33,6 @@ Vue.config.devtools = true;
 Vue.use(Vuex);
 Vue.use(VueLazyload);
 Vue.use(Cube);
-// Vue.use(Mint);
-Vue.use(VueAwesomeSwiper);
 Vue.use(AlloyFingerPlugin, {
   AlloyFinger
 })

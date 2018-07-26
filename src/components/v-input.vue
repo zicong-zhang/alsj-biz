@@ -60,7 +60,6 @@ export default {
   computed: {
     inputVal() {
       // 存值，供父组件调用验证方法
-      console.log("this.value:_____", this.value);
       return this.value;
     }
   },

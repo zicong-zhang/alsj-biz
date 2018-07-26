@@ -1,9 +1,8 @@
-
 // 竖直1px
 .vertical-bar {
   display: block;
-  width:e(1px);
-  height:e(25px);
+  width: e(1px);
+  height: e(25px);
   background: #a1a1a1;
   -webkit-transform: scale(.5, 1);
   transform: scale(.5, 1);
@@ -15,7 +14,7 @@
 .horizon-bar {
   display: block;
   width: 100%;
-  height:e(1px);
+  height: e(1px);
   background: #eaeaea;
   transform: scale(1, .5);
   transform-origin: center bottom;
@@ -24,7 +23,7 @@
 .common-rmb {
   &:before {
     content: '¥';
-    margin-right:e(6px);
+    margin-right: e(6px);
   }
 }
 
@@ -36,33 +35,41 @@
 }
 
 /* 覆盖选择器样式 */
+
 body {
   .cube-picker-wheel-item {
-    height: r(80px);
-    line-height: r(80px);
-    font-size: r(32px);
-    // background: #eee;
+    height: r(50px);
+    line-height: r(50px);
+    font-size: r(32px); // background: #eee;
   }
-  .cube-picker-wheel-wrapper {
-    padding-top: r(30px);
+  .cube-picker-content {
+    padding-top: r(70px);
+    .border-bottom-1px {
+      top: 10px;
+    }
+    .border-top-1px {
+      bottom: -6px;
+    }
   }
-  .cube-picker-wheel-wrapper > div {
-    height: r(240px);
+  .cube-picker-wheel-wrapper>div {
+    height: r(230px);
   }
   .cube-picker-panel {
-    height: r(600px);
+    height: r(500px);
   }
   .cube-picker-choose {
     height: r(98px);
     line-height: r(98px);
   }
-  .cube-picker-content > i {
-    height: r(100px);
-    &:before, &:after {
+  .cube-picker-content>i {
+    height: r(120px);
+    &:before,
+    &:after {
       transform: scale(1, 1);
     }
   }
-  .cube-picker-confirm, .cube-picker-cancel {
+  .cube-picker-confirm,
+  .cube-picker-cancel {
     height: r(98px);
     line-height: r(98px);
     font-size: r(24px);
