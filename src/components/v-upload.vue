@@ -278,10 +278,10 @@ export default {
   }
 }
 .upload-btn {
+    flex: none;
   padding-right: 36px;
   p {
-    flex: none;
-    width: 240px;
+    width: 100%;
     height: 160px;
     box-sizing: border-box;
     border: 2px solid #e5f2ff;

@@ -32,15 +32,23 @@
         required="未选择日期"
         placeholder="请选择日期" />
 
-        <!-- 上传定制合同  -->
-        
+      <!-- 上传定制合同  -->
+      <UploadContract :files="contractList"
+        label="上传定制合同 "
+        required="上传定制合同后，才进行订单款项的结算" />
+
     </VForm>
   </div>
 </template>
 
 <script>
+import UploadContract from './edit-contract-item-upload';
+
 export default {
   name: "EditContract",
+  components: {
+    UploadContract
+  },
   data() {
     // 付款方式选项
     const payTypeList = [
@@ -55,7 +63,8 @@ export default {
     ];
     return {
       payTypeList, // 付款方式选项
-      orderAmount: ""
+      orderAmount: "",
+      contractList: []
     };
   },
   methods: {}
@@ -79,6 +88,12 @@ export default {
     right: 24px;
     top: 50%;
     transform: translateY(-50%);
+  }
+  .upload-wrapper {
+    padding-top: 10px;
+    ul {
+      // padding-left: 0;
+    }
   }
 }
 </style>

@@ -52,7 +52,7 @@ body {
     }
   }
   .cube-picker-wheel-wrapper>div {
-    height: r(230px);
+    height: r(224px);
   }
   .cube-picker-panel {
     height: r(500px);
@@ -74,6 +74,9 @@ body {
     line-height: r(98px);
     font-size: r(24px);
     padding: 0 r(36px);
+  }
+  .cube-picker-confirm {
+    color: $main;
   }
   .cube-picker-title {
     font-size: r(32px);

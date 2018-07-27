@@ -1,12 +1,8 @@
 <template>
   <div class="v-picker">
 
-    <div class="label">
-      <label v-if="label">{{ label }}</label>
-      <transition name="input-warn">
-        <p v-show="warn">{{ warn }}</p>
-      </transition>
-    </div>
+    <VFormLabel :label="label"
+      :warn="warn"/>
 
     <div class="input-container">
       <p :class="{placeholder: placeholder}"

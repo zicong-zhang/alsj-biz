@@ -1,11 +1,14 @@
 <template>
   <div :class="{'v-input': true, 'v-input-focus': isFocus}">
-    <div class="label">
+    <!-- <div class="label">
       <label v-if="label">{{ label }}</label>
       <transition name="input-warn">
         <p v-show="warn">{{ warn }}</p>
       </transition>
-    </div>
+    </div> -->
+    <VFormLabel :label="label"
+      :warn="warn"/>
+      
     <div class="input-container">
       <input type="text"
         :value="value"

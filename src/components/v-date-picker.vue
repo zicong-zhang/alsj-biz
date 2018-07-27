@@ -1,12 +1,8 @@
 <template>
   <div class="v-date-picker">
 
-    <div class="label">
-      <label v-if="label">{{ label }}</label>
-      <transition name="input-warn">
-        <p v-show="warn">{{ warn }}</p>
-      </transition>
-    </div>
+    <VFormLabel :label="label"
+      :warn="warn"/>
 
     <div class="input-container">
       <p :class="{placeholder: placeholder}"
@@ -89,21 +85,6 @@ export default {
 </script>
 <style lang="scss">
 .v-date-picker {
-  .label {
-    display: flex;
-    align-items: flex-end;
-    padding-top: e(35px);
-    padding-bottom: e(24px);
-    label {
-      font-size: e(24px);
-      color: #999;
-      margin-right: e(8px);
-    }
-    p {
-      color: #f5594e;
-      font-size: e(20px);
-    }
-  }
   .input-container {
     color: #333;
     position: relative;
