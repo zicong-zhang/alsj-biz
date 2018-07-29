@@ -18,6 +18,7 @@
 
 
 <script>
+import { mapActions } from 'vuex';
 import WorkerHeader from "./worker-header";
 import WorkerTips from "./worker-tips";
 import WorkerGather from "./worker-gather";
@@ -39,8 +40,12 @@ export default {
       showBack: false
     };
   },
-  created() {},
-  mounted() {}
+  created() {
+    this.getStoreInfo();
+  },
+  methods: {
+    ...mapActions(['getStoreInfo'])
+  }
 };
 </script>
 <style lang="scss">

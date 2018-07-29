@@ -28,7 +28,7 @@ export default {
   computed: {
     ...mapState({
       orderCreater: state =>
-        state.OrderDetailModule.orderInfo.createStaffNickname
+        state.orderDetailModule.orderInfo.createStaffNickname
     }),
     ...mapGetters(["keepers"])
   },

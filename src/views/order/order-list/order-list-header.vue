@@ -1,6 +1,6 @@
 <template>
   <header class="order-list-header">
-    <h2>订单详情</h2>
+    <h2>订单列表</h2>
     <ul>
       <li v-for="(item, idx) in list"
         :class="{active: active === idx}"
@@ -38,7 +38,7 @@ export default {
   },
   computed: {
     ...mapState({
-      status: state => state.OrderListModule.status
+      status: state => state.orderListModule.status
     })
   },
   methods: {

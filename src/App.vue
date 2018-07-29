@@ -1,7 +1,7 @@
 <template>
   <div id="app"
     v-cloak>
-    <transition :name="$store.state.turn">
+    <transition :name="$store.state.root.turn">
       <keep-alive :exclude="exclude">
         <router-view></router-view>
       </keep-alive>
@@ -23,7 +23,8 @@ export default {
       ]
     };
   },
-  created() {},
+  created() {
+  },
   mounted() {}
 };
 </script>

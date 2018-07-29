@@ -33,7 +33,7 @@ export default {
   computed: {
     ...mapState({
       status: 'status',
-      orderList: state => state.OrderListModule.orderList
+      orderList: state => state.orderListModule.orderList
     })
   },
   watch: {

@@ -70,10 +70,10 @@ export default {
   },
   computed: {
     spaces() {
-      return this.$store.state.OrderDetailModule.spaceList
+      return this.$store.state.orderDetailModule.spaceList
     },
     functions() {
-      return this.$store.state.OrderDetailModule.functionList
+      return this.$store.state.orderDetailModule.functionList
     }
   },
   watch: {

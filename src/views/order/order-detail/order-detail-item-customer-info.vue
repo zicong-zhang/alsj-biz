@@ -46,7 +46,7 @@ export default {
     };
   },
   computed: mapState({
-    info: state => state.OrderDetailModule.orderInfo
+    info: state => state.orderDetailModule.orderInfo
   }),
   methods: {
     call() {

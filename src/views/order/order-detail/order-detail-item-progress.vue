@@ -36,7 +36,7 @@ export default {
   },
   computed: {
     ...mapState({
-      orderProgress: state => state.OrderDetailModule.orderProgress
+      orderProgress: state => state.orderDetailModule.orderProgress
     }),
     ...mapGetters(["orderDetailStatus"]),
     progress() {
@@ -139,7 +139,7 @@ export default {
     bottom: e(40px);
     transform: translate(-50%, 0);
     text-align: center;
-    width: e(118px);
+    width: e(120px);
     color: #fff;
     font-size: e(24px);
     font-weight: normal;

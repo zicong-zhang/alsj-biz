@@ -54,7 +54,7 @@ export default {
     };
   },
   computed: mapState({
-    status: state => state.OrderListModule.status
+    status: state => state.orderListModule.status
   }),
   created() {},
   methods: {

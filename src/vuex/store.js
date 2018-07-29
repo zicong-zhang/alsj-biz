@@ -1,20 +1,18 @@
 import Vuex from 'vuex';
-import states from './states';
-import actions from './actions';
-import mutations from './mutations';
 
-import OrderListModule from '~views/order/order-list/order-list-store';
-import OrderDetailModule from '~views/order/order-detail/order-detail-store';
+import root from './root';
+import workerModule from '~views/worker/worker-store';
+import orderListModule from '~views/order/order-list/order-list-store';
+import orderDetailModule from '~views/order/order-detail/order-detail-store';
 
 
 const store  = {
   strict: process.env.NODE_ENV !== 'production',
-  states,
-  actions,
-  mutations,
   modules: {
-    OrderListModule,
-    OrderDetailModule
+    root,
+    workerModule,
+    orderListModule,
+    orderDetailModule
   }
 }
 

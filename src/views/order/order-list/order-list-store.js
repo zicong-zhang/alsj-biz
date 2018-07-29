@@ -3,7 +3,7 @@ import * as api from '~apis/order';
 export default {
   state: {
     status: 1,
-    storeId: 1,
+    storeId: 4425,
     orderList: []
   },
   getters: {
