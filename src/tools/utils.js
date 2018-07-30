@@ -15,6 +15,22 @@ export default {
     vue.$store.commit('TURN', 'off');
     vue.$router.back(-1);
   },
+  /**
+   * 设置session缓存
+   */
+  setSession(name, data) {
+    let params = '';
+    switch (typeof data) {
+      case 'object':
+      case 'array':
+        params = JSON.stringify(data);
+        break;
+      default:
+        params = data;
+        break;
+    }
+    window.sessionStorage.setItem(name, params);
+  },
   deepCopy(obj) {
     var newObj = {};
     var trigger = (obj, newObj) => {

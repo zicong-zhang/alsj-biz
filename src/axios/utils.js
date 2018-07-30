@@ -52,14 +52,16 @@ function formatRequestData(data) {
 
 // 获取token
 function getToken() {
-  // return 'YWxhc2dhLmFwcC5nYXRld2F5LTExLTE1MzAxNjUxOTIwNjYtMTEtYWJj'
-  return 'VE9LRU4tMzYyLTE1MzI4NDkwODU0MjAtMzE3LWFiYw__'
-  /* var token = utils.getUserInfo();
-  if (token) {
-    return JSON.parse(token).token;
+  const storeToken = window.sessionStorage.getItem('STORE_TOKEN');
+  const userToken = window.sessionStorage.getItem('USER_TOKEN');
+  if (storeToken) {
+    return storeToken;
+  } else if (userToken) {
+    return userToken;
   } else {
     return '';
-  } */
+  }
+  // return (storage ? storage : 'VE9LRU4tMzYyLTE1MzI4NDkwODU0MjAtMzE3LWFiYw__');
 }
 
 // 判断平台 ios / Android

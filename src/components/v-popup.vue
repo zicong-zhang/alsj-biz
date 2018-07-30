@@ -4,9 +4,9 @@
       v-stop-cover></div>
     <ul>
       <li v-for="(item, idx) in list"
-        :key="idx"
+        :key="`v-popup${idx}`"
         @click.stop="select(item, idx)">
-        <p>{{ item }}</p>
+        <p>{{ showValue(item) }}</p>
         <!-- <i class="horizon-bar"></i> -->
       </li>
     </ul>
@@ -19,7 +19,9 @@ export default {
     list: {
       type: Array,
       required: true
-    }
+    },
+    textOne: String,
+    textTwo: String
   },
   data() {
     return {
@@ -28,11 +30,21 @@ export default {
   methods: {
     select(item, idx) {
       this.$emit('select', item, idx);
+    },
+    showValue(item) {
+      switch(true) {
+        case !!this.textTwo:
+          return item[this.textOne][this.textTwo];
+        case !!this.textOne:
+          return item[this.textOne];
+        default:
+          return item;
+      }
     }
   }
 };
 </script>
-<style lang="scss" scoped>
+<style lang="scss">
 .v-popup {
   .popup-cover {
     position: fixed;
@@ -44,36 +56,37 @@ export default {
   }
   ul {
     position: absolute;
-    right: e(36px);
+    right: 36px;
     bottom: 0;
     z-index: 20;
     transform: translateY(100%);
-    width: e(264px);
+    width: 264px;
     background: #fff;
-    box-shadow: 0 0 e(20px) 0 rgba(0, 0, 0, 0.3);
-    border-radius: e(12px);
+    box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.3);
+    border-radius: 12px;
     &:before {
       content: "";
       display: block;
       width: 0;
       height: 0;
-      border: e(10px) solid transparent;
+      border: 10px solid transparent;
       border-bottom-color: #fff;
       position: absolute;
-      right: e(24px);
+      right: 24px;
       top: 0;
-      transform: translateY(-100%);
+      z-index: 10;
+      transform: translateY(-95%);
     }
   }
   li {
-    height: e(80px);
-    font-size: e(24px);
+    height: 80px;
+    font-size: 24px;
     color: #404040;
     border-bottom:e(1px) solid #f5f5f5;
-    padding-left: e(36px);
+    padding-left: 36px;
   }
   p {
-    line-height: e(80px);
+    line-height: 80px;
   }
 }
 </style>

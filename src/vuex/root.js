@@ -13,6 +13,9 @@ export default {
     // 转场动画
     TURN(state, status) {
       state.turn = status;
+    },
+    SET_STORE_ID(state, id) {
+      state.storeId = id;
     }
   }
 }

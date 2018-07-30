@@ -1,14 +1,14 @@
 <template>
   <div class="home-gather">
     <div @click="toActualGather">
-      <h3>8.9万</h3>
+      <h3>{{ receiptAmount / 10000 }}万</h3>
       <p>实收款(本月)&nbsp;
         <i class="iconfont icon-rightBtn"></i>
       </p>
     </div>
     <i class="vertical-bar"></i>
     <div @click="toWaitGather">
-      <h3>8.9万</h3>
+      <h3>{{ dueAmount / 10000 }}万</h3>
       <p>待收款(全部)&nbsp;
         <i class="iconfont icon-rightBtn"></i>
       </p>
@@ -17,21 +17,50 @@
 </template>
 
 <script>
+import { mapState, mapActions } from "vuex";
 export default {
-  name: "HomeGather",
+  name: "WorkerGather",
   data() {
-    return {};
+    return {
+      dueAmount: 0,
+      receiptAmount: 0
+    };
+  },
+  created() {
+    this.init();
+  },
+  computed: {
+    ...mapState({
+      storeId: state => state.root.storeId
+    })
+  },
+  watch: {
+    storeId() {
+      this.init();
+    }
   },
   methods: {
-    toActualGather() {
-      this.$router.push({
-        name: ""
+    ...mapActions([
+      "getReceiptAmount", // 获取店铺实收款金额(本月)
+      "getDueAmount" // 获取店铺待收款金额(全部)
+    ]),
+    init() {
+      this.getReceiptAmount().then(res => {
+        this.receiptAmount = res.data.totalAmount;
+      });
+      this.getDueAmount().then(res => {
+        this.dueAmount = res.data.totalAmount;
       });
     },
-    toWaitGather() {
-      this.$router.push({
+    toActualGather() {
+      this.$utils.go({
         name: ""
-      });
+      }, this);
+    },
+    toWaitGather() {
+      this.$utils.go({
+        name: ""
+      }, this);
     }
   }
 };

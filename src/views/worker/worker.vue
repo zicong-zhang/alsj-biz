@@ -1,7 +1,7 @@
 <template>
   <div class="worker">
     <WorkerHeader />
-    
+
     <div class="content">
       <WorkerTips />
       <WorkerGather/>
@@ -18,7 +18,7 @@
 
 
 <script>
-import { mapActions } from 'vuex';
+import { mapActions, mapMutations } from "vuex";
 import WorkerHeader from "./worker-header";
 import WorkerTips from "./worker-tips";
 import WorkerGather from "./worker-gather";
@@ -41,10 +41,21 @@ export default {
     };
   },
   created() {
-    this.getStoreInfo();
+    this.getSelfStoreList().then(list => {
+      const first = list[0];
+      this.$utils.setSession("STORE_TOKEN", first.token);
+      this['SET_STORE_ID'](first.merchantExt.id);
+      this.getStoreInfo();
+    });
   },
   methods: {
-    ...mapActions(['getStoreInfo'])
+    ...mapActions([
+      "getStoreInfo", // 获取店铺信息
+      "getSelfStoreList" // 获取该账号下的所有店铺
+    ]),
+    ...mapMutations([
+      "SET_STORE_ID" // 设置店铺id
+    ])
   }
 };
 </script>
@@ -52,7 +63,7 @@ export default {
 .view-worker {
   display: flex;
   flex-flow: column;
-  background: #F0F4F7;
+  background: #f0f4f7;
   .content {
     flex: 1;
     -webkit-overflow-scrolling: touch;

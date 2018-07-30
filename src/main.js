@@ -1,3 +1,9 @@
+/**
+ * TODO
+ * 抽取 mutations type
+ * 图片上传改用七牛
+ */
+
 import 'babel-polyfill'
 import 'lib-flexible/flexible'
 // 第三方库

@@ -5,7 +5,7 @@
     </span>
     <div class="title"
       @click="showPop">
-      <h2 :class="{'show-pop': isShowPop}">{{ storeInfo.merchantName }}
+      <h2 class="show-pop">{{ storeInfo.merchantName }}
         <i class="iconfont icon-bottomnew"></i>
       </h2>
       <p>
@@ -13,6 +13,11 @@
         <i class="vertical-bar"></i>
         <span>关注人数 {{ storeInfo.merchantFollowCount }}</span>
       </p>
+      <VPopup v-show="isShowPop"
+        :list="myStoreList"
+        :text-one="'merchantExt'"
+        :text-two="'merchantName'"
+        @select="switchStore" />
     </div>
     <span class="btn">
       <i class="iconfont icon-btn_my_setting"></i>
@@ -21,7 +26,7 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
+import { mapGetters, mapActions, mapMutations } from "vuex";
 
 export default {
   name: "HomeHeader",
@@ -31,11 +36,26 @@ export default {
     };
   },
   computed: {
-    ...mapGetters(['storeInfo'])
+    ...mapGetters([
+      "storeInfo", // 店铺信息
+      "myStoreList" // 我的所有店铺列表
+    ])
   },
   methods: {
+    ...mapActions(["getStoreInfo"]),
+    ...mapMutations(["SET_STORE_ID"]),
     showPop() {
       this.isShowPop = !this.isShowPop;
+    },
+    // 切换店铺
+    switchStore(item, idx) {
+      this.isShowPop = false;
+
+      const { id } = item.merchantExt;
+      this.SET_STORE_ID(id);
+      this.$utils.setSession("STORE_TOKEN", item.token);
+
+      this.getStoreInfo();
     }
   }
 };
@@ -56,6 +76,7 @@ export default {
     flex-flow: column;
     justify-content: center;
     align-items: center;
+    position: relative;
     h2 {
       font-size: 32px;
       margin-bottom: 14px;
@@ -87,12 +108,6 @@ export default {
       }
     }
   }
-  .show-pop {
-    i {
-      transition: all 0.3s;
-      transform: rotate(180deg);
-    }
-  }
   .btn {
     display: block;
     line-height: 112px;
@@ -103,6 +118,12 @@ export default {
     }
     i {
       font-size: 44px;
+    }
+  }
+  .v-popup {
+    ul {
+      left: 50%;
+      transform: translate(-50%, 100%);
     }
   }
 }
