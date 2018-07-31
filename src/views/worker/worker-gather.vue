@@ -1,14 +1,14 @@
 <template>
   <div class="home-gather">
     <div @click="toActualGather">
-      <h3>{{ receiptAmount / 10000 }}万</h3>
+      <h3>{{ receiptAmount / 10000 || '0.00' }}万</h3>
       <p>实收款(本月)&nbsp;
         <i class="iconfont icon-rightBtn"></i>
       </p>
     </div>
     <i class="vertical-bar"></i>
     <div @click="toWaitGather">
-      <h3>{{ dueAmount / 10000 }}万</h3>
+      <h3>{{ dueAmount / 10000 || '0.00' }}万</h3>
       <p>待收款(全部)&nbsp;
         <i class="iconfont icon-rightBtn"></i>
       </p>

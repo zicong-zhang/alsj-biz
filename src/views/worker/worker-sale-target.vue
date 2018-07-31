@@ -11,20 +11,47 @@
       <span>已完成/目标</span>
     </p>
     <div class="plan">
-      <p><span>8.9</span>/12万</p>
-      <h4>82%</h4>
+      <p><span>{{ merchantGoalAmount / 10000 || 0 }}</span>/{{ merchantTradeAmount / 10000 || 0 }}万</p>
+      <h4>{{ rate }}</h4>
     </div>
     <div class="rate">
-      <p></p>
+      <p :style="{width: $rem(rate.replace(/\%/g, ''))}"></p>
     </div>
   </div>
 </template>
 
 <script>
+import { mapState, mapActions } from 'vuex';
+
 export default {
   name: "HomeSaleTarget",
   data() {
-    return {};
+    return {
+      merchantTradeAmount: 0,
+      merchantGoalAmount: 0,
+      rate: '0%'
+    };
+  },
+  computed: {
+    ...mapState({
+      storeId: state => state.root.storeId
+    })
+  },
+  watch: {
+    storeId() {
+      this.init();
+    }
+  },
+  created() {
+    this.init();
+  },
+  methods: {
+    ...mapActions(['getStoreSaleTarget']),
+    init() {
+      this.getStoreSaleTarget().then(res => {
+        Object.assign(this.$data, res.data);
+      })
+    }
   }
 };
 </script>

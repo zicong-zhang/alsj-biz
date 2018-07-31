@@ -17,7 +17,6 @@ export default {
   actions: {
     // 获取该账号下的所有店铺
     getSelfStoreList({
-      dispatch,
       commit
     }) {
       return api.getSelfStoreList()
@@ -38,13 +37,29 @@ export default {
         })
     },
     // 获取店铺实收款金额(本月)
-    getReceiptAmount({rootState}) {
+    getReceiptAmount({
+      rootState
+    }) {
       return api.getReceiptAmount(rootState.root.storeId)
         .then(res => Promise.resolve(res));
     },
     // 获取店铺待收款金额(全部)
-    getDueAmount({rootState}) {
+    getDueAmount({
+      rootState
+    }) {
       return api.getDueAmount(rootState.root.storeId)
+        .then(res => Promise.resolve(res));
+    },
+    // 获取月销售冠军
+    getCurrentMonthSaleChampion({
+      rootState
+    }) {
+      return api.getCurrentMonthSaleChampion(rootState.root.storeId)
+        .then(res => Promise.resolve(res))
+    },
+    // 获取店铺目标金额
+    getStoreSaleTarget({rootState}) {
+      return api.getStoreSaleTarget(rootState.root.storeId)
         .then(res => Promise.resolve(res));
     }
   },

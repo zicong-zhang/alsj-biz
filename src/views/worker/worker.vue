@@ -4,14 +4,10 @@
 
     <div class="content">
       <WorkerTips />
-      <WorkerGather/>
-      <div class="sale-champion">
-        <h4>
-          <i class="iconfont icon-btn_case_collectionP"></i>本月销售冠军</h4>
-        <p>张三丰 6.3万</p>
-      </div>
-      <WorkerSaleTarget/>
-      <WorkerActions/>
+      <WorkerGather />
+      <WorkerChampion />
+      <WorkerSaleTarget />
+      <WorkerActions />
     </div>
   </div>
 </template>
@@ -22,6 +18,7 @@ import { mapActions, mapMutations } from "vuex";
 import WorkerHeader from "./worker-header";
 import WorkerTips from "./worker-tips";
 import WorkerGather from "./worker-gather";
+import WorkerChampion from "./worker-champion";
 import WorkerSaleTarget from "./worker-sale-target";
 import WorkerActions from "./worker-actions";
 
@@ -31,6 +28,7 @@ export default {
     WorkerHeader,
     WorkerTips,
     WorkerGather,
+    WorkerChampion,
     WorkerSaleTarget,
     WorkerActions
   },
@@ -44,7 +42,7 @@ export default {
     this.getSelfStoreList().then(list => {
       const first = list[0];
       this.$utils.setSession("STORE_TOKEN", first.token);
-      this['SET_STORE_ID'](first.merchantExt.id);
+      this["SET_STORE_ID"](first.merchantExt.id);
       this.getStoreInfo();
     });
   },
@@ -70,24 +68,5 @@ export default {
     overflow-y: scroll;
   }
 }
-.sale-champion {
-  height: r(80px);
-  line-height: r(80px);
-  background: #fff;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  color: #3399ff;
-  font-size: r(32px);
-  padding: 0 r(36px);
-  margin-bottom: r(16px);
-  h4 {
-    font-weight: normal;
-    font-size: r(32px);
-  }
-  i {
-    font-size: r(30px);
-    margin-right: r(8px);
-  }
-}
+
 </style>

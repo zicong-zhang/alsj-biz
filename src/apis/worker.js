@@ -28,3 +28,27 @@ export const getReceiptAmount = merchantId => {
     pageSize: 0
   })
 }
+// 获取月销售冠军
+export const getCurrentMonthSaleChampion = merchantId => {
+  const current = new Date();
+
+  return http('/statistic/getMerchantChampion', {
+    merchantId,
+    month: current.getMonth() + 1,
+    year: current.getFullYear(),
+    pageNum: 1,
+    pageSize: 0
+  })
+}
+// 获取店铺目标金额
+export const getStoreSaleTarget = merchantId => {
+  const current = new Date();
+
+  return http('/statistic/getMerchantGoalProcess', {
+    merchantId,
+    month: current.getMonth() + 1,
+    year: current.getFullYear(),
+    pageNum: 1,
+    pageSize: 0
+  })
+}
