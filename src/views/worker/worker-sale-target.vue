@@ -11,11 +11,11 @@
       <span>已完成/目标</span>
     </p>
     <div class="plan">
-      <p><span>{{ merchantGoalAmount / 10000 || 0 }}</span>/{{ merchantTradeAmount / 10000 || 0 }}万</p>
+      <p><span>{{ $utils.formatNum(merchantTradeAmount) }}</span>/{{ $utils.formatNum(merchantGoalAmount) }}</p>
       <h4>{{ rate }}</h4>
     </div>
     <div class="rate">
-      <p :style="{width: $rem(rate.replace(/\%/g, ''))}"></p>
+      <p :style="{width: rate}"></p>
     </div>
   </div>
 </template>

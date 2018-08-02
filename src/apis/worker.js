@@ -22,7 +22,8 @@ export const getReceiptAmount = merchantId => {
 
   return http('/statistic/getMerchantReceiptAmount', {
     merchantId,
-    month: current.getMonth() + 1,
+    month: 7,
+    // month: current.getMonth() + 1,
     year: current.getFullYear(),
     pageNum: 1,
     pageSize: 0
@@ -46,8 +47,37 @@ export const getStoreSaleTarget = merchantId => {
 
   return http('/statistic/getMerchantGoalProcess', {
     merchantId,
-    month: current.getMonth() + 1,
+    month: 7,
+    // month: current.getMonth() + 1,
     year: current.getFullYear(),
+    pageNum: 1,
+    pageSize: 0
+  })
+}
+// 获取业绩排行榜
+export const getPerformanceRank = ({
+  merchantId,
+  year,
+  month
+}) => {
+  return http('/statistic/getDesignerTradeRank', {
+    merchantId,
+    year,
+    month,
+    pageNum: 1,
+    pageSize: 0
+  })
+}
+// 获取开单排行榜
+export const getBillRank = ({
+  merchantId,
+  year,
+  month
+}) => {
+  return http('/statistic/getBillRank', {
+    merchantId,
+    year,
+    month,
     pageNum: 1,
     pageSize: 0
   })

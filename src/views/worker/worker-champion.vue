@@ -1,5 +1,5 @@
 <template>
-  <div class="sale-champion">
+  <div class="worker-sale-champion" @click="toRank">
     <h4>
       <i class="iconfont icon-btn_case_collectionP"></i>本月销售冠军</h4>
     <p v-if="nickname && amount !== 0">{{ nickname }} {{ amount / 1000 || '0.00' }}万</p>
@@ -37,12 +37,17 @@ export default {
           this.nickname = data ? data.nickname : '';
           this.amount = data ? data.amount : 0;
       });
+    },
+    toRank() {
+      this.$utils.go(this, {
+        name: 'sale-rank'
+      })
     }
   }
 };
 </script>
 <style lang="scss">
-.sale-champion {
+.worker-sale-champion {
   height: r(80px);
   line-height: r(80px);
   background: #fff;

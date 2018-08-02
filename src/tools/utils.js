@@ -1,4 +1,4 @@
-import EXIF from 'exif-js'  
+import EXIF from 'exif-js'
 
 export default {
   /**
@@ -14,6 +14,18 @@ export default {
   back(vue) {
     vue.$store.commit('TURN', 'off');
     vue.$router.back(-1);
+  },
+  getDate(type = 'current') {
+    const current = new Date();
+    let dateObj = {
+      year: current.getFullYear(),
+      month: current.getMonth() + 1,
+      day: current.getDate()
+    };
+
+    if (type === 'current') {
+      return dateObj;
+    }
   },
   /**
    * 设置session缓存
@@ -31,35 +43,6 @@ export default {
     }
     window.sessionStorage.setItem(name, params);
   },
-  deepCopy(obj) {
-    var newObj = {};
-    var trigger = (obj, newObj) => {
-      for (var key in obj) {
-        if (typeof obj[key] === 'object') {
-          newObj[key] = obj[key];
-          trigger(obj[key], newObj[key]);
-        } else {
-          newObj[key] = obj[key]
-        }
-      }
-    }
-    trigger(obj, newObj);
-    return newObj;
-  },
-  /**
-   * 格式化 Url 参数
-   */
-  urlToObj() {
-    var _url = decodeURI(window.location.search.slice(1));
-    var obj = {};
-
-    var urlArr = _url.split('&');
-    urlArr.forEach(function(item) {
-      var temp = item.split('=');
-      obj[temp[0]] = temp[1];
-    })
-    return obj;
-  },
   // 附带参数跳转
   openUrl(path, params) {
     params = params || {};
@@ -72,11 +55,29 @@ export default {
     data = encodeURI(data.slice(0, -1));
     window.location.href = path + data;
   },
+  /**
+   * 格式化数字
+   */
+  formatNum(num, retain) {
+    if (!num) {
+      return 0;
+    } else if (num > 10000) {
+      let number = num * 1 / 10000;
+      number = retain ? number.toFixed(retain) : number;
+      return number + '万';
+    } else {
+      return num;
+    }
+  },
   // 复制数组
   copyArr(arr) {
     if (arr.length === 0) return [];
     var newArr = JSON.parse(JSON.stringify(arr));
     return newArr;
+  },
+  // 复制对象
+  copyObj(obj) {
+    return JSON.parse(JSON.stringify(obj));
   },
   /**
    * 限制输入框输入

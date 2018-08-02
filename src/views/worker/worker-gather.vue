@@ -1,14 +1,14 @@
 <template>
   <div class="home-gather">
-    <div @click="toActualGather">
-      <h3>{{ receiptAmount / 10000 || '0.00' }}万</h3>
+    <div @click="proceedsDetail(0)">
+      <h3>{{ $utils.formatNum(receiptAmount) }}</h3>
       <p>实收款(本月)&nbsp;
         <i class="iconfont icon-rightBtn"></i>
       </p>
     </div>
     <i class="vertical-bar"></i>
-    <div @click="toWaitGather">
-      <h3>{{ dueAmount / 10000 || '0.00' }}万</h3>
+    <div @click="proceedsDetail(1)">
+      <h3>{{ $utils.formatNum(dueAmount) }}</h3>
       <p>待收款(全部)&nbsp;
         <i class="iconfont icon-rightBtn"></i>
       </p>
@@ -52,15 +52,14 @@ export default {
         this.dueAmount = res.data.totalAmount;
       });
     },
-    toActualGather() {
-      this.$utils.go({
-        name: ""
-      }, this);
-    },
-    toWaitGather() {
-      this.$utils.go({
-        name: ""
-      }, this);
+    // 跳转收款详情 0：实收 1：待收
+    proceedsDetail(label) {
+      this.$utils.go(this, {
+        name: "proceeds-detail",
+        query: {
+          label: label === 0 ? 0 : 1
+        }
+      });
     }
   }
 };

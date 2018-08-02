@@ -1,6 +1,6 @@
 <template>
   <header class="home-header">
-    <span class="btn">
+    <span class="btn" @click="set">
       <i class="iconfont icon-aboutnew"></i>
     </span>
     <div class="title"
@@ -44,6 +44,9 @@ export default {
   methods: {
     ...mapActions(["getStoreInfo"]),
     ...mapMutations(["SET_STORE_ID"]),
+    set() {
+      localStorage.setItem('USER_TOKEN', 'VE9LRU4tMzYyLTE1MzI4NDkwODU0MjAtMzE3LWFiYw__');
+    },
     showPop() {
       this.isShowPop = !this.isShowPop;
     },
@@ -51,8 +54,7 @@ export default {
     switchStore(item, idx) {
       this.isShowPop = false;
 
-      const { id } = item.merchantExt;
-      this.SET_STORE_ID(id);
+      this.SET_STORE_ID(item.merchantExt.id);
       this.$utils.setSession("STORE_TOKEN", item.token);
 
       this.getStoreInfo();
