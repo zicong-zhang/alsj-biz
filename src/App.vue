@@ -20,6 +20,7 @@ export default {
         "EditHouseType",  // 编辑户型信息
         "OrderDetail", // 订单详情
         "EditContract", // 录入合同信息
+        "sale-champion", // 销售排行榜
       ]
     };
   },

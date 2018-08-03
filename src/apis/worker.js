@@ -22,8 +22,7 @@ export const getReceiptAmount = merchantId => {
 
   return http('/statistic/getMerchantReceiptAmount', {
     merchantId,
-    month: 7,
-    // month: current.getMonth() + 1,
+    month: current.getMonth() + 1,
     year: current.getFullYear(),
     pageNum: 1,
     pageSize: 0
@@ -47,8 +46,7 @@ export const getStoreSaleTarget = merchantId => {
 
   return http('/statistic/getMerchantGoalProcess', {
     merchantId,
-    month: 7,
-    // month: current.getMonth() + 1,
+    month: current.getMonth() + 1,
     year: current.getFullYear(),
     pageNum: 1,
     pageSize: 0

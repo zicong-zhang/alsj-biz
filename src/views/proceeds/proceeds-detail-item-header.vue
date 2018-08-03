@@ -36,7 +36,6 @@ export default {
   },
   methods: {
     init() {
-      console.log("this.$route.query.label:_____", this.$route.query.label);
       this.activeTab = this.$route.query.label;
     },
     back() {

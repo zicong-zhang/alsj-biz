@@ -4,11 +4,25 @@
 
     <!-- 本月销售冠军 -->
     <div class="sale-champion">
-      <img src="~~img/sale-rank/img_champion.png" />
-      <div>
+
+      <!-- 背景 -->
+      <img v-if="championInfo"
+        src="~~img/sale-rank/img_champion.png"
+        key="sale-rank-championInfo-has-bg" />
+      <img v-else
+        src="~~img/sale-rank/img_champion_grey.png"
+        key="sale-rank-championInfo-none-bg" />
+
+      <div v-if="championInfo"
+        key="sale-rank-championInfo-has">
         <h4>·本月销售冠军·</h4>
-        <h2 class="common-rmb">3,800,000</h2>
-        <h3>刘大师</h3>
+        <h2 class="common-rmb">{{ championInfo.amount }}</h2>
+        <h3>{{ championInfo.nickname }}</h3>
+      </div>
+      <div v-else
+        key="sale-rank-championInfo-none">
+        <p>本月销售冠军将会在这里显示</p>
+        <h3>冠军促单可及，继续加油！</h3>
       </div>
     </div>
 
@@ -17,19 +31,23 @@
       <div class="title">
         <h3>业绩排行</h3>
         <p>
-          <span :class="{active: 1}">本月</span>
+          <span :class="{active: performanceMonth === 0}"
+            @click="changeMonth('performanceMonth', 0)">本月</span>
           <i></i>
-          <span>上月</span>
+          <span :class="{active: performanceMonth === 1}"
+            @click="changeMonth('performanceMonth', 1)">上月</span>
         </p>
       </div>
-      <ul>
-        <li v-for="item in performanceList"
-          :key="item.id">
+      <ul v-if="performanceList.length !== 0"
+        key="performanceList-has">
+        <li v-for="(item, idx) in performanceList"
+          :key="'performanceList' + idx">
           <h5>{{ item.nickname }}</h5>
-          <p :style="{width: (item.amount / performanceList[0].amount) * 100 + '%'}"></p>
+          <p ref="performanceList"></p>
           <span>{{ $utils.formatNum(item.amount, 2) }}</span>
         </li>
       </ul>
+      <EmptyModule v-else key="performanceList-none"/>
     </div>
 
     <!-- 开单排行 -->
@@ -40,34 +58,51 @@
           <span>(新订单)</span>
         </h3>
         <p>
-          <span :class="{active: 1}">本月</span>
+          <span :class="{active: billMonth === 0}"
+            @click="changeMonth('billMonth', 0)">本月</span>
           <i></i>
-          <span>上月</span>
+          <span :class="{active: billMonth === 1}"
+            @click="changeMonth('billMonth', 1)">上月</span>
         </p>
       </div>
-      <ul>
+      <ul v-if="billList.length !== 0"
+        key="billList-has">
         <li v-for="item in billList"
-          :key="item.id">
+          :key="'billList' + item.staffId">
           <h5>{{ item.nickname }}</h5>
-          <p :style="{width: (item.amount / billList[0].amount) * 100 + '%'}"></p>
+          <p ref="billList"></p>
           <span>{{ $utils.formatNum(item.amount, 2) }}</span>
         </li>
       </ul>
+      <EmptyModule v-else key="billList-none"/>
     </div>
 
   </div>
 </template>
 <script>
 import { mapState } from "vuex";
-import { getPerformanceRank, getBillRank } from "~apis/worker";
+import EmptyModule from './sale-rank-item-empty';
+import {
+  getPerformanceRank,
+  getBillRank,
+  getCurrentMonthSaleChampion
+} from "~apis/worker";
 
 export default {
   name: "sale-champion",
+  components: {
+    EmptyModule
+  },
   data() {
     return {
-      currentMonth: 1,
+      championInfo: {}, // 销售冠军信息
+      // 月份切换 0 本月 1 上月
+      performanceMonth: 0,
+      billMonth: 0,
+      // 排行列表
       performanceList: [], // 业绩列表
       billList: [], // 开单列表
+      currentMonth: 1,
       date: {}
     };
   },
@@ -76,30 +111,79 @@ export default {
       merchantId: state => state.root.storeId
     })
   },
+  watch: {
+    performanceMonth(newVal) {
+      let month = this.date.month;
+      this.currentMonth = newVal === 0 ? month : month - 1;
+      this.getPerformanceRank();
+    },
+    billMonth(newVal) {
+      let month = this.date.month;
+      this.currentMonth = newVal === 0 ? month : month - 1;
+      this.getBillRank();
+    }
+  },
   created() {
     this.date = this.$utils.getDate("current");
-    this.getPerformanceRank();
-    this.getBillRank();
+    this.currentMonth = this.date.month;
+    this.init();
   },
   methods: {
+    init() {
+      this.getChampionInfo();
+      this.getPerformanceRank();
+      this.getBillRank();
+    },
+    // 设置排行榜每人占比
+    changeItem(list, name) {
+      list.forEach((item, idx) => {
+        this.setTtemWidth(item.amount, name, idx);
+      });
+    },
+    // 设置排行榜占比长度
+    setTtemWidth(amount, name, idx) {
+      const firstItem = this[name][0];
+      const scale = firstItem ? amount / firstItem.amount : 0;
+
+      const refList = this.$refs[name];
+      const width = refList[0].clientWidth;
+      if (idx !== 0)
+        // 第一行固定为100%宽度
+        refList[idx].style.width = this.$rem(width * scale * 2); // *2 因为2倍图
+    },
+    // 改变选择月份
+    changeMonth(name, idx) {
+      if (this[name] !== idx) this[name] = idx;
+    },
+    // 设置请求参数
     setReq() {
       let req = {
         merchantId: this.merchantId,
         year: this.date.year,
-        month: 7
+        month: this.currentMonth
       };
       return req;
     },
     // 获取业绩排行
     getPerformanceRank() {
       getPerformanceRank(this.setReq()).then(res => {
-        this.performanceList = res.data.list;
+        const list = res.data.list;
+        this.performanceList = list;
+        this.$nextTick(() => this.changeItem(list, "performanceList"));
       });
     },
     // 获取开单排行
     getBillRank() {
       getBillRank(this.setReq()).then(res => {
-        this.billList = res.data.list;
+        const list = res.data.list;
+        this.billList = list;
+        this.$nextTick(() => this.changeItem(list, "billList"));
+      });
+    },
+    // 获取销售冠军信息
+    getChampionInfo() {
+      getCurrentMonthSaleChampion(this.merchantId).then(res => {
+        this.championInfo = res.data.rankBO;
       });
     }
   }
@@ -141,6 +225,11 @@ export default {
     h4 {
       font-size: 24px;
       margin-bottom: 24px;
+    }
+    p {
+      font-size: 20px;
+      padding-top: 30px;
+      margin-bottom: 16px;
     }
   }
   .rank-list {
@@ -205,6 +294,7 @@ export default {
       padding-bottom: 36px;
       &:first-child {
         p {
+          width: 100%;
           background: linear-gradient(to right, #f87566, #f23e36);
         }
         span {
@@ -212,18 +302,15 @@ export default {
         }
       }
       p {
-        width: 50%;
         height: 24px;
         background: linear-gradient(to right, #3dadff, #2985ff);
         border-radius: 24px;
         margin-right: 16px;
+        transition: width 0.5s;
       }
       span {
-        display: block;
-        width: 110px;
         flex: none;
         color: $main;
-        text-align: right;
       }
       h5 {
         flex: none;
