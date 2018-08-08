@@ -1,19 +1,22 @@
 import EXIF from 'exif-js'
+import App from '~/App';
+import Vuex from '~/vuex/store';
+import Router from '~/router';
 
 export default {
   /**
    * 路由跳转
    */
-  go(vue, params) {
-    vue.$store.commit('TURN', 'on');
-    vue.$router.push(params);
+  go(params) {
+    Vuex.commit('TURN', 'on');
+    Router.push(params);
   },
   /**
    * 路由返回
    */
-  back(vue) {
-    vue.$store.commit('TURN', 'off');
-    vue.$router.back(-1);
+  back() {
+    Vuex.commit('TURN', 'off');
+    Router.back(-1);
   },
   getDate(type = 'current') {
     const current = new Date();

@@ -1,6 +1,6 @@
 <template>
   <div class="home-sale-target">
-    <div class="title">
+    <div class="title" @click="toPerformanceTarget">
       <h3>目标进度</h3>
       <p>设置
         <i class="iconfont icon-rightBtn"></i>
@@ -51,6 +51,11 @@ export default {
       this.getStoreSaleTarget().then(res => {
         Object.assign(this.$data, res.data);
       })
+    },
+    toPerformanceTarget() {
+      this.$utils.go({
+        name: 'performance-target'
+      })
     }
   }
 };
@@ -58,25 +63,26 @@ export default {
 <style lang="scss">
 .home-sale-target {
   background: #fff;
-  padding: 0 r(36px);
-  padding-bottom: r(32px);
-  margin-bottom: r(16px);
+  padding: 0 36px;
+  padding-bottom:32px;
+  margin-bottom:16px;
   .title {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding-bottom: r(43px);
+    padding-bottom:43px;
     h3 {
-      font-size: r(32px);
-      padding-left: r(16px);
-      padding-top: r(33px);
+      font-size:32px;
+      font-weight: bold;
+      padding-left:16px;
+      padding-top:33px;
       position: relative;
       &:before {
         content: "";
-        width: r(4px);
-        height: r(28px);
+        width:4px;
+        height:28px;
         background: #333;
-        border-radius: r(4px);
+        border-radius:4px;
         position: absolute;
         left: 0;
         top: calc(50% + #{r(16px)});
@@ -85,17 +91,17 @@ export default {
     }
     p {
       color: #999;
-      font-size: r(24px);
-      padding-top: r(40px);
+      font-size:24px;
+      padding-top:40px;
     }
     i {
-      font-size: r(24px);
+      font-size:24px;
     }
   }
   .tip {
-    font-size: r(20px);
+    font-size:20px;
     color: #999;
-    margin-bottom: r(8px);
+    margin-bottom:8px;
     span {
       &:first-child {
         color: #333;
@@ -106,9 +112,9 @@ export default {
     display: flex;
     justify-content: space-between;
     align-items: flex-end;
-    margin-bottom: r(23px);
+    margin-bottom:23px;
     p {
-      font-size: r(40px);
+      font-size:40px;
       color: #333;
     }
     span {
@@ -116,15 +122,15 @@ export default {
     }
     h4 {
       color: #39f;
-      font-size: r(32px);
+      font-size:32px;
       font-weight: normal;
     }
   }
   .rate {
     width: 100%;
-    height: r(12px);
+    height:12px;
     background: #E5F2FF;
-    border-radius: r(12px);
+    border-radius:12px;
     position: relative;
     p {
       position: absolute;
@@ -132,7 +138,7 @@ export default {
       top: 0;
       width: 40%;
       height: 100%;
-      border-radius: r(12px);
+      border-radius:12px;
       background: linear-gradient(to right, #2985FF , #3DADFF);
     }
   }

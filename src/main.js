@@ -8,7 +8,6 @@ import 'babel-polyfill'
 import 'lib-flexible/flexible'
 // 第三方库
 import Vue from 'vue'
-import Vuex from 'vuex'
 import VueLazyload from 'vue-lazyload'
 import AlloyFinger from 'alloyfinger'
 import AlloyFingerPlugin from 'alloyfinger/vue/alloy_finger.vue'
@@ -21,7 +20,7 @@ import router from './router';
 import './directives/directives';
 import utils from './tools/utils';
 import http from './axios';
-import vx from './vuex/store';
+import store from './vuex/store';
 
 // 全局组件
 import App from './App';
@@ -36,7 +35,6 @@ import './assets/font/iconfont.css';
 Vue.config.productionTip = false;
 Vue.config.devtools = true;
 
-Vue.use(Vuex);
 Vue.use(VueLazyload);
 Vue.use(Cube);
 Vue.use(AlloyFingerPlugin, {
@@ -58,8 +56,6 @@ if ('addEventListener' in document) {
 //   new Vconsole()
 // }
 
-
-let store = new Vuex.Store(vx);
 
 /* eslint-disable no-new */
 new Vue({

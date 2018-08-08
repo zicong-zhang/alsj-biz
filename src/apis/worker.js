@@ -80,3 +80,13 @@ export const getBillRank = ({
     pageSize: 0
   })
 }
+// 获取店铺某一年的业绩目标列表
+export const getOnePerformanceTargetList = ({
+  merchantId,
+  goalYear
+}) => {
+  return http('/merchantGoal/getMerchantGoalInfo', {
+    merchantId,
+    goalYear
+  })
+}

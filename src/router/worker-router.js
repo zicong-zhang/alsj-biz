@@ -17,6 +17,15 @@ const workRouter = [
       title: '销售排行榜 - 阿拉私家'
     }
   },
+  {
+    path: '/performance-target',
+    name: 'performance-target',
+    component: () =>
+      import ( /* webpackChunkName: "worker" */ "~views/performance-target/performance-target"),
+    meta: {
+      title: '业绩目标 - 阿拉私家'
+    }
+  }
 ]
 
 export default workRouter;

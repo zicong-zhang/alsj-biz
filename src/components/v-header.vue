@@ -55,6 +55,7 @@ export default {
     height:88px;
     line-height:88px;
     font-size:32px;
+    font-weight: bold;
     background: #fff;
     // color: $font;
     text-align: center;

@@ -33,6 +33,7 @@ export default {
   h3 {
     line-height: e(94px);
     font-size: e(32px);
+    font-weight: bold;
     color: #333;
     padding-left: e(14px);
     position: relative;

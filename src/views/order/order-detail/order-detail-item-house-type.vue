@@ -57,7 +57,7 @@ export default {
   },
   methods: {
     toEditHouseType() {
-      this.$utils.go(this, {
+      this.$utils.go({
         name: 'order-edit-house-type'
       })
     }

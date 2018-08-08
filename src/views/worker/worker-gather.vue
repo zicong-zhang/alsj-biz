@@ -54,7 +54,7 @@ export default {
     },
     // 跳转收款详情 0：实收 1：待收
     proceedsDetail(label) {
-      this.$utils.go(this, {
+      this.$utils.go({
         name: "proceeds-detail",
         query: {
           label: label === 0 ? 0 : 1

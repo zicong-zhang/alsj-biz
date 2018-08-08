@@ -1,7 +1,10 @@
 <template>
-  <div class="worker-sale-champion" @click="toRank">
+  <div class="worker-sale-champion"
+    @click="toRank">
     <h4>
-      <i class="iconfont icon-btn_case_collectionP"></i>本月销售冠军</h4>
+      <img src="~~img/home/icon_workbench_champion@2x.png" />
+      <span>本月销售冠军</span>
+    </h4>
     <p v-if="nickname && amount !== 0">{{ nickname }} {{ amount / 1000 || '0.00' }}万</p>
     <p v-else>暂无</p>
   </div>
@@ -34,37 +37,41 @@ export default {
     init() {
       this.getCurrentMonthSaleChampion().then(res => {
         const data = res.data.rankBO;
-          this.nickname = data ? data.nickname : '';
-          this.amount = data ? data.amount : 0;
+        this.nickname = data ? data.nickname : "";
+        this.amount = data ? data.amount : 0;
       });
     },
     toRank() {
-      this.$utils.go(this, {
-        name: 'sale-rank'
-      })
+      this.$utils.go({
+        name: "sale-rank"
+      });
     }
   }
 };
 </script>
 <style lang="scss">
 .worker-sale-champion {
-  height: r(80px);
-  line-height: r(80px);
+  height: 80px;
+  line-height: 80px;
   background: #fff;
   display: flex;
   justify-content: space-between;
   align-items: center;
   color: #3399ff;
-  font-size: r(32px);
-  padding: 0 r(36px);
-  margin-bottom: r(16px);
+  font-size: 32px;
+  padding: 0 36px;
+  margin-bottom: 16px;
   h4 {
     font-weight: normal;
-    font-size: r(32px);
+    font-size: 32px;
+    display: flex;
+    align-items: center;
   }
-  i {
-    font-size: r(30px);
-    margin-right: r(8px);
+  img {
+    width: auto;
+    height: 32px;
+    margin-right: 8px;
   }
+  
 }
 </style>

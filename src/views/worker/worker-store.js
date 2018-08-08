@@ -61,6 +61,11 @@ export default {
     getStoreSaleTarget({rootState}) {
       return api.getStoreSaleTarget(rootState.root.storeId)
         .then(res => Promise.resolve(res));
+    },
+    // 获取店铺某一年的业绩目标列表
+    getOnePerformanceTargetList({rootState}) {
+      return api.getOnePerformanceTargetList(rootState.root.storeId)
+        .then(res => Promise.resolve(res));
     }
   },
   mutations: {
