@@ -90,3 +90,38 @@ export const getOnePerformanceTargetList = ({
     goalYear
   })
 }
+// 更新店铺某一年业绩目标列表
+export const updatePerformTargetList = (merchantId, {
+  janAmount,
+  fabAmount,
+  marAmount,
+  aprAmount,
+  mayAmount,
+  junAmount,
+  julAmount,
+  augAmount,
+  sepAmount,
+  octAmount,
+  novAmount,
+  decAmount,
+  year,
+  id
+}) => {
+  return http('/merchantGoal/saveOrUpdateMerchantGoal', {
+    merchantId,
+    goalYear: year,
+    merchantGoalId: id,
+    janAmount: janAmount.length > 3 ? +janAmount.replace(/\D/g, '') : +janAmount,
+    fabAmount: fabAmount.length > 3 ? +fabAmount.replace(/\D/g, '') : +fabAmount,
+    marAmount: marAmount.length > 3 ? +marAmount.replace(/\D/g, '') : +marAmount,
+    aprAmount: aprAmount.length > 3 ? +aprAmount.replace(/\D/g, '') : +aprAmount,
+    mayAmount: mayAmount.length > 3 ? +mayAmount.replace(/\D/g, '') : +mayAmount,
+    junAmount: junAmount.length > 3 ? +junAmount.replace(/\D/g, '') : +junAmount,
+    julAmount: julAmount.length > 3 ? +julAmount.replace(/\D/g, '') : +julAmount,
+    augAmount: augAmount.length > 3 ? +augAmount.replace(/\D/g, '') : +augAmount,
+    sepAmount: sepAmount.length > 3 ? +sepAmount.replace(/\D/g, '') : +sepAmount,
+    octAmount: octAmount.length > 3 ? +octAmount.replace(/\D/g, '') : +octAmount,
+    novAmount: novAmount.length > 3 ? +novAmount.replace(/\D/g, '') : +novAmount,
+    decAmount: decAmount.length > 3 ? +decAmount.replace(/\D/g, '') :+ decAmount
+  })
+}

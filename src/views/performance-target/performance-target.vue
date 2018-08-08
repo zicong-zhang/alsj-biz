@@ -8,7 +8,7 @@
         <!-- 选择年份 -->
         <div class="select-year">
           <span>月份</span>
-          <span>(2018)</span>
+          <span>({{ year }})</span>
           <i class="iconfont icon-bottomnew"></i>
         </div>
 
@@ -19,95 +19,205 @@
 
       <div class="edit-plan-list">
         <ul>
-          <li :class="{empty: janAmount == 0}">
+          <li>
             <label>1月</label><input type="text"
-              :maxlength="maxLength"
-              v-model="janAmount">
+              v-model="janAmount"
+              placeholder="0"
+              @input="limitInput('janAmount')"
+              @focus="unFormatNum('janAmount')"
+              @blur="formatNum('janAmount')" />
           </li>
-          <li :class="{empty: fabAmount == 0}">
+          <li>
             <label>2月</label><input type="text"
-              :maxlength="maxLength"
-              v-model="fabAmount">
+              v-model="fabAmount"
+              placeholder="0"
+              @input="limitInput('fabAmount')"
+              @focus="unFormatNum('fabAmount')"
+              @blur="formatNum('fabAmount')" />
           </li>
-          <li :class="{empty: marAmount == 0}">
+          <li>
             <label>3月</label><input type="text"
-              :maxlength="maxLength"
-              v-model="marAmount">
+              v-model="marAmount"
+              placeholder="0"
+              @input="limitInput('marAmount')"
+              @focus="unFormatNum('marAmount')"
+              @blur="formatNum('marAmount')" />
           </li>
-          <li :class="{empty: aprAmount == 0}">
+          <li>
             <label>4月</label><input type="text"
-              :maxlength="maxLength"
-              v-model="aprAmount">
+              v-model="aprAmount"
+              placeholder="0"
+              @input="limitInput('aprAmount')"
+              @focus="unFormatNum('aprAmount')"
+              @blur="formatNum('aprAmount')" />
           </li>
-          <li :class="{empty: mayAmount == 0}">
+          <li>
             <label>5月</label><input type="text"
-              :maxlength="maxLength"
-              v-model="mayAmount">
+              v-model="mayAmount"
+              placeholder="0"
+              @input="limitInput('mayAmount')"
+              @focus="unFormatNum('mayAmount')"
+              @blur="formatNum('mayAmount')" />
           </li>
-          <li :class="{empty: junAmount == 0}">
+          <li>
             <label>6月</label><input type="text"
-              :maxlength="maxLength"
-              v-model="junAmount">
+              v-model="junAmount"
+              placeholder="0"
+              @input="limitInput('junAmount')"
+              @focus="unFormatNum('junAmount')"
+              @blur="formatNum('junAmount')" />
           </li>
-          <li :class="{empty: julAmount == 0}">
+          <li>
             <label>7月</label><input type="text"
-              :maxlength="maxLength"
-              v-model="julAmount">
+              v-model="julAmount"
+              placeholder="0"
+              @input="limitInput('julAmount')"
+              @focus="unFormatNum('julAmount')"
+              @blur="formatNum('julAmount')" />
           </li>
-          <li :class="{empty: augAmount == 0}">
+          <li>
             <label>8月</label><input type="text"
-              :maxlength="maxLength"
-              v-model="augAmount">
+              v-model="augAmount"
+              placeholder="0"
+              @input="limitInput('augAmount')"
+              @focus="unFormatNum('augAmount')"
+              @blur="formatNum('augAmount')" />
           </li>
-          <li :class="{empty: sepAmount == 0}">
+          <li>
             <label>9月</label><input type="text"
-              :maxlength="maxLength"
-              v-model="sepAmount">
+              v-model="sepAmount"
+              placeholder="0"
+              @input="limitInput('sepAmount')"
+              @focus="unFormatNum('sepAmount')"
+              @blur="formatNum('sepAmount')" />
           </li>
-          <li :class="{empty: octAmount == 0}">
+          <li>
             <label>10月</label><input type="text"
-              :maxlength="maxLength"
-              v-model="octAmount">
+              v-model="octAmount"
+              placeholder="0"
+              @input="limitInput('octAmount')"
+              @focus="unFormatNum('octAmount')"
+              @blur="formatNum('octAmount')" />
           </li>
-          <li :class="{empty: novAmount == 0}">
+          <li>
             <label>11月</label><input type="text"
-              :maxlength="maxLength"
-              v-model="novAmount">
+              v-model="novAmount"
+              placeholder="0"
+              @input="limitInput('novAmount')"
+              @focus="unFormatNum('novAmount')"
+              @blur="formatNum('novAmount')" />
           </li>
-          <li :class="{empty: decAmount == 0}">
+          <li>
             <label>12月</label><input type="text"
-              :maxlength="maxLength"
-              v-model="decAmount">
+              v-model="decAmount"
+              placeholder="0"
+              @input="limitInput('decAmount')"
+              @focus="unFormatNum('decAmount')"
+              @blur="formatNum('decAmount')" />
           </li>
         </ul>
       </div>
 
+      <div class="year-amount-total">
+        <span>全年</span>
+        <p>200000</p>
+      </div>
+      <i class="gap"></i>
+
+    </div>
+
+    <div class="handle-btns">
+      <p>取消</p>
+      <p @click="updateTargetData">确定目标</p>
     </div>
   </div>
 </template>
 
 <script>
+import { mapActions } from "vuex";
+
 export default {
   name: "performance-target",
   data() {
     return {
-      maxLength: 10,
-      janAmount: "22222", 
+      maxLength: 10, // 输入金额位数限制
+      year: 2018, // 当前选中年份
+      id: "", // 店铺目标id
+      janAmount: "22222",
       fabAmount: "22222",
-      marAmount: "0",
-      aprAmount: "0",
-      mayAmount: "0",
-      junAmount: "0",
-      julAmount: "0",
-      augAmount: "0",
-      sepAmount: "0",
-      octAmount: "0",
-      novAmount: "0",
-      decAmount: "0"
+      marAmount: "",
+      aprAmount: "",
+      mayAmount: "",
+      junAmount: "",
+      julAmount: "",
+      augAmount: "",
+      sepAmount: "",
+      octAmount: "",
+      novAmount: "",
+      decAmount: ""
     };
   },
-  created() {},
-  methods: {}
+  created() {
+    this.getDataList();
+  },
+  methods: {
+    ...mapActions(["getOnePerformanceTargetList", 'updatePerformTargetList']),
+    getDataList() {
+      this.getOnePerformanceTargetList(this.year).then(res => {
+        let data = res.data.merchantGoalExt;
+        this.id = data.id;
+        this.setAmount(data);
+      });
+    },
+    // 设置数据中已存在金额
+    setAmount(data) {
+      this.janAmount = data.janAmount === 0 ? "" : data.janAmount;
+      this.formatNum("janAmount");
+      this.fabAmount = data.fabAmount === 0 ? "" : data.fabAmount;
+      this.formatNum("fabAmount");
+      this.marAmount = data.marAmount === 0 ? "" : data.marAmount;
+      this.formatNum("marAmount");
+      this.aprAmount = data.aprAmount === 0 ? "" : data.aprAmount;
+      this.formatNum("aprAmount");
+      this.mayAmount = data.mayAmount === 0 ? "" : data.mayAmount;
+      this.formatNum("mayAmount");
+      this.junAmount = data.junAmount === 0 ? "" : data.junAmount;
+      this.formatNum("junAmount");
+      this.julAmount = data.julAmount === 0 ? "" : data.julAmount;
+      this.formatNum("julAmount");
+      this.augAmount = data.augAmount === 0 ? "" : data.augAmount;
+      this.formatNum("augAmount");
+      this.sepAmount = data.sepAmount === 0 ? "" : data.sepAmount;
+      this.formatNum("sepAmount");
+      this.octAmount = data.octAmount === 0 ? "" : data.octAmount;
+      this.formatNum("octAmount");
+      this.novAmount = data.novAmount === 0 ? "" : data.novAmount;
+      this.formatNum("novAmount");
+      this.decAmount = data.decAmount === 0 ? "" : data.decAmount;
+      this.formatNum("decAmount");
+    },
+    limitInput(name) {
+      this[name] = this[name]
+        .toString()
+        .replace(/\D/g, "")
+        .slice(0, 8);
+    },
+    // 某个 input 失去焦点时去除格式化
+    formatNum(name) {
+      this[name] = this[name].toString().replace(/(\d)(?=(?:\d{3})+$)/g, "$1,");
+    },
+    // 某个 input 获取焦点时去除格式化
+    unFormatNum(name) {
+      this[name] = this[name].replace(/\D/g, "");
+    },
+    // 提交更新目标数据
+    updateTargetData() {
+      this.updatePerformTargetList(this.$data)
+        .then(() => {
+          this.$utils.back();
+        })
+    }
+  }
 };
 </script>
 <style lang="scss">
@@ -153,6 +263,33 @@ export default {
       font-size: 24px;
       text-align: right;
       padding: 20px 24px;
+      &::-webkit-input-placeholder {
+        color: #333;
+      }
+    }
+  }
+  .year-amount-total {
+    height: 82px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 24px;
+    border-top: 1px solid rgba(0, 0, 0, 0.06);
+    margin: 0 36px;
+  }
+  .handle-btns {
+    height: 98px;
+    display: flex;
+    p {
+      flex: 1;
+      line-height: 98px;
+      text-align: center;
+      font-size: 32px;
+      background: #fff;
+      &:last-child {
+        color: #fff;
+        background: linear-gradient(to right, #2985ff, #3dadff);
+      }
     }
   }
 }

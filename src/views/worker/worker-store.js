@@ -1,5 +1,5 @@
 import * as api from '~apis/worker';
-
+// todo  更新worker的销售目标
 export default {
   state: {
     info: {}, // 店铺信息
@@ -21,7 +21,7 @@ export default {
     }) {
       return api.getSelfStoreList()
         .then(res => {
-          const list = res.data.list
+          const list = res.data.list;
           commit('SET_MY_STORE_LIST', list);
           return Promise.resolve(list);
         });
@@ -58,13 +58,28 @@ export default {
         .then(res => Promise.resolve(res))
     },
     // 获取店铺目标金额
-    getStoreSaleTarget({rootState}) {
+    getStoreSaleTarget({
+      rootState
+    }) {
       return api.getStoreSaleTarget(rootState.root.storeId)
         .then(res => Promise.resolve(res));
     },
     // 获取店铺某一年的业绩目标列表
-    getOnePerformanceTargetList({rootState}) {
-      return api.getOnePerformanceTargetList(rootState.root.storeId)
+    getOnePerformanceTargetList({
+      rootState
+    }, goalYear) {
+      return api.getOnePerformanceTargetList({
+          merchantId: rootState.root.storeId,
+          goalYear
+        })
+        .then(res => Promise.resolve(res));
+    },
+    // 更新店铺某一年业绩目标列表
+    updatePerformTargetList({
+      rootState,
+      commit
+    }, params) {
+      return api.updatePerformTargetList(rootState.root.storeId, params)
         .then(res => Promise.resolve(res));
     }
   },
