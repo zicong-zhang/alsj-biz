@@ -120,7 +120,7 @@
 
       <div class="year-amount-total">
         <span>全年</span>
-        <p>200000</p>
+        <p>{{ formatNum('total') }}</p>
       </div>
       <i class="gap"></i>
 
@@ -143,6 +143,7 @@ export default {
       maxLength: 10, // 输入金额位数限制
       year: 2018, // 当前选中年份
       id: "", // 店铺目标id
+
       janAmount: "22222",
       fabAmount: "22222",
       marAmount: "",
@@ -154,47 +155,49 @@ export default {
       sepAmount: "",
       octAmount: "",
       novAmount: "",
-      decAmount: ""
+      decAmount: "",
+      total: "0"
     };
   },
   created() {
     this.getDataList();
   },
   methods: {
-    ...mapActions(["getOnePerformanceTargetList", 'updatePerformTargetList']),
+    ...mapActions(["getOnePerformanceTargetList", "updatePerformTargetList"]),
     getDataList() {
       this.getOnePerformanceTargetList(this.year).then(res => {
         let data = res.data.merchantGoalExt;
         this.id = data.id;
+        this.total = data.totalGoalAmount;
         this.setAmount(data);
       });
     },
     // 设置数据中已存在金额
     setAmount(data) {
-      this.janAmount = data.janAmount === 0 ? "" : data.janAmount;
-      this.formatNum("janAmount");
-      this.fabAmount = data.fabAmount === 0 ? "" : data.fabAmount;
-      this.formatNum("fabAmount");
-      this.marAmount = data.marAmount === 0 ? "" : data.marAmount;
-      this.formatNum("marAmount");
-      this.aprAmount = data.aprAmount === 0 ? "" : data.aprAmount;
-      this.formatNum("aprAmount");
-      this.mayAmount = data.mayAmount === 0 ? "" : data.mayAmount;
-      this.formatNum("mayAmount");
-      this.junAmount = data.junAmount === 0 ? "" : data.junAmount;
-      this.formatNum("junAmount");
-      this.julAmount = data.julAmount === 0 ? "" : data.julAmount;
-      this.formatNum("julAmount");
-      this.augAmount = data.augAmount === 0 ? "" : data.augAmount;
-      this.formatNum("augAmount");
-      this.sepAmount = data.sepAmount === 0 ? "" : data.sepAmount;
-      this.formatNum("sepAmount");
-      this.octAmount = data.octAmount === 0 ? "" : data.octAmount;
-      this.formatNum("octAmount");
-      this.novAmount = data.novAmount === 0 ? "" : data.novAmount;
-      this.formatNum("novAmount");
-      this.decAmount = data.decAmount === 0 ? "" : data.decAmount;
-      this.formatNum("decAmount");
+      this.janAmount =
+        data.janAmount === 0 ? "" : this.formatNum("janAmount", data.janAmount);
+      this.fabAmount =
+        data.fabAmount === 0 ? "" : this.formatNum("fabAmount", data.fabAmount);
+      this.marAmount =
+        data.marAmount === 0 ? "" : this.formatNum("marAmount", data.marAmount);
+      this.aprAmount =
+        data.aprAmount === 0 ? "" : this.formatNum("aprAmount", data.aprAmount);
+      this.mayAmount =
+        data.mayAmount === 0 ? "" : this.formatNum("mayAmount", data.mayAmount);
+      this.junAmount =
+        data.junAmount === 0 ? "" : this.formatNum("junAmount", data.junAmount);
+      this.julAmount =
+        data.julAmount === 0 ? "" : this.formatNum("julAmount", data.julAmount);
+      this.augAmount =
+        data.augAmount === 0 ? "" : this.formatNum("augAmount", data.augAmount);
+      this.sepAmount =
+        data.sepAmount === 0 ? "" : this.formatNum("sepAmount", data.sepAmount);
+      this.octAmount =
+        data.octAmount === 0 ? "" : this.formatNum("octAmount", data.octAmount);
+      this.novAmount =
+        data.novAmount === 0 ? "" : this.formatNum("novAmount", data.novAmount);
+      this.decAmount =
+        data.decAmount === 0 ? "" : this.formatNum("decAmount", data.decAmount);
     },
     limitInput(name) {
       this[name] = this[name]
@@ -202,9 +205,11 @@ export default {
         .replace(/\D/g, "")
         .slice(0, 8);
     },
-    // 某个 input 失去焦点时去除格式化
-    formatNum(name) {
-      this[name] = this[name].toString().replace(/(\d)(?=(?:\d{3})+$)/g, "$1,");
+    // 某个 input 失去焦点时 进行格式化
+    formatNum(name, value) {
+      const val = value || this[name];
+      this[name] = this.$utils.numInsertSymbol(val);
+      return this[name];
     },
     // 某个 input 获取焦点时去除格式化
     unFormatNum(name) {
@@ -212,10 +217,10 @@ export default {
     },
     // 提交更新目标数据
     updateTargetData() {
-      this.updatePerformTargetList(this.$data)
-        .then(() => {
-          this.$utils.back();
-        })
+      this.updatePerformTargetList(this.$data).then(() => {
+        this.$toast("修改成功");
+        this.$utils.back();
+      });
     }
   }
 };
@@ -288,7 +293,7 @@ export default {
       background: #fff;
       &:last-child {
         color: #fff;
-        background: linear-gradient(to right, #2985ff, #3dadff);
+        background: linear-gradient(to left, #2985ff, #3dadff);
       }
     }
   }

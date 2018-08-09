@@ -18,6 +18,11 @@ export default {
     Vuex.commit('TURN', 'off');
     Router.back(-1);
   },
+  /**
+   * 获取时间
+   * @param {String} type 根据不同类型返回不同的数据格式
+   * @return {Object} 返回格式化好的对象
+   */
   getDate(type = 'current') {
     const current = new Date();
     let dateObj = {
@@ -57,6 +62,19 @@ export default {
 
     data = encodeURI(data.slice(0, -1));
     window.location.href = path + data;
+  },
+  /**
+   * 数字内插入符号
+   * @param {Number | String} number 需要操作的数字
+   * @param {String} symbol 插入的符号
+   */
+  numInsertSymbol(number = 0, symbol = ',') {
+    let num = number.toString();
+    if (number.length > 3) {
+      return num.replace(/(\d)(?=(?:\d{3})+$)/g, `$1${symbol}`);
+    } else {
+      return num;
+    }
   },
   /**
    * 格式化数字

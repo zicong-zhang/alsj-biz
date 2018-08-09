@@ -21,6 +21,18 @@
         </li>
       </ul>
     </div>
+
+    <div class="aa">
+      <p>
+        <span>订单金额</span>
+        <span>￥8,880,000.00</span>
+      </p>
+      <i class="vertical-bar"></i>
+      <p>
+        <span>订金额</span>
+        <span>￥8,880,000.00</span>
+      </p>
+    </div>
   </div>
 </template>
 <script>
@@ -181,6 +193,26 @@ export default {
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
+  }
+}
+.aa {
+  display: flex;
+  align-items: center;
+  color: #fff;
+  border-top: 1px solid;
+  padding:36px;
+  i {
+    height: 24px;
+    background: #fff;
+    margin: 0 20px;
+  }
+  span {
+    font-size: 24px;
+  }
+  p {
+    span:last-child {
+
+    }
   }
 }
 </style>

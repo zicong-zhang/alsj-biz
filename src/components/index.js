@@ -29,7 +29,7 @@ Vue.component('VDatePicker', VDatePicker);
 Vue.component('VFormLabel', VFormLabel);
 
 let ToastConstructor = Vue.extend(VToast);
-Vue.prototype.$toast = function(txt, timeout = 2300) {
+Vue.prototype.$toast = function(txt, timeout = 1500) {
   return new Promise(resolve => {
     let toastDom = new ToastConstructor({
       el: document.createElement('div')
