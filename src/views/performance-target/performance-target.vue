@@ -134,7 +134,7 @@
 </template>
 
 <script>
-import { mapActions } from "vuex";
+import { mapActions, mapMutations } from "vuex";
 
 export default {
   name: "performance-target",
@@ -144,8 +144,8 @@ export default {
       year: 2018, // 当前选中年份
       id: "", // 店铺目标id
 
-      janAmount: "22222",
-      fabAmount: "22222",
+      janAmount: "",
+      fabAmount: "",
       marAmount: "",
       aprAmount: "",
       mayAmount: "",
@@ -163,7 +163,11 @@ export default {
     this.getDataList();
   },
   methods: {
-    ...mapActions(["getOnePerformanceTargetList", "updatePerformTargetList"]),
+    ...mapActions([
+      "getOnePerformanceTargetList", // 获取店铺某一年的业绩目标列表
+      "updatePerformTargetList", // 更新店铺某一年业绩目标列表
+      "getStoreSaleTarget" // 获取店铺目标金额, 调用接口刷新数据
+    ]),
     getDataList() {
       this.getOnePerformanceTargetList(this.year).then(res => {
         let data = res.data.merchantGoalExt;
@@ -174,30 +178,18 @@ export default {
     },
     // 设置数据中已存在金额
     setAmount(data) {
-      this.janAmount =
-        data.janAmount === 0 ? "" : this.formatNum("janAmount", data.janAmount);
-      this.fabAmount =
-        data.fabAmount === 0 ? "" : this.formatNum("fabAmount", data.fabAmount);
-      this.marAmount =
-        data.marAmount === 0 ? "" : this.formatNum("marAmount", data.marAmount);
-      this.aprAmount =
-        data.aprAmount === 0 ? "" : this.formatNum("aprAmount", data.aprAmount);
-      this.mayAmount =
-        data.mayAmount === 0 ? "" : this.formatNum("mayAmount", data.mayAmount);
-      this.junAmount =
-        data.junAmount === 0 ? "" : this.formatNum("junAmount", data.junAmount);
-      this.julAmount =
-        data.julAmount === 0 ? "" : this.formatNum("julAmount", data.julAmount);
-      this.augAmount =
-        data.augAmount === 0 ? "" : this.formatNum("augAmount", data.augAmount);
-      this.sepAmount =
-        data.sepAmount === 0 ? "" : this.formatNum("sepAmount", data.sepAmount);
-      this.octAmount =
-        data.octAmount === 0 ? "" : this.formatNum("octAmount", data.octAmount);
-      this.novAmount =
-        data.novAmount === 0 ? "" : this.formatNum("novAmount", data.novAmount);
-      this.decAmount =
-        data.decAmount === 0 ? "" : this.formatNum("decAmount", data.decAmount);
+      data.janAmount === 0 ? "" : this.formatNum("janAmount", data.janAmount);
+      data.fabAmount === 0 ? "" : this.formatNum("fabAmount", data.fabAmount);
+      data.marAmount === 0 ? "" : this.formatNum("marAmount", data.marAmount);
+      data.aprAmount === 0 ? "" : this.formatNum("aprAmount", data.aprAmount);
+      data.mayAmount === 0 ? "" : this.formatNum("mayAmount", data.mayAmount);
+      data.junAmount === 0 ? "" : this.formatNum("junAmount", data.junAmount);
+      data.julAmount === 0 ? "" : this.formatNum("julAmount", data.julAmount);
+      data.augAmount === 0 ? "" : this.formatNum("augAmount", data.augAmount);
+      data.sepAmount === 0 ? "" : this.formatNum("sepAmount", data.sepAmount);
+      data.octAmount === 0 ? "" : this.formatNum("octAmount", data.octAmount);
+      data.novAmount === 0 ? "" : this.formatNum("novAmount", data.novAmount);
+      data.decAmount === 0 ? "" : this.formatNum("decAmount", data.decAmount);
     },
     limitInput(name) {
       this[name] = this[name]
@@ -218,8 +210,11 @@ export default {
     // 提交更新目标数据
     updateTargetData() {
       this.updatePerformTargetList(this.$data).then(() => {
-        this.$toast("修改成功");
-        this.$utils.back();
+        this.getStoreSaleTarget().then(() => {
+          this.$toast("修改成功");
+          // 因涉及进度的百分比字符串，并且月份的数据格式过于分散，因此采用重调接口
+          this.$utils.back();
+        });
       });
     }
   }

@@ -27,7 +27,7 @@ const webpackConfig = merge(baseWebpackConfig, {
   output: {
     path: config.build.assetsRoot,
     filename: utils.assetsPath('js/[name].[chunkhash].js'),
-    chunkFilename: utils.assetsPath('js/[id].[chunkhash].js')
+    chunkFilename: utils.assetsPath('js/[name].[chunkhash].asyncChunk.js') // 配合懒加载打包重命名
   },
   plugins: [
     // http://vuejs.github.io/vue-loader/en/workflow/production.html
@@ -37,7 +37,12 @@ const webpackConfig = merge(baseWebpackConfig, {
     new UglifyJsPlugin({
       uglifyOptions: {
         compress: {
-          warnings: false
+          warnings: false,
+          drop_debugger: true, // 去除 debugger
+          drop_console: true // 去除 console
+        },
+        output: { // 删除打包后的注释
+          comments: false
         }
       },
       sourceMap: config.build.productionSourceMap,

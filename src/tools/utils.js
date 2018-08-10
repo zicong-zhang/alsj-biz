@@ -70,7 +70,7 @@ export default {
    */
   numInsertSymbol(number = 0, symbol = ',') {
     let num = number.toString();
-    if (number.length > 3) {
+    if (num.length > 3) {
       return num.replace(/(\d)(?=(?:\d{3})+$)/g, `$1${symbol}`);
     } else {
       return num;

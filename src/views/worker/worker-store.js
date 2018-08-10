@@ -4,6 +4,9 @@ export default {
   state: {
     info: {}, // 店铺信息
     myStores: [], // 我的所有店铺列表
+    merchantTradeAmount: 0, // 当前已完成销售目标
+    merchantGoalAmount: 0, // 总销售目标金额
+    rate: '0%', // 销售金额进度
   },
   getters: {
     storeInfo: state => { // 店铺信息
@@ -59,10 +62,14 @@ export default {
     },
     // 获取店铺目标金额
     getStoreSaleTarget({
-      rootState
+      rootState,
+      commit
     }) {
       return api.getStoreSaleTarget(rootState.root.storeId)
-        .then(res => Promise.resolve(res));
+        .then(res => {
+          commit('SET_SALE_TARGET', res.data);
+          return Promise.resolve(res);
+        });
     },
     // 获取店铺某一年的业绩目标列表
     getOnePerformanceTargetList({
@@ -91,6 +98,10 @@ export default {
     // 设置店铺列表
     SET_MY_STORE_LIST(state, storeList) {
       state.myStores = storeList;
+    },
+    // 设置销售目标
+    SET_SALE_TARGET(state, params) {
+      Object.assign(state, params);
     }
   }
 }

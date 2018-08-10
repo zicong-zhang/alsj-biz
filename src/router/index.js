@@ -1,5 +1,5 @@
-import Vue from '../../node_modules/_vue@2.5.16@vue';
-import Router from '../../node_modules/_vue-router@3.0.1@vue-router';
+import Vue from 'vue';
+import Router from 'vue-router';
 
 Vue.use(Router);
 
@@ -15,6 +15,7 @@ const router = new Router({
 });
 
 router.beforeEach((to, from, next) => {
+  console.log('to:_____', to);
   document.title = to.meta.title;
   if (to.meta.needLogin) {
     // if (store.state.token) { // 通过vuex state获取当前的token是否存在
@@ -28,7 +29,11 @@ router.beforeEach((to, from, next) => {
         } // 将跳转的路由path作为参数，登录成功后跳转到该路由
       })
     }
-  } else {
+  } else if (!to.name) {
+    next({
+      name: 'home'
+    })
+  }  else {
     next();
   }
 })

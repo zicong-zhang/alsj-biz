@@ -11,7 +11,7 @@
       <span>已完成/目标</span>
     </p>
     <div class="plan">
-      <p><span>{{ $utils.formatNum(merchantTradeAmount) }}</span>/{{ $utils.formatNum(merchantGoalAmount) }}</p>
+      <p><span>{{ $utils.formatNum(currentAmount) }}</span>/{{ $utils.formatNum(targetAmount) }}</p>
       <h4>{{ rate }}</h4>
     </div>
     <div class="rate">
@@ -27,14 +27,14 @@ export default {
   name: "HomeSaleTarget",
   data() {
     return {
-      merchantTradeAmount: 0,
-      merchantGoalAmount: 0,
-      rate: '0%'
     };
   },
   computed: {
     ...mapState({
-      storeId: state => state.root.storeId
+      storeId: state => state.root.storeId,
+      currentAmount: state => state.workerModule.merchantTradeAmount,
+      targetAmount: state => state.workerModule.merchantGoalAmount,
+      rate: state => state.workerModule.rate
     })
   },
   watch: {
@@ -48,9 +48,7 @@ export default {
   methods: {
     ...mapActions(['getStoreSaleTarget']),
     init() {
-      this.getStoreSaleTarget().then(res => {
-        Object.assign(this.$data, res.data);
-      })
+      this.getStoreSaleTarget();
     },
     toPerformanceTarget() {
       this.$utils.go({

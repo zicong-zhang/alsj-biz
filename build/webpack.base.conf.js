@@ -43,6 +43,13 @@ module.exports = {
       '~axios': resolve('src/axios'),
     }
   },
+  externals: { // value 为 umd 模块名
+    'vue': 'Vue',
+    axios: 'axios',
+    vuex: 'Vuex',
+    'cube-ui': 'cube',
+    'vue-router': 'VueRouter'
+  },
   module: {
     rules: [
       ...(config.dev.useEslint ? [createLintingRule()] : []),

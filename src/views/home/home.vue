@@ -9,7 +9,7 @@
 
 <script>
 export default {
-  name: "Home",
+  name: "home",
   data() {
     return {};
   }
@@ -22,7 +22,8 @@ export default {
   flex-flow: column;
   & > div {
     &:first-of-type {
-      height: 100%;
+      flex:  1;
+      // height: 100%;
     }
   }
 }

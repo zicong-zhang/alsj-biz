@@ -1,5 +1,5 @@
 <template>
-  <div class="worker">
+  <div class="view-worker">
     <WorkerHeader />
 
     <div class="content">
@@ -64,8 +64,7 @@ export default {
   background: #f0f4f7;
   .content {
     flex: 1;
-    -webkit-overflow-scrolling: touch;
-    overflow-y: scroll;
+    @include scroll(y);
   }
 }
 
