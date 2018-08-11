@@ -81,4 +81,8 @@ body {
   .cube-picker-title {
     font-size: r(32px);
   }
+  // 修复图片查看器 查看小图放大不能显示全部的问题
+  .cube-image-preview-item {
+    width: 100%;
+  }
 }

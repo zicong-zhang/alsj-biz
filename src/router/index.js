@@ -14,6 +14,7 @@ import noFoundRouter from './no-found-router';
 const routes = [].concat(homeRouter, workerRouter, orderRouter, noFoundRouter);
 
 const router = new Router({
+  mode: 'history',
   routes
 });
 
