@@ -10,6 +10,8 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const OptimizeCSSPlugin = require('optimize-css-assets-webpack-plugin')
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
+const PostCompilePlugin = require('webpack-post-compile-plugin')
+const TransformModulesPlugin = require('webpack-transform-modules-plugin')
 
 const env = process.env.NODE_ENV === 'testing'
   ? require('../config/test.env')
@@ -23,6 +25,12 @@ const webpackConfig = merge(baseWebpackConfig, {
       usePostCSS: true
     })
   },
+  externals: { // value 为 umd 模块名
+    'vue': 'Vue',
+    axios: 'axios',
+    vuex: 'Vuex',
+    'vue-router': 'VueRouter'
+  },
   devtool: config.build.productionSourceMap ? config.build.devtool : false,
   output: {
     path: config.build.assetsRoot,
@@ -30,6 +38,9 @@ const webpackConfig = merge(baseWebpackConfig, {
     chunkFilename: utils.assetsPath('js/[name].[chunkhash].asyncChunk.js') // 配合懒加载打包重命名
   },
   plugins: [
+    
+    new PostCompilePlugin(),
+    new TransformModulesPlugin(),
     // http://vuejs.github.io/vue-loader/en/workflow/production.html
     new webpack.DefinePlugin({
       'process.env': env
@@ -71,7 +82,7 @@ const webpackConfig = merge(baseWebpackConfig, {
       filename: process.env.NODE_ENV === 'testing'
         ? 'index.html'
         : config.build.index,
-      template: 'index.html',
+      template: 'index-production.html',
       inject: true,
       minify: {
         removeComments: true,

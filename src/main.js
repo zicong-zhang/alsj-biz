@@ -12,7 +12,14 @@ import VueLazyload from 'vue-lazyload'
 import AlloyFinger from 'alloyfinger'
 import AlloyFingerPlugin from 'alloyfinger/vue/alloy_finger.vue'
 import FastClick from 'fastclick'
-import Cube from 'cube-ui'
+import Cube from 'cube-ui';
+Vue.use(Cube);
+/* import {
+  BetterScroll,
+  Style,
+  图片查看器不支持按需引入
+  Picker
+} from 'cube-ui' */
 
 
 // 工具类
@@ -32,11 +39,11 @@ import './sass/common.scss';
 import './sass/transition.scss';
 import './assets/font/iconfont.css';
 
+Vue.config.devtools = process.env.NODE_ENV === 'development';
+
 Vue.config.productionTip = false;
-Vue.config.devtools = true;
 
 Vue.use(VueLazyload);
-Vue.use(Cube);
 Vue.use(AlloyFingerPlugin, {
   AlloyFinger
 })

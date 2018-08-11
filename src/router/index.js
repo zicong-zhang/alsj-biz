@@ -1,7 +1,10 @@
 import Vue from 'vue';
 import Router from 'vue-router';
 
-Vue.use(Router);
+const DEV_ENV = process.env.NODE_ENV === 'development';
+if (DEV_ENV) {
+  Vue.use(Router);
+}
 
 import homeRouter from './home-router';
 import workerRouter from './worker-router';

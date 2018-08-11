@@ -1,4 +1,4 @@
-import Vue from '../../node_modules/_vue@2.5.16@vue';
+import Vue from 'vue';
 
 /**
  * 滚动加载更多

@@ -14,7 +14,7 @@ const homeRouter = [{
     path: 'worker',
     name: 'worker',
     component: () =>
-      import ( /* webpackChunkName: "worker" */ "~views/worker/worker"),
+      import ( /* webpackChunkName: "worker-index" */ "~views/worker/worker"),
     meta: {
       title: '工作台 - 阿拉私家'
     }
@@ -22,7 +22,7 @@ const homeRouter = [{
     path: 'order-list',
     name: 'order-list',
     component: () =>
-      import ( /* webpackChunkName: "order" */ "~views/order/order-list/order-list"),
+      import ( /* webpackChunkName: "order-list" */ "~views/order/order-list/order-list"),
     meta: {
       title: '订单列表 - 阿拉私家'
     }
