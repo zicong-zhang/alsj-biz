@@ -4,6 +4,8 @@
 
     <div class="content">
       <i class="gap"></i>
+      <Button>aaaa</Button>
+      <van-button>aaaa</van-button>
       <header>
         <!-- 选择年份 -->
         <div class="select-year">
@@ -134,6 +136,7 @@
 </template>
 
 <script>
+
 import { mapActions, mapMutations } from "vuex";
 
 export default {

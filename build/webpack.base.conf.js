@@ -43,6 +43,9 @@ module.exports = {
       '~axios': resolve('src/axios'),
     }
   },
+  externals: { // value 为 umd 模块名
+    // 'cube-ui': 'cube'
+  },
   module: {
     rules: [
       ...(config.dev.useEslint ? [createLintingRule()] : []),

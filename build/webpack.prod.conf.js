@@ -29,7 +29,8 @@ const webpackConfig = merge(baseWebpackConfig, {
     'vue': 'Vue',
     axios: 'axios',
     vuex: 'Vuex',
-    'vue-router': 'VueRouter'
+    'vue-router': 'VueRouter',
+    'cube-ui': 'cube'
   },
   devtool: config.build.productionSourceMap ? config.build.devtool : false,
   output: {

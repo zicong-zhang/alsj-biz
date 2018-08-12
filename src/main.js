@@ -2,6 +2,9 @@
  * TODO
  * 抽取 mutations type
  * 图片上传改用七牛
+ * 组件库改用 vant，后期有时间再修改以前使用cube组件的地方
+ * webpack 配置 dll 打包
+ * 配置用户权限表
  */
 
 import 'babel-polyfill'
@@ -12,14 +15,10 @@ import VueLazyload from 'vue-lazyload'
 import AlloyFinger from 'alloyfinger'
 import AlloyFingerPlugin from 'alloyfinger/vue/alloy_finger.vue'
 import FastClick from 'fastclick'
-import Cube from 'cube-ui';
-Vue.use(Cube);
-/* import {
-  BetterScroll,
-  Style,
-  图片查看器不支持按需引入
-  Picker
-} from 'cube-ui' */
+
+import { Button, Picker } from 'vant';
+Vue.use(Button).use(Picker)
+
 
 
 // 工具类
