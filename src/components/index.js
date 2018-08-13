@@ -1,5 +1,9 @@
 import Vue from 'vue';
 
+
+import { Button, Picker } from 'vant';
+Vue.use(Button).use(Picker)
+
 import VHeader from '~components/v-header';
 import VFooter from '~components/v-footer';
 import VPopup from '~components/v-popup';
@@ -13,6 +17,7 @@ import VDialog from '~components/v-dialog';
 import VCover from '~components/v-cover';
 import VDatePicker from '~components/v-date-picker';
 import VFormLabel from '~components/v-form-label';
+import VVPicker from '~components/v-v-picker';
 
 
 Vue.component('VHeader', VHeader);
@@ -27,6 +32,7 @@ Vue.component('VDialog', VDialog);
 Vue.component('VCover', VCover);
 Vue.component('VDatePicker', VDatePicker);
 Vue.component('VFormLabel', VFormLabel);
+Vue.component('VVPicker', VVPicker);
 
 let ToastConstructor = Vue.extend(VToast);
 Vue.prototype.$toast = function(txt, timeout = 1500) {

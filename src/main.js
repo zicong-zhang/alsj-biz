@@ -16,9 +16,7 @@ import AlloyFinger from 'alloyfinger'
 import AlloyFingerPlugin from 'alloyfinger/vue/alloy_finger.vue'
 import FastClick from 'fastclick'
 
-import { Button, Picker } from 'vant';
-Vue.use(Button).use(Picker)
-
+import './tools/function';
 
 
 // 工具类
