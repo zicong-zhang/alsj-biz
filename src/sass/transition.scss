@@ -105,3 +105,24 @@
   z-index: 20;
   transition: top .25s, opacity .25s;
 }
+/* 展示选择器 */
+
+.v-picker-enter,
+.v-picker-leave-to {
+  opacity: 0;
+  transform: translate3d(0, 50%, 0);
+}
+.v-picker-enter-active,
+.v-picker-leave-active {
+  transition: all .3s;
+}
+/* 展示遮罩 */
+
+.v-cover-enter,
+.v-cover-leave-to {
+  opacity: 0;
+}
+.v-cover-enter-active,
+.v-cover-leave-active {
+  transition: all .3s;
+}

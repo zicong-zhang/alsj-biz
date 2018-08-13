@@ -6,7 +6,7 @@
       <i class="gap"></i>
       <header>
         <!-- 选择年份 -->
-        <div class="select-year">
+        <div class="select-year" @click="showPicker">
           <span>月份</span>
           <span>({{ year }})</span>
           <i class="iconfont icon-bottomnew"></i>
@@ -186,7 +186,6 @@ export default {
   },
   created() {
     this.getDataList();
-    this.$Picker();
   },
   methods: {
     ...mapActions([
@@ -194,6 +193,16 @@ export default {
       "updatePerformTargetList", // 更新店铺某一年业绩目标列表
       "getStoreSaleTarget" // 获取店铺目标金额, 调用接口刷新数据
     ]),
+    showPicker() {
+      this.$Picker({
+        key: 'text',
+        isShowToolBar: true,
+        title: '选择城市',
+        cancel: () => {
+          console.log('123:_____', 123);
+        }
+      })
+    },
     getDataList() {
       this.getOnePerformanceTargetList(this.year).then(res => {
         let data = res.data.merchantGoalExt;

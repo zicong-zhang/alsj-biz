@@ -3,11 +3,6 @@ import VPicker from '~components/v-v-picker';
 
 const VPickerConstructor = Vue.extend(VPicker);
 
-VPickerConstructor.prototype.close = function() {
-  // this.visible = false;
-  this.$el.addEventListener('transitionend', this.isShow = false);
-};
-
 const $Picker = (opt = {
   showToolBar: false,
   dataList: []
@@ -18,6 +13,7 @@ const $Picker = (opt = {
   document.body.appendChild(instance.$el);
 
   instance.isShow = true;
+  instance.isShowContainer = true;
 }
 
 export default $Picker;
