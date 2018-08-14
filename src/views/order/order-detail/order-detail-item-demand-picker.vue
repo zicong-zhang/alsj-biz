@@ -119,7 +119,7 @@ export default {
           value.active && arr.push(value);
         });
       });
-      this.updateDemand(arr).then(this.$toast("修改成功"));
+      this.updateDemand(arr).then(this.$Toast("修改成功"));
     }
   }
 };

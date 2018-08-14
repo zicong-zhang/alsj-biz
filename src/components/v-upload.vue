@@ -151,7 +151,7 @@ export default {
         type.indexOf("jpeg") == -1
       ) {
         this.showFileInput = true;
-        this.$toast("请上传正确的图片");
+        this.$Toast("请上传正确的图片");
         return false;
       } else {
         return true;

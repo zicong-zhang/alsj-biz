@@ -1,14 +1,14 @@
 import Vue from 'vue';
 
 
-import { Button, Picker } from 'vant';
-Vue.use(Button).use(Picker)
+import { DatetimePicker , Picker } from 'vant';
+Vue.use(DatetimePicker)
+  .use(Picker)
 
 import VHeader from '~components/v-header';
 import VFooter from '~components/v-footer';
 import VPopup from '~components/v-popup';
 import VInfoList from '~components/v-info-list';
-import VToast from '~components/v-toast';
 import VInput from '~components/v-input';
 import VPicker from '~components/v-picker';
 import VForm from '~components/v-form';
@@ -17,8 +17,6 @@ import VDialog from '~components/v-dialog';
 import VCover from '~components/v-cover';
 import VDatePicker from '~components/v-date-picker';
 import VFormLabel from '~components/v-form-label';
-import VVPicker from '~components/v-v-picker';
-
 
 Vue.component('VHeader', VHeader);
 Vue.component('VFooter', VFooter);
@@ -32,36 +30,11 @@ Vue.component('VDialog', VDialog);
 Vue.component('VCover', VCover);
 Vue.component('VDatePicker', VDatePicker);
 Vue.component('VFormLabel', VFormLabel);
-Vue.component('VVPicker', VVPicker);
 
-let ToastConstructor = Vue.extend(VToast);
-Vue.prototype.$toast = function(txt, timeout = 1500) {
-  return new Promise(resolve => {
-    let toastDom = new ToastConstructor({
-      el: document.createElement('div')
-    })
+import $Picker from './v-v-picker/v-picker';
+import $DatePicker from './v-date-picker/v-date-picker';
+import $Toast from './v-toast/v-toast'
 
-    document.querySelector('#app').appendChild(toastDom.$el);
-    toastDom.text = txt;
-
-    // 显示文本
-    let timer = null;
-    timer = setTimeout(() => {
-      toastDom.showText = true;
-      clearTimeout(timer);
-      timer = null;
-    }, 50)
-
-    toastDom.timer = setTimeout(() => {
-      clearTimeout(toastDom.showText);
-      toastDom.showText = false;
-    }, timeout)
-
-    // 隐藏容器
-    toastDom.showToast = setTimeout(() => {
-      clearTimeout(toastDom.showToast);
-      toastDom.showToast = false;
-      resolve();
-    }, timeout + 200)
-  })
-}
+Vue.prototype.$Toast = $Toast;
+Vue.prototype.$Picker = $Picker;
+Vue.prototype.$DatePicker = $DatePicker;

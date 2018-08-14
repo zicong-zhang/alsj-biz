@@ -21,6 +21,7 @@ export default {
         "OrderDetail", // 订单详情
         "EditContract", // 录入合同信息
         "sale-champion", // 销售排行榜
+        'performance-target', // 业绩目标
       ]
     };
   },

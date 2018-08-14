@@ -108,7 +108,7 @@ export default {
         measurement: this.measurement,
         orderId: this.orderId
       }).then(data => {
-        this.$toast("修改成功");
+        this.$Toast("修改成功");
         this.$utils.back(this);
       });
     }

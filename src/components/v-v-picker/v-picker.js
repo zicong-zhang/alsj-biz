@@ -1,5 +1,5 @@
 import Vue from 'vue';
-import VPicker from '~components/v-v-picker';
+import VPicker from './v-v-picker';
 
 const VPickerConstructor = Vue.extend(VPicker);
 

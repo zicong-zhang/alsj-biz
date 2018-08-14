@@ -6,7 +6,7 @@
       <i class="gap"></i>
       <header>
         <!-- 选择年份 -->
-        <div class="select-year" @click="showPicker">
+        <div class="select-year" @click="showDatePicker">
           <span>月份</span>
           <span>({{ year }})</span>
           <i class="iconfont icon-bottomnew"></i>
@@ -150,7 +150,6 @@
 
     </div>
 
-    <!-- <v-v-picker></v-v-picker> -->
     <div class="handle-btns">
       <p @click="cancel">取消</p>
       <p @click="updateTargetData">确定目标</p>
@@ -193,13 +192,11 @@ export default {
       "updatePerformTargetList", // 更新店铺某一年业绩目标列表
       "getStoreSaleTarget" // 获取店铺目标金额, 调用接口刷新数据
     ]),
-    showPicker() {
-      this.$Picker({
-        key: 'text',
-        isShowToolBar: true,
-        title: '选择城市',
-        cancel: () => {
-          console.log('123:_____', 123);
+    showDatePicker() {
+      this.$DatePicker({
+        confirm: (dateObj) => {
+          this.year = dateObj.getFullYear();
+          this.getDataList();
         }
       })
     },
@@ -213,18 +210,18 @@ export default {
     },
     // 设置数据中已存在金额
     setAmount(data) {
-      data.janAmount === 0 ? "" : this.formatNum("janAmount", data.janAmount);
-      data.fabAmount === 0 ? "" : this.formatNum("fabAmount", data.fabAmount);
-      data.marAmount === 0 ? "" : this.formatNum("marAmount", data.marAmount);
-      data.aprAmount === 0 ? "" : this.formatNum("aprAmount", data.aprAmount);
-      data.mayAmount === 0 ? "" : this.formatNum("mayAmount", data.mayAmount);
-      data.junAmount === 0 ? "" : this.formatNum("junAmount", data.junAmount);
-      data.julAmount === 0 ? "" : this.formatNum("julAmount", data.julAmount);
-      data.augAmount === 0 ? "" : this.formatNum("augAmount", data.augAmount);
-      data.sepAmount === 0 ? "" : this.formatNum("sepAmount", data.sepAmount);
-      data.octAmount === 0 ? "" : this.formatNum("octAmount", data.octAmount);
-      data.novAmount === 0 ? "" : this.formatNum("novAmount", data.novAmount);
-      data.decAmount === 0 ? "" : this.formatNum("decAmount", data.decAmount);
+      this.formatNum("janAmount", data.janAmount || 0);
+      this.formatNum("fabAmount", data.fabAmount || 0);
+      this.formatNum("marAmount", data.marAmount || 0);
+      this.formatNum("aprAmount", data.aprAmount || 0);
+      this.formatNum("mayAmount", data.mayAmount || 0);
+      this.formatNum("junAmount", data.junAmount || 0);
+      this.formatNum("julAmount", data.julAmount || 0);
+      this.formatNum("augAmount", data.augAmount || 0);
+      this.formatNum("sepAmount", data.sepAmount || 0);
+      this.formatNum("octAmount", data.octAmount || 0);
+      this.formatNum("novAmount", data.novAmount || 0);
+      this.formatNum("decAmount", data.decAmount || 0);
     },
     limitInput(name) {
       this[name] = this[name]
@@ -234,7 +231,7 @@ export default {
     },
     // 某个 input 失去焦点时 进行格式化
     formatNum(name, value) {
-      const val = value || this[name];
+      const val = typeof value !== 'undefined' ? value : this[name];
       this[name] = this.$utils.numInsertSymbol(val);
       return this[name];
     },
@@ -246,7 +243,7 @@ export default {
     updateTargetData() {
       this.updatePerformTargetList(this.$data).then(() => {
         this.getStoreSaleTarget().then(() => {
-          this.$toast("修改成功");
+          this.$Toast("修改成功");
           // 因涉及进度的百分比字符串，并且月份的数据格式过于分散，因此采用重调接口
           this.$utils.back();
         });

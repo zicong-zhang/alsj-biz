@@ -219,13 +219,13 @@ export default {
   judgeIsLogin(_this) {
     console.log('this:_____', this);
     if (!this.getUserInfo()) {
-      _this.$toast('您尚未登录，请登录后再试', 800)
+      _this.$Toast('您尚未登录，请登录后再试', 800)
         .then(() => {
           this.goLogin();
         })
       return false;
     } else if (this.judgeLoginStatusExpire()) {
-      _this.$toast('您的登录状态已过期，请重新登录', 800)
+      _this.$Toast('您的登录状态已过期，请重新登录', 800)
         .then(() => {
           this.goLogin();
         })

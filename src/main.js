@@ -16,9 +16,6 @@ import AlloyFinger from 'alloyfinger'
 import AlloyFingerPlugin from 'alloyfinger/vue/alloy_finger.vue'
 import FastClick from 'fastclick'
 
-import './tools/function';
-
-
 // 工具类
 import router from './router';
 import './directives/directives';

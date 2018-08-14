@@ -75,7 +75,7 @@ export default {
           break;
       }
       this.updateOrderDetailStatus().then(() => {
-        this.$toast(txt);
+        this.$Toast(txt);
       })
     },
     // 去录入合同信息
