@@ -6,7 +6,7 @@
         <img src="~~img/home/icon_workbench_wallet@2x.png" />
         <p>我的钱包</p>
       </li>
-      <li>
+      <li @click="toCustomerManagement">
         <img src="~~img/home/icon_workbench_customer@2x.png" />
         <p>客户管理</p>
       </li>
@@ -36,8 +36,12 @@
 <script>
 export default {
   name: "HomeActions",
-  data() {
-    return {};
+  methods: {
+    toCustomerManagement() {
+      this.$utils.go({
+        name: 'customer-list'
+      })
+    }
   }
 };
 </script>

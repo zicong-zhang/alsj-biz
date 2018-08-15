@@ -5,9 +5,9 @@ import root from './root';
 import workerModule from '~views/worker/worker-store';
 import orderListModule from '~views/order/order-list/order-list-store';
 import orderDetailModule from '~views/order/order-detail/order-detail-store';
+import customerModule from '~views/customer-management/customer-store';
 
-const DEV_ENV = process.env.NODE_ENV === 'development';
-if (DEV_ENV) {
+if (process.env.NODE_ENV === 'development') {
   Vue.use(Vuex);
 }
 
@@ -17,7 +17,8 @@ const store = new Vuex.Store({
     root,
     workerModule,
     orderListModule,
-    orderDetailModule
+    orderDetailModule,
+    customerModule
   }
 });
 
