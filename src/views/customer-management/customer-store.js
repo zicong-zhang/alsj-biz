@@ -10,8 +10,15 @@ export default {
   },
   actions: {
     // 获取客户列表
-    getCustomerList({rootState, commit}) {
-      return api.getCustomerList(rootState.root.storeId)
+    getCustomerList({
+      rootState,
+      state,
+      commit
+    }) {
+      return api.getCustomerList({
+        merchantId: rootState.root.storeId,
+        pageNum: state.pageNum
+      })
         .then(res => {
           commit('UPDATE_CUSTOMER_LIST', res.data);
           return Promise.resolve(res);
@@ -20,10 +27,8 @@ export default {
   },
   mutations: {
     UPDATE_CUSTOMER_LIST(state, data) {
-      if (data.next) {
-        state.pageNum++;
-        state.customerList.concat(list);
-      }
+      state.pageNum++;
+      state.customerList = state.customerList.concat(data.list);
     }
   }
 }

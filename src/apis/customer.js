@@ -8,6 +8,6 @@ export const getCustomerList = ({
   return http('/merchantCustomer/list', {
     merchantId,
     pageNum,
-    pageSize: 30
+    pageSize: 12
   })
 }

@@ -1,9 +1,10 @@
 import Vue from 'vue';
 
 
-import { DatetimePicker , Picker } from 'vant';
+import { DatetimePicker , Picker ,List } from 'vant';
 Vue.use(DatetimePicker)
   .use(Picker)
+  .use(List)
 
 import VHeader from '~components/v-header';
 import VFooter from '~components/v-footer';

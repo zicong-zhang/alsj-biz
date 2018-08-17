@@ -41,6 +41,7 @@ export default {
 
 <style lang="scss">
 .header-component {
+  flex: none;
   display: -webkit-box;
   display: flex;
   /* space-around | start | end | center | justify */
