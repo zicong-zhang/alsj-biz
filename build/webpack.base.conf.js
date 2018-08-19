@@ -41,6 +41,7 @@ module.exports = {
       '~img': resolve('src/assets/img'),
       '~apis': resolve('src/apis'),
       '~axios': resolve('src/axios'),
+      '~tools': resolve('src/tools')
     }
   },
   externals: { // value 为 umd 模块名

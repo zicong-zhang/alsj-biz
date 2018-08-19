@@ -13,7 +13,7 @@
         <i class="vertical-bar"></i>
         <span>关注人数 {{ storeInfo.merchantFollowCount }}</span>
       </p>
-      <VPopup v-show="isShowPop"
+      <v-popup v-show="isShowPop"
         :list="myStoreList"
         :text-one="'merchantExt'"
         :text-two="'merchantName'"
