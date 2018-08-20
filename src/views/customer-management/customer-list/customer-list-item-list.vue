@@ -1,21 +1,17 @@
 <template>
   <div class="customer-list-item-list">
-    <div class="scroll-container">
-
-      <div class="pull-down"
-        ref="pull-text">
-        <i class="gap"></i>
-        <span>下拉加载更多</span>
-      </div>
-
+    <v-scroll class="scroll-container"
+      :listen="customerList"
+      :show-pulldown-txt="true"
+      :on-pulldown="onRefresh">
       <ul ref="scrollContent">
         <li v-for="item in customerList"
           :key="item.id">
           <img v-lazy="{
-            src: item.avatar,
-            loading: imgPlaceholder,
-            error: imgPlaceholder
-          }">
+              src: item.avatar,
+              loading: imgPlaceholder,
+              error: imgPlaceholder
+            }">
           <div class="user-info">
             <h4>{{ item.name }}</h4>
             <span v-if="item.type === 1"
@@ -25,98 +21,37 @@
               :key="'not-pf' + item.id">非平台客户</span>
           </div>
         </li>
-
       </ul>
-
-      <div class="pull-up">
-        <p v-if="!nextPage"
-          key="customer-list-no-next">到达底线了</p>
-        <v-loading v-else/>
-      </div>
-
-    </div>
+    </v-scroll>
 
   </div>
 </template>
 <script>
 import { mapState, mapActions, mapMutations } from "vuex";
-import BScroll from "better-scroll";
 import imgPlaceholder from "~img/placeholder_user.png";
-/* 
-  TODO
-  封装成组件
- */
+
 export default {
   name: "customer-list-item-list",
   data() {
     return {
       nextPage: true,
-      imgPlaceholder,
-      scrollObj: "",
-      isPullDown: false,
-      isPullUping: false,
-      scrollContentHeight: 0,
-      tipTextHeight: 0
+      imgPlaceholder
     };
   },
   computed: {
     ...mapState({
       customerList: state => state.customerModule.customerList
-    }),
-    pullDownConfig() {
-      return {
-        threshold: this.tipTextHeight + 10, // 顶部下拉的距离
-        stop: this.tipTextHeight // 回弹停留的距离
-      };
-    },
-    pullUpConfig() {
-      console.log('-(this.scrollContentHeight / 2):_____', -(this.scrollContentHeight / 2));
-      return {
-        // threshold: 0
-        threshold: this.scrollContentHeight / 2
-      };
-    }
+    })
   },
   created() {
     this.getCustomerList();
   },
-  mounted() {
-    this.$nextTick(() => {
-      this.tipTextHeight = this.$refs['pull-text'].clientHeight;
-      this.scrollContentHeight = this.$refs.scrollContent.clientHeight;
-
-      // 上拉加载无定位，下拉刷新要定位
-      this.scrollObj = new BScroll(".customer-list-item-list", {
-        bounceTime: 300,
-        pullDownRefresh: this.pullDownConfig,
-        pullUpLoad: this.pullUpConfig
-      });
-
-      /* this.$once('hook:beforeDestroy', () => {
-        scrollObj.destroy();
-      }) */
-
-      // 触发下拉，发起请求
-      this.scrollObj.on("pullingDown", () => {
-        console.log("down:_____");
-        this.onRefresh();
-      });
-      this.scrollObj.on("pullingUp", () => {
-        console.log("1111:_____", 1111);
-        this.onPullUp();
-      });
-
-      this.scrollObj.on('scroll', obj => {
-        console.log('obj.y:_____', obj.y);
-      })
-    });
-  },
+  mounted() {},
   methods: {
     ...mapActions(["getCustomerList"]),
     ...mapMutations(["INIT_CUSTOMER_LIST_PAGE_NUM"]),
     getDataList() {
       return this.getCustomerList().then(res => {
-        console.log("res:_____", res);
         if (!res.data.next) {
           this.nextPage = false;
         }
@@ -124,16 +59,13 @@ export default {
       });
     },
     onRefresh() {
-      console.log("123:_____下拉刷新");
       this.nextPage = true;
       this.INIT_CUSTOMER_LIST_PAGE_NUM();
-      this.getDataList().then(() => {
-        console.log("this.nextPage111111:_____", this.nextPage);
-        this.scrollObj.finishPullDown();
-        this.scrollObj.refresh();
+      return this.getDataList().then(() => {
+        Promise.resolve();
       });
-    },
-    onPullUp() {
+    }
+    /* onPullUp() {
       console.log("this.nextPage:_____", this.nextPage);
       if (this.nextPage) {
         this.isPullUping = true;
@@ -149,7 +81,7 @@ export default {
       } else {
           this.scrollObj.finishPullUp();
       }
-    }
+    } */
   }
 };
 </script>
