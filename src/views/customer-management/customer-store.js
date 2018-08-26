@@ -28,7 +28,7 @@ export default {
   mutations: {
     // 更新客户列表 （添加）
     UPDATE_CUSTOMER_LIST(state, data) {
-      state.customerList = state.pageNum === 1 ? [].concat(data.list) : state.customerList.concat(data.list);
+      state.customerList = (state.pageNum === 1 ? [] : state.customerList).concat(data.list);
       state.pageNum++;
       console.log('state.customerList.length:_____', state.customerList.length);
     },

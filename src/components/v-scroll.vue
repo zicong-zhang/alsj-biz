@@ -3,11 +3,12 @@
     ref="scroll">
     <div class="scroll-wrapper">
 
-      <slot name="pull-down-txt" v-if="showPulldownTxt">
+      <slot name="pull-down-txt"
+        v-if="showPulldownTxt">
         <div class="pull-down"
           ref="pull-text">
           <i class="gap"></i>
-          <span>下拉加载更多</span>
+          <v-loading />
         </div>
       </slot>
 
@@ -16,22 +17,19 @@
         <slot></slot>
       </div>
 
-      <slot name="pull-up-txt" v-if="showPullupTxt">
-        <div class="pull-up">
-          <!-- <p key="customer-list-no-next">到达底线了</p> -->
+      <div class="pull-up"
+        v-if="showPullupTxt">
+        <slot name="pullup-txt">
           <v-loading/>
-        </div>
-      </slot>
+        </slot>
+      </div>
 
     </div>
   </div>
 </template>
 <script>
 import BScroll from "better-scroll";
-/**
- * TODO
- * 添加更多属性参数
- */
+
 export default {
   name: "v-scroll",
   props: {
@@ -114,19 +112,50 @@ export default {
       // 触发下拉刷新
       if (this.onPulldown) {
         this.scrollObj.on("pullingDown", () => {
+          this.closePullUp();
           this.onPulldown().then(() => {
             console.log("6666:_____", 6666);
+            this.openPullUp();
             this.scrollObj.finishPullDown();
           });
         });
       }
 
       // 触发上拉加载更多
-      if (this.onPulldown) {
+      if (this.onPullup) {
         this.scrollObj.on("pullingUp", () => {
           console.log("1111:_____", 1111);
-          this.onPulldown();
+          this.closePullDown();
+          this.onPullup().then(res => {
+            console.log("res:_____", res);
+            this.openPullDown();
+            this.scrollObj.finishPullUp();
+          });
         });
+      }
+    },
+    // 动态开启 下拉刷新
+    openPullDown() {
+      if (this.onPulldown) {
+        this.scrollObj.openPullDown(this.pullDownConfig);
+      }
+    },
+    // 动态关闭 下拉刷新
+    closePullDown() {
+      if (this.onPulldown) {
+        this.scrollObj.closePullDown();
+      }
+    },
+    // 动态开启 上拉加载
+    openPullUp() {
+      if (this.onPullup) {
+        this.scrollObj.openPullUp(this.pullUpConfig);
+      }
+    },
+    // 动态关闭 上拉加载
+    closePullUp() {
+      if (this.onPullup) {
+        this.scrollObj.closePullUp();
       }
     }
   }

@@ -1,10 +1,13 @@
 <template>
   <div class="customer-list-item-list">
     <v-scroll class="scroll-container"
+      ref="vScroll"
       :listen="customerList"
       :show-pulldown-txt="true"
-      :on-pulldown="onRefresh">
-      <ul ref="scrollContent">
+      :show-pullup-txt="true"
+      :on-pulldown="onRefresh"
+      :on-pullup="onPullup">
+      <ul>
         <li v-for="item in customerList"
           :key="item.id">
           <img v-lazy="{
@@ -22,6 +25,7 @@
           </div>
         </li>
       </ul>
+      <p slot="pullup-txt" v-if="isFinishPullup">到达底部</p>
     </v-scroll>
 
   </div>
@@ -35,7 +39,8 @@ export default {
   data() {
     return {
       nextPage: true,
-      imgPlaceholder
+      imgPlaceholder,
+      isFinishPullup: false
     };
   },
   computed: {
@@ -51,19 +56,25 @@ export default {
     ...mapActions(["getCustomerList"]),
     ...mapMutations(["INIT_CUSTOMER_LIST_PAGE_NUM"]),
     getDataList() {
-      return this.getCustomerList().then(res => {
-        if (!res.data.next) {
-          this.nextPage = false;
-        }
-        return Promise.resolve(res);
-      });
+      if (this.nextPage) {
+        return this.getCustomerList().then(res => {
+          if (!res.data.next) {
+            this.nextPage = false;
+          }
+          return Promise.resolve(res);
+        });
+      } else {
+        this.isFinishPullup = true;
+        return Promise.resolve();
+      }
     },
     onRefresh() {
       this.nextPage = true;
       this.INIT_CUSTOMER_LIST_PAGE_NUM();
-      return this.getDataList().then(() => {
-        Promise.resolve();
-      });
+      return this.getDataList();
+    },
+    onPullup() {
+      return this.getDataList();
     }
     /* onPullUp() {
       console.log("this.nextPage:_____", this.nextPage);
