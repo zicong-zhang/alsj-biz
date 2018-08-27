@@ -15,6 +15,7 @@ import VueLazyload from 'vue-lazyload'
 import AlloyFinger from 'alloyfinger'
 import AlloyFingerPlugin from 'alloyfinger/vue/alloy_finger.vue'
 import FastClick from 'fastclick'
+// import { VuetronVue } from 'vuetron';
 
 // 工具类
 import router from './router';
@@ -46,6 +47,7 @@ Vue.config.devtools = process.env.NODE_ENV === 'development';
 
 Vue.config.productionTip = false;
 
+// Vue.use(VuetronVue);
 Vue.use(VueLazyload);
 Vue.use(AlloyFingerPlugin, {
   AlloyFinger

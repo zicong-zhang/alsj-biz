@@ -31,6 +31,7 @@ import BScroll from "better-scroll";
 /**
  * TODO
  * 添加更多属性参数
+ * 下拉或上拉时，禁止相对的另一种操作
  */
 export default {
   name: "v-scroll",
@@ -82,7 +83,6 @@ export default {
     listen() {
       clearTimeout(this.timer);
       this.timer = setTimeout(() => {
-        console.log("222222:_____", 222222);
         clearTimeout(this.timer);
         this.timer = "";
         this.scrollObj.refresh();
@@ -122,12 +122,21 @@ export default {
       }
 
       // 触发上拉加载更多
-      if (this.onPulldown) {
+      if (this.onPullup) {
         this.scrollObj.on("pullingUp", () => {
           console.log("1111:_____", 1111);
-          this.onPulldown();
+          this.onPullup().then(() => {
+            this.scrollObj.finishPullUp();
+          })
         });
       }
+
+      // 监听滚动事件
+        if (this.onScroll) {
+          this.scrollObj.on('scroll', pos => {
+            this.onScroll(pos);
+          })
+        }
     }
   }
 };

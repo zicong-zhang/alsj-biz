@@ -22,6 +22,7 @@ export default {
         "EditContract", // 录入合同信息
         "sale-champion", // 销售排行榜
         'performance-target', // 业绩目标
+        'view-customer-list', // 客户列表
       ]
     };
   },
