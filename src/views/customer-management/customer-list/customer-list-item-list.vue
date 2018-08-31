@@ -9,7 +9,8 @@
       :on-pullup="onPullup">
       <ul>
         <li v-for="item in customerList"
-          :key="item.id">
+          :key="item.id"
+          @tap="toCustomerDetail(item.id)">
           <img v-lazy="{
               src: item.avatar,
               loading: imgPlaceholder,
@@ -75,6 +76,15 @@ export default {
     },
     onPullup() {
       return this.getDataList();
+    },
+    toCustomerDetail(id) {
+      console.log('12321123:_____', 12321123);
+      this.$utils.go(this, {
+        name: 'view-customer-info',
+        query: {
+          id
+        }
+      })
     }
     /* onPullUp() {
       console.log("this.nextPage:_____", this.nextPage);

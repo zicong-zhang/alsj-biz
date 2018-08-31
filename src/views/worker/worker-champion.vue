@@ -5,7 +5,7 @@
       <img src="~~img/home/icon_workbench_champion@2x.png" />
       <span>本月销售冠军</span>
     </h4>
-    <p v-if="nickname && amount !== 0">{{ nickname }} {{ amount / 1000 || '0.00' }}万</p>
+    <p v-if="nickname && amount !== 0">{{ (nickname || '').slice(0, 6) }} {{ amount / 1000 || '0.00' }}万</p>
     <p v-else>暂无</p>
   </div>
 </template>

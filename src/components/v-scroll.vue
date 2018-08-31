@@ -98,6 +98,7 @@ export default {
 
       // 上拉加载无定位，下拉刷新要定位
       this.scrollObj = new BScroll(this.$refs.scroll, {
+        click: true,
         bounceTime: 300,
         pullDownRefresh: this.pullDownConfig,
         pullUpLoad: this.pullUpConfig
@@ -112,7 +113,6 @@ export default {
         this.scrollObj.on("pullingDown", () => {
           this.closePullUp();
           this.onPulldown().then(() => {
-            console.log("6666:_____", 6666);
             this.openPullUp();
             this.scrollObj.finishPullDown();
           });
@@ -122,10 +122,8 @@ export default {
       // 触发上拉加载更多
       if (this.onPullup) {
         this.scrollObj.on("pullingUp", () => {
-          console.log("1111:_____", 1111);
           this.closePullDown();
           this.onPullup().then(res => {
-            console.log("res:_____", res);
             this.openPullDown();
             this.scrollObj.finishPullUp();
           });

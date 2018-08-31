@@ -1,14 +1,14 @@
 <template>
   <div class="home-gather">
     <div @click="proceedsDetail(0)">
-      <h3>{{ $utils.formatNum(receiptAmount) }}</h3>
+      <h3>{{ $utils.formatNum(receiptAmount, 4) }}</h3>
       <p>实收款(本月)&nbsp;
         <i class="iconfont icon-rightBtn"></i>
       </p>
     </div>
     <i class="vertical-bar"></i>
     <div @click="proceedsDetail(1)">
-      <h3>{{ $utils.formatNum(dueAmount) }}</h3>
+      <h3>{{ $utils.formatNum(dueAmount, 4) }}</h3>
       <p>待收款(全部)&nbsp;
         <i class="iconfont icon-rightBtn"></i>
       </p>

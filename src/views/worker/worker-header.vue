@@ -45,7 +45,9 @@ export default {
     ...mapActions(["getStoreInfo"]),
     ...mapMutations(["SET_STORE_ID"]),
     set() {
-      localStorage.setItem('USER_TOKEN', 'VE9LRU4tMzYyLTE1MzI4NDkwODU0MjAtMzE3LWFiYw__');
+      localStorage.setItem('USER_TOKEN', 'VE9LRU4tMjg3LTE1MzU3MTc5OTc2MzMtYWJj');
+      // 15812345678
+      // 1235678
     },
     showPop() {
       this.isShowPop = !this.isShowPop;
