@@ -68,7 +68,7 @@
     </div>
 
     <!-- 提示弹窗 -->
-    <VDialog :show.sync="isShowDelDialog"
+    <v-dialog :show.sync="isShowDelDialog"
       title="提示"
       content="确定要删除这张图片？"
       @confirm="delPic"
@@ -81,7 +81,7 @@
 import axios from "axios";
 
 export default {
-  name: "VUpload",
+  name: "v-upload",
   props: {
     asyncQty: {
       default: 3

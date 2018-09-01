@@ -93,7 +93,7 @@ export default {
   },
   methods: {
     initScroll() {
-      this.tipTextHeight = this.$refs["pull-text"].clientHeight;
+      this.tipTextHeight = this.showPullupTxt ? this.$refs["pull-text"].clientHeight : 0;
       this.scrollContentHeight = this.$refs.scrollContent.clientHeight;
 
       // 上拉加载无定位，下拉刷新要定位

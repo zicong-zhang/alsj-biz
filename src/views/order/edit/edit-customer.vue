@@ -1,12 +1,12 @@
 <template>
   <div class="order-edit-customer">
-    <VHeader title="客户信息">
+    <v-header title="客户信息">
       <p class="save btn"
         slot="right-one"
         @click="submit">
         <span>保存</span>
       </p>
-    </VHeader>
+    </v-header>
 
     <div class="form">
       <i class="gap"></i>

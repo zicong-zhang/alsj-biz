@@ -6,7 +6,7 @@
 
     <div class="design-list">
 
-      <VUpload :files="designList"
+      <v-upload :files="designList"
         @on-del="delPic"
         @success="uploadSuccess" />
 

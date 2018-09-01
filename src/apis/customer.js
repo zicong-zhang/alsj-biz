@@ -11,3 +11,21 @@ export const getCustomerList = ({
     pageSize: 12
   })
 }
+// 获取客户对应的订单列表
+export const getOrderListByCustomer = ({
+  customerId,
+  pageNum,
+  pageSize
+}) => {
+  return http('/order/listByCustomer', {
+    customerId,
+    pageNum,
+    pageSize
+  })
+}
+// 获取客户信息
+export const getCustomerInfo = merchantCustomerId => {
+  return http('/merchantCustomer/getInfo', {
+    merchantCustomerId
+  });
+}

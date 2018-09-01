@@ -1,6 +1,6 @@
 <template>
   <div class="order-detail">
-    <VHeader :title="'订单详情'" />
+    <v-header :title="'订单详情'" />
     <div class="content">
       <WorkerTips v-if="false" />
       <Progress/>

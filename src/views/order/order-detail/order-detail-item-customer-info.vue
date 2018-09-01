@@ -6,15 +6,15 @@
     </H2>
 
     <ul>
-      <VInfoList label="客户姓名"
+      <v-infoList label="客户姓名"
         align="left"
         :value="info.linkmanName" />
-      <VInfoList class="blue"
+      <v-infoList class="blue"
         align="left"
         label="客户手机"
         :value="info.linkmanPhone"
         @handler="call" />
-      <VInfoList class="address"
+      <v-infoList class="address"
         align="left"
         label="客户地址"
         :value="info.linkmanAddress" />

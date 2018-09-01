@@ -1,7 +1,7 @@
 <template>
   <div class="edit-contract">
 
-    <VHeader title="录入合同信息"></VHeader>
+    <v-header title="录入合同信息"></v-header>
 
     <i class="gap"></i>
 

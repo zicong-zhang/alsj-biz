@@ -3,7 +3,7 @@
      <VFormLabel :label="$attrs.label"
         :warn="$attrs.warn" />
 
-      <VUpload :files="$attrs.files"
+      <v-upload :files="$attrs.files"
         :width="160" />
   </div>
 </template>

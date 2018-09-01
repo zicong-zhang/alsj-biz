@@ -1,13 +1,13 @@
 <template>
   <div class="edit-house-type">
 
-    <VHeader title="户型信息">
+    <v-header title="户型信息">
       <p class="save btn"
         slot="right-one"
         @click="submit">
         <span>保存</span>
       </p>
-    </VHeader>
+    </v-header>
 
     <i class="gap"></i>
     <VForm ref="form">

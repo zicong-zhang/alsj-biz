@@ -1,6 +1,6 @@
 <template>
   <div class="view-sale-rank">
-    <VHeader title="销售排行榜" />
+    <v-header title="销售排行榜" />
 
     <!-- 本月销售冠军 -->
     <div class="sale-champion">

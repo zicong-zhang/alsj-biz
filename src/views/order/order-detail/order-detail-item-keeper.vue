@@ -2,11 +2,11 @@
   <div class="order-detail-item-keeper">
     <H2 title="跟进人" />
     <ul>
-      <VInfoList v-for="item in list"
+      <v-infoList v-for="item in list"
         :key="item.userId"
         :label="item.currentKeeperFlag === 1 ? '当前跟进人' : '历史跟进人'"
         :value="item.keeperName" />
-      <VInfoList label="订单创建人"
+      <v-infoList label="订单创建人"
         :value="orderCreater" />
     </ul>
   </div>

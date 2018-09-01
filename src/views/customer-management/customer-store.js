@@ -23,6 +23,18 @@ export default {
           commit('UPDATE_CUSTOMER_LIST', res.data);
           return Promise.resolve(res);
         })
+    },
+    // 获取客户信息
+    getCustomerInfo(ctx, customerId) {
+      return api.getCustomerInfo(customerId);
+    },
+    // 获取客户对应的订单列表
+    getOrderListByCustomer(ctx, {customerId, pageNum}) {
+      return api.getOrderListByCustomer({
+        customerId,
+        pageNum,
+        pageSize: 15
+      })
     }
   },
   mutations: {

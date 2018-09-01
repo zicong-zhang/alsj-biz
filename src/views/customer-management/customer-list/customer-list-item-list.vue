@@ -1,7 +1,6 @@
 <template>
   <div class="customer-list-item-list">
     <v-scroll class="scroll-container"
-      ref="vScroll"
       :listen="customerList"
       :show-pulldown-txt="true"
       :show-pullup-txt="true"
@@ -10,7 +9,7 @@
       <ul>
         <li v-for="item in customerList"
           :key="item.id"
-          @tap="toCustomerDetail(item.id)">
+          @click="toCustomerDetail(item.id)">
           <img v-lazy="{
               src: item.avatar,
               loading: imgPlaceholder,
@@ -78,9 +77,8 @@ export default {
       return this.getDataList();
     },
     toCustomerDetail(id) {
-      console.log('12321123:_____', 12321123);
-      this.$utils.go(this, {
-        name: 'view-customer-info',
+      this.$utils.go({
+        name: 'customer-info',
         query: {
           id
         }

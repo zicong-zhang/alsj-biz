@@ -15,7 +15,7 @@
 
 <script>
 export default {
-  name: "VHeader",
+  name: "v-header",
   props: {
     title: {
       type: String

@@ -16,13 +16,13 @@
         <i class="iconfont icon-btn_all_next"></i>
       </H2>
       <ul>
-        <VInfoList label="所在小区"
+        <v-infoList label="所在小区"
           align="left"
           :value="orderInfo.linkmanResidence || '无'" />
-        <VInfoList label="户型"
+        <v-infoList label="户型"
           align="left"
           :value="orderInfo.linkmanHouseType  || '无'" />
-        <VInfoList label="面积"
+        <v-infoList label="面积"
           align="left"
           :value="orderInfo.measurement ?  `${orderInfo.measurement} ㎡` : '无'" />
       </ul>

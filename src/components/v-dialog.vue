@@ -26,7 +26,7 @@
 
 <script>
 export default {
-  name: "VDialog",
+  name: "v-dialog",
   props: {
     show: {
       default: false,
