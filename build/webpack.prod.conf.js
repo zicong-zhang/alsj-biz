@@ -24,11 +24,10 @@ const webpackConfig = merge(baseWebpackConfig, {
     })
   },
   externals: { // value 为 umd 模块名
-    'vue': 'Vue',
+    vue: 'Vue',
     axios: 'axios',
     vuex: 'Vuex',
-    'vue-router': 'VueRouter',
-    'cube-ui': 'cube'
+    'vue-router': 'VueRouter'
   },
   devtool: config.build.productionSourceMap ? config.build.devtool : false,
   output: {

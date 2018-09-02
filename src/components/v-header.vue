@@ -28,12 +28,21 @@ export default {
     },
     iconBg: {
       type: Boolean
+    },
+    onBack: {
+      type: Function
     }
+  },
+  created() {
   },
   methods: {
     back() {
-      this.$store.commit("TURN", "off");
-      this.$router.back(-1);
+      if (this.onBack) {
+        this.onBack();
+      } else {
+        this.$store.commit("TURN", "off");
+        this.$router.back(-1);
+      }
     }
   }
 };
@@ -50,24 +59,24 @@ export default {
   /* start | end | center | baseline | stretch */
   -webkit-box-align: center;
   align-items: center;
-  height:88px;
+  height: 88px;
   h1 {
     width: 100%;
-    height:88px;
-    line-height:88px;
-    font-size:32px;
+    height: 88px;
+    line-height: 88px;
+    font-size: 32px;
     font-weight: bold;
     background: #fff;
     // color: $font;
     text-align: center;
   }
   i {
-    font-size:30px;
+    font-size: 30px;
     color: #333;
     display: block;
     // width:50px;
-    height:50px;
-    line-height:50px;
+    height: 50px;
+    line-height: 50px;
     text-align: center;
     // background: rgba(0, 0, 0, 0.2);
     border-radius: 50%;
@@ -78,17 +87,17 @@ export default {
   position: absolute;
   left: 0;
   z-index: 51;
-  height:88px;
+  height: 88px;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 .back-btn {
-  width:100px;
-  padding-left:36px;
+  width: 100px;
+  padding-left: 36px;
   justify-content: flex-start;
   i {
-    font-size:24px;
+    font-size: 24px;
   }
 }
 .fixed {

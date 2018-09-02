@@ -17,18 +17,25 @@ export default {
       // 排除缓存
       exclude: [
         "OrderEditCustomer", // 编辑客户信息
-        "EditHouseType",  // 编辑户型信息
+        "EditHouseType", // 编辑户型信息
         "OrderDetail", // 订单详情
         "EditContract", // 录入合同信息
         "sale-champion", // 销售排行榜
-        'performance-target', // 业绩目标
-        'view-customer-info', // 客户详情
+        "performance-target", // 业绩目标
+        "view-customer-info" // 客户详情
       ]
     };
   },
   created() {
+    mui.back = this.back;
   },
-  mounted() {}
+  mounted() {},
+  methods: {
+    back() {
+      this.$store.commit("TURN", "off");
+      this.$router.back(-1);
+    }
+  }
 };
 </script>
 

@@ -1,14 +1,16 @@
 <template>
   <div class="home-gather">
     <div @click="proceedsDetail(0)">
-      <h3>{{ $utils.formatNum(receiptAmount, 4) }}</h3>
+      <h3 v-if="receiptAmount / 10000 >= 1">{{ receiptAmount / 10000 | money(2) }}万</h3>
+      <h3 v-else>{{ receiptAmount | money }}元</h3>
       <p>实收款(本月)&nbsp;
         <i class="iconfont icon-rightBtn"></i>
       </p>
     </div>
     <i class="vertical-bar"></i>
     <div @click="proceedsDetail(1)">
-      <h3>{{ $utils.formatNum(dueAmount, 4) }}</h3>
+      <h3 v-if="dueAmount / 10000 >= 1">{{ dueAmount / 10000 | money(2) }}万</h3>
+      <h3 v-else>{{ dueAmount | money }}元</h3>
       <p>待收款(全部)&nbsp;
         <i class="iconfont icon-rightBtn"></i>
       </p>

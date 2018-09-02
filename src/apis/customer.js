@@ -8,7 +8,7 @@ export const getCustomerList = ({
   return http('/merchantCustomer/list', {
     merchantId,
     pageNum,
-    pageSize: 12
+    pageSize: 10
   })
 }
 // 获取客户对应的订单列表

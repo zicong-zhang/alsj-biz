@@ -1,5 +1,9 @@
 /**
  * TODO
+ * 判断当前运行环境，动态引入mui，减少不必要的加载时间
+ * 引入模块化mui
+ * 加入plus
+ * 修改通用返回事件监听mui
  * 抽取 mutations type
  * 图片上传改用七牛
  * 组件库改用 vant，后期有时间再修改以前使用cube组件的地方
@@ -16,10 +20,12 @@ import AlloyFinger from 'alloyfinger'
 import AlloyFingerPlugin from 'alloyfinger/vue/alloy_finger.vue'
 import FastClick from 'fastclick'
 // import { VuetronVue } from 'vuetron';
+mui.init();
 
 // 工具类
 import router from './router';
 import './directives/directives';
+import './filters/filters';
 import utils from './tools/utils';
 import http from './axios';
 import store from './vuex/store';
@@ -53,6 +59,13 @@ Vue.use(AlloyFingerPlugin, {
   AlloyFinger
 })
 
+/* Vue.prototype.$plus = fn => {
+  if (window.plus) {
+    fn();
+  } else {
+    document.addEventListener("plusready", fn, false);
+  }
+} */
 
 Vue.prototype.$utils = utils;
 Vue.prototype.$http = http;
@@ -63,10 +76,10 @@ if ('addEventListener' in document) {
   }, false);
 }
 
-// import Vconsole from 'vconsole';
-// if (process.env.NODE_ENV !== 'production') {
-//   new Vconsole()
-// }
+/* import Vconsole from 'vconsole';
+if (process.env.NODE_ENV !== 'production') {
+  new Vconsole()
+} */
 
 
 /* eslint-disable no-new */

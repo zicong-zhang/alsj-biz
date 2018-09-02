@@ -35,7 +35,7 @@
             <div class="infos">
               <v-infoList label="客户手机"
                 align="left"
-                :value="customerInfo.mobile" />
+                :value="customerInfo.mobile | phone" />
               <v-infoList label="联系地址"
                 align="left"
                 line="1"

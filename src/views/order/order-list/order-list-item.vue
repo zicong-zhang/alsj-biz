@@ -33,7 +33,7 @@
     </ul>
     <div class="create-date">
       <i class="iconfont icon-icon_my_orrders"></i>
-      <span>2018.5.20 16:12:10</span>
+      <span>{{ item.updateDate | date }}</span>
     </div>
   </li>
 </template>
