@@ -31,8 +31,8 @@ Vue.component('v-picker', VPicker);
 Vue.component('v-upload', VUpload);
 Vue.component('v-dialog', VDialog);
 Vue.component('v-cover', VCover);
-Vue.component('v-datePicker', VDatePicker);
-Vue.component('v-formLabel', VFormLabel);
+Vue.component('v-date-picker', VDatePicker);
+Vue.component('v-form-label', VFormLabel);
 Vue.component('v-loading', VLoading);
 Vue.component('v-scroll', VScroll);
 

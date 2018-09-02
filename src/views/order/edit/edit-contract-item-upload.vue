@@ -1,6 +1,6 @@
 <template>
   <div class="edit-contract-item-upload">
-     <VFormLabel :label="$attrs.label"
+     <v-form-label :label="$attrs.label"
         :warn="$attrs.warn" />
 
       <v-upload :files="$attrs.files"

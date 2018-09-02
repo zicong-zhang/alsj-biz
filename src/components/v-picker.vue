@@ -1,8 +1,9 @@
 <template>
   <div class="v-picker">
 
-    <VFormLabel :label="label"
-      :warn="warn"/>
+    <v-form-label v-if="label"
+      :label="label"
+      :warn="warn" />
 
     <div class="input-container">
       <p :class="{placeholder: placeholder}"
@@ -15,7 +16,7 @@
 
 <script>
 export default {
-  name: "VPicker",
+  name: "v-picker",
   props: {
     label: String,
     list: {
@@ -29,11 +30,16 @@ export default {
       default: ""
     },
     // 是否必填项, 传入值为未填写必填项时的警告语
-    required: String
+    required: String,
+    onConfirm: {
+      type: Function,
+      required: true
+    },
+    onCancel: {
+      type: Function
+    }
   },
-  created() {
-    this.init();
-  },
+  created() {},
   data() {
     return {
       value: "",
@@ -50,7 +56,7 @@ export default {
   },
   methods: {
     init() {
-      this.picker = this.$createPicker({
+      /* this.picker = this.$createPicker({
         title: this.title,
         data: this.list,
         onSelect: (value, index, text) => {
@@ -59,10 +65,10 @@ export default {
           this.$emit("select", value);
         },
         onCancel: () => {}
-      });
+      }); */
     },
     showPicker() {
-      this.picker.show();
+      this.$Picker();
     },
     showWarn() {
       this.warn = false;
@@ -89,16 +95,16 @@ export default {
   .label {
     display: flex;
     align-items: flex-end;
-    padding-top: e(35px);
-    padding-bottom: e(24px);
+    padding-top: 35px;
+    padding-bottom: 24px;
     label {
-      font-size: e(24px);
+      font-size: 24px;
       color: #999;
-      margin-right: e(8px);
+      margin-right: 8px;
     }
     p {
       color: #f5594e;
-      font-size: e(20px);
+      font-size: 20px;
     }
   }
   .input-container {
@@ -107,19 +113,19 @@ export default {
     p {
       display: block;
       width: 100%;
-      height: e(72px);
-      line-height: e(72px);
-      font-size: e(24px);
+      height: 72px;
+      line-height: 72px;
+      font-size: 24px;
       background: #f5f5f5;
       box-sizing: border-box;
-      border: e(1px) solid transparent;
-      border-radius: e(8px);
+      border: 1px solid transparent;
+      border-radius: 8px;
       transition: all 0.2s;
-      padding: 0 e(24px);
+      padding: 0 24px;
     }
     i {
       position: absolute;
-      right: e(24px);
+      right: 24px;
       top: 50%;
       transform: translateY(-50%);
       font-size: 30px;
@@ -139,27 +145,27 @@ export default {
     color: #c7c7c7;
   }
 }
-.v-picker-container {
+/* .v-picker-container {
   position: absolute;
   bottom: 0;
   left: 0;
   right: 0;
   z-index: 22;
   background: #fff;
-  box-shadow: 0 0 e(30px) 0 rgba(0, 0, 0, 0.3);
-  padding-bottom: e(36px);
+  box-shadow: 0 0 30px 0 rgba(0, 0, 0, 0.3);
+  padding-bottom: 36px;
   header {
-    margin-bottom: e(36px);
+    margin-bottom: 36px;
     div {
-      height: e(98px);
+      height: 98px;
       display: flex;
       justify-content: space-between;
       align-items: center;
     }
     p {
-      width: e(200px);
-      height: e(98px);
-      line-height: e(98px);
+      width: 200px;
+      height: 98px;
+      line-height: 98px;
       display: flex;
       align-items: center;
     }
@@ -168,33 +174,33 @@ export default {
     background: #eee;
   }
   h5 {
-    font-size: e(32px);
+    font-size: 32px;
     text-align: center;
     flex: 1;
   }
   .close-btn {
     flex: none;
-    padding-left: e(36px);
+    padding-left: 36px;
     i {
       color: #999;
-      font-size: e(20px);
+      font-size: 20px;
     }
   }
   .save-btn {
     justify-content: flex-end;
     flex: none;
-    padding-right: e(36px);
+    padding-right: 36px;
     span {
       display: block;
-      width: e(120px);
-      height: e(48px);
-      line-height: e(48px);
+      width: 120px;
+      height: 48px;
+      line-height: 48px;
       border: 1px solid $main;
-      border-radius: e(8px);
+      border-radius: 8px;
       color: $main;
-      font-size: e(24px);
+      font-size: 24px;
       text-align: center;
     }
   }
-}
+} */
 </style>

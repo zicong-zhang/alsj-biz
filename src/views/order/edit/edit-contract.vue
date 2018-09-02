@@ -5,22 +5,22 @@
 
     <i class="gap"></i>
 
-    <VForm>
+    <v-form>
       <!-- 付款方式 -->
-      <VPicker label="付款方式"
+      <v-picker label="付款方式"
         title="付款方式"
         :list="[payTypeList]"
         placeholder="请选择付款方式"
         required="未选择付款方式" />
 
       <!-- 订单金额 -->
-      <VInput v-model="orderAmount"
+      <v-input v-model="orderAmount"
         label="订单金额"
         required="未输入金额"
         placeholder="请输入定制合同金额"
         max="10">
         <span class="order-amount">元</span>
-      </VInput>
+      </v-input>
 
       <!-- 预计完成生产日期  -->
       <VDatePicker label="预计完成生产日期 "
@@ -37,7 +37,7 @@
         label="上传定制合同 "
         required="上传定制合同后，才进行订单款项的结算" />
 
-    </VForm>
+    </v-form>
   </div>
 </template>
 

@@ -1,7 +1,7 @@
 <template>
   <div class="v-date-picker">
 
-    <VFormLabel :label="label"
+    <v-form-label :label="label"
       :warn="warn"/>
 
     <div class="input-container">

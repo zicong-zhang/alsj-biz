@@ -15,6 +15,14 @@ const orderRouter = [{
     title: '编辑客户信息 - 阿拉私家'
   }
 }, {
+  path: '/edit-create-order',
+  name: 'order-edit-create-order',
+  component: () =>
+    import ( /* webpackChunkName: "order-edit-create-order" */ "~views/order/edit/edit-create-order"),
+  meta: {
+    title: '开单 - 阿拉私家'
+  }
+}, {
   path: '/edit-house-type',
   name: 'order-edit-house-type',
   component: () =>

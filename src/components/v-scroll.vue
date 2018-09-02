@@ -96,13 +96,15 @@ export default {
       this.tipTextHeight = this.showPullupTxt ? this.$refs["pull-text"].clientHeight : 0;
       this.scrollContentHeight = this.$refs.scrollContent.clientHeight;
 
-      // 上拉加载无定位，下拉刷新要定位
-      this.scrollObj = new BScroll(this.$refs.scroll, {
+      let scrollConfig = {
         click: true,
         bounceTime: 300,
-        pullDownRefresh: this.pullDownConfig,
-        pullUpLoad: this.pullUpConfig
-      });
+      }
+      if (this.onPulldown) scrollConfig.pullDownRefresh = this.pullUpConfig;
+      if (this.onPulldown) scrollConfig.pullUpLoad = this.pullDownConfig;
+      
+      // 上拉加载无定位，下拉刷新要定位
+      this.scrollObj = new BScroll(this.$refs.scroll, scrollConfig);
 
       this.$once("hook:beforeDestroy", () => {
         this.scrollObj.destroy();
@@ -111,6 +113,7 @@ export default {
       // 触发下拉刷新
       if (this.onPulldown) {
         this.scrollObj.on("pullingDown", () => {
+          console.log('1111111:_____', 1111111);
           this.closePullUp();
           this.onPulldown().then(() => {
             this.openPullUp();
@@ -122,6 +125,7 @@ export default {
       // 触发上拉加载更多
       if (this.onPullup) {
         this.scrollObj.on("pullingUp", () => {
+          console.log('222222:_____', 222222);
           this.closePullDown();
           this.onPullup().then(res => {
             this.openPullDown();

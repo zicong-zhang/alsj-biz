@@ -10,16 +10,16 @@
     </v-header>
 
     <i class="gap"></i>
-    <VForm ref="form">
+    <v-form ref="form">
       <!-- 小区 -->
-      <VInput v-model="linkmanResidence"
+      <v-input v-model="linkmanResidence"
         label="所在小区"
         placeholder="输入客户所在的小区"
         replace="all"
         max="10" />
 
       <!-- 户型 -->
-      <VPicker label="户型"
+      <v-picker label="户型"
         :list="residenceList"
         :default-value="linkmanHouseType"
         @select="selectResidence"
@@ -27,15 +27,15 @@
         title="选择户型" />
 
       <!-- 面积 -->
-      <VInput v-model="measurement"
+      <v-input v-model="measurement"
         label="面积"
         placeholder="0"
         replace="number"
         max="5">
         <span class="measurement">㎡</span>
-      </VInput>
+      </v-input>
 
-    </VForm>
+    </v-form>
   </div>
 </template>
 <script>

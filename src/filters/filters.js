@@ -7,13 +7,13 @@ Vue.filter('phone', value => {
 })
 
 // 格式化金钱
-Vue.filter('money', (value, fixed, beforeSymbol = '') => {
+Vue.filter('money', (value, fixed) => {
   if (!value) return 0;
   let float = '';
   if (fixed) float = value.toFixed(fixed).match(/\.(\d+)/g)[0]; // 截取包括小数点在内的浮点数
   
   let intNum = value.toString().split('.')[0].replace(/(\d)(?=(?:\d{3})+$)/g, '$1,'); // 截取小数点之前的整数
-  return beforeSymbol + intNum + float;
+  return intNum + float;
 })
 
 // 格式化日期

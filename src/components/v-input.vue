@@ -6,9 +6,10 @@
         <p v-show="warn">{{ warn }}</p>
       </transition>
     </div> -->
-    <VFormLabel :label="label"
-      :warn="warn"/>
-      
+    <v-form-label v-if="label"
+      :label="label"
+      :warn="warn" />
+
     <div class="input-container">
       <input type="text"
         :value="value"
@@ -28,7 +29,7 @@
  * validator 方法，传入的规则数组子项 >= 2 时，如何处理
  */
 export default {
-  name: "VInput",
+  name: "v-input",
   model: {
     prop: "value",
     event: "input"

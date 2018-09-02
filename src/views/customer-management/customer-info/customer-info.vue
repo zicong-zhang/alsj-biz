@@ -14,7 +14,7 @@
             }" />
             <div class="customer-info">
               <h4>
-                <span>{{ customerInfo.nickname }}</span>
+                <span>{{ customerInfo.name }}</span>
                 <img v-if="customerInfo.sex === 1"
                   src="~~img/customer/man.png" />
                 <img v-if="customerInfo.sex === 2"
@@ -25,7 +25,7 @@
                 class="label-pf">平台客户</p>
               <p v-else
                 key="no-pf"
-                class="label-pf label-no-pf">平台客户</p>
+                class="label-pf label-no-pf">非平台客户</p>
             </div>
             <p class="talk-btn">在线沟通</p>
           </div>
@@ -58,7 +58,8 @@
               :key="item.id"
               :item="item" />
           </div>
-          <p class="create-order-btn">＋开单</p>
+          <p class="create-order-btn"
+            @click="toCreateOrder">＋开单</p>
         </div>
       </v-scroll>
     </div>
@@ -100,6 +101,20 @@ export default {
       }).then(res => {
         this.orderList = res.data.list;
       });
+    },
+    // 开单
+    toCreateOrder() {
+      this.$utils.go({
+        name: 'order-edit-create-order',
+        query: {
+          customerId: this.customerId,
+          linkmanAddress: this.customerInfo.address,
+          linkmanGender: this.customerInfo.sex,
+          linkmanName: this.customerInfo.name,
+          linkmanPhone: this.customerInfo.mobile,
+          orderType: this.customerInfo.type
+        }
+      })
     }
   }
 };

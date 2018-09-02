@@ -10,10 +10,10 @@
 
     <div class="form">
       <i class="gap"></i>
-      <VForm ref="form">
+      <v-form ref="form">
 
         <!-- 客户姓名 -->
-        <VInput v-model="linkmanName"
+        <v-input v-model="linkmanName"
           label="客户姓名"
           placeholder="输入客户姓名"
           max="15"
@@ -22,7 +22,7 @@
           :rule="rules.linkmanName" />
 
         <!-- 联系电话 -->
-        <VInput v-model="linkmanPhone"
+        <v-input v-model="linkmanPhone"
           label="联系电话"
           placeholder="输入客户联系电话"
           max="11"
@@ -30,7 +30,7 @@
           :rule="rules.linkmanPhone" />
 
         <!-- 性别 -->
-        <VPicker label="性别"
+        <v-picker label="性别"
           :list="[genderList]"
           :index="linkmanGender"
           :default-value="sex"
@@ -38,22 +38,22 @@
           title="选择性别" />
 
         <!-- 详细地址 -->
-        <VInput v-model="linkmanAddress"
+        <v-input v-model="linkmanAddress"
           label="详细地址"
           placeholder="输入详细地址"
           required="请输入详细地址"
           max="30" />
 
         <!-- 客户预算 -->
-        <VInput v-model="linkmanBudget"
+        <v-input v-model="linkmanBudget"
           label="客户预算"
           :placeholder="0"
           required="请输入客户预算"
           max="10"
           replace="number">
           <span class="linkmanBudget">元</span>
-        </VInput>
-      </VForm>
+        </v-input>
+      </v-form>
     </div>
   </div>
 </template>

@@ -8,7 +8,7 @@
 </template>
 <script>
 export default {
-  name: 'VFormLabel',
+  name: 'v-form-label',
   props: {
     label: String,
     warn: [String, Boolean]

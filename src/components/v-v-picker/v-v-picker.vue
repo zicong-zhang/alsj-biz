@@ -10,14 +10,14 @@
 
       <div class="v-picker-container"
         v-show="isShowContainer"
-        @click="onCancel">
+        @click="cancel">
 
         <van-picker :show-toolbar="isShowToolBar"
           :title="title"
           :columns="columns"
           :value-key="key"
-          @cancel="onCancel"
-          @confirm="onConfirm" />
+          @cancel="cancel"
+          @confirm="confirm" />
       </div>
     </transition>
 
@@ -58,23 +58,23 @@ export default {
       title: "选择年份",
       isShow: true,
       isShowContainer: false,
-      key: "",
+      key: "text",
       isShowToolBar: false,
-      cancel: "",
-      confirm: ""
+      onCancel: "",
+      onConfirm: ""
     };
   },
   methods: {
     transitionEnd(el) {
       this.isShow = false;
     },
-    onCancel() {
+    cancel() {
       this.isShowContainer = false;
-      if (typeof this.cancel === "function") this.cancel();
+      if (typeof this.onCancel === "function") this.onCancel();
     },
-    onConfirm(value, idx) {
+    confirm(value, idx) {
       console.log("value:_____", value);
-      if (typeof this.confirm === "function") this.confirm(value, idx);
+      if (typeof this.onConfirm === "function") this.onConfirm(value, idx);
     }
   }
 };

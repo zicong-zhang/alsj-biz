@@ -6,7 +6,7 @@
 
 <script>
 export default {
-  name: 'VForm',
+  name: 'v-form',
   methods: {
     // 调用子组件的验证方法
     submit() {
