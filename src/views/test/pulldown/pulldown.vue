@@ -1,0 +1,144 @@
+<template>
+  <div class="view-edit-create-order">
+    <v-header title="测试下拉" />
+    <i class="gap"></i>
+    <div class="content">
+      <!-- <v-form class="form">
+        <v-input v-model="linkmanName"
+          label="联系人信息(必填)"
+          placeholder="请输入联系人姓名"
+          max="12" />
+        <v-input v-model="linkmanPhone"
+          placeholder="请输入联系人手机号码"
+          max="11" />
+        <v-picker :on-confirm="aa"
+          placeholder="请选择客户性别" />
+        <v-picker label="安装地址(必填)"
+          :on-confirm="aa"
+          placeholder="请选择所在地区" />
+        <v-input v-model="linkmanAddress"
+          placeholder="请输入详细地址"
+          max="50" />
+      </v-form>
+      <p class="create-order-btn">确认开单</p> -->
+      <div class="c"
+        @scroll="scroll">
+        <div :class="{wrapper: true, transition: transitionClass}"
+          :style="{transform: `translate3d(0, ${pulldownY}px, 0)`}"
+          @touchend="touchend">
+          <p class="pulldown">{{ pulldownText }}</p>
+          <ul v-finger:press-move="pressMove">
+            <li v-for="(item, idx) in 150"
+              :key="idx">
+              <h2>{{ idx }}.........{{ idx }}</h2>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
+<script>
+export default {
+  name: "view-test-pulldown",
+  data() {
+    return {
+      customerId: "",
+      linkmanAddress: "",
+      linkmanGender: "",
+      linkmanName: "",
+      linkmanPhone: "",
+      orderType: "",
+      pulldownY: 0,
+      scrollTop: 0,
+      transitionClass: false,
+      pulldownText: '下拉加载更多',
+      pulldowning: false
+    };
+  },
+  created() {},
+  methods: {
+    aa() {
+      console.log("12323:_____", 12323);
+    },
+    touchend() {
+      this.transitionClass = true;
+      console.log('this.pulldownY:_____', this.pulldownY);
+      if (this.pulldownY >= 60) {
+        this.pulldownY = 60;
+        this.pulldowning = true;
+        this.pulldownText = '加载中...';
+      } else if (!this.pulldowning) {
+        this.pulldownY = 0;
+      }
+    },
+    pressMove({ deltaY }) {
+      if (this.scrollTop === 0) {
+        this.transitionClass = false;
+        this.pulldownY += deltaY;
+      }
+      if (this.pulldownY > 60 && !this.pulldowning) {
+        this.pulldownText = '松开加载';
+      }
+      // console.log("e:_____", e);
+    },
+    scroll(e) {
+      this.scrollTop = e.target.scrollTop;
+      console.log("e:_____", e.target.scrollTop);
+    }
+  }
+};
+</script>
+<style lang="scss">
+.view-edit-create-order {
+  display: flex;
+  flex-flow: column;
+  .gap {
+    flex: none;
+  }
+  .content {
+    flex: 1;
+    /* display: flex;
+    flex-flow: column;
+    justify-content: space-between; */
+  }
+  .c {
+    height: 100%;
+    position: relative;
+    -webkit-overflow-scrolling: touch;
+    overflow-y: scroll;
+    .pulldown {
+      line-height: 50px;
+    }
+    h2 {
+      line-height: 100px;
+      font-size: 24px;
+      border-bottom: 1px solid #ccc;
+      font-weight: normal;
+    }
+  }
+  .wrapper {
+    margin-top: -50px;
+    position: absolute;
+  }
+  .transition {
+    transition: transform .2s;
+  }
+  .form {
+    background: #fff;
+    padding: 0 36px;
+    padding-bottom: 40px;
+  }
+  .v-input,
+  .v-picker {
+    margin-bottom: 24px;
+  }
+  .create-order-btn {
+    line-height: 98px;
+    background: linear-gradient(to right, #2985ff, #3dadff);
+    color: #fff;
+    font-size: 32px;
+    text-align: center;
+  }
+}
+</style>

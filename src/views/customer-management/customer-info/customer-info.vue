@@ -27,7 +27,8 @@
                 key="no-pf"
                 class="label-pf label-no-pf">非平台客户</p>
             </div>
-            <p class="talk-btn">在线沟通</p>
+            <p class="talk-btn"
+              id="aa">在线沟通</p>
           </div>
           <i class="gap"></i>
           <div class="base-info">
@@ -58,11 +59,11 @@
               :key="item.id"
               :item="item" />
           </div>
-          <p class="create-order-btn"
-            @click="toCreateOrder">＋开单</p>
         </div>
       </v-scroll>
     </div>
+    <p class="create-order-btn"
+      @click="toCreateOrder">＋开单</p>
   </div>
 </template>
 <script>
@@ -105,7 +106,7 @@ export default {
     // 开单
     toCreateOrder() {
       this.$utils.go({
-        name: 'order-edit-create-order',
+        name: "order-edit-create-order",
         query: {
           customerId: this.customerId,
           linkmanAddress: this.customerInfo.address,
@@ -114,7 +115,7 @@ export default {
           linkmanPhone: this.customerInfo.mobile,
           orderType: this.customerInfo.type
         }
-      })
+      });
     }
   }
 };
@@ -124,7 +125,7 @@ export default {
   display: flex;
   flex-flow: column;
   .content {
-    height: calc(100% - 88px);
+    height: calc(100% - 88px - 88px);
     overflow: hidden;
   }
   .customer-label {
@@ -169,8 +170,8 @@ export default {
         color: #32ab6e;
       }
       .label-no-pf {
-        background: #FFF1F0;
-        color: #F5594E;
+        background: #fff1f0;
+        color: #f5594e;
       }
     }
   }
@@ -211,10 +212,13 @@ export default {
   .create-order-btn {
     line-height: 88px;
     background: #fff;
+    box-shadow:0px 0px 10px rgba(0,0,0,0.1);
     font-size: 30px;
     font-weight: bold;
     color: $main;
     text-align: center;
+    position: relative;
+    z-index: 2;
   }
 }
 </style>

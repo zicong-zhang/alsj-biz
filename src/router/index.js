@@ -11,8 +11,9 @@ import workerRouter from './worker-router';
 import orderRouter from './order-router';
 import noFoundRouter from './no-found-router';
 import customerRouter from './customer-router';
+import testRouter from './test-router';
 
-const routes = [].concat(homeRouter, workerRouter, orderRouter, customerRouter, noFoundRouter);
+const routes = [].concat(homeRouter, workerRouter, orderRouter, customerRouter, noFoundRouter, testRouter);
 
 const router = new Router({
   mode: 'history',
@@ -37,7 +38,7 @@ router.beforeEach((to, from, next) => {
     next({
       name: 'home'
     })
-  }  else {
+  } else {
     next();
   }
 })

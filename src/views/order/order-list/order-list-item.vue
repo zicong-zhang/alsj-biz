@@ -28,7 +28,7 @@
       </li>
       <li>
         <h5>客户预算</h5>
-        <p class="budget">{{ item.linkmanBudget || 0 }}</p>
+        <p class="budget">{{ item.linkmanBudget | money(2) }}</p>
       </li>
     </ul>
     <div class="create-date">
@@ -75,46 +75,48 @@ export default {
 <style lang="scss">
 .order-list-item {
   background: #fff;
-  padding: 0 r(36px);
-  padding-bottom: r(35px);
-  margin-bottom: r(16px);
+  padding: 0 36px;
+  padding-bottom: 35px;
+  margin-bottom: 16px;
       position: relative;
   .list-item-title {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    border-bottom: r(6px) solid #333;
-    padding-top: r(30px);
-    padding-bottom: r(32px);
+    border-bottom: 6px solid #333;
+    padding-top: 30px;
+    padding-bottom: 32px;
     position: relative;
     &:before {
       content: "";
       display: block;
       width: 100%;
-      height: r(2px);
+      height: 2px;
       background: #333;
       position: absolute;
-      bottom: r(-12px);
+      bottom: -12px;
       left: 0;
       right: 0;
     }
     h3 {
       flex: 1;
-      font-size: r(32px);
+      line-height: 44px;
+      font-size: 24px;
     }
     i {
-      font-size: r(28px);
-      margin-right: r(12px);
+      font-size: 28px;
+      line-height: 44px;
+      margin-right: 12px;
     }
   }
   .label {
     flex: none;
     color: #fff;
-    font-size: r(24px);
-    line-height: r(44px);
-    border-radius: r(8px);
+    font-size: 24px;
+    line-height: 44px;
+    border-radius: 8px;
     background: $main;
-    padding: 0 r(23px);
+    padding: 0 23px;
   }
   .address {
     @include over(1);
@@ -122,42 +124,42 @@ export default {
   .budget {
     &:before {
       content: "¥";
-      margin-right: r(6px);
+      margin-right: 6px;
     }
   }
   .customer-info {
-    border-bottom: r(1px) solid #c7c7c7;
-    padding-top: r(32px);
-    padding-bottom: r(34px);
-    margin-bottom: r(24px);
+    border-bottom: 1px solid #c7c7c7;
+    padding-top: 32px;
+    padding-bottom: 34px;
+    margin-bottom: 24px;
     li {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      line-height: r(48px);
+      line-height: 48px;
     }
     h5 {
       flex: none;
       color: #999;
-      line-height: r(48px);
+      line-height: 48px;
       font-weight: normal;
-      font-size: r(24px);
+      font-size: 24px;
       margin: 0;
     }
     p {
       max-width: 80%;
       text-align: right;
-      font-size: r(24px);
-      line-height: r(48px);
+      font-size: 24px;
+      line-height: 48px;
     }
   }
   .create-date {
     span {
-      font-size: r(24px);
+      font-size: 24px;
       color: #999;
     }
     i {
-      font-size: r(24px);
+      font-size: 24px;
       color: #999;
     }
   }

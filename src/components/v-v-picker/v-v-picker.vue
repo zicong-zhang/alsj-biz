@@ -12,9 +12,9 @@
         v-show="isShowContainer"
         @click="cancel">
 
-        <van-picker :show-toolbar="isShowToolBar"
+        <van-picker :show-toolbar="true"
           :title="title"
-          :columns="columns"
+          :columns="list"
           :value-key="key"
           @cancel="cancel"
           @confirm="confirm" />
@@ -29,37 +29,12 @@ export default {
   name: "v-v-picker",
   data() {
     return {
-      columns: [
-        {
-          values: [
-            {
-              text: "杭州",
-              val: 123
-            },
-            {
-              text: "aa",
-              val: 33333
-            }
-          ]
-        },
-        {
-          values: [
-            {
-              text: "啊啊啊啊",
-              val: 4444
-            },
-            {
-              text: "阿斯顿",
-              val: 66666
-            }
-          ]
-        }
-      ],
-      title: "选择年份",
+      list: [],
+      title: "",
       isShow: true,
       isShowContainer: false,
       key: "text",
-      isShowToolBar: false,
+      isShowToolBar: true,
       onCancel: "",
       onConfirm: ""
     };
@@ -73,7 +48,7 @@ export default {
       if (typeof this.onCancel === "function") this.onCancel();
     },
     confirm(value, idx) {
-      console.log("value:_____", value);
+      console.log("value:_____", value, this.onConfirm);
       if (typeof this.onConfirm === "function") this.onConfirm(value, idx);
     }
   }
@@ -97,6 +72,8 @@ export default {
     z-index: 50;
   }
   .van-picker__toolbar {
+    height: 98px;
+    line-height: 98px;
     font-size: 32px;
   }
   .van-picker__cancel,

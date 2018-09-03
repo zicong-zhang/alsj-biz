@@ -14,7 +14,7 @@
 </template>
 <script>
 export default {
-  name: "VPopup",
+  name: "v-popup",
   props: {
     list: {
       type: Array,

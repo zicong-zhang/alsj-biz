@@ -10,6 +10,7 @@
 </template>
 
 <script>
+import { mapState, mapMutations } from "vuex";
 export default {
   name: "App",
   data() {
@@ -26,14 +27,37 @@ export default {
       ]
     };
   },
+  computed: {
+    ...mapState({
+      storeId: state => state.root.storeId
+    })
+  },
   created() {
-    mui.back = this.back;
+    this.setMuiBack();
+    console.log('this.storeId:_____', this.storeId);
+    this.judgeSessionHasStoreId();
   },
   mounted() {},
   methods: {
+    ...mapMutations(['SET_STORE_ID']),
     back() {
       this.$store.commit("TURN", "off");
       this.$router.back(-1);
+    },
+    setMuiBack() {
+      mui.back = this.back;
+    },
+    judgeSessionHasStoreId() {
+      if (!this.storeId) {
+        const storageStoreId = window.sessionStorage.getItem('STORE_ID');
+        if (storageStoreId) {
+          this.SET_STORE_ID(storageStoreId);
+        } else {
+          this.$utils.go({
+            name: 'home'
+          })
+        }
+      }
     }
   }
 };

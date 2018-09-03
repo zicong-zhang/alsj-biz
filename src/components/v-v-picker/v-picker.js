@@ -4,12 +4,15 @@ import VPicker from './v-v-picker';
 const VPickerConstructor = Vue.extend(VPicker);
 
 const $Picker = (opt = {
-  showToolBar: false,
-  dataList: []
+  key: 'text',
+  title: '',
+  list: []
 }) => {
   let instance = new VPickerConstructor().$mount(document.createElement('div'));
 
   Object.assign(instance, opt);
+  instance.onConfirm = opt.onConfirm;
+  instance.onCancel = opt.onCancel;
   document.body.appendChild(instance.$el);
 
   instance.isShow = true;

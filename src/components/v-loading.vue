@@ -12,7 +12,7 @@ export default {
     this.$nextTick(() => {
       lottie.loadAnimation({
         container: this.$refs.loading, // the dom element that will contain the animation
-        renderer: "canvas",
+        renderer: "svg",
         loop: true,
         autoplay: true,
         animationData: loadingConfig // the path to the animation json

@@ -98,7 +98,8 @@ export default {
 
       let scrollConfig = {
         click: true,
-        bounceTime: 300,
+        swipeBounceTime: 200,
+        bounceTime: 300
       }
       if (this.onPulldown) scrollConfig.pullDownRefresh = this.pullUpConfig;
       if (this.onPulldown) scrollConfig.pullUpLoad = this.pullDownConfig;

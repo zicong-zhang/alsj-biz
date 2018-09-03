@@ -25,7 +25,7 @@
           </div>
         </li>
       </ul>
-      <p slot="pullup-txt" v-if="isFinishPullup">到达底部</p>
+      <p slot="pullup-txt" v-if="isFinishPullup">没有更多的客户啦~</p>
     </v-scroll>
 
   </div>
@@ -49,7 +49,7 @@ export default {
     })
   },
   created() {
-    this.getCustomerList();
+    this.getDataList();
   },
   mounted() {},
   methods: {
@@ -58,9 +58,7 @@ export default {
     getDataList() {
       if (this.nextPage) {
         return this.getCustomerList().then(res => {
-          if (!res.data.next) {
-            this.nextPage = false;
-          }
+          this.nextPage = !res.data.next;
           return Promise.resolve(res);
         });
       } else {
@@ -84,23 +82,6 @@ export default {
         }
       })
     }
-    /* onPullUp() {
-      console.log("this.nextPage:_____", this.nextPage);
-      if (this.nextPage) {
-        this.isPullUping = true;
-        this.scrollObj.closePullDown(); // 动态关闭下拉刷新功能, 上拉加载更多时禁止下拉刷新
-
-        this.getDataList().then(() => {
-          console.log('"up":_____', "up");
-          this.isPullUping = false;
-          this.scrollObj.finishPullUp();
-          this.scrollObj.openPullDown(this.pullDownConfig); // 加载更多完成后，恢复下拉刷新功能
-          this.scrollObj.refresh();
-        });
-      } else {
-          this.scrollObj.finishPullUp();
-      }
-    } */
   }
 };
 </script>

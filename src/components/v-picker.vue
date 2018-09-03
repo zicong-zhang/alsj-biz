@@ -20,7 +20,38 @@ export default {
   props: {
     label: String,
     list: {
-      type: Array
+      type: Array,
+      default: () => {
+        return [
+          {
+            values: [
+              {
+                text: "杭州",
+                val: 123
+              },
+              {
+                text: "aa",
+                val: 33333
+              }
+            ]
+          },
+          {
+            values: [
+              {
+                text: "啊啊啊啊",
+                val: 4444
+              },
+              {
+                text: "阿斯顿",
+                val: 66666
+              }
+            ]
+          }
+        ];
+      }
+    },
+    value: {
+      type: String
     },
     defaultVal: {
       default: 0
@@ -42,7 +73,6 @@ export default {
   created() {},
   data() {
     return {
-      value: "",
       warn: "",
       picker: null,
       timer: null
@@ -68,7 +98,13 @@ export default {
       }); */
     },
     showPicker() {
-      this.$Picker();
+      this.$Picker({
+        label: this.label,
+        list: this.list,
+        title: this.title,
+        onConfirm: this.onConfirm,
+        onCancel: this.onCancel
+      });
     },
     showWarn() {
       this.warn = false;

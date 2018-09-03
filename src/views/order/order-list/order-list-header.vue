@@ -14,7 +14,7 @@
           <span>{{ statusName }}</span>
           <i class="iconfont icon-bottomnew"></i>
         </p>
-        <VPopup :list="moreStatus"
+        <v-popup :list="moreStatus"
           v-if="isShowPopup"
           @select="selectMoreStatus" />
       </li>

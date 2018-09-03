@@ -11,10 +11,12 @@
         <v-input v-model="linkmanPhone"
           placeholder="请输入联系人手机号码"
           max="11" />
-        <v-picker on-confirm="aa"
-          placeholder="请选择客户性别" />
+        <v-picker placeholder="请选择客户性别"
+          :value="sexText"
+          :list="sexList"
+          :on-confirm="selectSex" />
         <v-picker label="安装地址(必填)"
-          on-confirm="aa"
+          :on-confirm="aa"
           placeholder="请选择所在地区" />
         <v-input v-model="linkmanAddress"
           placeholder="请输入详细地址"
@@ -34,13 +36,33 @@ export default {
       linkmanGender: "",
       linkmanName: "",
       linkmanPhone: "",
-      orderType: ""
+      orderType: "",
+
+      sexText: '',
+      sexList: [
+        {
+          values: [
+            {
+              text: "男",
+              value: 1
+            },
+            {
+              text: "女",
+              value: 2
+            }
+          ]
+        }
+      ]
     };
   },
   created() {},
   methods: {
-    aa() {
-      console.log("12323:_____", 12323);
+    selectSex([sex]) {
+      console.log("sex:_____", sex);
+      this.sexText = sex.text;
+    },
+    aa(value, idx) {
+      console.log("12323:_____", value, idx);
     }
   }
 };

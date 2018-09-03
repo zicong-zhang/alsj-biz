@@ -1,5 +1,6 @@
 /**
  * TODO
+ * 清除缓存时要把app.vue的缓存组件数组清空？
  * 判断当前运行环境，动态引入mui，减少不必要的加载时间
  * 引入模块化mui
  * 加入plus
@@ -76,10 +77,10 @@ if ('addEventListener' in document) {
   }, false);
 }
 
-/* import Vconsole from 'vconsole';
-if (process.env.NODE_ENV !== 'production') {
-  new Vconsole()
-} */
+// import Vconsole from 'vconsole';
+// if (process.env.NODE_ENV !== 'production') {
+//   new Vconsole()
+// }
 
 
 /* eslint-disable no-new */
