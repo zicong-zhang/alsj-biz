@@ -22,6 +22,7 @@ const router = new Router({
 
 router.beforeEach((to, from, next) => {
   document.title = to.meta.title;
+  console.log('from:_____', to, from);
   if (to.meta.needLogin) {
     // if (store.state.token) { // 通过vuex state获取当前的token是否存在
     if (1) {

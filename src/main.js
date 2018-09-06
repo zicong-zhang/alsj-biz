@@ -27,8 +27,7 @@ mui.init();
 import router from './router';
 import './directives/directives';
 import './filters/filters';
-import utils from './tools/utils';
-import http from './axios';
+import './tools/tools';
 import store from './vuex/store';
 
 // 全局组件
@@ -67,10 +66,6 @@ Vue.use(AlloyFingerPlugin, {
     document.addEventListener("plusready", fn, false);
   }
 } */
-
-Vue.prototype.$utils = utils;
-Vue.prototype.$http = http;
-
 if ('addEventListener' in document) {
   document.addEventListener('DOMContentLoaded', function() {
     FastClick.attach(document.body);
@@ -90,7 +85,3 @@ new Vue({
   store,
   render: h => h(App)
 })
-
-Vue.prototype.$rem = (fz) => {
-  return `${fz / 75}rem`;
-}

@@ -15,18 +15,18 @@
           :value="sexText"
           :list="sexList"
           :on-confirm="selectSex" />
-        <v-picker label="安装地址(必填)"
-          :on-confirm="aa"
-          placeholder="请选择所在地区" />
-        <v-input v-model="linkmanAddress"
+        <v-input label="安装地址(必填)"
+          v-model="linkmanAddress"
           placeholder="请输入详细地址"
           max="50" />
       </v-form>
-      <p class="create-order-btn">确认开单</p>
+      <p class="create-order-btn"
+        @click="submit">确认开单</p>
     </div>
   </div>
 </template>
 <script>
+import { mapActions } from 'vuex';
 export default {
   name: "view-edit-create-order",
   data() {
@@ -38,7 +38,7 @@ export default {
       linkmanPhone: "",
       orderType: "",
 
-      sexText: '',
+      sexText: "",
       sexList: [
         {
           values: [
@@ -55,14 +55,30 @@ export default {
       ]
     };
   },
-  created() {},
+  created() {
+    this.init();
+  },
   methods: {
+    ...mapActions(['createOrder']),
+    init() {
+      const query = this.$route.query;
+      Object.assign(this.$data, query);
+      this.sexText = query.linkmanGender == 1 ? '男' : '女';
+    },
     selectSex([sex]) {
       console.log("sex:_____", sex);
       this.sexText = sex.text;
     },
-    aa(value, idx) {
-      console.log("12323:_____", value, idx);
+    submit() {
+      this.createOrder({...this.$route.query})
+        .then(res => {
+          this.$utils.go({
+            name: 'order-detail',
+            query: {
+              id: res.data.order.id
+            }
+          }, 'replace')
+        })
     }
   }
 };

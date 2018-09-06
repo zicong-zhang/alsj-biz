@@ -13,11 +13,12 @@
         <i class="vertical-bar"></i>
         <span>关注人数 {{ storeInfo.merchantFollowCount }}</span>
       </p>
-      <v-popup v-show="isShowPop"
+      <store-list></store-list>
+      <!-- <v-popup v-show="isShowPop"
         :list="myStoreList"
         :text-one="'merchantExt'"
         :text-two="'merchantName'"
-        @select="switchStore" />
+        @select="switchStore" /> -->
     </div>
     <span class="btn">
       <i class="iconfont icon-btn_my_setting"></i>
@@ -27,9 +28,13 @@
 
 <script>
 import { mapGetters, mapActions, mapMutations } from "vuex";
+import storeList from './worker-header-item-store-picker';
 
 export default {
   name: "HomeHeader",
+  components: {
+    storeList
+  },
   data() {
     return {
       isShowPop: false

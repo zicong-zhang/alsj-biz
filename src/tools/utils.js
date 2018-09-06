@@ -7,9 +7,9 @@ export default {
   /**
    * 路由跳转
    */
-  go(params) {
+  go(params, replace) {
     Vuex.commit('TURN', 'on');
-    Router.push(params);
+    replace ? Router.replace(params) : Router.push(params);
   },
   /**
    * 路由返回

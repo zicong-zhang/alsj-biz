@@ -29,3 +29,23 @@ export const getCustomerInfo = merchantCustomerId => {
     merchantCustomerId
   });
 }
+// 创建订单
+export const createOrder = ({
+  customerId,
+  linkmanAddress,
+  linkmanGender,
+  linkmanName,
+  linkmanPhone,
+  merchantId,
+  orderType
+}) => {
+  return http('/order/create', {
+    customerId,
+    linkmanAddress,
+    linkmanGender,
+    linkmanName,
+    linkmanPhone,
+    merchantId,
+    orderType
+  })
+}

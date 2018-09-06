@@ -23,7 +23,8 @@ export default {
         "EditContract", // 录入合同信息
         "sale-champion", // 销售排行榜
         "performance-target", // 业绩目标
-        "view-customer-info" // 客户详情
+        "view-customer-info", // 客户详情
+        "view-edit-create-order" // 开单
       ]
     };
   },
@@ -34,7 +35,6 @@ export default {
   },
   created() {
     this.setMuiBack();
-    console.log('this.storeId:_____', this.storeId);
     this.judgeSessionHasStoreId();
   },
   mounted() {},

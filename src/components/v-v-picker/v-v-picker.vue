@@ -48,7 +48,6 @@ export default {
       if (typeof this.onCancel === "function") this.onCancel();
     },
     confirm(value, idx) {
-      console.log("value:_____", value, this.onConfirm);
       if (typeof this.onConfirm === "function") this.onConfirm(value, idx);
     }
   }

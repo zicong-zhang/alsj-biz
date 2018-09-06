@@ -211,7 +211,7 @@ export default {
 }
 .v-input-focus {
   input {
-    border: e(1px) solid $main;
+    border-color: $main;
     background: $bg;
     transition: all 0.2s;
   }

@@ -35,6 +35,24 @@ export default {
         pageNum,
         pageSize: 15
       })
+    },
+    createOrder({ rootState }, {
+      customerId,
+      linkmanAddress,
+      linkmanGender,
+      linkmanName,
+      linkmanPhone,
+      orderType
+    }) {
+      return api.createOrder({
+        customerId,
+        linkmanAddress,
+        linkmanGender,
+        linkmanName,
+        linkmanPhone,
+        orderType,
+        merchantId: rootState.root.storeId
+      })
     }
   },
   mutations: {
