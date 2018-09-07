@@ -1,6 +1,7 @@
 <template>
   <header class="home-header">
-    <span class="btn" @click="set">
+    <span class="btn"
+      @click="set">
       <i class="iconfont icon-aboutnew"></i>
     </span>
     <div class="title"
@@ -13,7 +14,9 @@
         <i class="vertical-bar"></i>
         <span>关注人数 {{ storeInfo.merchantFollowCount }}</span>
       </p>
-      <store-list></store-list>
+      <store-list v-show="isShowPop"
+        :list="myStoreList"
+        @select="switchStore" />
       <!-- <v-popup v-show="isShowPop"
         :list="myStoreList"
         :text-one="'merchantExt'"
@@ -28,7 +31,7 @@
 
 <script>
 import { mapGetters, mapActions, mapMutations } from "vuex";
-import storeList from './worker-header-item-store-picker';
+import storeList from "./worker-header-item-store-picker";
 
 export default {
   name: "HomeHeader",
@@ -50,7 +53,10 @@ export default {
     ...mapActions(["getStoreInfo"]),
     ...mapMutations(["SET_STORE_ID"]),
     set() {
-      localStorage.setItem('USER_TOKEN', 'VE9LRU4tMjg3LTE1MzU3MTc5OTc2MzMtYWJj');
+      localStorage.setItem(
+        "USER_TOKEN",
+        "VE9LRU4tMjg3LTE1MzU3MTc5OTc2MzMtYWJj"
+      );
       // 15812345678
       // 1235678
     },
