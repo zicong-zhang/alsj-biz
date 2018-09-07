@@ -3,28 +3,13 @@
     <v-header title="测试下拉" />
     <i class="gap"></i>
     <div class="content">
-      <!-- <v-form class="form">
-        <v-input v-model="linkmanName"
-          label="联系人信息(必填)"
-          placeholder="请输入联系人姓名"
-          max="12" />
-        <v-input v-model="linkmanPhone"
-          placeholder="请输入联系人手机号码"
-          max="11" />
-        <v-picker :on-confirm="aa"
-          placeholder="请选择客户性别" />
-        <v-picker label="安装地址(必填)"
-          :on-confirm="aa"
-          placeholder="请选择所在地区" />
-        <v-input v-model="linkmanAddress"
-          placeholder="请输入详细地址"
-          max="50" />
-      </v-form>
-      <p class="create-order-btn">确认开单</p> -->
       <div class="c"
+        :style="{overflow: !transitionClass && 'hidden'}"
         @scroll="scroll">
         <div :class="{wrapper: true, transition: transitionClass}"
-          :style="{transform: `translate3d(0, ${pulldownY}px, 0)`}"
+          :style="{
+            transform: `translate3d(0, ${pulldownY}px, 0)`
+          }"
           @touchend="touchend">
           <p class="pulldown">{{ pulldownText }}</p>
           <ul v-finger:press-move="pressMove">
@@ -39,16 +24,14 @@
   </div>
 </template>
 <script>
+/* 
+  TODO
+  下拉时添加overflow hidden，阻止ios的滚动回弹
+*/
 export default {
   name: "view-test-pulldown",
   data() {
     return {
-      customerId: "",
-      linkmanAddress: "",
-      linkmanGender: "",
-      linkmanName: "",
-      linkmanPhone: "",
-      orderType: "",
       pulldownY: 0,
       scrollTop: 0,
       transitionClass: false,

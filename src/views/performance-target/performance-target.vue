@@ -146,7 +146,6 @@
         <span>全年</span>
         <p>{{ formatNum('total') }}</p>
       </div>
-      <i class="gap"></i>
 
     </div>
 

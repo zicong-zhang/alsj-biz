@@ -23,7 +23,8 @@
         :text-two="'merchantName'"
         @select="switchStore" /> -->
     </div>
-    <span class="btn">
+    <span class="btn"
+      @click="toTest">
       <i class="iconfont icon-btn_my_setting"></i>
     </span>
   </header>
@@ -71,6 +72,11 @@ export default {
       this.$utils.setSession("STORE_TOKEN", item.token);
 
       this.getStoreInfo();
+    },
+    toTest() {
+      this.$utils.go({
+        name: 'test-pulldown'
+      })
     }
   }
 };

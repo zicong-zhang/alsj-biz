@@ -32,7 +32,7 @@ export default {
   },
   computed: {
     ...mapState({
-      status: 'status',
+      status: state => state.orderListModule.status,
       orderList: state => state.orderListModule.orderList
     })
   },
@@ -44,11 +44,14 @@ export default {
     }
   },
   created() {
-    this.getListByStatus(1);
+    this.init();
   },
   methods: {
     // 根据订单状态获取订单列表
     ...mapActions(['getListByStatus']),
+    init() {
+      this.getListByStatus(this.status);
+    },
     // 记录滚动高度
     logScrollTop() {
       this.$route.meta.scrollTop = this.$refs.content.scrollTop;
@@ -64,8 +67,7 @@ export default {
 
   .content {
     flex: 1;
-    -webkit-overflow-scrolling: touch;
-    overflow-y: scroll;
+    @include scroll(y);
     & > ul {
       padding-top: r(16px);
     }
