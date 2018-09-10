@@ -25,7 +25,6 @@
           </div>
         </li>
       </ul>
-      <p slot="pullup-txt" v-if="isFinishPullup">没有更多的客户啦~</p>
     </v-scroll>
 
   </div>
@@ -58,12 +57,10 @@ export default {
     getDataList() {
       if (this.nextPage) {
         return this.getCustomerList().then(res => {
-          this.nextPage = !res.data.next;
-          return Promise.resolve(res);
+          this.nextPage = res.data.next;
         });
       } else {
-        this.isFinishPullup = true;
-        return Promise.resolve();
+        return Promise.resolve(false);
       }
     },
     onRefresh() {
@@ -89,32 +86,6 @@ export default {
 .customer-list-item-list {
   height: 100%;
   @include scroll(y);
-  .scroll-container {
-    position: relative;
-  }
-  .pull-down {
-    position: absolute;
-    top: 0;
-    left: 0;
-    transform: translate3d(0, -100%, 0);
-    width: 100%;
-    text-align: center;
-    span {
-      display: block;
-      height: 50px;
-      line-height: 50px;
-    }
-  }
-  .pull-up {
-    padding-top: 16px;
-    padding-bottom: 24px;
-    p {
-      height: 60px;
-      line-height: 76px;
-      text-align: center;
-      color: #999;
-    }
-  }
   ul {
     padding-top: 16px;
   }

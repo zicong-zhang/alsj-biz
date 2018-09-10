@@ -18,12 +18,13 @@ export default {
         status,
       } = ctx.state;
       
-      api.getOrderListByStatus({
+      return api.getOrderListByStatus({
         storeId,
         status,
         pageNum
       }).then(data => {
         ctx.commit('CONCAT_ORDER_LIST', data.data.list);
+        return Promise.resolve(data);
       })
     }
   },

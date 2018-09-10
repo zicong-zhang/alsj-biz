@@ -10,14 +10,14 @@
         <img src="~~img/home/icon_workbench_customer@2x.png" />
         <p>客户管理</p>
       </li>
-      <li>
+      <!-- <li>
         <img src="~~img/home/icon_workbench_chart@2x.png" />
         <p>效率报表</p>
-      </li>
-      <li>
+      </li> -->
+      <!-- <li>
         <img src="~~img/home/icon_workbench_market@2x.png" />
         <p>营销中心</p>
-      </li>
+      </li> -->
       <li>
         <img src="~~img/home/icon_workbench_wallet@2x.png" />
         <p>店员管理</p>
@@ -26,10 +26,10 @@
         <img src="~~img/home/icon_workbench_staff@2x.png" />
         <p>产品中心</p>
       </li>
-      <li>
+      <!-- <li>
         <img src="~~img/home/icon_workbench_cases@2x.png" />
         <p>案例中心</p>
-      </li>
+      </li> -->
     </ul>
   </div>
 </template>

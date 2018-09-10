@@ -58,8 +58,6 @@ export default {
         "USER_TOKEN",
         "VE9LRU4tMjg3LTE1MzU3MTc5OTc2MzMtYWJj"
       );
-      // 15812345678
-      // 1235678
     },
     showPop() {
       this.isShowPop = !this.isShowPop;

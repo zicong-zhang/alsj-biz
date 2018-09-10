@@ -4,7 +4,7 @@
     <i class="gap"></i>
     <div class="content">
       <div class="c"
-        :style="{overflow: !transitionClass && 'hidden'}"
+        :style="scrollClassName"
         @scroll="scroll">
         <div :class="{wrapper: true, transition: transitionClass}"
           :style="{
@@ -39,6 +39,14 @@ export default {
       pulldowning: false
     };
   },
+  computed: {
+    scrollClassName() {
+      console.log('this.pulldownY, this.pulldowning:_____', this.pulldownY, this.pulldowning);
+      return {
+        overflow: (this.pulldownY > 0 && !this.pulldowning) ? 'hidden' : ''
+      }
+    }
+  },
   created() {},
   methods: {
     aa() {
@@ -46,7 +54,7 @@ export default {
     },
     touchend() {
       this.transitionClass = true;
-      console.log('this.pulldownY:_____', this.pulldownY);
+      // console.log('this.pulldownY:_____', this.pulldownY);
       if (this.pulldownY >= 60) {
         this.pulldownY = 60;
         this.pulldowning = true;
@@ -59,6 +67,7 @@ export default {
       if (this.scrollTop === 0) {
         this.transitionClass = false;
         this.pulldownY += deltaY;
+        console.log('this.pulldownY:_____', this.pulldownY);
       }
       if (this.pulldownY > 60 && !this.pulldowning) {
         this.pulldownText = '松开加载';
@@ -101,8 +110,11 @@ export default {
     }
   }
   .wrapper {
+
     margin-top: -50px;
     position: absolute;
+    left: 0;
+    right: 50px;
   }
   .transition {
     transition: transform .2s;

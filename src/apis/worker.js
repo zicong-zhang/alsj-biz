@@ -125,3 +125,15 @@ export const updatePerformTargetList = (merchantId, {
     decAmount: decAmount.length > 3 ? +decAmount.replace(/\D/g, '') :+ decAmount
   })
 }
+// 获取店铺总业绩列表
+export const getPerformanceTotalList = ({
+  merchantId,
+  year
+}) => {
+  return http('/statistic/getMerchantTradeAmountList', {
+    merchantId,
+    year,
+    pageNum: 1,
+    pageSize: 0,
+  })
+}

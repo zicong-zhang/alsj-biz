@@ -3,28 +3,61 @@
     ref="loading"></div>
 </template>
 <script>
+/**
+ * doc
+ * https://github.com/airbnb/lottie-web
+ */
 import lottie from "lottie-web";
 import loadingConfig from "~tools/lottie-config";
 
 export default {
   name: "v-loading",
+  props: {
+    autoplay: {
+      default: true
+    },
+    play: {
+      default: false
+    }
+  },
+  data() {
+    return {
+      lottie: ''
+    }
+  },
+  watch: {
+    play(newVal) {
+      console.log('newVal:_____', newVal);
+      if (newVal) {
+        this.lottie.play();
+      } else {
+        this.lottie.stop();
+      }
+    }
+  },
   mounted() {
-    this.$nextTick(() => {
-      lottie.loadAnimation({
+    let config = {
         container: this.$refs.loading, // the dom element that will contain the animation
         renderer: "svg",
         loop: true,
-        autoplay: true,
-        animationData: loadingConfig // the path to the animation json
+        autoplay: this.autoplay,
+        animationData: loadingConfig
         // path: '../xxx/data.json'
-      });
-    });
+      }
+      this.lottie = lottie.loadAnimation(config);
+      this.$once('hook:beforeDestroy', () => this.lottie.destroy())
   }
 };
 </script>
 <style lang="scss">
 .v-loading {
-  height: 60px;
-  line-height: 60px;
+  height: 142px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  svg {
+    height: 46px !important;
+    line-height: 46px;
+  }
 }
 </style>

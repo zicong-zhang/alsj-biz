@@ -40,14 +40,14 @@ import './sass/common.scss';
 import './sass/transition.scss';
 import './assets/font/iconfont.css';
 
-/* (function() {
-  var script = document.createElement('script');
-  script.src = "//cdn.jsdelivr.net/npm/eruda";
-  document.body.appendChild(script);
-  script.onload = function() {
-    eruda.init()
-  }
-})() */
+// (function() {
+//   var script = document.createElement('script');
+//   script.src = "//cdn.jsdelivr.net/npm/eruda";
+//   document.body.appendChild(script);
+//   script.onload = function() {
+//     eruda.init()
+//   }
+// })()
 
 Vue.config.devtools = process.env.NODE_ENV === 'development';
 
@@ -72,9 +72,9 @@ if ('addEventListener' in document) {
   }, false);
 }
 
-// import Vconsole from 'vconsole';
+// import VConsole from 'vconsole';
 // if (process.env.NODE_ENV !== 'production') {
-//   new Vconsole()
+//   let vc = new VConsole();
 // }
 
 

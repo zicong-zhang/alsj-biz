@@ -44,14 +44,12 @@ export default {
       rootState
     }) {
       return api.getReceiptAmount(rootState.root.storeId)
-        .then(res => Promise.resolve(res));
     },
     // 获取店铺待收款金额(全部)
     getDueAmount({
       rootState
     }) {
       return api.getDueAmount(rootState.root.storeId)
-        .then(res => Promise.resolve(res));
     },
     // 获取月销售冠军
     getCurrentMonthSaleChampion({
@@ -68,7 +66,6 @@ export default {
       return api.getStoreSaleTarget(rootState.root.storeId)
         .then(res => {
           commit('SET_SALE_TARGET', res.data);
-          return Promise.resolve(res);
         });
     },
     // 获取店铺某一年的业绩目标列表
@@ -79,7 +76,6 @@ export default {
           merchantId: rootState.root.storeId,
           goalYear
         })
-        .then(res => Promise.resolve(res));
     },
     // 更新店铺某一年业绩目标列表
     updatePerformTargetList({
@@ -87,7 +83,15 @@ export default {
       commit
     }, params) {
       return api.updatePerformTargetList(rootState.root.storeId, params)
-        .then(res => Promise.resolve(res));
+    },
+    // 获取店铺总业绩列表
+    getPerformanceTotalList({
+      rootState
+    }, year) {
+      return api.getPerformanceTotalList({
+        merchantId: rootState.root.storeId,
+        year
+      })
     }
   },
   mutations: {

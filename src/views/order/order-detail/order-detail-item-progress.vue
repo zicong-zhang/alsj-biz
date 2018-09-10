@@ -83,7 +83,7 @@ export default {
   display: flex;
   justify-content: space-between;
   color: #fff;
-  border-bottom: e(1px) solid #fff;
+  border-bottom: e(1px) solid rgba(255, 255, 255, 0.2);
   line-height: e(82px);
   margin: 0 e(36px);
   // padding-top: e(34px);
@@ -199,8 +199,9 @@ export default {
   display: flex;
   align-items: center;
   color: #fff;
-  border-top: 1px solid;
-  padding:36px;
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
+  padding: 36px 0;
+  margin: 0 36px;
   i {
     height: 24px;
     background: #fff;

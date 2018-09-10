@@ -11,6 +11,7 @@
 
 <script>
 import { mapState, mapMutations } from "vuex";
+import store from '~/vuex/store';
 export default {
   name: "App",
   data() {
@@ -34,6 +35,10 @@ export default {
     })
   },
   created() {
+    localStorage.setItem(
+        "USER_TOKEN",
+        "VE9LRU4tMjg3LTE1MzU3MTc5OTc2MzMtYWJj"
+      );
     this.setMuiBack();
     this.judgeSessionHasStoreId();
   },

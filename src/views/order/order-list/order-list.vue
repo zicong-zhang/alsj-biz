@@ -1,14 +1,18 @@
 <template>
   <div class="order-list">
     <OrderListHeader/>
-    <div class="content"
-      ref="content">
+    <div class="content">
+      <v-scroll
+        :show-pulldown-txt="true"
+        :on-pulldown="init">
+
       <ul v-if="orderList.length" key="order-list">
         <OrderListItem v-for="item in orderList"
           :item="item"
-          :key="item.id"
+          :key="`order-list-item-${item.id}`"
           @log-scrolltop="logScrollTop" />
       </ul>
+      </v-scroll>
     </div>
   </div>
 </template>
@@ -27,7 +31,9 @@ export default {
   data() {
     return {
       dataList: 5,
-      scrollTop: 0
+      scrollTop: 0,
+      pageNum: 1,
+      hasNext: false
     };
   },
   computed: {
@@ -38,8 +44,8 @@ export default {
   },
   watch: {
     $route(to, from) {
-      if (from.name == "order-detail") {
-        this.$refs.content.scrollTop = this.$route.meta.scrollTop;
+      if (from.name == "order-detail" && to.name == 'order-list') {
+        // this.$refs.content.scrollTop = this.$route.meta.scrollTop;
       }
     }
   },
@@ -50,11 +56,25 @@ export default {
     // 根据订单状态获取订单列表
     ...mapActions(['getListByStatus']),
     init() {
-      this.getListByStatus(this.status);
+      this.pageNum = 1;
+      this.hasNext = false;
+      return this.getOrderList();
     },
     // 记录滚动高度
     logScrollTop() {
       this.$route.meta.scrollTop = this.$refs.content.scrollTop;
+    },
+    getOrderList() {
+      if (!this.hasNext) {
+        return this.getListByStatus(this.pageNum)
+          .then(res => {
+            console.log('res:_____', res);
+            this.hasNext = res.data.next;
+            this.pageNum++;
+        })
+      } else {
+        return Promise.resolve(false);
+      }
     }
   }
 };
@@ -67,8 +87,8 @@ export default {
 
   .content {
     flex: 1;
-    @include scroll(y);
-    & > ul {
+    overflow: hidden;
+    ul {
       padding-top: r(16px);
     }
   }

@@ -68,9 +68,17 @@ export default {
     selectSex([sex]) {
       console.log("sex:_____", sex);
       this.sexText = sex.text;
+      this.linkmanGender = sex.value;
     },
     submit() {
-      this.createOrder({...this.$route.query})
+      this.createOrder({
+        customerId: this.customerId,
+        linkmanAddress: this.linkmanAddress,
+        linkmanGender: this.linkmanGender,
+        linkmanName: this.linkmanName,
+        linkmanPhone: this.linkmanPhone,
+        orderType: this.orderType,
+      })
         .then(res => {
           this.$utils.go({
             name: 'order-detail',

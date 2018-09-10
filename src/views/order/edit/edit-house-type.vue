@@ -21,10 +21,9 @@
       <!-- 户型 -->
       <v-picker label="户型"
         :list="residenceList"
-        :default-value="linkmanHouseType"
-        @select="selectResidence"
-        placeholder="请选择户型"
-        title="选择户型" />
+        :value="linkmanHouseType"
+        :on-confirm="selectResidence"
+        placeholder="请选择户型" />
 
       <!-- 面积 -->
       <v-input v-model="measurement"
@@ -42,42 +41,46 @@
 import { mapGetters, mapActions } from "vuex";
 
 const residenceList = [
-  [
-    {
-      text: "一房",
-      value: "一房"
-    },
-    {
-      text: "二房",
-      value: "二房"
-    },
-    {
-      text: "三房",
-      value: "三房"
-    },
-    {
-      text: "四房",
-      value: "四房"
-    },
-    {
-      text: "五房",
-      value: "五房"
-    }
-  ],
-  [
-    {
-      text: "一厅",
-      value: "一厅"
-    },
-    {
-      text: "二厅",
-      value: "二厅"
-    },
-    {
-      text: "三厅",
-      value: "三厅"
-    }
-  ]
+  {
+    values: [
+      {
+        text: "一房",
+        value: "一房"
+      },
+      {
+        text: "二房",
+        value: "二房"
+      },
+      {
+        text: "三房",
+        value: "三房"
+      },
+      {
+        text: "四房",
+        value: "四房"
+      },
+      {
+        text: "五房",
+        value: "五房"
+      }
+    ]
+  },
+  {
+    values: [
+      {
+        text: "一厅",
+        value: "一厅"
+      },
+      {
+        text: "二厅",
+        value: "二厅"
+      },
+      {
+        text: "三厅",
+        value: "三厅"
+      }
+    ]
+  }
 ];
 
 export default {
@@ -98,8 +101,8 @@ export default {
   },
   methods: {
     ...mapActions(["updateHouseTypeInfo"]),
-    selectResidence(value) {
-      this.linkmanHouseType = value.join("");
+    selectResidence([value1, value2]) {
+      this.linkmanHouseType = value1.value + value2.value;
     },
     submit() {
       this.updateHouseTypeInfo({
@@ -109,7 +112,7 @@ export default {
         orderId: this.orderId
       }).then(data => {
         this.$Toast("修改成功");
-        this.$utils.back(this);
+        this.$utils.back();
       });
     }
   }

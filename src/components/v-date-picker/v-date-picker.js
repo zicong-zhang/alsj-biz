@@ -11,8 +11,8 @@ const $DatePicker = (opt = {}) => {
   const current = new Date();
   const max = new Date();
   max.setFullYear(max.getFullYear() + 15);
-  instance.minDate = opt.min || current; // 默认最小是当前
-  instance.maxDate = opt.max || max; // 默认最大展示15年
+  instance.minDate = opt.minDate || current; // 默认最小是当前
+  instance.maxDate = opt.maxDate || max; // 默认最大展示15年
 
   instance.$mount(document.createElement('div'));
   

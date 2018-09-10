@@ -31,11 +31,9 @@
 
         <!-- 性别 -->
         <v-picker label="性别"
-          :list="[genderList]"
-          :index="linkmanGender"
-          :default-value="sex"
-          @select="selectSex"
-          title="选择性别" />
+          :value="sexText"
+          :list="genderList"
+          :on-confirm="selectSex" />
 
         <!-- 详细地址 -->
         <v-input v-model="linkmanAddress"
@@ -76,12 +74,16 @@ const rules = {
 };
 const genderList = [
   {
-    value: "1",
-    text: "男"
-  },
-  {
-    value: "2",
-    text: "女"
+    values: [
+      {
+        value: "1",
+        text: "男"
+      },
+      {
+        value: "2",
+        text: "女"
+      }
+    ]
   }
 ];
 export default {
@@ -90,41 +92,29 @@ export default {
     return {
       linkmanName: "",
       linkmanPhone: "",
-      linkmanGender: '男',
+      linkmanGender: '',
       linkmanAddress: "",
       linkmanBudget: '',
       rules,
       genderList,
-      isShowPicker: false
+      isShowPicker: false,
+      sexText: ''
     };
   },
   computed: {
-    ...mapGetters(['orderInfo', 'orderId']),
-    sex() {
-      return (this.linkmanGender ? this.genderList[this.linkmanGender - 1].text : '1');
-    }
+    ...mapGetters(['orderInfo', 'orderId'])
   },
   created() {
-    let {
-      linkmanAddress,
-      linkmanBudget,
-      linkmanGender,
-      linkmanName,
-      linkmanPhone
-    } = this.orderInfo;
-    console.log('this.orderInfo', this.orderInfo)
-    this.linkmanName = linkmanName;
-    this.linkmanGender = linkmanGender;
-    this.linkmanPhone = linkmanPhone;
-    this.linkmanAddress = linkmanAddress;
-    this.linkmanBudget = linkmanBudget || '';
+    Object.assign(this.$data, this.orderInfo);
+    this.sexText = this.linkmanGender === 1 ? '男' : '女';
   },
   mounted() {},
   methods: {
     ...mapActions(['updateCustomerInfo']),
     // 选择器回调
-    selectSex(item) {
-      this.linkmanGender = item[0];
+    selectSex([sex]) {
+      this.sexText = sex.text;
+      this.linkmanGender = sex.value;
     },
     submit() {
       let pass = this.$refs.form.submit();

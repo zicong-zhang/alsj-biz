@@ -4,148 +4,128 @@
 
     <div class="content">
       <i class="gap"></i>
-      <header>
-        <!-- 选择年份 -->
-        <div class="select-year" @click="showDatePicker">
-          <span>月份</span>
-          <span>({{ year }})</span>
-          <i class="iconfont icon-bottomnew"></i>
+      <div class="container">
+        <header>
+          <!-- 选择年份 -->
+          <div class="select-year"
+            @click="showDatePicker">
+            <span>月份</span>
+            <span>({{ year }})</span>
+            <i class="iconfont icon-bottomnew"></i>
+          </div>
+
+          <!-- 计划业绩金额 -->
+          <p>计划业绩金额(元)</p>
+
+        </header>
+
+        <div class="edit-plan-list">
+          <ul>
+            <li>
+              <label>1月</label><input type="text"
+                v-model="janAmount"
+                placeholder="0"
+                @input="limitInput('janAmount')"
+                @focus="unFormatNum('janAmount')"
+                @blur="formatNum('janAmount')" />
+            </li>
+            <li>
+              <label>2月</label><input type="text"
+                v-model="fabAmount"
+                placeholder="0"
+                @input="limitInput('fabAmount')"
+                @focus="unFormatNum('fabAmount')"
+                @blur="formatNum('fabAmount')" />
+            </li>
+            <li>
+              <label>3月</label><input type="text"
+                v-model="marAmount"
+                placeholder="0"
+                @input="limitInput('marAmount')"
+                @focus="unFormatNum('marAmount')"
+                @blur="formatNum('marAmount')" />
+            </li>
+            <li>
+              <label>4月</label><input type="text"
+                v-model="aprAmount"
+                placeholder="0"
+                @input="limitInput('aprAmount')"
+                @focus="unFormatNum('aprAmount')"
+                @blur="formatNum('aprAmount')" />
+            </li>
+            <li>
+              <label>5月</label><input type="text"
+                v-model="mayAmount"
+                placeholder="0"
+                @input="limitInput('mayAmount')"
+                @focus="unFormatNum('mayAmount')"
+                @blur="formatNum('mayAmount')" />
+            </li>
+            <li>
+              <label>6月</label><input type="text"
+                v-model="junAmount"
+                placeholder="0"
+                @input="limitInput('junAmount')"
+                @focus="unFormatNum('junAmount')"
+                @blur="formatNum('junAmount')" />
+            </li>
+            <li>
+              <label>7月</label><input type="text"
+                v-model="julAmount"
+                placeholder="0"
+                @input="limitInput('julAmount')"
+                @focus="unFormatNum('julAmount')"
+                @blur="formatNum('julAmount')" />
+            </li>
+            <li>
+              <label>8月</label><input type="text"
+                v-model="augAmount"
+                placeholder="0"
+                @input="limitInput('augAmount')"
+                @focus="unFormatNum('augAmount')"
+                @blur="formatNum('augAmount')" />
+            </li>
+            <li>
+              <label>9月</label><input type="text"
+                v-model="sepAmount"
+                placeholder="0"
+                @input="limitInput('sepAmount')"
+                @focus="unFormatNum('sepAmount')"
+                @blur="formatNum('sepAmount')" />
+            </li>
+            <li>
+              <label>10月</label><input type="text"
+                v-model="octAmount"
+                placeholder="0"
+                @input="limitInput('octAmount')"
+                @focus="unFormatNum('octAmount')"
+                @blur="formatNum('octAmount')" />
+            </li>
+            <li>
+              <label>11月</label><input type="text"
+                v-model="novAmount"
+                placeholder="0"
+                @input="limitInput('novAmount')"
+                @focus="unFormatNum('novAmount')"
+                @blur="formatNum('novAmount')" />
+            </li>
+            <li>
+              <label>12月</label><input type="text"
+                v-model="decAmount"
+                placeholder="0"
+                @input="limitInput('decAmount')"
+                @focus="unFormatNum('decAmount')"
+                @blur="formatNum('decAmount')" />
+            </li>
+          </ul>
         </div>
 
-        <!-- 计划业绩金额 -->
-        <p>计划业绩金额(元)</p>
-
-      </header>
-
-      <div class="edit-plan-list">
-        <ul>
-          <li>
-            <label>1月</label><input
-              type="text"
-              v-model="janAmount"
-              placeholder="0"
-              @input="limitInput('janAmount')"
-              @focus="unFormatNum('janAmount')"
-              @blur="formatNum('janAmount')"
-            />
-          </li>
-          <li>
-            <label>2月</label><input
-              type="text"
-              v-model="fabAmount"
-              placeholder="0"
-              @input="limitInput('fabAmount')"
-              @focus="unFormatNum('fabAmount')"
-              @blur="formatNum('fabAmount')"
-            />
-          </li>
-          <li>
-            <label>3月</label><input
-              type="text"
-              v-model="marAmount"
-              placeholder="0"
-              @input="limitInput('marAmount')"
-              @focus="unFormatNum('marAmount')"
-              @blur="formatNum('marAmount')"
-            />
-          </li>
-          <li>
-            <label>4月</label><input
-              type="text"
-              v-model="aprAmount"
-              placeholder="0"
-              @input="limitInput('aprAmount')"
-              @focus="unFormatNum('aprAmount')"
-              @blur="formatNum('aprAmount')"
-            />
-          </li>
-          <li>
-            <label>5月</label><input
-              type="text"
-              v-model="mayAmount"
-              placeholder="0"
-              @input="limitInput('mayAmount')"
-              @focus="unFormatNum('mayAmount')"
-              @blur="formatNum('mayAmount')"
-            />
-          </li>
-          <li>
-            <label>6月</label><input
-              type="text"
-              v-model="junAmount"
-              placeholder="0"
-              @input="limitInput('junAmount')"
-              @focus="unFormatNum('junAmount')"
-              @blur="formatNum('junAmount')"
-            />
-          </li>
-          <li>
-            <label>7月</label><input
-              type="text"
-              v-model="julAmount"
-              placeholder="0"
-              @input="limitInput('julAmount')"
-              @focus="unFormatNum('julAmount')"
-              @blur="formatNum('julAmount')"
-            />
-          </li>
-          <li>
-            <label>8月</label><input
-              type="text"
-              v-model="augAmount"
-              placeholder="0"
-              @input="limitInput('augAmount')"
-              @focus="unFormatNum('augAmount')"
-              @blur="formatNum('augAmount')"
-            />
-          </li>
-          <li>
-            <label>9月</label><input
-              type="text"
-              v-model="sepAmount"
-              placeholder="0"
-              @input="limitInput('sepAmount')"
-              @focus="unFormatNum('sepAmount')"
-              @blur="formatNum('sepAmount')"
-            />
-          </li>
-          <li>
-            <label>10月</label><input
-              type="text"
-              v-model="octAmount"
-              placeholder="0"
-              @input="limitInput('octAmount')"
-              @focus="unFormatNum('octAmount')"
-              @blur="formatNum('octAmount')"
-            />
-          </li>
-          <li>
-            <label>11月</label><input
-              type="text"
-              v-model="novAmount"
-              placeholder="0"
-              @input="limitInput('novAmount')"
-              @focus="unFormatNum('novAmount')"
-              @blur="formatNum('novAmount')"
-            />
-          </li>
-          <li>
-            <label>12月</label><input
-              type="text"
-              v-model="decAmount"
-              placeholder="0"
-              @input="limitInput('decAmount')"
-              @focus="unFormatNum('decAmount')"
-              @blur="formatNum('decAmount')"
-            />
-          </li>
-        </ul>
+        <div class="year-amount-total">
+          <span>全年</span>
+          <p>{{ formatNum('total') }}</p>
+        </div>
       </div>
-
-      <div class="year-amount-total">
-        <span>全年</span>
-        <p>{{ formatNum('total') }}</p>
-      </div>
+      <i class="gap"></i>
 
     </div>
 
@@ -193,11 +173,11 @@ export default {
     ]),
     showDatePicker() {
       this.$DatePicker({
-        confirm: (dateObj) => {
+        confirm: dateObj => {
           this.year = dateObj.getFullYear();
           this.getDataList();
         }
-      })
+      });
     },
     getDataList() {
       this.getOnePerformanceTargetList(this.year).then(res => {
@@ -230,7 +210,7 @@ export default {
     },
     // 某个 input 失去焦点时 进行格式化
     formatNum(name, value) {
-      const val = typeof value !== 'undefined' ? value : this[name];
+      const val = typeof value !== "undefined" ? value : this[name];
       this[name] = this.$utils.numInsertSymbol(val);
       return this[name];
     },
@@ -260,7 +240,7 @@ export default {
   display: flex;
   flex-flow: column;
   .content {
-    background: #fff;
+    // background: #fff;
     flex: 1;
     @include scroll(y);
     header {
@@ -274,6 +254,13 @@ export default {
       margin: 0 36px;
       margin-bottom: 24px;
     }
+  }
+  .container {
+    background: #fff;
+  }
+  .select-year {
+    height: 100%;
+    line-height: 82px;
   }
   .edit-plan-list {
     padding: 0 36px;

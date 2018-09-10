@@ -40,7 +40,6 @@ export default {
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
-  line-height: 48px;
   padding-top: 12px;
 }
 .left {
@@ -59,7 +58,7 @@ h5 {
 p {
   max-width: 80%;
   font-size: 24px;
-  line-height: 36px;
+  line-height: 36px !important;
   display: -webkit-box;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 1;
