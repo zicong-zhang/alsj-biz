@@ -1,39 +1,30 @@
 <template>
-  <div
-    class="v-date-picker"
-    v-if="isShow"
-  >
+  <div class="v-date-picker"
+    v-if="isShow">
 
     <transition name="v-cover">
       <v-cover v-show="isShowContainer" />
     </transition>
 
-    <transition
-      name="v-picker"
-      @after-leave="transitionEnd"
-    >
+    <transition name="v-picker"
+      @after-leave="transitionEnd">
 
-      <div
-        class="v-datetime-picker-container"
+      <div class="v-datetime-picker-container"
         v-show="isShowContainer"
-        @click="onCancel"
-      >
+        @click="onCancel">
 
-        <van-datetime-picker
-          v-model="currentDate"
+        <van-datetime-picker v-model="currentDate"
           :title="title"
           :type="type"
-          :formatter="formatter"
           :min-date="minDate"
           :max-date="maxDate"
           @cancel="onCancel"
           @confirm="onConfirm"
-          @change="onChange"
-        />
-        </div>
+          @change="onChange" />
+      </div>
     </transition>
 
-    </div>
+  </div>
 </template>
 <script>
 export default {
@@ -42,21 +33,21 @@ export default {
     return {
       isShow: true,
       isShowContainer: false,
-      title: '',
-      type: 'date',
-      currentDate: '',
-      minDate: '', // type: Date
-      maxDate: '', // type: Date
-      loading: false, // type Boolean
+      title: "",
+      type: "date",
+      currentDate: "",
+      minDate: "", // type: Date
+      maxDate: "", // type: Date
+      loading: false // type Boolean
     };
   },
   methods: {
     formatter(type, value) {
-      if (type === 'year') {
+      if (type === "year") {
         return `${value}年`;
-      } else if (type === 'month') {
+      } else if (type === "month") {
         return `${value}月`;
-      } else if (type === 'day') {
+      } else if (type === "day") {
         return `${value}日`;
       }
     },
@@ -72,7 +63,7 @@ export default {
       if (typeof this.confirm === "function") this.confirm(value);
     },
     onChange(instance) {
-      console.log('instance:_____', instance);
+      console.log("instance:_____", instance);
       if (typeof this.change === "function") this.change();
     }
   }

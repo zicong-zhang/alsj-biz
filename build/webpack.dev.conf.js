@@ -17,6 +17,9 @@ const devWebpackConfig = merge(baseWebpackConfig, {
   module: {
     rules: utils.styleLoaders({ sourceMap: config.dev.cssSourceMap, usePostCSS: true })
   },
+  externals: { // value 为 umd 模块名
+    echarts: "echarts"
+  },
   // cheap-module-eval-source-map is faster for development
   devtool: config.dev.devtool,
 

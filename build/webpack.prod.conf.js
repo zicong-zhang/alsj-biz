@@ -27,7 +27,8 @@ const webpackConfig = merge(baseWebpackConfig, {
     vue: 'Vue',
     axios: 'axios',
     vuex: 'Vuex',
-    'vue-router': 'VueRouter'
+    'vue-router': 'VueRouter',
+    echarts: "echarts"
   },
   devtool: config.build.productionSourceMap ? config.build.devtool : false,
   output: {

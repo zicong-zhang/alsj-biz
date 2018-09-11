@@ -1,8 +1,8 @@
 const noFoundRouter = [{
   path: '*',
-  name: '404',
+  name: 'notfound',
   component: () =>
-    import ( /* webpackChunkName: "no-found" */ "~components/home"),
+    import ( /* webpackChunkName: "notfound" */ "~views/notfound/notfound"),
   meta: {
     title: '找不到页面 - 阿拉私家'
   }
