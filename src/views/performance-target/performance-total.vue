@@ -47,16 +47,24 @@ export default {
     ...mapActions(["getPerformanceTotalList"]),
     showDatePicker() {
       this.$DatePicker({
-        type: 'year-month'
+        type: 'year-month',
+        confirm: value => {
+          this.year = value.getFullYear();
+          this.init();
+        }
       })
     },
     init() {
       this.getPerformanceTotalList(this.year).then(res => {
         const list = res.data.list;
-        list.forEach(item => {
-          const idx = item.month - 1;
-          this.performanceList.splice(idx, 1, item.amount / 10000);
+        if (list.length) {
+          list.forEach(item => {
+            const idx = item.month - 1;
+            this.performanceList.splice(idx, 1, item.amount / 10000);
         });
+        } else {
+          this.performanceList = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+        }
         this.$nextTick(() => {
           this.chart ? this.setChartOpt() : this.initChart();
         });
@@ -66,7 +74,7 @@ export default {
       this.charts = echarts.init(this.$refs.chart);
       this.setChartOpt();
       this.$once("hook:beforeDestroy", () => {
-        this.charts.destroy();
+        this.charts.dispose();
       });
     },
     setChartOpt() {

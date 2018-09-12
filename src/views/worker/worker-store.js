@@ -80,7 +80,6 @@ export default {
     // 更新店铺某一年业绩目标列表
     updatePerformTargetList({
       rootState,
-      commit
     }, params) {
       return api.updatePerformTargetList(rootState.root.storeId, params)
     },

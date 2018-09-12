@@ -25,7 +25,8 @@ export default {
         "sale-champion", // 销售排行榜
         "performance-target", // 业绩目标
         "view-customer-info", // 客户详情
-        "view-edit-create-order" // 开单
+        "view-edit-create-order", // 开单
+        "view-performnace-total", // 总业绩
       ]
     };
   },
