@@ -289,6 +289,7 @@ export default {
       padding-top: 36px;
     }
     li {
+      height: 36px;
       display: flex;
       align-items: center;
       padding-bottom: 36px;
@@ -315,7 +316,12 @@ export default {
       h5 {
         flex: none;
         width: 90px;
+        height: 36px;
+        line-height: 36px;
+        font-size: 20px;
+        box-sizing: border-box;
         @include over(1);
+        padding-top: 4px;
         margin-right: 36px;
       }
     }

@@ -3,7 +3,7 @@
     <div class="home-tips-module blue">
       <i class="iconfont icon-icon_wallet_note"></i>
       <h3>店铺尚未进行认证，暂不支持使用私家钱包进行在线交易。
-        <span>点击了解更多
+        <span @click="toAuthExplain">点击了解更多
           <i class="iconfont icon-rightBtn"></i>
         </span>
       </h3>
@@ -18,6 +18,11 @@ export default {
   name: "HomeTips",
   data() {
     return {};
+  },
+  methods: {
+    toAuthExplain() {
+      window.location.href = 'http://test.alasga.cn/pro/proxy/web/web/pages/product/product_detail.html?id=28'
+    }
   }
 };
 </script>

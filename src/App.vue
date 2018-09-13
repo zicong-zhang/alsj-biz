@@ -38,8 +38,12 @@ export default {
   created() {
     localStorage.setItem(
         "USER_TOKEN",
-        "VE9LRU4tMjg3LTE1MzU3MTc5OTc2MzMtYWJj"
+        "VE9LRU4tMTQ5LTE1MzY3MjM2MzE3ODktYWJj"
       );
+    // localStorage.setItem(
+    //     "USER_TOKEN",
+    //     "VE9LRU4tMjg3LTE1MzU3MTc5OTc2MzMtYWJj"
+    //   );
     this.setMuiBack();
     this.judgeSessionHasStoreId();
   },

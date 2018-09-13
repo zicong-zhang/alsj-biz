@@ -12,7 +12,7 @@
           <span>年份({{ year }})</span>
           <i class="iconfont icon-bottomnew"></i>
         </div>
-        <p>单位：万元</p>
+        <p @click="toAuthExplain">单位：万元</p>
       </div>
       <div class="chart-container">
         <div class="chart"
@@ -45,6 +45,9 @@ export default {
   },
   methods: {
     ...mapActions(["getPerformanceTotalList"]),
+    toAuthExplain() {
+      window.location.href = 'http://test.alasga.cn/pro/proxy/web/web/pages/product/product_detail.html?id=28'
+    },
     showDatePicker() {
       this.$DatePicker({
         type: 'year-month',

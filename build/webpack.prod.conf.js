@@ -25,7 +25,6 @@ const webpackConfig = merge(baseWebpackConfig, {
   },
   externals: { // value 为 umd 模块名
     vue: 'Vue',
-    axios: 'axios',
     vuex: 'Vuex',
     'vue-router': 'VueRouter',
     echarts: "echarts"
