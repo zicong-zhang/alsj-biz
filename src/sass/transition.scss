@@ -12,8 +12,7 @@
 .on-leave-active {
   z-index: 100;
   background: $bg;
-  box-shadow: 0 e(30px) 0 rgba(0, 0, 0, .2);
-  transition: transform .2s ease;
+  transition: transform .3s ease;
 }
 
 .off-enter {
@@ -125,4 +124,14 @@
 .v-cover-enter-active,
 .v-cover-leave-active {
   transition: all .3s;
+}
+/* 图片加载组件 */
+.v-img-enter,
+.v-img-leave-to {
+  opacity: 0;
+}
+
+.v-img-enter-active,
+.v-img-leave-active {
+  transition: opacity .35s linear;
 }

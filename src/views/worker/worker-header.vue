@@ -2,7 +2,7 @@
   <header class="home-header">
     <span class="btn"
       @click="set">
-      <i class="iconfont icon-aboutnew"></i>
+      <i class="icon i-user"></i>
     </span>
     <div class="title"
       @click="showPop">
@@ -25,7 +25,7 @@
     </div>
     <span class="btn"
       @click="toTest">
-      <i class="iconfont icon-btn_my_setting"></i>
+      <i class="icon i-shezhi"></i>
     </span>
   </header>
 </template>

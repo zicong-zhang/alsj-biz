@@ -31,7 +31,6 @@ export default {
   height: e(110px);
   color: #fff;
   font-size: e(24px);
-  border-bottom: e(16px) solid transparent;
   h3 {
     font-size: e(24px);
     font-weight: normal;

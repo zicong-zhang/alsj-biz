@@ -3,7 +3,8 @@
     <WorkerHeader />
 
     <div class="content">
-      <WorkerTips />
+      <WorkerTips v-if="false" />
+      <i class="gap"></i>
       <WorkerGather />
       <WorkerChampion />
       <WorkerSaleTarget />

@@ -22,7 +22,7 @@
         <img src="~~img/home/icon_workbench_wallet@2x.png" />
         <p>店员管理</p>
       </li>
-      <li>
+      <li @click="toProductCenter">
         <img src="~~img/home/icon_workbench_staff@2x.png" />
         <p>产品中心</p>
       </li>
@@ -40,6 +40,11 @@ export default {
     toCustomerManagement() {
       this.$utils.go({
         name: 'customer-list'
+      })
+    },
+    toProductCenter() {
+      this.$utils.go({
+        name: 'product-center'
       })
     }
   }

@@ -63,7 +63,6 @@ export default {
       if (typeof this.confirm === "function") this.confirm(value);
     },
     onChange(instance) {
-      console.log("instance:_____", instance);
       if (typeof this.change === "function") this.change();
     }
   }

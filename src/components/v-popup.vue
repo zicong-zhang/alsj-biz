@@ -1,45 +1,45 @@
 <template>
   <div class="v-popup">
     <div class="popup-cover"
-      v-stop-cover></div>
+      v-show="isShow"
+      @click.prevent.stop="hide"></div>
     <ul>
-      <li v-for="(item, idx) in list"
+      <li v-show="isShow"
+        v-for="(item, idx) in list"
         :key="`v-popup${idx}`"
         @click.stop="select(item, idx)">
-        <p>{{ showValue(item) }}</p>
-        <!-- <i class="horizon-bar"></i> -->
+        <p>{{ showText ? item[showText] : item }}</p>
       </li>
     </ul>
   </div>
 </template>
 <script>
 export default {
-  name: "v-popup",
+  name: 'v-popup',
   props: {
     list: {
       type: Array,
       required: true
     },
-    textOne: String,
-    textTwo: String
+    showText: {
+      type: String
+    }
   },
   data() {
     return {
-    }
+      isShow: false
+    };
   },
   methods: {
-    select(item, idx) {
-      this.$emit('select', item, idx);
+    show() {
+      this.isShow = true;
     },
-    showValue(item) {
-      switch(true) {
-        case !!this.textTwo:
-          return item[this.textOne][this.textTwo];
-        case !!this.textOne:
-          return item[this.textOne];
-        default:
-          return item;
-      }
+    hide() {
+      this.isShow = false;
+    },
+    select(item, idx) {
+      this.hide();
+      this.$emit('select', item, idx);
     }
   }
 };
@@ -65,7 +65,7 @@ export default {
     box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.3);
     border-radius: 12px;
     &:before {
-      content: "";
+      content: '';
       display: block;
       width: 0;
       height: 0;
@@ -82,7 +82,7 @@ export default {
     height: 80px;
     font-size: 24px;
     color: #404040;
-    border-bottom:e(1px) solid #f5f5f5;
+    border-bottom: e(1px) solid #f5f5f5;
     padding-left: 36px;
   }
   p {

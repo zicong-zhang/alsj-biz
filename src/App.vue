@@ -26,7 +26,6 @@ export default {
         "performance-target", // 业绩目标
         "view-customer-info", // 客户详情
         "view-edit-create-order", // 开单
-        "view-performnace-total", // 总业绩
       ]
     };
   },
@@ -36,9 +35,10 @@ export default {
     })
   },
   created() {
+    // 18600000001
     localStorage.setItem(
         "USER_TOKEN",
-        "VE9LRU4tMTQ5LTE1MzY3MjM2MzE3ODktYWJj"
+        "VE9LRU4tMzYyLTE1MzY5MjczMTgyNzctYWJj"
       );
     // localStorage.setItem(
     //     "USER_TOKEN",

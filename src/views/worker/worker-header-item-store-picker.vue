@@ -13,7 +13,7 @@
           @click.stop="select(item)">
           <img src="~~img/home/icon_tap_home_normal@2x.png" />
           <h4>{{ item.merchantExt.merchantName }}</h4>
-          <span>{{ item.merchantStaffExt.roleId }}</span>
+          <!-- <span>{{ item.unreadMsgTotalCount }}</span> -->
         </li>
       </ul>
       <div class="create-store-btn">

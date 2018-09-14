@@ -45,9 +45,6 @@ export default {
       this.init();
     }
   },
-  created() {
-    this.init();
-  },
   methods: {
     ...mapActions(["getStoreSaleTarget"]),
     init() {

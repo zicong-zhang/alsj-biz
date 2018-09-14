@@ -30,11 +30,11 @@
   </div>
 </template>
 <script>
-import { mapState, mapActions, mapMutations } from "vuex";
-import imgPlaceholder from "~img/placeholder_user.png";
+import { mapState, mapActions, mapMutations } from 'vuex';
+import imgPlaceholder from '~img/placeholder_user.png';
 
 export default {
-  name: "customer-list-item-list",
+  name: 'customer-list-item-list',
   data() {
     return {
       nextPage: true,
@@ -52,12 +52,13 @@ export default {
   },
   mounted() {},
   methods: {
-    ...mapActions(["getCustomerList"]),
-    ...mapMutations(["INIT_CUSTOMER_LIST_PAGE_NUM"]),
+    ...mapActions(['getCustomerList']),
+    ...mapMutations(['INIT_CUSTOMER_LIST_PAGE_NUM']),
     getDataList() {
       if (this.nextPage) {
         return this.getCustomerList().then(res => {
           this.nextPage = res.data.next;
+          // 当第一页就为false时，没有展示文案
         });
       } else {
         return Promise.resolve(false);
@@ -77,7 +78,7 @@ export default {
         query: {
           id
         }
-      })
+      });
     }
   }
 };

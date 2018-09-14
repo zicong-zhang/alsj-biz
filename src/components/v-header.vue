@@ -15,12 +15,12 @@
 
 <script>
 export default {
-  name: "v-header",
+  name: 'v-header',
   props: {
     title: {
       type: String
     },
-    "back-reload": {
+    'back-reload': {
       type: Number
     },
     opacity: {
@@ -33,14 +33,13 @@ export default {
       type: Function
     }
   },
-  created() {
-  },
+  created() {},
   methods: {
     back() {
       if (this.onBack) {
         this.onBack();
       } else {
-        this.$store.commit("TURN", "off");
+        this.$store.commit('TURN', 'off');
         this.$router.back(-1);
       }
     }
@@ -51,23 +50,17 @@ export default {
 <style lang="scss">
 .header-component {
   flex: none;
-  display: -webkit-box;
   display: flex;
-  /* space-around | start | end | center | justify */
-  -webkit-box-pack: justify;
   justify-content: space-between;
-  /* start | end | center | baseline | stretch */
-  -webkit-box-align: center;
   align-items: center;
   height: 88px;
+  background: #fff;
   h1 {
     width: 100%;
     height: 88px;
     line-height: 88px;
     font-size: 32px;
     font-weight: bold;
-    background: #fff;
-    // color: $font;
     text-align: center;
   }
   i {

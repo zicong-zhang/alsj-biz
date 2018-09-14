@@ -28,9 +28,6 @@ export default {
       receiptAmount: 0
     };
   },
-  created() {
-    this.init();
-  },
   computed: {
     ...mapState({
       storeId: state => state.root.storeId

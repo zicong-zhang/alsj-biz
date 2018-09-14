@@ -6,23 +6,23 @@
     <div class="sale-champion">
 
       <!-- 背景 -->
-      <img v-if="championInfo"
-        src="~~img/sale-rank/img_champion.png"
-        key="sale-rank-championInfo-has-bg" />
-      <img v-else
+      <img v-if="!championInfo.nickname"
         src="~~img/sale-rank/img_champion_grey.png"
         key="sale-rank-championInfo-none-bg" />
+      <img v-else
+        src="~~img/sale-rank/img_champion.png"
+        key="sale-rank-championInfo-has-bg" />
 
-      <div v-if="championInfo"
+      <div v-if="!championInfo.nickname"
+        key="sale-rank-championInfo-none">
+        <p>本月销售冠军将会在这里显示</p>
+        <h3>冠军促单可及，继续加油！</h3>
+      </div>
+      <div v-else
         key="sale-rank-championInfo-has">
         <h4>·本月销售冠军·</h4>
         <h2 class="common-rmb">{{ championInfo.amount }}</h2>
         <h3>{{ championInfo.nickname }}</h3>
-      </div>
-      <div v-else
-        key="sale-rank-championInfo-none">
-        <p>本月销售冠军将会在这里显示</p>
-        <h3>冠军促单可及，继续加油！</h3>
       </div>
     </div>
 

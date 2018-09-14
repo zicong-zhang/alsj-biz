@@ -12,7 +12,7 @@
           <span>年份({{ year }})</span>
           <i class="iconfont icon-bottomnew"></i>
         </div>
-        <p @click="toAuthExplain">单位：万元</p>
+        <p>单位：万元</p>
       </div>
       <div class="chart-container">
         <div class="chart"
@@ -22,15 +22,15 @@
   </div>
 </template>
 <script>
-import { mapActions } from "vuex";
-import echarts from "echarts";
+import { mapActions } from 'vuex';
+import echarts from 'echarts';
 
 export default {
-  name: "view-performnace-total",
+  name: 'view-performnace-total',
   data() {
     return {
-      year: "",
-      chart: "",
+      year: '',
+      chart: '',
       performanceList: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
     };
   },
@@ -39,15 +39,12 @@ export default {
       if (!this.performanceList) return [0];
     }
   },
-  created() {
+  activated() {
     this.year = new Date().getFullYear();
     this.init();
   },
   methods: {
-    ...mapActions(["getPerformanceTotalList"]),
-    toAuthExplain() {
-      window.location.href = 'http://test.alasga.cn/pro/proxy/web/web/pages/product/product_detail.html?id=28'
-    },
+    ...mapActions(['getPerformanceTotalList']),
     showDatePicker() {
       this.$DatePicker({
         type: 'year-month',
@@ -55,7 +52,7 @@ export default {
           this.year = value.getFullYear();
           this.init();
         }
-      })
+      });
     },
     init() {
       this.getPerformanceTotalList(this.year).then(res => {
@@ -64,7 +61,7 @@ export default {
           list.forEach(item => {
             const idx = item.month - 1;
             this.performanceList.splice(idx, 1, item.amount / 10000);
-        });
+          });
         } else {
           this.performanceList = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
         }
@@ -76,17 +73,23 @@ export default {
     initChart() {
       this.charts = echarts.init(this.$refs.chart);
       this.setChartOpt();
-      this.$once("hook:beforeDestroy", () => {
+      this.$once('hook:deactivated', () => {
+        console.log('1111111:_____', 1111111);
         this.charts.dispose();
       });
     },
     setChartOpt() {
       this.charts.setOption({
+        // 动画类型
+        backOut(k) {
+          var s = 1.70158;
+          return --k * k * ((s + 1) * k + s) + 1;
+        },
         tooltip: {
-          trigger: "axis",
+          trigger: 'axis',
           axisPointer: {
             // 坐标轴指示器，坐标轴触发有效
-            type: "line" // 默认为直线，可选为：'line' | 'shadow'
+            type: 'line' // 默认为直线，可选为：'line' | 'shadow'
           }
         },
         grid: {
@@ -95,7 +98,7 @@ export default {
           y: 10
         },
         xAxis: {
-          type: "category",
+          type: 'category',
           boundaryGap: false,
           data: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
           offset: 18, // 文字距离轴线的偏移
@@ -104,7 +107,7 @@ export default {
             show: true, //去除网格线
             // 网格线颜色
             lineStyle: {
-              color: ["#f2f2f2"]
+              color: ['#f2f2f2']
             }
           },
           // splitArea : {show : true},//保留网格区域
@@ -112,13 +115,13 @@ export default {
           axisLabel: {
             show: true,
             textStyle: {
-              color: "#999"
+              color: '#999'
             }
           },
           // 轴线条颜色
           axisLine: {
             lineStyle: {
-              color: "#f2f2f2"
+              color: '#f2f2f2'
               // type: 'solid',
               // width:'2'
             }
@@ -128,14 +131,14 @@ export default {
           }
         },
         yAxis: {
-          type: "value",
+          type: 'value',
           offset: 5, // 文字距离轴线的偏移
           // 网格线
           splitLine: {
             show: true, //去除网格线
             // 网格线颜色
             lineStyle: {
-              color: ["#f2f2f2"]
+              color: ['#f2f2f2']
             }
           },
           // splitArea : {show : true},//保留网格区域
@@ -143,13 +146,13 @@ export default {
           axisLabel: {
             show: true,
             textStyle: {
-              color: "#999"
+              color: '#999'
             }
           },
           // 轴线条颜色
           axisLine: {
             lineStyle: {
-              color: "#fff"
+              color: '#fff'
               // type: 'solid',
               // width:'2'
             }
@@ -161,13 +164,13 @@ export default {
         series: [
           {
             data: this.performanceList,
-            type: "line",
+            type: 'line',
             symbolSize: 8, // 圆点
             itemStyle: {
               normal: {
-                color: "#39f", // 设置折线折点颜色
+                color: '#39f', // 设置折线折点颜色
                 lineStyle: {
-                  color: "#39f" // 设置折线线条颜色
+                  color: '#39f' // 设置折线线条颜色
                 }
               }
             },
@@ -177,11 +180,11 @@ export default {
                 color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
                   {
                     offset: 0,
-                    color: "RGBA(51, 153, 255, 0.2)"
+                    color: 'RGBA(51, 153, 255, 0.2)'
                   },
                   {
                     offset: 1,
-                    color: "RGBA(51, 153, 255, 0)"
+                    color: 'RGBA(51, 153, 255, 0)'
                   }
                 ])
               }
@@ -207,7 +210,7 @@ export default {
       padding-left: 12px;
       position: relative;
       &:before {
-        content: "";
+        content: '';
         position: absolute;
         left: 0;
         top: 50%;
@@ -227,11 +230,12 @@ export default {
     display: flex;
     justify-content: space-between;
     align-items: center;
-      padding: 0 36px;
+    padding: 0 36px;
     i {
       font-size: 24px;
     }
-    p, .picker {
+    p,
+    .picker {
       padding-top: 24px;
       padding-bottom: 50px;
     }

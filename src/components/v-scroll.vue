@@ -4,7 +4,7 @@
     <div class="scroll-wrapper">
 
       <slot name="pull-down-txt"
-        v-if="showPulldownTxt">
+        v-if="onPulldown">
         <div class="pull-down"
           ref="pull-text">
           <v-loading :play="loadingPlay"
@@ -61,6 +61,10 @@ export default {
     },
     // 监听该数据的变化，用于刷新bs
     listen: {
+      // required: true
+    },
+    // 是否完成上拉加载
+    finish: {
       // required: true
     }
   },
