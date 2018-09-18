@@ -13,7 +13,7 @@ export default {
   data() {
     return {
       text: "",
-      showToast: false,
+      showToast: true,
       showText: false,
       timer: null
     };
@@ -30,10 +30,7 @@ export default {
   left: 50%;
   z-index: 1100;
   transform: translate(-50%, -50%);
-  display: -webkit-box;
   display: flex;
-  /* space-around | start | end | center | justify */
-  -webkit-box-pack: center;
   justify-content: center;
   span {
     display: inline-block;

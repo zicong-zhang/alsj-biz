@@ -18,7 +18,8 @@ const devWebpackConfig = merge(baseWebpackConfig, {
     rules: utils.styleLoaders({ sourceMap: config.dev.cssSourceMap, usePostCSS: true })
   },
   externals: { // value 为 umd 模块名
-    echarts: "echarts"
+    echarts: "echarts",
+    vue: 'Vue'
   },
   // cheap-module-eval-source-map is faster for development
   devtool: config.dev.devtool,

@@ -3,15 +3,8 @@
     <v-header title="产品中心">
       <div class="right-btn btn"
         slot="right-one"
-        @click="showPopup">
+        @click="changeMode">
         <p>编辑</p>
-        <v-popup ref="popup"
-          :list="[{
-            type: 'del',
-            value: '删除'
-          }]"
-          show-text="value"
-          @select="enterDelectMode" />
       </div>
     </v-header>
     <div class="content">
@@ -21,49 +14,12 @@
           :key="`product-list-item${item.id}`"
           class="item"
           @click="selectProductItem(item.id)">
-          <i :class="{
-            icon: true, 
-            'i-danxuanweixuanzhong': !selectedList.includes(item.id),
-            'i-danxuanxuanzhong': selectedList.includes(item.id)
-          }"></i>
-          <v-img :src="item.goodsCover"
-            :loading="defaultImg" />
-          <section>
-            <header>{{ item.goodsName }}</header>
-            <p v-if="item">
-              <span v-for="(value, idx) in item.spaceName"
-                :key="`product-list-item-space-list${idx}`">{{ value }}</span>
-            </p>
-          </section>
-        </li>
-        <li v-for="item in productList"
-          :key="`product-list-item2${item.id}`"
-          class="item"
-          @click="selectProductItem(item.id)">
-          <i :class="{
-            icon: true, 
-            'i-danxuanweixuanzhong': !selectedList.includes(item.id),
-            'i-danxuanxuanzhong': selectedList.includes(item.id)
-          }"></i>
-          <v-img :src="item.goodsCover"
-            :loading="defaultImg" />
-          <section>
-            <header>{{ item.goodsName }}</header>
-            <p v-if="item">
-              <span v-for="(value, idx) in item.spaceName"
-                :key="`product-list-item-space-list${idx}`">{{ value }}</span>
-            </p>
-          </section>
-        </li>
-        <li v-for="item in productList"
-          :key="`product-list-item3${item.id}`"
-          class="item"
-          @click="selectProductItem(item.id)">
-          <i :class="{
-            icon: true, 
-            'i-danxuanweixuanzhong': !selectedList.includes(item.id),
-            'i-danxuanxuanzhong': selectedList.includes(item.id)
-          }"></i>
+          <i v-show="editMode"
+            :class="{
+              icon: true, 
+              'i-danxuanweixuanzhong': !selectedList.includes(item.id),
+              'i-danxuanxuanzhong': selectedList.includes(item.id)
+            }"></i>
           <v-img :src="item.goodsCover"
             :loading="defaultImg" />
           <section>
@@ -76,14 +32,19 @@
         </li>
       </ul>
     </div>
-    <nav class="handle-bar">
-      <div>
-        <i :class="{
+    <nav v-show="editMode"
+      class="handle-bar">
+      <i :class="{
           icon: true, 
           'i-danxuanweixuanzhong': selectedList.length !== productList.length && productList.length !== 0,
           'i-danxuanxuanzhong': selectedList.length === productList.length && productList.length !== 0
         }"></i>
-        <span>全选</span>
+      <p>全选</p>
+      <div class="del-btn"
+        @click="delProduct">
+        <span>删除</span>
+        <span v-show="selectedList.length"
+          key="product-center-del-btn">({{ selectedList.length }})</span>
       </div>
     </nav>
   </div>
@@ -100,8 +61,7 @@ export default {
       pageNum: 1,
       defaultImg,
       productList: [],
-      isShowPopup: false,
-      mode: 'none', // 编辑模式 edit
+      editMode: false, // 编辑模式
       selectedList: []
     };
   },
@@ -109,7 +69,10 @@ export default {
     this.init();
   },
   methods: {
-    ...mapActions(['getProductList']),
+    ...mapActions([
+      'getProductList',
+      'delProduct'
+    ]),
     init() {
       this.pageNum = 1;
       this.getProductListData();
@@ -119,20 +82,32 @@ export default {
         this.productList = res.data.list;
       });
     },
-    showPopup() {
-      this.$refs.popup.show();
+    // 删除模式
+    changeMode(item) {
+      this.editMode = !this.editMode;
+      this.selectedList.splice(0, this.selectedList.length);
     },
-    enterDelectMode(item) {
-      if (item.type === 'del') {
-        this.mode = 'del';
-      }
-    },
+    // 选中产品
     selectProductItem(id) {
       const idx = this.selectedList.indexOf(id);
       if (idx > -1) {
         this.selectedList.splice(idx, 1);
       } else {
         this.selectedList.push(id);
+      }
+    },
+    // 删除产品
+    delProduct() {
+      const list = this.selectedList;
+      if (list.length) {
+        this.delProduct(list)
+          .then(res => {
+            const newList = this.productList.filter(item => this.selectedList.some(value => item.id == value))
+            this.$set(this.$data, 'productList', newList);
+            this.$Toast('删除成功');
+          })
+      } else {
+        this.$Toast('请选择需要删除的产品');
       }
     }
   }
@@ -179,6 +154,7 @@ export default {
         bottom: 0;
         left: 36px;
         right: 36px;
+        z-index: 30;
       }
     }
     section {
@@ -215,6 +191,7 @@ export default {
     }
   }
   .icon {
+    flex: none;
     margin-right: 30px;
   }
   .i-danxuanweixuanzhong {
@@ -222,6 +199,30 @@ export default {
   }
   .i-danxuanxuanzhong {
     color: $main;
+  }
+  .handle-bar {
+    height: 100px;
+    line-height: 100px;
+    background: #fff;
+    border-top: 1px solid #eaeaea;
+    font-size: 32px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-left: 36px;
+    p {
+      flex: 1;
+    }
+  }
+  .del-btn {
+    flex: none;
+    display: block;
+    width: 250px;
+    height: 100px;
+    line-height: 100px;
+    background: $main;
+    color: #fff;
+    text-align: center;
   }
 }
 </style>
