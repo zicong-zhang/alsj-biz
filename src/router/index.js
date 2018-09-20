@@ -17,7 +17,7 @@ import testRouter from './test-router';
 const routes = [].concat(homeRouter, workerRouter, orderRouter, customerRouter, noFoundRouter, productRouter, testRouter);
 
 const router = new Router({
-  // mode: 'history',
+  mode: 'history',
   routes
 });
 
@@ -25,7 +25,7 @@ router.beforeEach((to, from, next) => {
   document.title = to.meta.title;
   // console.log('from:_____', to, from);
   if (to.meta.needLogin) {
-    // if (store.state.token) { // 通过vuex state获取当前的token是否存在
+    // if (store.state.token) { // 通过 vuex state 获取当前的 token是否存在
     if (1) {
       next();
     } else {

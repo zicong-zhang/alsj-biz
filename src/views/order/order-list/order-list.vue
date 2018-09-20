@@ -1,7 +1,7 @@
 <template>
   <div class="order-list">
     <OrderListHeader/>
-    <div class="content">
+    <div class="content" ref="content">
       <v-scroll
         :show-pulldown-txt="true"
         :on-pulldown="init">

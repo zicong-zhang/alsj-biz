@@ -69,7 +69,7 @@ export default {
   flex: none;
   width: 100%;
   height: 100%;
-  background: #f5f5f5;
+  background: #f6f6f6;
   overflow: hidden;
   position: relative;
 

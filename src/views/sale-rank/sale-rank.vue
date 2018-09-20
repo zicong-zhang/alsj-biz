@@ -183,7 +183,7 @@ export default {
     // 获取销售冠军信息
     getChampionInfo() {
       getCurrentMonthSaleChampion(this.merchantId).then(res => {
-        this.championInfo = res.data.rankBO;
+        this.championInfo = res.data.rankBO || {};
       });
     }
   }

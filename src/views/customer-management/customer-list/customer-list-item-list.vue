@@ -1,11 +1,8 @@
 <template>
   <div class="customer-list-item-list">
     <v-scroll class="scroll-container"
-      :listen="customerList"
-      :show-pulldown-txt="true"
-      :show-pullup-txt="true"
-      :on-pulldown="onRefresh"
-      :on-pullup="onPullup">
+      v-model="isFinishLoad"
+      :on-load="onLoad">
       <ul>
         <li v-for="item in customerList"
           :key="item.id"
@@ -39,13 +36,18 @@ export default {
     return {
       nextPage: true,
       imgPlaceholder,
-      isFinishPullup: false
+      isFinishLoad: false
     };
   },
   computed: {
     ...mapState({
       customerList: state => state.customerModule.customerList
     })
+  },
+  watch: {
+    isFinishLoad(val) {
+      console.log('isFinishLoad:_____', val);
+    }
   },
   created() {
     this.getDataList();
@@ -61,7 +63,7 @@ export default {
           // 当第一页就为false时，没有展示文案
         });
       } else {
-        return Promise.resolve(false);
+        return Promise.reject(false);
       }
     },
     onRefresh() {
@@ -69,7 +71,7 @@ export default {
       this.INIT_CUSTOMER_LIST_PAGE_NUM();
       return this.getDataList();
     },
-    onPullup() {
+    onLoad() {
       return this.getDataList();
     },
     toCustomerDetail(id) {
@@ -86,7 +88,6 @@ export default {
 <style lang="scss">
 .customer-list-item-list {
   height: 100%;
-  @include scroll(y);
   ul {
     padding-top: 16px;
   }

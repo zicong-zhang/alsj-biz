@@ -1,10 +1,16 @@
 import Vue from 'vue';
 
 
-import { DatetimePicker , Picker ,List } from 'vant';
+import {
+  DatetimePicker,
+  Picker,
+  List,
+  PullRefresh
+} from 'vant';
 Vue.use(DatetimePicker)
   .use(Picker)
   .use(List)
+  .use(PullRefresh)
 
 import VHeader from '~components/v-header';
 import VFooter from '~components/v-footer';
@@ -19,7 +25,7 @@ import VCover from '~components/v-cover';
 import VDatePicker from '~components/v-date-picker';
 import VFormLabel from '~components/v-form-label';
 import VLoading from '~components/v-loading';
-import VScroll from '~components/v-scroll';
+import VScroll from '~components/v-scroll2';
 import VImg from '~components/v-img';
 
 Vue.component('v-header', VHeader);
