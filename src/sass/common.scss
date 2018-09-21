@@ -87,10 +87,3 @@ body {
     width: 100%;
   }
 }
-
-.van-pull-refresh__head {
-  $h: r(142px);
-  height: $h;
-  line-height: $h;
-  top: -$h;
-}

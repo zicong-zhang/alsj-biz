@@ -3,15 +3,14 @@
     <v-header title="客户详情" />
 
     <div class="content">
-      <v-scroll :listen="orderList">
+      <v-scroll :load-finish="nextOrderList"
+        :on-refresh="init"
+        :on-load="getCustomerOrder">
         <div class="scroll-container">
 
           <div class="customer-label">
-            <img v-lazy="{
-              src: customerInfo.avatar,
-              loading: errorLogo,
-              error: errorLogo
-            }" />
+            <v-img :src="customerInfo.avatar"
+              error-type="user" />
             <div class="customer-info">
               <h4>
                 <span>{{ customerInfo.name }}</span>
@@ -27,8 +26,7 @@
                 key="no-pf"
                 class="label-pf label-no-pf">非平台客户</p>
             </div>
-            <p class="talk-btn"
-              id="aa">在线沟通</p>
+            <p class="talk-btn">在线沟通</p>
           </div>
           <i class="gap"></i>
           <div class="base-info">
@@ -67,46 +65,63 @@
   </div>
 </template>
 <script>
-import { mapActions } from "vuex";
-import OrderListItem from "~views/order/order-list/order-list-item";
+import { mapActions } from 'vuex';
+import OrderListItem from '~views/order/order-list/order-list-item';
 export default {
-  name: "view-customer-info",
+  name: 'view-customer-info',
   components: {
     OrderListItem
   },
   data() {
     return {
-      errorLogo: require("~img/placeholder_user.png"),
+      errorLogo: require('~img/placeholder_user.png'),
       customerInfo: {},
       pageNum: 1,
-      customerId: "",
-      orderList: []
+      customerId: '',
+      orderList: [],
+      nextOrderList: true
     };
   },
   created() {
     this.customerId = this.$route.query.id;
-    this.getInfo();
-    this.getCustomerOrder();
+    this.init();
+  },
+  watch: {
+    nextOrderList(newVal) {
+      console.log('nextOrderList:_____', newVal);
+    }
   },
   methods: {
-    ...mapActions(["getCustomerInfo", "getOrderListByCustomer"]),
+    ...mapActions(['getCustomerInfo', 'getOrderListByCustomer']),
+    init() {
+      this.pageNum = 1;
+      this.nextOrderList = true;
+      this.orderList = [];
+      console.log('this.orderList:_____', this.orderList);
+      return Promise.all([this.getInfo(), this.getCustomerOrder()]);
+    },
     getInfo() {
-      this.getCustomerInfo(this.customerId).then(res => {
+      return this.getCustomerInfo(this.customerId).then(res => {
         this.customerInfo = res.data.merchantCustomer;
       });
     },
     getCustomerOrder() {
-      this.getOrderListByCustomer({
-        customerId: this.customerId,
-        pageNum: this.pageNum
-      }).then(res => {
-        this.orderList = res.data.list;
-      });
+      if (this.nextOrderList) {
+        return this.getOrderListByCustomer({
+          customerId: this.customerId,
+          pageNum: this.pageNum
+        }).then(res => {
+          const { list, next } = res.data;
+          this.pageNum++;
+          this.nextOrderList = next;
+          this.orderList = this.orderList.concat(list);
+        });
+      }
     },
     // 开单
     toCreateOrder() {
       this.$utils.go({
-        name: "order-edit-create-order",
+        name: 'order-edit-create-order',
         query: {
           customerId: this.customerId,
           linkmanAddress: this.customerInfo.address,
@@ -135,7 +150,7 @@ export default {
     height: 144px;
     background: linear-gradient(to right, #2985ff, #3dadff);
     padding: 0 36px;
-    img {
+    .v-img {
       width: 88px;
       height: 88px;
       border-radius: 50%;
@@ -197,7 +212,7 @@ export default {
       margin-bottom: 12px;
       position: relative;
       &:before {
-        content: "";
+        content: '';
         width: 4px;
         height: 28px;
         background: #333;
@@ -212,7 +227,7 @@ export default {
   .create-order-btn {
     line-height: 88px;
     background: #fff;
-    box-shadow:0px 0px 10px rgba(0,0,0,0.1);
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
     font-size: 30px;
     font-weight: bold;
     color: $main;

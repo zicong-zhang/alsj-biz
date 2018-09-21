@@ -27,7 +27,6 @@ export default {
   },
   watch: {
     play(newVal) {
-      console.log('newVal:_____', newVal);
       if (newVal) {
         this.lottie.play();
       } else {
@@ -51,7 +50,7 @@ export default {
 </script>
 <style lang="scss">
 .v-loading {
-  height: 142px;
+  height: 100px;
   display: flex;
   justify-content: center;
   align-items: center;

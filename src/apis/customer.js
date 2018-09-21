@@ -3,12 +3,13 @@ import http from '~axios';
 // 获取客户列表
 export const getCustomerList = ({
   merchantId,
-  pageNum
+  pageNum,
+  pageSize
 }) => {
   return http('/merchantCustomer/list', {
     merchantId,
     pageNum,
-    pageSize: 20
+    pageSize
   })
 }
 // 获取客户对应的订单列表

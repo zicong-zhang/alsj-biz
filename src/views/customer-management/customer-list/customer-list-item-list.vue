@@ -1,7 +1,8 @@
 <template>
   <div class="customer-list-item-list">
     <v-scroll class="scroll-container"
-      v-model="isFinishLoad"
+      :load-finish="!nextPage"
+      :on-refresh="onRefresh"
       :on-load="onLoad">
       <ul>
         <li v-for="item in customerList"
@@ -58,12 +59,11 @@ export default {
     ...mapMutations(['INIT_CUSTOMER_LIST_PAGE_NUM']),
     getDataList() {
       if (this.nextPage) {
+        console.log('5566666:_____', 5566666);
         return this.getCustomerList().then(res => {
           this.nextPage = res.data.next;
           // 当第一页就为false时，没有展示文案
         });
-      } else {
-        return Promise.reject(false);
       }
     },
     onRefresh() {

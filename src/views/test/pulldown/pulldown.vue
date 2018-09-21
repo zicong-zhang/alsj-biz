@@ -46,15 +46,7 @@
 <script>
 export default {
   name: 'view-test-pulldown',
-  model: {
-    // 这里
-    prop: 'aa',
-    event: 'bb'
-  },
   props: {
-    aa: {
-      type: String
-    },
     onRefresh: {
       type: Function
     },
@@ -95,7 +87,7 @@ export default {
           }
           this.listLoading = false;
           // this.listFinished = this.qty >= 2;
-        }, 2000);
+        }, 300);
       } else {
         console.log('pull:_____');
       }
@@ -103,12 +95,40 @@ export default {
     handleRefresh() {
       // if (this.onRefresh) {
       this.listFinished = true;
-      setTimeout(() => {
+      return this.aa()
+        .then(() => this.isPulldownLoading = false)
+        .catch(() => this.isPulldownLoading = false)
+      /* setTimeout(() => {
         this.$Toast('刷新成功');
         this.isPulldownLoading = false;
         this.listFinished = false;
-      }, 3000);
+      }, 2000); */
       // }
+    },
+    aa() {
+      return Promise.all([this.bb(), this.cc()])
+        .then(res => {
+          console.log('res:_____', res);
+        })
+        .catch(err => {
+          console.log('err:_____', err);
+        })
+    },
+    bb() {
+      return new Promise((res, rej) => {
+        setTimeout(() => {
+          res('bbb');
+          console.log('bb完成:_____');
+        }, 3000);
+      });
+    },
+    cc() {
+      return new Promise((res, rej) => {
+        setTimeout(() => {
+          rej('ccc');
+          console.log('cc完成:_____');
+        }, 4000);
+      });
     }
   }
 };

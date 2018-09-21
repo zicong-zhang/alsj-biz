@@ -23,13 +23,8 @@ export default {
     src: {
       type: String
     },
-    errorImg: {
-      type: String
-    },
-    type: {
-      type: String,
-      default: 'logo'
-    }
+    loadingType: String,
+    errorType: String
   },
   data() {
     return {
@@ -38,9 +33,20 @@ export default {
   },
   computed: {
     loadingImg() {
-      switch(this.type) {
+      switch(this.loadingType) {
         case 'logo':
           return require('~img/placeholder/store_logo.png');
+        default:
+          return require('~img/placeholder/f5.png');
+      }
+    },
+    errorImg() {
+      switch (this.errorType) {
+        case 'user':
+          return require('~img/placeholder/user.png');
+        default:
+          return this.loadingImg;
+          break;
       }
     }
   },

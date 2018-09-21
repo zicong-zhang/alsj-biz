@@ -17,7 +17,8 @@ export default {
     }) {
       return api.getCustomerList({
           merchantId: rootState.root.storeId,
-          pageNum: state.pageNum
+          pageNum: state.pageNum,
+          pageSize: 15
         })
         .then(res => {
           commit('UPDATE_CUSTOMER_LIST', res.data);
@@ -33,7 +34,7 @@ export default {
       return api.getOrderListByCustomer({
         customerId,
         pageNum,
-        pageSize: 15
+        pageSize: 2
       })
     },
     createOrder({ rootState }, {
