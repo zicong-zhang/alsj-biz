@@ -1,6 +1,6 @@
 export default {
   state: {
-    turn: '',
+    turn: '', // '' on off
     storeId: false
   },
   getters: {

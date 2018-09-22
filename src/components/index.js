@@ -26,6 +26,7 @@ import VDatePicker from '~components/v-date-picker';
 import VFormLabel from '~components/v-form-label';
 import VLoading from '~components/v-loading';
 import VScroll from '~components/v-scroll2';
+import VList from '~components/v-list';
 import VImg from '~components/v-img';
 
 Vue.component('v-header', VHeader);
@@ -41,7 +42,8 @@ Vue.component('v-cover', VCover);
 Vue.component('v-date-picker', VDatePicker);
 Vue.component('v-form-label', VFormLabel);
 Vue.component('v-loading', VLoading);
-Vue.component('v-scroll', VScroll);
+// Vue.component('v-scroll', VScroll);
+Vue.component('v-scroll', VList);
 Vue.component('v-img', VImg);
 
 import $Picker from './v-v-picker/v-picker';

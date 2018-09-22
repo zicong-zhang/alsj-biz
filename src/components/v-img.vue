@@ -50,18 +50,23 @@ export default {
       }
     }
   },
+  watch: {
+    src(newVal) {
+      this.loadImg();
+    }
+  },
   created() {
-    this.status = 'loading';
     this.loadImg();
   },
   methods: {
     loadImg() {
+      this.status = 'loading';
       let img = new Image();
       img.src = this.src;
       img.onload = () => {
         this.status = 'loaded';
       };
-      img.onerror = () => {
+      img.onerror = (err) => {
         if (!this.error) this.error = this.loading;
         this.status = 'error';
       };

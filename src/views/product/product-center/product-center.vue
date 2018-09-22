@@ -23,7 +23,7 @@
             }"></i>
           <div class="product-info">
             <v-img :src="item.goodsCover"
-              :loading="defaultImg" />
+              loading-type />
             <section>
               <header>{{ item.goodsName }}</header>
               <p v-if="item">

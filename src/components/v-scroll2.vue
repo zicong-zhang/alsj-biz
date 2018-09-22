@@ -1,58 +1,56 @@
 <template>
   <div class="v-scroll-wrapper">
-    <!-- 下拉刷新 -->
-    <van-pull-refresh v-model="isPulldownLoading"
-      :head-height="loadingHeight"
-      :disabled="disabledRefresh"
-      @refresh="handleRefresh">
+    <!-- 底部加载更多 -->
+    <van-list v-model="listLoading"
+      :immediate-check="false"
+      :finished="disabledLoad"
+      @load="handleLoadMore">
 
-      <v-loading slot="normal"
-        :autoplay="false"
-        ref="loadingComponent" />
-      <v-loading slot="pulling"
-        :autoplay="false" />
-      <v-loading slot="loosing"
-        :autoplay="false" />
-      <v-loading slot="loading"
-        :play="true" />
+      <!-- 下拉刷新 -->
+      <van-pull-refresh v-model="isPulldownLoading"
+        :head-height="loadingHeight"
+        :disabled="disabledRefresh"
+        @refresh="handleRefresh">
 
-      <!-- 底部加载更多 -->
-      <van-list v-model="listLoading"
-        :immediate-check="false"
-        :finished="disabledLoad"
-        @load="handleLoadMore">
-        <slot>
-        </slot>
+        <v-loading slot="normal"
+          :autoplay="false"
+          ref="loadingComponent" />
+        <v-loading slot="pulling"
+          :autoplay="false" />
+        <v-loading slot="loosing"
+          :autoplay="false" />
+        <v-loading slot="loading"
+          :play="true" />
 
-        <!-- 列表底部 loading -->
-        <v-loading slot="loading" />
-        <!-- 到达底部文案 -->
-        <div v-show="!loadFinish"
-          class="v-scroll-list-finish-text">
-          <p>到底啦~</p>
+        <div class="v-scroll-container">
+          <slot></slot>
         </div>
-      </van-list>
 
-      <!-- 下拉刷新占位 pull-refresh bug解决方案 -->
-      <div v-show="isPulldownLoading"
-        class="pull-refresh-placeholder"
-        :style="{
+        <!-- 下拉刷新占位 pull-refresh bug解决方案 -->
+        <div v-show="isPulldownLoading"
+          class="pull-refresh-placeholder"
+          :style="{
             height: `${loadingHeight}px`
           }"></div>
-    </van-pull-refresh>
+      </van-pull-refresh>
+
+      <!-- 列表底部 loading -->
+      <v-loading slot="loading" />
+      <!-- 到达底部文案 -->
+      <div v-show="!enabled"
+        class="v-scroll-list-finish-text">
+        <p>到底啦~</p>
+      </div>
+    </van-list>
   </div>
 </template>
 
 <script>
 export default {
   name: 'v-scroll',
-  /* model: {
-    prop: 'loadFinish',
-    event: 'allFinish'
-  }, */
   props: {
     // 标记整个列表加载完成
-    loadFinish: {
+    enabled: {
       type: Boolean,
       required: true
     },
@@ -75,12 +73,23 @@ export default {
     };
   },
   watch: {
-    loadFinish(val) {
-      this.disabledLoad = val;
-      console.log('val:_____', val);
+    enabled(val) {
+
+      if (val === this.disabledLoad) {
+        this.disabledLoad = !val;
+      }/*  else {
+        this.$nextTick(() => {
+          this.disabledLoad = false;
+        })
+      } */
+    },
+    disabledLoad(newVal) {
+      console.log('disabledLoad:_____', newVal);
     }
   },
   created() {
+    console.log('create...this.disabledLoad:_____', this.disabledLoad, this.enabled);
+    this.disabledLoad = !this.enabled;
     this.disabledRefresh = !this.onRefresh;
   },
   mounted() {
@@ -103,11 +112,12 @@ export default {
           .catch(res => {
             this.onFinishLoadMore();
           });
+      } else {
+        this.onFinishLoadMore();
       }
     },
     // 完成加载更多
     onFinishLoadMore() {
-      console.log('1:_____', 1);
       this.listLoading = false;
     },
     // 执行下拉刷新
@@ -121,9 +131,10 @@ export default {
        * 如超过 - 关闭 loading
        * 未超过 - 根据剩余时间开 setTimeout
        */
+      console.log(':_____', 'handleRefresh');
       if (this.onRefresh) {
         const now = Date.now();
-        this.disabledLoad = true;
+        if (!this.disabledLoad) this.disabledLoad = true;
         console.log('2222:_____', 2222);
         this.onRefresh()
           .then(() => this.onFinishRefresh(now))
@@ -133,7 +144,7 @@ export default {
     // 完成刷新
     onFinishRefresh(old, fail) {
       console.log('444444:_____', 444444);
-      const dateGap = Date.now() - old;
+      /* const dateGap = Date.now() - old;
       const minute = 600;
       const timeGap = minute - dateGap;
 
@@ -147,34 +158,52 @@ export default {
 
         this.finishRefreshInitStatus(timeGap + 500);
       } else {
-        this.isPulldownLoading = false;
-        this.finishRefreshInitStatus(timeGap);
-      }
+        this.isPulldownLoading = false; */
+      // this.finishRefreshInitStatus(timeGap);
+      this.finishRefreshInitStatus();
+      this.isPulldownLoading = false;
+      if (this.enabled) this.disabledLoad = false;
+      // }
 
       if (fail) console.warn('refresh fail');
     },
     // 完成刷新后初始化状态 动画结束后再开放加载更多
     finishRefreshInitStatus(timeout) {
-      let timer = setTimeout(() => {
-      console.log('timeout:_____', timeout);
-        clearTimeout(timer);
-        timer = null;
-        this.disabledLoad = false;
-      }, 3000);
+      // let timer = setTimeout(() => {
+      console.log('timeout:_____', this.enabled);
+      //   clearTimeout(timer);
+      //   timer = null;
+      /* if (this.enabled) {
+        this.$nextTick(() => {
+          this.disabledLoad = false;
+        })
+        
+      } */
+      // }, 1000);
     }
   }
 };
 </script>
-<style lang="scss" scoped>
+<style lang="scss">
 .v-scroll-wrapper {
   height: 100%;
-  @include scroll(y);
+  // @include scroll(y);
+  // .van-pull-refresh__track {
+  //   height: 100%;
+  // }
+  .v-scroll-container {
+    min-height: 100%;
+  }
 }
 .van-pull-refresh__head {
   $h: 100px;
   height: $h;
   line-height: $h;
   top: -$h;
+}
+.van-list {
+  height: 100%;
+  @include scroll(y);
 }
 .v-scroll-list-finish-text {
   height: 100px;

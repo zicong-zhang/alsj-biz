@@ -94,16 +94,21 @@ export default {
     },
     handleRefresh() {
       // if (this.onRefresh) {
+      this.list = [];
       this.listFinished = true;
       return this.aa()
-        .then(() => this.isPulldownLoading = false)
-        .catch(() => this.isPulldownLoading = false)
+        .then(() => this.finishRefresh())
+        .catch(() => this.finishRefresh())
       /* setTimeout(() => {
         this.$Toast('刷新成功');
         this.isPulldownLoading = false;
         this.listFinished = false;
       }, 2000); */
       // }
+    },
+    finishRefresh() {
+      this.isPulldownLoading = false;
+      // this.listFinished = false;
     },
     aa() {
       return Promise.all([this.bb(), this.cc()])

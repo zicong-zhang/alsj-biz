@@ -1,7 +1,8 @@
 <template>
   <div id="app"
     v-cloak>
-    <transition :name="$store.state.root.turn">
+    <transition :name="turn"
+      @after-enter="setBackAnimation">
       <keep-alive :exclude="exclude">
         <router-view></router-view>
       </keep-alive>
@@ -31,7 +32,8 @@ export default {
   },
   computed: {
     ...mapState({
-      storeId: state => state.root.storeId
+      storeId: state => state.root.storeId,
+      turn: state => state.root.turn
     })
   },
   created() {
@@ -50,13 +52,18 @@ export default {
   },
   mounted() {},
   methods: {
-    ...mapMutations(['SET_STORE_ID']),
+    ...mapMutations(['SET_STORE_ID', 'TURN']),
     back() {
       this.$store.commit("TURN", "off");
       this.$router.back(-1);
     },
     setMuiBack() {
       mui.back = this.back;
+    },
+    setBackAnimation() {
+      if (this.turn && this.turn != 'off') {
+        this.TURN('off');
+      }
     },
     judgeSessionHasStoreId() {
       if (!this.storeId) {

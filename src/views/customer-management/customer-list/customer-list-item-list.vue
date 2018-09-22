@@ -1,7 +1,7 @@
 <template>
   <div class="customer-list-item-list">
     <v-scroll class="scroll-container"
-      :load-finish="!nextPage"
+      :enabled="nextPage"
       :on-refresh="onRefresh"
       :on-load="onLoad">
       <ul>
@@ -53,18 +53,13 @@ export default {
   created() {
     this.getDataList();
   },
-  mounted() {},
   methods: {
     ...mapActions(['getCustomerList']),
     ...mapMutations(['INIT_CUSTOMER_LIST_PAGE_NUM']),
     getDataList() {
-      if (this.nextPage) {
-        console.log('5566666:_____', 5566666);
-        return this.getCustomerList().then(res => {
-          this.nextPage = res.data.next;
-          // 当第一页就为false时，没有展示文案
-        });
-      }
+      return this.getCustomerList().then(res => {
+        this.nextPage = res.data.next;
+      });
     },
     onRefresh() {
       this.nextPage = true;

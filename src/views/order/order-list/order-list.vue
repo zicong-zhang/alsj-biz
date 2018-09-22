@@ -1,29 +1,31 @@
 <template>
   <div class="order-list">
     <OrderListHeader/>
-    <div class="content" ref="content">
-      <v-scroll
-        :show-pulldown-txt="true"
-        :on-pulldown="init">
+    <div class="content"
+      ref="content">
+      <v-scroll :enabled="hasNext"
+        :on-refresh="init"
+        :on-load="getOrderList">
 
-      <ul v-if="orderList.length" key="order-list">
-        <OrderListItem v-for="item in orderList"
-          :item="item"
-          :key="`order-list-item-${item.id}`"
-          @log-scrolltop="logScrollTop" />
-      </ul>
+        <ul v-if="orderList.length"
+          key="order-list">
+          <OrderListItem v-for="item in orderList"
+            :item="item"
+            :key="`order-list-item-${item.id}`"
+            @log-scrolltop="logScrollTop" />
+        </ul>
       </v-scroll>
     </div>
   </div>
 </template>
 <script>
-import OrderListHeader from "./order-list-header";
-import OrderListItem from "./order-list-item";
+import OrderListHeader from './order-list-header';
+import OrderListItem from './order-list-item';
 
 import { mapState, mapActions } from 'vuex';
 
 export default {
-  name: "OrderList",
+  name: 'OrderList',
   components: {
     OrderListHeader,
     OrderListItem
@@ -33,7 +35,7 @@ export default {
       dataList: 5,
       scrollTop: 0,
       pageNum: 1,
-      hasNext: false
+      hasNext: true
     };
   },
   computed: {
@@ -44,7 +46,7 @@ export default {
   },
   watch: {
     $route(to, from) {
-      if (from.name == "order-detail" && to.name == 'order-list') {
+      if (from.name == 'order-detail' && to.name == 'order-list') {
         // this.$refs.content.scrollTop = this.$route.meta.scrollTop;
       }
     }
@@ -57,7 +59,7 @@ export default {
     ...mapActions(['getListByStatus']),
     init() {
       this.pageNum = 1;
-      this.hasNext = false;
+      this.hasNext = true;
       return this.getOrderList();
     },
     // 记录滚动高度
@@ -65,16 +67,11 @@ export default {
       this.$route.meta.scrollTop = this.$refs.content.scrollTop;
     },
     getOrderList() {
-      if (!this.hasNext) {
-        return this.getListByStatus(this.pageNum)
-          .then(res => {
-            console.log('res:_____', res);
-            this.hasNext = res.data.next;
-            this.pageNum++;
-        })
-      } else {
-        return Promise.resolve(false);
-      }
+      return this.getListByStatus(this.pageNum).then(res => {
+        console.log('res:_____', res);
+        this.hasNext = res.data.next;
+        this.pageNum++;
+      });
     }
   }
 };

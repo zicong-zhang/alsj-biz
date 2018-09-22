@@ -3,7 +3,7 @@
     <v-header title="客户详情" />
 
     <div class="content">
-      <v-scroll :load-finish="nextOrderList"
+      <v-scroll :enabled="nextOrderList"
         :on-refresh="init"
         :on-load="getCustomerOrder">
         <div class="scroll-container">
@@ -66,6 +66,7 @@
 </template>
 <script>
 import { mapActions } from 'vuex';
+import { vibrate } from '../../../tools/plus.js';
 import OrderListItem from '~views/order/order-list/order-list-item';
 export default {
   name: 'view-customer-info',
@@ -82,28 +83,33 @@ export default {
       nextOrderList: true
     };
   },
+    watch: {
+      nextOrderList(newVal) {
+        // console.log('nextOrderList:_____', newVal);
+      }
+    },
   created() {
     this.customerId = this.$route.query.id;
     this.init();
   },
-  watch: {
-    nextOrderList(newVal) {
-      console.log('nextOrderList:_____', newVal);
-    }
+  mounted() {
+    console.log('Plus:_____', vibrate());
   },
   methods: {
     ...mapActions(['getCustomerInfo', 'getOrderListByCustomer']),
     init() {
       this.pageNum = 1;
       this.nextOrderList = true;
-      this.orderList = [];
       console.log('this.orderList:_____', this.orderList);
-      return Promise.all([this.getInfo(), this.getCustomerOrder()]);
+      return Promise.all([this.getInfo(), this.aa()]);
     },
     getInfo() {
       return this.getCustomerInfo(this.customerId).then(res => {
         this.customerInfo = res.data.merchantCustomer;
       });
+    },
+    aa() {
+      return this.getCustomerOrder();
     },
     getCustomerOrder() {
       if (this.nextOrderList) {
@@ -111,10 +117,14 @@ export default {
           customerId: this.customerId,
           pageNum: this.pageNum
         }).then(res => {
+          if (this.pageNum === 1) this.orderList = [];
           const { list, next } = res.data;
           this.pageNum++;
-          this.nextOrderList = next;
+          console.log('this.orderList:_____', this.orderList);
           this.orderList = this.orderList.concat(list);
+          this.$nextTick(() => {
+            this.nextOrderList = next;
+          })
         });
       }
     },
