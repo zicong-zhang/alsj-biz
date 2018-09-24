@@ -18,7 +18,7 @@
         <img src="~~img/home/icon_workbench_market@2x.png" />
         <p>营销中心</p>
       </li> -->
-      <li>
+      <li @click="toStaffList">
         <img src="~~img/home/icon_workbench_wallet@2x.png" />
         <p>店员管理</p>
       </li>
@@ -45,6 +45,11 @@ export default {
     toProductCenter() {
       this.$utils.go({
         name: 'product-center'
+      })
+    },
+    toStaffList() {
+      this.$utils.go({
+        name: 'staff-list'
       })
     }
   }

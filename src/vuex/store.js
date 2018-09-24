@@ -7,6 +7,7 @@ import orderListModule from '~views/order/order-list/order-list-store';
 import orderDetailModule from '~views/order/order-detail/order-detail-store';
 import customerModule from '~views/customer-management/customer-store';
 import productCenterModule from '~views/product/product-center/product-center-store';
+import staffStore from '~views/staff/staff-store';
 
 if (process.env.NODE_ENV === 'development') {
   Vue.use(Vuex);
@@ -20,7 +21,8 @@ const store = new Vuex.Store({
     orderListModule,
     orderDetailModule,
     customerModule,
-    productCenterModule
+    productCenterModule,
+    staffStore
   }
 });
 

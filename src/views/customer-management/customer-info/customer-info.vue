@@ -93,7 +93,6 @@ export default {
     this.init();
   },
   mounted() {
-    console.log('Plus:_____', vibrate());
   },
   methods: {
     ...mapActions(['getCustomerInfo', 'getOrderListByCustomer']),

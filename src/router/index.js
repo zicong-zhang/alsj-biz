@@ -13,8 +13,9 @@ import noFoundRouter from './no-found-router';
 import customerRouter from './customer-router';
 import productRouter from './product-router';
 import testRouter from './test-router';
+import staffRouter from './staff-router';
 
-const routes = [].concat(homeRouter, workerRouter, orderRouter, customerRouter, noFoundRouter, productRouter, testRouter);
+const routes = [].concat(homeRouter, workerRouter, orderRouter, customerRouter, noFoundRouter, productRouter, staffRouter, testRouter);
 
 const router = new Router({
   mode: 'history',

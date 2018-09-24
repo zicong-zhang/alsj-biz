@@ -36,6 +36,8 @@ export default {
       switch(this.loadingType) {
         case 'logo':
           return require('~img/placeholder/store_logo.png');
+        case 'user':
+          return require('~img/placeholder/user.png');
         default:
           return require('~img/placeholder/f5.png');
       }
