@@ -7,23 +7,23 @@
  * doc
  * https://github.com/airbnb/lottie-web
  */
-import lottie from "lottie-web";
-import loadingConfig from "~tools/lottie-config";
+import lottie from 'lottie-web';
+import loadingConfig from '~tools/lottie-config';
 
 export default {
-  name: "v-loading",
+  name: 'v-loading',
   props: {
     autoplay: {
-      default: true
+      default: true,
     },
     play: {
-      default: false
-    }
+      default: false,
+    },
   },
   data() {
     return {
-      lottie: ''
-    }
+      lottie: '',
+    };
   },
   watch: {
     play(newVal) {
@@ -32,20 +32,20 @@ export default {
       } else {
         this.lottie.stop();
       }
-    }
+    },
   },
   mounted() {
-    let config = {
-        container: this.$refs.loading, // the dom element that will contain the animation
-        renderer: "svg",
-        loop: true,
-        autoplay: this.autoplay,
-        animationData: loadingConfig
-        // path: '../xxx/data.json'
-      }
-      this.lottie = lottie.loadAnimation(config);
-      this.$once('hook:beforeDestroy', () => this.lottie.destroy())
-  }
+    const config = {
+      container: this.$refs.loading, // the dom element that will contain the animation
+      renderer: 'svg',
+      loop: true,
+      autoplay: this.autoplay,
+      animationData: loadingConfig,
+      // path: '../xxx/data.json'
+    };
+    this.lottie = lottie.loadAnimation(config);
+    this.$once('hook:beforeDestroy', () => this.lottie.destroy());
+  },
 };
 </script>
 <style lang="scss">

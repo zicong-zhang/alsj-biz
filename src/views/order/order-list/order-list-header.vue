@@ -23,32 +23,33 @@
 </template>
 
 <script>
-import { mapState, mapActions, mapMutations } from "vuex";
+import { mapState, mapActions, mapMutations } from 'vuex';
 
 export default {
-  name: "OrderListHeader",
+  name: 'OrderListHeader',
   data() {
     return {
       active: 0,
       isShowPopup: false,
-      list: ["上门量尺", "设计方案", "签订合同"],
-      moreStatus: ["复尺", "下单", "生产", "送货安装", "待确认", "完成", "已取消"],
-      statusName: "更多状态"
+      list: ['上门量尺', '设计方案', '签订合同'],
+      moreStatus: ['复尺', '下单', '生产', '送货安装', '待确认', '完成', '已取消'],
+      statusName: '更多状态',
     };
   },
   computed: {
     ...mapState({
-      status: state => state.orderListModule.status
-    })
+      status: state => state.orderListModule.status,
+    }),
   },
   methods: {
-    ...mapActions(["getListByStatus"]),
-    ...mapMutations(["CHANGE_STATUS"]),
+    ...mapActions(['getListByStatus']),
+    ...mapMutations(['CHANGE_STATUS']),
     changeActive(idx) {
-      if (this.active === idx) return false;
-      this.active = idx;
-      this.CHANGE_STATUS(idx + 1);
-      this.getListByStatus(1);
+      if (this.active !== idx) {
+        this.active = idx;
+        this.CHANGE_STATUS(idx + 1);
+        this.getListByStatus(1);
+      }
     },
     showMoreStatus() {
       this.isShowPopup = !this.isShowPopup;
@@ -58,17 +59,17 @@ export default {
       this.isShowPopup = false;
       this.statusName = item;
       this.active = 3;
-      let status = item === '已取消' ? 0 : idx + 4;
+      const status = item === '已取消' ? 0 : idx + 4;
       this.CHANGE_STATUS(status);
       this.getListByStatus(1);
-    }
-  }
+    },
+  },
 };
 </script>
 <style lang="scss" scoped>
 .order-list-header {
   flex: none;
-  height: r(88px +e(55px));
+  height: r(88px + e(55px));
   background: #fff;
   h2 {
     height: e(68px);
@@ -90,7 +91,7 @@ export default {
     position: relative;
     &:not(:last-child) {
       &:before {
-        content: "";
+        content: '';
         display: block;
         width: e(2px);
         height: e(24px);

@@ -38,69 +38,69 @@
   </div>
 </template>
 <script>
-import { mapGetters, mapActions } from "vuex";
+import { mapGetters, mapActions } from 'vuex';
 
 const residenceList = [
   {
     values: [
       {
-        text: "一房",
-        value: "一房"
+        text: '一房',
+        value: '一房',
       },
       {
-        text: "二房",
-        value: "二房"
+        text: '二房',
+        value: '二房',
       },
       {
-        text: "三房",
-        value: "三房"
+        text: '三房',
+        value: '三房',
       },
       {
-        text: "四房",
-        value: "四房"
+        text: '四房',
+        value: '四房',
       },
       {
-        text: "五房",
-        value: "五房"
-      }
-    ]
+        text: '五房',
+        value: '五房',
+      },
+    ],
   },
   {
     values: [
       {
-        text: "一厅",
-        value: "一厅"
+        text: '一厅',
+        value: '一厅',
       },
       {
-        text: "二厅",
-        value: "二厅"
+        text: '二厅',
+        value: '二厅',
       },
       {
-        text: "三厅",
-        value: "三厅"
-      }
-    ]
-  }
+        text: '三厅',
+        value: '三厅',
+      },
+    ],
+  },
 ];
 
 export default {
-  name: "EditHouseType",
+  name: 'EditHouseType',
   data() {
     return {
-      linkmanHouseType: "",
-      linkmanResidence: "",
-      measurement: "",
-      residenceList
+      linkmanHouseType: '',
+      linkmanResidence: '',
+      measurement: '',
+      residenceList,
     };
   },
   computed: {
-    ...mapGetters(["orderInfo", "orderId"])
+    ...mapGetters(['orderInfo', 'orderId']),
   },
   created() {
     Object.assign(this.$data, this.orderInfo);
   },
   methods: {
-    ...mapActions(["updateHouseTypeInfo"]),
+    ...mapActions(['updateHouseTypeInfo']),
     selectResidence([value1, value2]) {
       this.linkmanHouseType = value1.value + value2.value;
     },
@@ -109,13 +109,13 @@ export default {
         linkmanHouseType: this.linkmanHouseType,
         linkmanResidence: this.linkmanResidence,
         measurement: this.measurement,
-        orderId: this.orderId
-      }).then(data => {
-        this.$Toast("修改成功");
+        orderId: this.orderId,
+      }).then((data) => {
+        this.$Toast('修改成功');
         this.$utils.back();
       });
-    }
-  }
+    },
+  },
 };
 </script>
 <style lang="scss" scoped>

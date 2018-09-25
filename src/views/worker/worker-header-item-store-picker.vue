@@ -6,7 +6,7 @@
         class="store-list">
         <li v-for="(item, idx) in list"
           :class="{
-          active: item.merchantExt.id === storeId, 
+          active: item.merchantExt.id === storeId,
           'list-item': true
         }"
           :key="idx"
@@ -25,24 +25,25 @@
 </template>
 
 <script>
-import { mapState } from "vuex";
+import { mapState } from 'vuex';
+
 export default {
-  name: "worker-header-item-store-picker",
+  name: 'worker-header-item-store-picker',
   props: {
     list: {
-      type: Array
-    }
+      type: Array,
+    },
   },
   computed: {
     ...mapState({
-      storeId: state => state.root.storeId
-    })
+      storeId: state => state.root.storeId,
+    }),
   },
   methods: {
     select(item) {
-      this.$emit("select", item);
-    }
-  }
+      this.$emit('select', item);
+    },
+  },
 };
 </script>
 <style lang="scss">

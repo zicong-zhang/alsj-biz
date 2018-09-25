@@ -28,26 +28,26 @@
 </template>
 <script>
 export default {
-  name: "v-date-picker",
+  name: 'v-date-picker',
   data() {
     return {
       isShow: true,
       isShowContainer: false,
-      title: "",
-      type: "date",
-      currentDate: "",
-      minDate: "", // type: Date
-      maxDate: "", // type: Date
-      loading: false // type Boolean
+      title: '',
+      type: 'date',
+      currentDate: '',
+      minDate: '', // type: Date
+      maxDate: '', // type: Date
+      loading: false, // type Boolean
     };
   },
   methods: {
     formatter(type, value) {
-      if (type === "year") {
+      if (type === 'year') {
         return `${value}年`;
-      } else if (type === "month") {
+      } else if (type === 'month') {
         return `${value}月`;
-      } else if (type === "day") {
+      } else if (type === 'day') {
         return `${value}日`;
       }
     },
@@ -56,16 +56,16 @@ export default {
     },
     onCancel() {
       this.isShowContainer = false;
-      if (typeof this.cancel === "function") this.cancel();
+      if (typeof this.cancel === 'function') this.cancel();
     },
     onConfirm(value) {
-      console.log("value:_____", value);
-      if (typeof this.confirm === "function") this.confirm(value);
+      console.log('value:_____', value);
+      if (typeof this.confirm === 'function') this.confirm(value);
     },
     onChange(instance) {
-      if (typeof this.change === "function") this.change();
-    }
-  }
+      if (typeof this.change === 'function') this.change();
+    },
+  },
 };
 </script>
 <style lang="scss">

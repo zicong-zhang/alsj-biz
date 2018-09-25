@@ -4,16 +4,17 @@
   </div>
 </template>
 <script>
-import { mapGetters, mapActions } from "vuex";
+import { mapGetters, mapActions } from 'vuex';
+
 export default {
   name: 'OrderDetailItemNextStepBtn',
   computed: {
     ...mapGetters([
-      'orderDetailStatus' // 订单状态
+      'orderDetailStatus', // 订单状态
     ]),
     text() {
       let txt = '';
-      switch(this.orderDetailStatus) {
+      switch (this.orderDetailStatus) {
         case 1:
           txt = '完成量尺';
           break;
@@ -40,7 +41,7 @@ export default {
           break;
       }
       return txt;
-    }
+    },
   },
   methods: {
     ...mapActions(['updateOrderDetailStatus']), // 更新订单进度
@@ -48,7 +49,7 @@ export default {
     nextStep() {
       let txt = '';
       // 进行不同弹窗
-      switch(this.orderDetailStatus) {
+      switch (this.orderDetailStatus) {
         case 1:
           txt = '完成量尺';
           break;
@@ -76,17 +77,17 @@ export default {
       }
       this.updateOrderDetailStatus().then(() => {
         this.$Toast(txt);
-      })
+      });
     },
     // 去录入合同信息
     toEditContract() {
       this.$store.commit('TURN', 'on');
       this.$router.push({
-        name: 'order-edit-contract'
-      })
-    }
-  }
-}
+        name: 'order-edit-contract',
+      });
+    },
+  },
+};
 </script>
 <style lang="scss">
 .order-detail-item-next-step-btn {

@@ -32,44 +32,44 @@
       </li>
     </ul>
     <div class="create-date">
-      <i class="iconfont icon-icon_my_orrders"></i>
+      <i class="icon i-shizhong"></i>
       <span>{{ item.updateDate | date }}</span>
     </div>
   </li>
 </template>
 <script>
-import { mapState } from "vuex";
-import cancelIcon from "~img/order/icon_cancelorder_white@2x.png";
+import { mapState } from 'vuex';
+import cancelIcon from '~img/order/icon_cancelorder_white@2x.png';
 
 export default {
-  name: "OrderListItem",
+  name: 'OrderListItem',
   props: {
     item: {
-      type: Object
-    }
+      type: Object,
+    },
   },
   data() {
     return {
-      cancelIcon
+      cancelIcon,
     };
   },
   computed: mapState({
-    status: state => state.orderListModule.status
+    status: state => state.orderListModule.status,
   }),
   created() {},
   methods: {
     finish() {},
     toDetail() {
-      this.$emit("log-scrolltop");
-      this.$store.commit("TURN", "on");
+      this.$emit('log-scrolltop');
+      this.$store.commit('TURN', 'on');
       this.$router.push({
-        name: "order-detail",
+        name: 'order-detail',
         query: {
-          id: this.item.id
-        }
+          id: this.item.id,
+        },
       });
-    }
-  }
+    },
+  },
 };
 </script>
 <style lang="scss">

@@ -27,32 +27,33 @@
 </template>
 <script>
 import { mapActions } from 'vuex';
+
 export default {
-  name: "view-edit-create-order",
+  name: 'view-edit-create-order',
   data() {
     return {
-      customerId: "",
-      linkmanAddress: "",
-      linkmanGender: "",
-      linkmanName: "",
-      linkmanPhone: "",
-      orderType: "",
+      customerId: '',
+      linkmanAddress: '',
+      linkmanGender: '',
+      linkmanName: '',
+      linkmanPhone: '',
+      orderType: '',
 
-      sexText: "",
+      sexText: '',
       sexList: [
         {
           values: [
             {
-              text: "男",
-              value: 1
+              text: '男',
+              value: 1,
             },
             {
-              text: "女",
-              value: 2
-            }
-          ]
-        }
-      ]
+              text: '女',
+              value: 2,
+            },
+          ],
+        },
+      ],
     };
   },
   created() {
@@ -66,7 +67,7 @@ export default {
       this.sexText = query.linkmanGender == 1 ? '男' : '女';
     },
     selectSex([sex]) {
-      console.log("sex:_____", sex);
+      console.log('sex:_____', sex);
       this.sexText = sex.text;
       this.linkmanGender = sex.value;
     },
@@ -79,16 +80,16 @@ export default {
         linkmanPhone: this.linkmanPhone,
         orderType: this.orderType,
       })
-        .then(res => {
+        .then((res) => {
           this.$utils.go({
             name: 'order-detail',
             query: {
-              id: res.data.order.id
-            }
-          }, 'replace')
-        })
-    }
-  }
+              id: res.data.order.id,
+            },
+          }, 'replace');
+        });
+    },
+  },
 };
 </script>
 <style lang="scss">

@@ -78,27 +78,27 @@
 </template>
 
 <script>
-import axios from "axios";
+import axios from 'axios';
 
 export default {
-  name: "v-upload",
+  name: 'v-upload',
   props: {
     asyncQty: {
-      default: 3
+      default: 3,
     },
     width: {
       type: Number,
-      default: 240
+      default: 240,
     },
     showBtn: {
-      default: true
+      default: true,
     },
     showFile: {
-      default: true
+      default: true,
     },
     files: {
-      default: []
-    }
+      default: [],
+    },
   },
   data() {
     return {
@@ -107,24 +107,20 @@ export default {
       fileList: [],
       isShowDelBtn: false,
       isShowDelDialog: false,
-      delPicIdx: ""
+      delPicIdx: '',
     };
   },
   watch: {
     files(newVal) {
-      this.fileList = newVal.map(item => {
-        return {
-          path: item
-        };
-      });
-    }
+      this.fileList = newVal.map(item => ({
+        path: item,
+      }));
+    },
   },
   created() {
-    this.fileList = this.files.map(item => {
-        return {
-          path: item
-        };
-      });
+    this.fileList = this.files.map(item => ({
+      path: item,
+    }));
   },
   methods: {
     // 隐藏菜单
@@ -144,33 +140,32 @@ export default {
     // 判断是否图片
     judgePic(file) {
       // 拦截图片格式
-      var type = file.type;
+      const type = file.type;
       if (
-        type.indexOf("png") == -1 &&
-        type.indexOf("jpg") == -1 &&
-        type.indexOf("jpeg") == -1
+        type.indexOf('png') == -1 &&
+        type.indexOf('jpg') == -1 &&
+        type.indexOf('jpeg') == -1
       ) {
         this.showFileInput = true;
-        this.$Toast("请上传正确的图片");
+        this.$Toast('请上传正确的图片');
         return false;
-      } else {
-        return true;
       }
+      return true;
     },
     // 压缩图片
     compressImg(pic) {
       if (!this.judgePic(pic)) return;
       const len = this.fileList.length;
       this.$set(this.fileList, len, {
-        path: "",
-        progress: 0
+        path: '',
+        progress: 0,
       });
 
       const size = pic.size / 1024;
       // 大于500K压缩
       if (size > 500) {
-        this.$utils.photoCompress(pic, (500 / size).toFixed(2), base64Codes => {
-          var bl = this.$utils.convertBase64UrlToBlob(base64Codes);
+        this.$utils.photoCompress(pic, (500 / size).toFixed(2), (base64Codes) => {
+          const bl = this.$utils.convertBase64UrlToBlob(base64Codes);
           this.uploadImg(bl, len);
         });
       } else {
@@ -180,39 +175,39 @@ export default {
     // 图片上传
     uploadImg(pic, length) {
       this.showFileInput = true;
-      let fd = new FormData();
-      fd.append("files", pic);
+      const fd = new FormData();
+      fd.append('files', pic);
       fd.append(
-        "token",
-        "YWxhc2dhLmFwcC5nYXRld2F5LTExLTE1MzAxNjUxOTIwNjYtMTEtYWJj"
+        'token',
+        'YWxhc2dhLmFwcC5nYXRld2F5LTExLTE1MzAxNjUxOTIwNjYtMTEtYWJj',
       );
       axios
-        .post("/img", pic, {
-          onUploadProgress: progressEvent => {
+        .post('/img', pic, {
+          onUploadProgress: (progressEvent) => {
             // 约0.1s执行一次
             if (progressEvent.lengthComputable) {
-              //属性lengthComputable主要表明总共需要完成的工作量和已经完成的工作是否可以被测量
-              //如果lengthComputable为false，就获取不到progressEvent.total和progressEvent.loaded
+              // 属性lengthComputable主要表明总共需要完成的工作量和已经完成的工作是否可以被测量
+              // 如果lengthComputable为false，就获取不到progressEvent.total和progressEvent.loaded
               const { loaded, total } = progressEvent;
               this.fileList[length].progress = parseInt(loaded / total * 100);
             } else {
               this.fileList[length].progress = 100;
             }
-          }
+          },
         })
-        .then(res => {
-          let uploader = this.$refs.uploader;
+        .then((res) => {
+          const uploader = this.$refs.uploader;
           uploader.scrollLeft = uploader.scrollWidth - uploader.clientWidth;
           this.fileList[length].path = res[0];
-          this.$emit("success", res[0]);
+          this.$emit('success', res[0]);
         });
     },
     // 查看大图
     showPicPreview(idx) {
       this.$createImagePreview({
         imgs: this.fileList.map(item => item.path),
-        "initial-index": idx,
-        loop: false
+        'initial-index': idx,
+        loop: false,
       }).show();
     },
     // 弹出删除图片对话框
@@ -222,15 +217,15 @@ export default {
     },
     // 取消弹出弹窗
     cancelDialog() {
-      this.delPicIdx = "";
+      this.delPicIdx = '';
       this.isShowDelDialog = false;
     },
     // 删除图片
     delPic(idx) {
       this.isShowDelDialog = false;
-      this.$emit("on-del", this.delPicIdx);
-    }
-  }
+      this.$emit('on-del', this.delPicIdx);
+    },
+  },
 };
 </script>
 

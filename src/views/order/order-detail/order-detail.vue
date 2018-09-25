@@ -16,21 +16,21 @@
   </div>
 </template>
 <script>
-import WorkerTips from "~views/worker/worker-tips";
-import Progress from "./order-detail-item-progress";
-import CustomerInfo from "./order-detail-item-customer-info";
-import HouseType from "./order-detail-item-house-type";
-import CustomDemand from "./order-detail-item-demand";
-import KeeperList from "./order-detail-item-keeper";
-import Contract from "./order-detail-item-contract";
-import Design from "./order-detail-item-design";
-import Remark from "./order-detail-item-remark";
-import NextBtn from "./order-detail-item-next-step-btn";
+import WorkerTips from '~views/worker/worker-tips';
+import Progress from './order-detail-item-progress';
+import CustomerInfo from './order-detail-item-customer-info';
+import HouseType from './order-detail-item-house-type';
+import CustomDemand from './order-detail-item-demand';
+import KeeperList from './order-detail-item-keeper';
+import Contract from './order-detail-item-contract';
+import Design from './order-detail-item-design';
+import Remark from './order-detail-item-remark';
+import NextBtn from './order-detail-item-next-step-btn';
 
-import { mapState, mapGetters, mapActions, mapMutations } from "vuex";
+import { mapState, mapGetters, mapActions, mapMutations } from 'vuex';
 
 export default {
-  name: "OrderDetail",
+  name: 'OrderDetail',
   components: {
     WorkerTips,
     Progress,
@@ -41,22 +41,22 @@ export default {
     Contract,
     Design,
     Remark,
-    NextBtn
+    NextBtn,
   },
   created() {
     this.init();
   },
   computed: {
-    ...mapGetters(["orderDetailStatus"])
+    ...mapGetters(['orderDetailStatus']),
   },
   methods: {
-    ...mapActions(["getOrderDetailInfo"]),
-    ...mapMutations(["SET_ORDER_ID"]),
+    ...mapActions(['getOrderDetailInfo']),
+    ...mapMutations(['SET_ORDER_ID']),
     init() {
       this.SET_ORDER_ID(this.$route.query.id);
       this.getOrderDetailInfo();
-    }
-  }
+    },
+  },
 };
 </script>
 <style lang="scss" scoped>

@@ -9,21 +9,21 @@
 </template>
 
 <script>
-import Header from "./proceeds-detail-item-header";
-import Total from "./proceeds-detail-item-total";
-import List from "./proceeds-detail-item-list";
+import Header from './proceeds-detail-item-header';
+import Total from './proceeds-detail-item-total';
+import List from './proceeds-detail-item-list';
 
 export default {
-  name: "proceeds-detail",
+  name: 'proceeds-detail',
   components: {
     Header,
     Total,
-    List
+    List,
   },
   data() {
     return {};
   },
-  methods: {}
+  methods: {},
 };
 </script>
 <style lang="scss">

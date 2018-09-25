@@ -9,21 +9,20 @@ export default {
     rate: '0%', // 销售金额进度
   },
   getters: {
-    storeInfo: state => { // 店铺信息
-      return { ...state.info
-      }
-    },
-    myStoreList: state => { // 我的所有店铺列表
-      return [...state.myStores]
-    } // 店铺列表
+    storeInfo: state => // 店铺信息
+      ({ ...state.info,
+      }),
+    myStoreList: state => // 我的所有店铺列表
+      [...state.myStores],
+    // 店铺列表
   },
   actions: {
     // 获取该账号下的所有店铺
     getSelfStoreList({
-      commit
+      commit,
     }) {
       return api.getSelfStoreList()
-        .then(res => {
+        .then((res) => {
           const list = res.data.list;
           commit('SET_MY_STORE_LIST', list);
           return Promise.resolve(list);
@@ -32,66 +31,66 @@ export default {
     // 获取店铺信息
     getStoreInfo({
       rootState,
-      commit
+      commit,
     }) {
       api.getStoreInfo(rootState.root.storeId)
-        .then(res => {
+        .then((res) => {
           commit('SET_STORE_INFO', res.data.merchantExt);
-        })
+        });
     },
     // 获取店铺实收款金额(本月)
     getReceiptAmount({
-      rootState
+      rootState,
     }) {
-      return api.getReceiptAmount(rootState.root.storeId)
+      return api.getReceiptAmount(rootState.root.storeId);
     },
     // 获取店铺待收款金额(全部)
     getDueAmount({
-      rootState
+      rootState,
     }) {
-      return api.getDueAmount(rootState.root.storeId)
+      return api.getDueAmount(rootState.root.storeId);
     },
     // 获取月销售冠军
     getCurrentMonthSaleChampion({
-      rootState
+      rootState,
     }) {
       return api.getCurrentMonthSaleChampion(rootState.root.storeId)
-        .then(res => Promise.resolve(res))
+        .then(res => Promise.resolve(res));
     },
     // 获取店铺目标金额
     getStoreSaleTarget({
       rootState,
-      commit
+      commit,
     }) {
       return api.getStoreSaleTarget(rootState.root.storeId)
-        .then(res => {
+        .then((res) => {
           commit('SET_SALE_TARGET', res.data);
         });
     },
     // 获取店铺某一年的业绩目标列表
     getOnePerformanceTargetList({
-      rootState
+      rootState,
     }, goalYear) {
       return api.getOnePerformanceTargetList({
-          merchantId: rootState.root.storeId,
-          goalYear
-        })
+        merchantId: rootState.root.storeId,
+        goalYear,
+      });
     },
     // 更新店铺某一年业绩目标列表
     updatePerformTargetList({
       rootState,
     }, params) {
-      return api.updatePerformTargetList(rootState.root.storeId, params)
+      return api.updatePerformTargetList(rootState.root.storeId, params);
     },
     // 获取店铺总业绩列表
     getPerformanceTotalList({
-      rootState
+      rootState,
     }, year) {
       return api.getPerformanceTotalList({
         merchantId: rootState.root.storeId,
-        year
-      })
-    }
+        year,
+      });
+    },
   },
   mutations: {
     // 设置店铺信息
@@ -105,6 +104,6 @@ export default {
     // 设置销售目标
     SET_SALE_TARGET(state, params) {
       Object.assign(state, params);
-    }
-  }
-}
+    },
+  },
+};

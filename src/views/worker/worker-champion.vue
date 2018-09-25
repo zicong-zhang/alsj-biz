@@ -10,40 +10,41 @@
   </div>
 </template>
 <script>
-import { mapState, mapActions } from "vuex";
+import { mapState, mapActions } from 'vuex';
+
 export default {
-  name: "WorkerChampion",
+  name: 'WorkerChampion',
   data() {
     return {
-      nickname: "",
-      amount: 0
+      nickname: '',
+      amount: 0,
     };
   },
   computed: {
     ...mapState({
-      storeId: state => state.root.storeId
-    })
+      storeId: state => state.root.storeId,
+    }),
   },
   watch: {
     storeId(newVal) {
       this.init();
-    }
+    },
   },
   methods: {
-    ...mapActions(["getCurrentMonthSaleChampion"]),
+    ...mapActions(['getCurrentMonthSaleChampion']),
     init() {
-      this.getCurrentMonthSaleChampion().then(res => {
+      this.getCurrentMonthSaleChampion().then((res) => {
         const data = res.data.rankBO;
-        this.nickname = data ? data.nickname : "";
+        this.nickname = data ? data.nickname : '';
         this.amount = data ? data.amount : 0;
       });
     },
     toRank() {
       this.$utils.go({
-        name: "sale-rank"
+        name: 'sale-rank',
       });
-    }
-  }
+    },
+  },
 };
 </script>
 <style lang="scss">
@@ -69,6 +70,6 @@ export default {
     height: 32px;
     margin-right: 8px;
   }
-  
+
 }
 </style>

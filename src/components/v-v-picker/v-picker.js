@@ -6,9 +6,9 @@ const VPickerConstructor = Vue.extend(VPicker);
 const $Picker = (opt = {
   key: 'text',
   title: '',
-  list: []
+  list: [],
 }) => {
-  let instance = new VPickerConstructor().$mount(document.createElement('div'));
+  const instance = new VPickerConstructor().$mount(document.createElement('div'));
 
   Object.assign(instance, opt);
   instance.onConfirm = opt.onConfirm;
@@ -17,6 +17,6 @@ const $Picker = (opt = {
 
   instance.isShow = true;
   instance.isShowContainer = true;
-}
+};
 
 export default $Picker;

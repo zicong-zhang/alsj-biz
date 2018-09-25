@@ -13,7 +13,8 @@
         <p class="staff-intro-handle">
           <i class="iconfont icon-comment"></i>
         </p>
-        <p class="staff-intro-handle">
+        <p class="staff-intro-handle"
+          @click="call">
           <i class="iconfont icon-btn_msg_call"></i>
         </p>
       </div>
@@ -26,21 +27,23 @@
           @click="changeNav(1)">店员资料</h3>
       </nav>
       <div class="modules">
-      <!-- 跟进的订单 -->
-      <order-list/>
-      <!-- 店员信息 -->
-
+        <!-- 跟进的订单 -->
+        <order-list :class="{'show-module': active === 0}" />
+        <!-- 店员信息 -->
+        <staff-info :class="{'show-module': active === 1}" />
       </div>
     </div>
   </div>
 </template>
 <script>
 import orderList from './staff-detail-item-order';
+import staffInfo from './staff-detail-item-info';
 
 export default {
   name: 'view-staff-detail',
   components: {
-    orderList
+    orderList,
+    staffInfo,
   },
   data() {
     return {
@@ -48,9 +51,10 @@ export default {
         id: '',
         avatar: '', // 头像
         nickname: '', // 昵称
-        positionTypeName: '' // 职位
+        positionTypeName: '', // 职位
+        phone: '',
       },
-      active: 0
+      active: 0,
     };
   },
   activated() {
@@ -58,12 +62,16 @@ export default {
   },
   methods: {
     init() {
+      this.active = 0;
       Object.assign(this.baseInfo, this.$route.query);
     },
     changeNav(idx) {
       if (this.active !== idx) this.active = idx;
-    }
-  }
+    },
+    call() {
+      window.location.href = `tel:${this.baseInfo.phone}`;
+    },
+  },
 };
 </script>
 <style lang="scss">
@@ -145,6 +153,18 @@ export default {
   .modules {
     height: calc(100% - 16px - 184px - 88px - 2px);
     overflow: hidden;
+    position: relative;
+    & > div {
+      position: absolute;
+      left: 0;
+      top: 0;
+      transform: translate3d(-200%, 0, 0);
+      width: 100%;
+      box-sizing: border-box;
+    }
+    .show-module {
+      transform: translate3d(0, 0, 0);
+    }
   }
 }
 </style>

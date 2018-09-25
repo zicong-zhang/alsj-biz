@@ -28,28 +28,28 @@ export default {
   name: 'OrderList',
   components: {
     OrderListHeader,
-    OrderListItem
+    OrderListItem,
   },
   data() {
     return {
       dataList: 5,
       scrollTop: 0,
       pageNum: 1,
-      hasNext: true
+      hasNext: true,
     };
   },
   computed: {
     ...mapState({
       status: state => state.orderListModule.status,
-      orderList: state => state.orderListModule.orderList
-    })
+      orderList: state => state.orderListModule.orderList,
+    }),
   },
   watch: {
     $route(to, from) {
       if (from.name == 'order-detail' && to.name == 'order-list') {
         // this.$refs.content.scrollTop = this.$route.meta.scrollTop;
       }
-    }
+    },
   },
   created() {
     this.init();
@@ -67,13 +67,13 @@ export default {
       this.$route.meta.scrollTop = this.$refs.content.scrollTop;
     },
     getOrderList() {
-      return this.getListByStatus(this.pageNum).then(res => {
+      return this.getListByStatus(this.pageNum).then((res) => {
         console.log('res:_____', res);
         this.hasNext = res.data.next;
         this.pageNum++;
       });
-    }
-  }
+    },
+  },
 };
 </script>
 <style lang="scss">

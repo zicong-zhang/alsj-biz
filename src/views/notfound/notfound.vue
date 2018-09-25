@@ -9,7 +9,7 @@
 </template>
 <script>
 export default {
-  name: "view-notfound"
+  name: 'view-notfound',
 };
 </script>
 <style lang="scss">

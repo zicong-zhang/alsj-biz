@@ -5,17 +5,13 @@ import {
   DatetimePicker,
   Picker,
   List,
-  PullRefresh
+  PullRefresh,
 } from 'vant';
-Vue.use(DatetimePicker)
-  .use(Picker)
-  .use(List)
-  .use(PullRefresh)
 
 import VHeader from '~components/v-header';
 import VFooter from '~components/v-footer';
 import VPopup from '~components/v-popup';
-import VInfoList from '~components/v-info-list';
+import VCell from '~components/v-cell';
 import VInput from '~components/v-input';
 import VPicker from '~components/v-picker';
 import VForm from '~components/v-form';
@@ -29,10 +25,19 @@ import VScroll from '~components/v-scroll2';
 import VList from '~components/v-list';
 import VImg from '~components/v-img';
 
+import $Picker from './v-v-picker/v-picker';
+import $DatePicker from './v-date-picker/v-date-picker';
+import $Toast from './v-toast/v-toast';
+
+Vue.use(DatetimePicker)
+  .use(Picker)
+  .use(List)
+  .use(PullRefresh);
+
 Vue.component('v-header', VHeader);
 Vue.component('v-footer', VFooter);
 Vue.component('v-popup', VPopup);
-Vue.component('v-infoList', VInfoList);
+Vue.component('v-cell', VCell);
 Vue.component('v-form', VForm);
 Vue.component('v-input', VInput);
 Vue.component('v-picker', VPicker);
@@ -45,10 +50,6 @@ Vue.component('v-loading', VLoading);
 // Vue.component('v-scroll', VScroll);
 Vue.component('v-scroll', VList);
 Vue.component('v-img', VImg);
-
-import $Picker from './v-v-picker/v-picker';
-import $DatePicker from './v-date-picker/v-date-picker';
-import $Toast from './v-toast/v-toast'
 
 Vue.prototype.$Toast = $Toast;
 Vue.prototype.$Picker = $Picker;

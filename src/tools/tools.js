@@ -6,6 +6,4 @@ Vue.prototype.$utils = utils;
 
 Vue.prototype.$http = http;
 
-Vue.prototype.$rem = fz => {
-  return `${fz / 75}rem`;
-}
+Vue.prototype.$rem = fz => `${fz / 75}rem`;

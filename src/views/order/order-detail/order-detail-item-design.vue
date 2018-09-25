@@ -15,25 +15,25 @@
 </template>
 
 <script>
-import H2 from "./order-detail-item-h2";
-import { mapGetters, mapActions, mapMutations } from "vuex";
+import H2 from './order-detail-item-h2';
+import { mapGetters, mapActions, mapMutations } from 'vuex';
 
 export default {
-  name: "OrderDetailItemDesign",
+  name: 'OrderDetailItemDesign',
   components: {
-    H2
+    H2,
   },
   data() {
     return {
-      fileList: []
+      fileList: [],
     };
   },
   computed: {
-    ...mapGetters(["designList", "orderDetailStatus"])
+    ...mapGetters(['designList', 'orderDetailStatus']),
   },
   methods: {
     ...mapActions([
-      "updateDesignPic" // 修改设计方案图片
+      'updateDesignPic', // 修改设计方案图片
     ]),
     // 上传成功
     uploadSuccess(path) {
@@ -44,8 +44,8 @@ export default {
     delPic(idx) {
       this.designList.splice(idx, 1);
       this.updateDesignPic(this.designList);
-    }
-  }
+    },
+  },
 };
 </script>
 

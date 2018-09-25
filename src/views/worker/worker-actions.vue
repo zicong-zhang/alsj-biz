@@ -35,24 +35,24 @@
 </template>
 <script>
 export default {
-  name: "HomeActions",
+  name: 'HomeActions',
   methods: {
     toCustomerManagement() {
       this.$utils.go({
-        name: 'customer-list'
-      })
+        name: 'customer-list',
+      });
     },
     toProductCenter() {
       this.$utils.go({
-        name: 'product-center'
-      })
+        name: 'product-center',
+      });
     },
     toStaffList() {
       this.$utils.go({
-        name: 'staff-list'
-      })
-    }
-  }
+        name: 'staff-list',
+      });
+    },
+  },
 };
 </script>
 <style lang="scss">

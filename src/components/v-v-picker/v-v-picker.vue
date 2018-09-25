@@ -26,17 +26,17 @@
 
 <script>
 export default {
-  name: "v-v-picker",
+  name: 'v-v-picker',
   data() {
     return {
       list: [],
-      title: "",
+      title: '',
       isShow: true,
       isShowContainer: false,
-      key: "text",
+      key: 'text',
       isShowToolBar: true,
-      onCancel: "",
-      onConfirm: ""
+      onCancel: '',
+      onConfirm: '',
     };
   },
   methods: {
@@ -45,12 +45,12 @@ export default {
     },
     cancel() {
       this.isShowContainer = false;
-      if (typeof this.onCancel === "function") this.onCancel();
+      if (typeof this.onCancel === 'function') this.onCancel();
     },
     confirm(value, idx) {
-      if (typeof this.onConfirm === "function") this.onConfirm(value, idx);
-    }
-  }
+      if (typeof this.onConfirm === 'function') this.onConfirm(value, idx);
+    },
+  },
 };
 </script>
 <style lang="scss">

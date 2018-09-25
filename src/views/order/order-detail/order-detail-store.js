@@ -3,33 +3,33 @@ import * as api from '~apis/order';
 // 订单流程对应名称
 const progressList = {
   1: {
-    name: "创建订单"
+    name: '创建订单',
   },
   2: {
-    name: "上门量尺"
+    name: '上门量尺',
   },
   3: {
-    name: "设计方案"
+    name: '设计方案',
   },
   4: {
-    name: "签订合同"
+    name: '签订合同',
   },
   5: {
-    name: "复尺"
+    name: '复尺',
   },
   6: {
-    name: "下单"
+    name: '下单',
   },
   7: {
-    name: "生产"
+    name: '生产',
   },
   8: {
-    name: "送货安装"
+    name: '送货安装',
   },
   9: {
-    name: "订单已完成"
-  }
-}
+    name: '订单已完成',
+  },
+};
 
 export default {
   state: {
@@ -38,54 +38,47 @@ export default {
     orderProgress: [], // 订单进度
     isShowDemandPicker: false, // 是否展示定制需求选择器
     spaceList: [], // 空间列表
-    functionList: [] // 功能列表
+    functionList: [], // 功能列表
   },
   getters: {
     // 订单信息
-    orderInfo: state => {
-      if (JSON.stringify({ ...state.orderInfo
-        }) === '{}') {
-        let storage = sessionStorage.getItem('ORDER_DETAIL_INFO');
+    orderInfo: (state) => {
+      if (JSON.stringify({ ...state.orderInfo,
+      }) === '{}') {
+        const storage = sessionStorage.getItem('ORDER_DETAIL_INFO');
         return (storage ? JSON.parse(storage) : {});
-      } else {
-        return state.orderInfo;
       }
+      return state.orderInfo;
     },
     // 订单id
     orderId: state => (state.orderId || sessionStorage.getItem('ORDER_DETAIL_ID')),
     // 订单状态
-    orderDetailStatus: state => {
-      return state.orderInfo.orderStatus;
-    },
+    orderDetailStatus: state => state.orderInfo.orderStatus,
     // 定制需求
-    demands: state => {
-      return state.orderInfo.dimensionList
-
-    },
+    demands: state => state.orderInfo.dimensionList,
     // 跟进人
     keepers: state => state.orderInfo.orderKeeperList,
     // 合同图片列表(目前只展示纸质合同)
-    contractList: state => {
-      let contract = state.orderInfo.paperContract;
+    contractList: (state) => {
+      const contract = state.orderInfo.paperContract;
       if (contract) {
         return contract.split(',');
-      } else {
-        return [];
       }
+      return [];
     },
     // 设计方案图片列表
-    designList: state => {
-      let designsUrl = state.orderInfo.designsUrl;
+    designList: (state) => {
+      const designsUrl = state.orderInfo.designsUrl;
       return (designsUrl ? designsUrl.split(',') : []);
-    }
+    },
   },
   actions: {
     // 获取订单详情信息
     getOrderDetailInfo(ctx) {
       api.getOrderDetailInfo(ctx.state.orderId)
-        .then(data => {
+        .then((data) => {
           ctx.commit('SET_ORDER_DETAIL_INFO', data.data.orderExt);
-        })
+        });
     },
     // 获取订单进度
     getOrderDetailProgress(ctx) {
@@ -93,19 +86,19 @@ export default {
         pageNum: 1,
         pageSize: 0,
         type: 1,
-        orderId: ctx.state.orderId
-      }).then(data => {
+        orderId: ctx.state.orderId,
+      }).then((data) => {
         ctx.commit('SET_ORDER_DETAIL_PROGRESS', data.data.list);
         return Promise.resolve();
-      })
+      });
     },
     // 修改客户信息
     updateCustomerInfo(ctx, params) {
       api.updateCustomerInfo(params)
-        .then(data => {
+        .then((data) => {
           ctx.commit('UPDATE_CUSTOMER_INFO', data.data);
           return Promise.resolve();
-        })
+        });
     },
     // 修改户型信息
     updateHouseTypeInfo(ctx, params) {
@@ -113,42 +106,42 @@ export default {
         .then(() => {
           ctx.commit('UPDATE_HOUSE_TYPE_INFO', params);
           return Promise.resolve();
-        })
+        });
     },
     // 修改设计方案图片
     updateDesignPic(ctx, imgArr) {
       api.updateDesignPic({
-          imgs: imgArr,
-          orderId: ctx.state.orderId
-        })
-        .then(() => ctx.commit('UPDATE_DESIGN_PIC', imgArr))
+        imgs: imgArr,
+        orderId: ctx.state.orderId,
+      })
+        .then(() => ctx.commit('UPDATE_DESIGN_PIC', imgArr));
     },
     // 获取空间列表
     getSpaceList(ctx) {
-      api.getSpaceList().then(data => {
+      api.getSpaceList().then((data) => {
         const list = data.data.list;
         ctx.commit('SET_SPACE_LIST', list);
 
         list.forEach((item, idx) => {
           ctx.commit('SET_PLACEHOLDER_FUNCTION_LIST', list.length);
           ctx.dispatch('getFunctionList', [item.id, idx]);
-        })
-      })
+        });
+      });
     },
     // 通过空间id获取功能列表
     getFunctionList(ctx, [id, idx]) {
-      api.getFunctionListBySpaceId(id).then(data => {
+      api.getFunctionListBySpaceId(id).then((data) => {
         ctx.commit('SET_FUNCTION_LIST', [data.data.list, idx]);
-      })
+      });
     },
     // 修改定制需求
     updateDemand(ctx, activeList) {
-      let list = activeList.map(item => item.id);
+      const list = activeList.map(item => item.id);
       api.updateDemand(list, ctx.state.orderId)
         .then(() => {
           ctx.commit('UPDATE_DEMAND', JSON.parse(JSON.stringify(activeList)));
           return Promise.resolve();
-        })
+        });
     },
     // 更新订单进度
     updateOrderDetailStatus(ctx) {
@@ -159,10 +152,10 @@ export default {
           ctx.dispatch('getOrderDetailProgress');
           ctx.commit('UPDATE_ORDER_STATUS');
           Promise.resolve();
-        }, err => {
+        }, (err) => {
           Promise.reject(err);
-        })
-    }
+        });
+    },
   },
   mutations: {
     // 设置订单 id
@@ -172,16 +165,16 @@ export default {
     },
     // 设置订单进度
     SET_ORDER_DETAIL_PROGRESS(state, arr) {
-      let newArr = JSON.parse(JSON.stringify(progressList));
+      const newArr = JSON.parse(JSON.stringify(progressList));
       arr.forEach(item => Object.assign(newArr[item.orderStatus], item, {
-        finish: true
+        finish: true,
       }));
       state.orderProgress = newArr;
     },
     // 设置订单信息
     SET_ORDER_DETAIL_INFO(state, info) {
       state.orderInfo = info;
-      sessionStorage.setItem('ORDER_DETAIL_INFO', JSON.stringify({ ...info
+      sessionStorage.setItem('ORDER_DETAIL_INFO', JSON.stringify({ ...info,
       }));
     },
     // 修改客户信息
@@ -202,7 +195,7 @@ export default {
     },
     // 设置默认占位的空间列表，以便通过下标插入对应的空间名
     SET_PLACEHOLDER_FUNCTION_LIST(state, length) {
-      let arr = [];
+      const arr = [];
       for (let index = 0; index < length; index++) {
         arr.push([]);
       }
@@ -210,13 +203,13 @@ export default {
     },
     // 设置功能列表
     SET_FUNCTION_LIST(state, [list, idx]) {
-      let demands = state.orderInfo.dimensionList;
+      const demands = state.orderInfo.dimensionList;
       if (demands.length !== 0) {
-        list.forEach(item => {
-          demands.forEach(value => {
+        list.forEach((item) => {
+          demands.forEach((value) => {
             if (item.id == value.id) item.active = true;
           });
-        })
+        });
       }
       state.functionList.splice(idx, 1, list);
     },
@@ -227,6 +220,6 @@ export default {
     // 更改订单状态
     UPDATE_ORDER_STATUS(state) {
       state.orderInfo.orderStatus++;
-    }
-  }
-}
+    },
+  },
+};

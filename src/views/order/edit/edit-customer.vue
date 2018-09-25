@@ -56,53 +56,53 @@
   </div>
 </template>
 <script>
-import { mapGetters, mapActions } from "vuex";
+import { mapGetters, mapActions } from 'vuex';
 
 const rules = {
   linkmanName: [
     {
-      regExp: "name",
-      warn: "请输入中文名"
-    }
+      regExp: 'name',
+      warn: '请输入中文名',
+    },
   ],
   linkmanPhone: [
     {
-      regExp: "phone",
-      warn: "请输入正确的11位手机号"
-    }
-  ]
+      regExp: 'phone',
+      warn: '请输入正确的11位手机号',
+    },
+  ],
 };
 const genderList = [
   {
     values: [
       {
-        value: "1",
-        text: "男"
+        value: '1',
+        text: '男',
       },
       {
-        value: "2",
-        text: "女"
-      }
-    ]
-  }
+        value: '2',
+        text: '女',
+      },
+    ],
+  },
 ];
 export default {
-  name: "OrderEditCustomer",
+  name: 'OrderEditCustomer',
   data() {
     return {
-      linkmanName: "",
-      linkmanPhone: "",
+      linkmanName: '',
+      linkmanPhone: '',
       linkmanGender: '',
-      linkmanAddress: "",
+      linkmanAddress: '',
       linkmanBudget: '',
       rules,
       genderList,
       isShowPicker: false,
-      sexText: ''
+      sexText: '',
     };
   },
   computed: {
-    ...mapGetters(['orderInfo', 'orderId'])
+    ...mapGetters(['orderInfo', 'orderId']),
   },
   created() {
     Object.assign(this.$data, this.orderInfo);
@@ -117,7 +117,7 @@ export default {
       this.linkmanGender = sex.value;
     },
     submit() {
-      let pass = this.$refs.form.submit();
+      const pass = this.$refs.form.submit();
       if (pass) {
         this.updateCustomerInfo({
           linkmanAddress: this.linkmanAddress,
@@ -128,10 +128,10 @@ export default {
           orderId: this.orderId,
         }).then(() => {
           this.$utils.back(this);
-        })
+        });
       }
-    }
-  }
+    },
+  },
 };
 </script>
 <style lang="scss">

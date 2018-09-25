@@ -32,18 +32,18 @@
 </template>
 
 <script>
-import H2 from "./order-detail-item-h2";
-import { mapState } from "vuex";
+import H2 from './order-detail-item-h2';
+import { mapState } from 'vuex';
 
 export default {
-  name: "OrderDetailItemRemark",
+  name: 'OrderDetailItemRemark',
   components: {
-    H2
+    H2,
   },
   data() {
     return {};
   },
-  methods: {}
+  methods: {},
 };
 </script>
 <style lang="scss">

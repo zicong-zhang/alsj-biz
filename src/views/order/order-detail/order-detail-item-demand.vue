@@ -30,32 +30,32 @@
 </template>
 
 <script>
-import H2 from "./order-detail-item-h2";
+import H2 from './order-detail-item-h2';
 import Picker from './order-detail-item-demand-picker';
-import { mapGetters } from "vuex";
+import { mapGetters } from 'vuex';
 
 export default {
-  name: "OrderDetailItemDemand",
+  name: 'OrderDetailItemDemand',
   components: {
     H2,
-    Picker
+    Picker,
   },
   data() {
     return {
-      title: "定制需求",
+      title: '定制需求',
       list: [],
-      isShowPicker: false
+      isShowPicker: false,
     };
   },
   computed: {
-    ...mapGetters(["demands"])
+    ...mapGetters(['demands']),
   },
   created() {},
   methods: {
     showDemandPicker() {
       this.isShowPicker = true;
-    }
-  }
+    },
+  },
 };
 </script>
 <style lang="scss">

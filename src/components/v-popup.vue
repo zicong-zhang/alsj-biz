@@ -19,15 +19,15 @@ export default {
   props: {
     list: {
       type: Array,
-      required: true
+      required: true,
     },
     showText: {
-      type: String
-    }
+      type: String,
+    },
   },
   data() {
     return {
-      isShow: false
+      isShow: false,
     };
   },
   methods: {
@@ -40,8 +40,8 @@ export default {
     select(item, idx) {
       this.hide();
       this.$emit('select', item, idx);
-    }
-  }
+    },
+  },
 };
 </script>
 <style lang="scss">

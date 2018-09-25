@@ -32,20 +32,20 @@
           <div class="base-info">
             <h3>基本信息</h3>
             <div class="infos">
-              <v-infoList label="客户手机"
+              <v-cell label="客户手机"
                 align="left"
                 :value="customerInfo.mobile | phone" />
-              <v-infoList label="联系地址"
+              <v-cell label="联系地址"
                 align="left"
                 line="1"
                 :value="customerInfo.address" />
-              <v-infoList label="登记时间"
+              <v-cell label="登记时间"
                 align="left"
                 :value="customerInfo.createDate" />
-              <v-infoList label="登记人员"
+              <v-cell label="登记人员"
                 align="left"
                 :value="customerInfo.createUserNickname" />
-              <v-infoList label="备注信息"
+              <v-cell label="备注信息"
                 align="left"
                 line="3"
                 :value="customerInfo.remark || '无'" />
@@ -68,10 +68,11 @@
 import { mapActions } from 'vuex';
 import { vibrate } from '../../../tools/plus.js';
 import OrderListItem from '~views/order/order-list/order-list-item';
+
 export default {
   name: 'view-customer-info',
   components: {
-    OrderListItem
+    OrderListItem,
   },
   data() {
     return {
@@ -80,14 +81,14 @@ export default {
       pageNum: 1,
       customerId: '',
       orderList: [],
-      nextOrderList: true
+      nextOrderList: true,
     };
   },
-    watch: {
-      nextOrderList(newVal) {
-        // console.log('nextOrderList:_____', newVal);
-      }
+  watch: {
+    nextOrderList(newVal) {
+      // console.log('nextOrderList:_____', newVal);
     },
+  },
   created() {
     this.customerId = this.$route.query.id;
     this.init();
@@ -103,7 +104,7 @@ export default {
       return Promise.all([this.getInfo(), this.aa()]);
     },
     getInfo() {
-      return this.getCustomerInfo(this.customerId).then(res => {
+      return this.getCustomerInfo(this.customerId).then((res) => {
         this.customerInfo = res.data.merchantCustomer;
       });
     },
@@ -114,8 +115,8 @@ export default {
       if (this.nextOrderList) {
         return this.getOrderListByCustomer({
           customerId: this.customerId,
-          pageNum: this.pageNum
-        }).then(res => {
+          pageNum: this.pageNum,
+        }).then((res) => {
           if (this.pageNum === 1) this.orderList = [];
           const { list, next } = res.data;
           this.pageNum++;
@@ -123,7 +124,7 @@ export default {
           this.orderList = this.orderList.concat(list);
           this.$nextTick(() => {
             this.nextOrderList = next;
-          })
+          });
         });
       }
     },
@@ -137,11 +138,11 @@ export default {
           linkmanGender: this.customerInfo.sex,
           linkmanName: this.customerInfo.name,
           linkmanPhone: this.customerInfo.mobile,
-          orderType: this.customerInfo.type
-        }
+          orderType: this.customerInfo.type,
+        },
       });
-    }
-  }
+    },
+  },
 };
 </script>
 <style lang="scss">

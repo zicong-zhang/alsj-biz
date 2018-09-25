@@ -25,10 +25,10 @@
 </template>
 
 <script>
-import { mapState, mapActions } from "vuex";
+import { mapState, mapActions } from 'vuex';
 
 export default {
-  name: "HomeSaleTarget",
+  name: 'HomeSaleTarget',
   data() {
     return {};
   },
@@ -37,30 +37,30 @@ export default {
       storeId: state => state.root.storeId,
       currentAmount: state => state.workerModule.merchantTradeAmount,
       targetAmount: state => state.workerModule.merchantGoalAmount,
-      rate: state => state.workerModule.rate
-    })
+      rate: state => state.workerModule.rate,
+    }),
   },
   watch: {
     storeId() {
       this.init();
-    }
+    },
   },
   methods: {
-    ...mapActions(["getStoreSaleTarget"]),
+    ...mapActions(['getStoreSaleTarget']),
     init() {
       this.getStoreSaleTarget();
     },
     toPerformanceTarget() {
       this.$utils.go({
-        name: "performance-target"
+        name: 'performance-target',
       });
     },
     toPerformanceTotal() {
       this.$utils.go({
-        name: 'performance-total'
-      })
-    }
-  }
+        name: 'performance-total',
+      });
+    },
+  },
 };
 </script>
 <style lang="scss">

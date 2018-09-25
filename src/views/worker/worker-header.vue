@@ -31,32 +31,32 @@
 </template>
 
 <script>
-import { mapGetters, mapActions, mapMutations } from "vuex";
-import storeList from "./worker-header-item-store-picker";
+import { mapGetters, mapActions, mapMutations } from 'vuex';
+import storeList from './worker-header-item-store-picker';
 
 export default {
-  name: "HomeHeader",
+  name: 'HomeHeader',
   components: {
-    storeList
+    storeList,
   },
   data() {
     return {
-      isShowPop: false
+      isShowPop: false,
     };
   },
   computed: {
     ...mapGetters([
-      "storeInfo", // 店铺信息
-      "myStoreList" // 我的所有店铺列表
-    ])
+      'storeInfo', // 店铺信息
+      'myStoreList', // 我的所有店铺列表
+    ]),
   },
   methods: {
-    ...mapActions(["getStoreInfo"]),
-    ...mapMutations(["SET_STORE_ID"]),
+    ...mapActions(['getStoreInfo']),
+    ...mapMutations(['SET_STORE_ID']),
     set() {
       localStorage.setItem(
-        "USER_TOKEN",
-        "VE9LRU4tMjg3LTE1MzU3MTc5OTc2MzMtYWJj"
+        'USER_TOKEN',
+        'VE9LRU4tMjg3LTE1MzU3MTc5OTc2MzMtYWJj',
       );
     },
     showPop() {
@@ -67,16 +67,16 @@ export default {
       this.isShowPop = false;
 
       this.SET_STORE_ID(item.merchantExt.id);
-      this.$utils.setSession("STORE_TOKEN", item.token);
+      this.$utils.setSession('STORE_TOKEN', item.token);
 
       this.getStoreInfo();
     },
     toTest() {
       this.$utils.go({
-        name: 'test-pulldown'
-      })
-    }
-  }
+        name: 'test-pulldown',
+      });
+    },
+  },
 };
 </script>
 <style lang="scss">

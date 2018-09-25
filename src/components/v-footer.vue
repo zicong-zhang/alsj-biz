@@ -5,7 +5,8 @@
         :key="idx"
         :class="{active: routeName === item.routeName}"
         @click="changeActive(item, idx)">
-        <i :class="['iconfont', item.icon]"></i>
+        <img v-if="routeName === item.routeName" :src="item.iconActive" />
+        <img v-else :src="item.icon" />
         <p>{{ item.name }}</p>
       </li>
     </ul>
@@ -13,33 +14,36 @@
 </template>
 <script>
 export default {
-  name: "VFooter",
+  name: 'VFooter',
   data() {
     return {
       active: 0,
       list: [
         {
-          name: "工作台",
-          routeName: "worker",
-          icon: "icon-classification"
+          name: '工作台',
+          routeName: 'worker',
+          icon: require('~img/home/icon_tap_home_normal@2x.png'),
+          iconActive: require('~img/home/icon_tap_home_press@2x.png'),
         },
         {
-          name: "消息",
-          routeName: "home",
-          icon: "icon-btn_product_comment"
+          name: '消息',
+          routeName: 'test-pulldown',
+          icon: require('~img/home/icon_tap_msg_normal@2x.png'),
+          iconActive: require('~img/home/icon_tap_msg_press@2x.png'),
         },
         {
-          name: "订单",
-          routeName: "order-list",
-          icon: "icon-icon_my_orrders"
-        }
-      ]
+          name: '订单',
+          routeName: 'order-list',
+          icon: require('~img/home/icon_tap_user_normal@2x.png'),
+          iconActive: require('~img/home/icon_tap_user_press@2x.png'),
+        },
+      ],
     };
   },
   computed: {
     routeName() {
       return this.$route.name;
-    }
+    },
   },
   created() {
     this.active = this.list.indexOf(this.routeName);
@@ -49,12 +53,12 @@ export default {
       console.log('item.routeName, idx:_____', item.routeName, idx);
       if (this.active === idx) return false;
       this.active = idx;
-      this.$store.commit("TURN", "");
+      this.$store.commit('TURN', '');
       this.$router.push({
-        name: item.routeName
+        name: item.routeName,
       });
-    }
-  }
+    },
+  },
 };
 </script>
 <style lang="scss">
@@ -62,7 +66,7 @@ export default {
   flex: none;
   height: r(98px);
   background: #fff;
-  box-shadow: 0 0 r(20px) 0 #E9ECF4;
+  box-shadow: 0 0 r(20px) 0 #e9ecf4;
   position: relative;
   z-index: 20;
   ul {
@@ -77,6 +81,11 @@ export default {
     justify-content: center;
     width: 100%;
     height: r(98px);
+  }
+  img {
+    width: 48px;
+    height: 48px;
+    margin-bottom: 8px;
   }
   i {
     font-size: r(42px);

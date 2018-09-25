@@ -80,18 +80,18 @@
   </div>
 </template>
 <script>
-import { mapState } from "vuex";
+import { mapState } from 'vuex';
 import EmptyModule from './sale-rank-item-empty';
 import {
   getPerformanceRank,
   getBillRank,
-  getCurrentMonthSaleChampion
-} from "~apis/worker";
+  getCurrentMonthSaleChampion,
+} from '~apis/worker';
 
 export default {
-  name: "sale-champion",
+  name: 'sale-champion',
   components: {
-    EmptyModule
+    EmptyModule,
   },
   data() {
     return {
@@ -103,28 +103,28 @@ export default {
       performanceList: [], // 业绩列表
       billList: [], // 开单列表
       currentMonth: 1,
-      date: {}
+      date: {},
     };
   },
   computed: {
     ...mapState({
-      merchantId: state => state.root.storeId
-    })
+      merchantId: state => state.root.storeId,
+    }),
   },
   watch: {
     performanceMonth(newVal) {
-      let month = this.date.month;
+      const month = this.date.month;
       this.currentMonth = newVal === 0 ? month : month - 1;
       this.getPerformanceRank();
     },
     billMonth(newVal) {
-      let month = this.date.month;
+      const month = this.date.month;
       this.currentMonth = newVal === 0 ? month : month - 1;
       this.getBillRank();
-    }
+    },
   },
   created() {
-    this.date = this.$utils.getDate("current");
+    this.date = this.$utils.getDate('current');
     this.currentMonth = this.date.month;
     this.init();
   },
@@ -148,8 +148,8 @@ export default {
       const refList = this.$refs[name];
       const width = refList[0].clientWidth;
       if (idx !== 0)
-        // 第一行固定为100%宽度
-        refList[idx].style.width = this.$rem(width * scale * 2); // *2 因为2倍图
+      // 第一行固定为100%宽度
+      { refList[idx].style.width = this.$rem(width * scale * 2); } // *2 因为2倍图
     },
     // 改变选择月份
     changeMonth(name, idx) {
@@ -157,36 +157,36 @@ export default {
     },
     // 设置请求参数
     setReq() {
-      let req = {
+      const req = {
         merchantId: this.merchantId,
         year: this.date.year,
-        month: this.currentMonth
+        month: this.currentMonth,
       };
       return req;
     },
     // 获取业绩排行
     getPerformanceRank() {
-      getPerformanceRank(this.setReq()).then(res => {
+      getPerformanceRank(this.setReq()).then((res) => {
         const list = res.data.list;
         this.performanceList = list;
-        this.$nextTick(() => this.changeItem(list, "performanceList"));
+        this.$nextTick(() => this.changeItem(list, 'performanceList'));
       });
     },
     // 获取开单排行
     getBillRank() {
-      getBillRank(this.setReq()).then(res => {
+      getBillRank(this.setReq()).then((res) => {
         const list = res.data.list;
         this.billList = list;
-        this.$nextTick(() => this.changeItem(list, "billList"));
+        this.$nextTick(() => this.changeItem(list, 'billList'));
       });
     },
     // 获取销售冠军信息
     getChampionInfo() {
-      getCurrentMonthSaleChampion(this.merchantId).then(res => {
+      getCurrentMonthSaleChampion(this.merchantId).then((res) => {
         this.championInfo = res.data.rankBO || {};
       });
-    }
-  }
+    },
+  },
 };
 </script>
 <style lang="scss">

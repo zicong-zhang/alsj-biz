@@ -43,21 +43,21 @@ export default {
   props: {
     bottom: {
       type: Number,
-      default: 300
+      default: 300,
     },
     onRefresh: {
-      type: Function
+      type: Function,
     },
     onLoad: {
-      type: Function
+      type: Function,
     },
-    enabled: Boolean
+    enabled: Boolean,
   },
   watch: {
     enabled(newVal) {
       console.log('newVal:_____', newVal);
       this.finished = !newVal;
-    }
+    },
   },
   data() {
     return {
@@ -66,13 +66,13 @@ export default {
       loading: false, // 加载更多
       finished: false, // 列表完成加载，两个作用，禁止触发加载更多，标记整个列表加载完成
       isPulldownLoading: false, // 标记完成下拉刷新
-      disabledRefresh: false // 禁止下拉刷新
+      disabledRefresh: false, // 禁止下拉刷新
     };
   },
   computed: {
     scrollDom() {
       return this.$refs.scrollDom;
-    }
+    },
   },
   mounted() {
     this.loadingHeight = this.$refs.loadingComponent.$el.clientHeight;
@@ -162,8 +162,8 @@ export default {
       this.loading = false;
 
       if (this.onRefresh) this.disabledRefresh = false;
-    }
-  }
+    },
+  },
 };
 </script>
 <style lang="scss">

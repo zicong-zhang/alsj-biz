@@ -50,14 +50,15 @@
   </div>
 </template>
 <script>
-import { mapState, mapActions } from "vuex";
+import { mapState, mapActions } from 'vuex';
+
 export default {
-  name: "OrderDetailItemDemandPicker",
+  name: 'OrderDetailItemDemandPicker',
   props: {
     show: {
       type: Boolean,
-      defalut: false
-    }
+      defalut: false,
+    },
   },
   data() {
     return {
@@ -65,16 +66,16 @@ export default {
       dataLoaded: false, // 是否已经请求数据
       activeSpace: 0, // 当前选中的空间名称 的下标
       spaceList: [],
-      functionList: []
+      functionList: [],
     };
   },
   computed: {
     spaces() {
-      return this.$store.state.orderDetailModule.spaceList
+      return this.$store.state.orderDetailModule.spaceList;
     },
     functions() {
-      return this.$store.state.orderDetailModule.functionList
-    }
+      return this.$store.state.orderDetailModule.functionList;
+    },
   },
   watch: {
     // 监听本组件是否第一次展示
@@ -89,17 +90,17 @@ export default {
     },
     functions(newVal) {
       this.functionList = JSON.parse(JSON.stringify(newVal));
-    }
+    },
   },
   methods: {
     ...mapActions([
-      "getSpaceList", // 获取空间列表
-      "updateDemand" // 保存修改定制需求
+      'getSpaceList', // 获取空间列表
+      'updateDemand', // 保存修改定制需求
     ]),
     // 关闭选择器
     closePicker() {
       this.functionList = JSON.parse(JSON.stringify(this.functions));
-      this.$emit("close");
+      this.$emit('close');
     },
     // 选中空间
     selectSpace(idx) {
@@ -112,16 +113,16 @@ export default {
     },
     // 保存选中的定制需求
     saveDemand() {
-      this.$emit("close");
-      let arr = [];
-      this.functionList.forEach(item => {
-        item.forEach(value => {
+      this.$emit('close');
+      const arr = [];
+      this.functionList.forEach((item) => {
+        item.forEach((value) => {
           value.active && arr.push(value);
         });
       });
-      this.updateDemand(arr).then(this.$Toast("修改成功"));
-    }
-  }
+      this.updateDemand(arr).then(this.$Toast('修改成功'));
+    },
+  },
 };
 </script>
 <style lang="scss">

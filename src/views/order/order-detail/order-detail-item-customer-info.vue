@@ -6,15 +6,15 @@
     </H2>
 
     <ul>
-      <v-infoList label="客户姓名"
+      <v-cell label="客户姓名"
         align="left"
         :value="info.linkmanName" />
-      <v-infoList class="blue"
+      <v-cell class="blue"
         align="left"
         label="客户手机"
         :value="info.linkmanPhone"
         @handler="call" />
-      <v-infoList class="address"
+      <v-cell class="address"
         align="left"
         label="客户地址"
         :value="info.linkmanAddress" />
@@ -32,33 +32,33 @@
 </template>
 
 <script>
-import H2 from "./order-detail-item-h2";
-import { mapState } from "vuex";
+import H2 from './order-detail-item-h2';
+import { mapState } from 'vuex';
 
 export default {
-  name: "OrderDetailItemCustomerInfo",
+  name: 'OrderDetailItemCustomerInfo',
   components: {
-    H2
+    H2,
   },
   data() {
     return {
-      title: "客户信息"
+      title: '客户信息',
     };
   },
   computed: mapState({
-    info: state => state.orderDetailModule.orderInfo
+    info: state => state.orderDetailModule.orderInfo,
   }),
   methods: {
     call() {
-      alert("打电话");
+      alert('打电话');
     },
     toEditCustomer() {
-      this.$store.commit("TURN", "on");
+      this.$store.commit('TURN', 'on');
       this.$router.push({
-        name: "order-edit-customer"
+        name: 'order-edit-customer',
       });
-    }
-  }
+    },
+  },
 };
 </script>
 

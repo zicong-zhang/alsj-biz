@@ -16,73 +16,71 @@
 
 <script>
 export default {
-  name: "v-picker",
+  name: 'v-picker',
   props: {
     label: String,
     list: {
       type: Array,
-      default: () => {
-        return [
-          {
-            values: [
-              {
-                text: "杭州",
-                val: 123
-              },
-              {
-                text: "aa",
-                val: 33333
-              }
-            ]
-          },
-          {
-            values: [
-              {
-                text: "啊啊啊啊",
-                val: 4444
-              },
-              {
-                text: "阿斯顿",
-                val: 66666
-              }
-            ]
-          }
-        ];
-      }
+      default: () => [
+        {
+          values: [
+            {
+              text: '杭州',
+              val: 123,
+            },
+            {
+              text: 'aa',
+              val: 33333,
+            },
+          ],
+        },
+        {
+          values: [
+            {
+              text: '啊啊啊啊',
+              val: 4444,
+            },
+            {
+              text: '阿斯顿',
+              val: 66666,
+            },
+          ],
+        },
+      ],
     },
     value: {
-      type: String
+      type: String,
     },
     defaultVal: {
-      default: 0
+      default: 0,
     },
     // 选择器标题
     title: {
-      default: ""
+      default: '',
     },
     // 是否必填项, 传入值为未填写必填项时的警告语
     required: String,
     onConfirm: {
       type: Function,
-      required: true
+      required: true,
     },
     onCancel: {
-      type: Function
-    }
+      type: Function,
+    },
   },
   created() {},
   data() {
     return {
-      warn: "",
+      warn: '',
       picker: null,
-      timer: null
+      timer: null,
     };
   },
   computed: {
     placeholder() {
-      let placeholder = this.$attrs.placeholder;
-      return placeholder && !this.value && !this.$attrs["default-value"];
-    }
+      const placeholder = this.$attrs.placeholder;
+      return placeholder && !this.value && !this.$attrs['default-value'];
+    },
   },
   methods: {
     init() {
@@ -103,7 +101,7 @@ export default {
         list: this.list,
         title: this.title,
         onConfirm: this.onConfirm,
-        onCancel: this.onCancel
+        onCancel: this.onCancel,
       });
     },
     showWarn() {
@@ -119,11 +117,10 @@ export default {
     validator() {
       if (this.required) {
         return this.value ? true : this.showWarn();
-      } else {
-        return true;
       }
-    }
-  }
+      return true;
+    },
+  },
 };
 </script>
 <style lang="scss">

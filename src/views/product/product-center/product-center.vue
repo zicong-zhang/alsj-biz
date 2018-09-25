@@ -17,7 +17,7 @@
           @click="selectProductItem(item.id)">
           <i v-show="editMode"
             :class="{
-              icon: true, 
+              icon: true,
               'i-danxuanweixuanzhong': !selectedList.includes(item.id),
               'i-danxuanxuanzhong': selectedList.includes(item.id)
             }"></i>
@@ -40,7 +40,7 @@
       <div class="select-all-btn"
         @click="selectAll">
         <i :class="{
-          icon: true, 
+          icon: true,
           'i-danxuanweixuanzhong': selectLength !== proLength && proLength !== 0,
           'i-danxuanxuanzhong': selectLength === proLength && proLength !== 0
         }"></i>
@@ -69,7 +69,7 @@ export default {
       productList: [],
       editMode: false, // 编辑模式
       isSelectAll: false,
-      selectedList: []
+      selectedList: [],
     };
   },
   computed: {
@@ -80,7 +80,7 @@ export default {
     // 已选列表长度
     selectLength() {
       return this.selectedList.length;
-    }
+    },
   },
   created() {
     this.init();
@@ -97,7 +97,7 @@ export default {
       this.getProductListData();
     },
     getProductListData() {
-      this.getProductList(this.pageNum).then(res => {
+      this.getProductList(this.pageNum).then((res) => {
         this.productList = res.data.list;
       });
     },
@@ -125,7 +125,7 @@ export default {
     del() {
       const list = [...this.selectedList];
       if (list.length) {
-        this.delProduct(list).then(res => {
+        this.delProduct(list).then((res) => {
           const newList = this.productList.filter(item => this.selectedList.some(value => item.id != value));
           this.$set(this.$data, 'productList', newList);
           this.$set(this.$data, 'selectedList', []);
@@ -134,8 +134,8 @@ export default {
       } else {
         this.$Toast('请选择需要删除的产品');
       }
-    }
-  }
+    },
+  },
 };
 </script>
 <style lang="scss">

@@ -6,7 +6,7 @@
 </template>
 <script>
 export default {
-  name: "sale-rank-item-empty-module"
+  name: 'sale-rank-item-empty-module',
 };
 </script>
 <style lang="scss">

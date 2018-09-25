@@ -12,9 +12,9 @@
 export default {
   name: 'EditContractItemUpload',
   data() {
-    return {}
-  }
-}
+    return {};
+  },
+};
 </script>
 <style lang="scss">
 .edit-contract-item-upload {

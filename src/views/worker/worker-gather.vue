@@ -19,48 +19,49 @@
 </template>
 
 <script>
-import { mapState, mapActions } from "vuex";
+import { mapState, mapActions } from 'vuex';
+
 export default {
-  name: "WorkerGather",
+  name: 'WorkerGather',
   data() {
     return {
       dueAmount: 0,
-      receiptAmount: 0
+      receiptAmount: 0,
     };
   },
   computed: {
     ...mapState({
-      storeId: state => state.root.storeId
-    })
+      storeId: state => state.root.storeId,
+    }),
   },
   watch: {
     storeId() {
       this.init();
-    }
+    },
   },
   methods: {
     ...mapActions([
-      "getReceiptAmount", // 获取店铺实收款金额(本月)
-      "getDueAmount" // 获取店铺待收款金额(全部)
+      'getReceiptAmount', // 获取店铺实收款金额(本月)
+      'getDueAmount', // 获取店铺待收款金额(全部)
     ]),
     init() {
-      this.getReceiptAmount().then(res => {
+      this.getReceiptAmount().then((res) => {
         this.receiptAmount = res.data.totalAmount;
       });
-      this.getDueAmount().then(res => {
+      this.getDueAmount().then((res) => {
         this.dueAmount = res.data.totalAmount;
       });
     },
     // 跳转收款详情 0：实收 1：待收
     proceedsDetail(label) {
       this.$utils.go({
-        name: "proceeds-detail",
+        name: 'proceeds-detail',
         query: {
-          label: label === 0 ? 0 : 1
-        }
+          label: label === 0 ? 0 : 1,
+        },
       });
-    }
-  }
+    },
+  },
 };
 </script>
 <style lang="scss">

@@ -137,29 +137,29 @@
 </template>
 
 <script>
-import { mapActions, mapMutations } from "vuex";
+import { mapActions, mapMutations } from 'vuex';
 
 export default {
-  name: "performance-target",
+  name: 'performance-target',
   data() {
     return {
       maxLength: 10, // 输入金额位数限制
       year: 2018, // 当前选中年份
-      id: "", // 店铺目标id
+      id: '', // 店铺目标id
 
-      janAmount: "",
-      fabAmount: "",
-      marAmount: "",
-      aprAmount: "",
-      mayAmount: "",
-      junAmount: "",
-      julAmount: "",
-      augAmount: "",
-      sepAmount: "",
-      octAmount: "",
-      novAmount: "",
-      decAmount: "",
-      total: "0"
+      janAmount: '',
+      fabAmount: '',
+      marAmount: '',
+      aprAmount: '',
+      mayAmount: '',
+      junAmount: '',
+      julAmount: '',
+      augAmount: '',
+      sepAmount: '',
+      octAmount: '',
+      novAmount: '',
+      decAmount: '',
+      total: '0',
     };
   },
   created() {
@@ -167,21 +167,21 @@ export default {
   },
   methods: {
     ...mapActions([
-      "getOnePerformanceTargetList", // 获取店铺某一年的业绩目标列表
-      "updatePerformTargetList", // 更新店铺某一年业绩目标列表
-      "getStoreSaleTarget" // 获取店铺目标金额, 调用接口刷新数据
+      'getOnePerformanceTargetList', // 获取店铺某一年的业绩目标列表
+      'updatePerformTargetList', // 更新店铺某一年业绩目标列表
+      'getStoreSaleTarget', // 获取店铺目标金额, 调用接口刷新数据
     ]),
     showDatePicker() {
       this.$DatePicker({
-        confirm: dateObj => {
+        confirm: (dateObj) => {
           this.year = dateObj.getFullYear();
           this.getDataList();
-        }
+        },
       });
     },
     getDataList() {
-      this.getOnePerformanceTargetList(this.year).then(res => {
-        let data = res.data.merchantGoalExt;
+      this.getOnePerformanceTargetList(this.year).then((res) => {
+        const data = res.data.merchantGoalExt;
         this.id = data.id;
         this.total = data.totalGoalAmount;
         this.setAmount(data);
@@ -189,40 +189,40 @@ export default {
     },
     // 设置数据中已存在金额
     setAmount(data) {
-      this.formatNum("janAmount", data.janAmount || 0);
-      this.formatNum("fabAmount", data.fabAmount || 0);
-      this.formatNum("marAmount", data.marAmount || 0);
-      this.formatNum("aprAmount", data.aprAmount || 0);
-      this.formatNum("mayAmount", data.mayAmount || 0);
-      this.formatNum("junAmount", data.junAmount || 0);
-      this.formatNum("julAmount", data.julAmount || 0);
-      this.formatNum("augAmount", data.augAmount || 0);
-      this.formatNum("sepAmount", data.sepAmount || 0);
-      this.formatNum("octAmount", data.octAmount || 0);
-      this.formatNum("novAmount", data.novAmount || 0);
-      this.formatNum("decAmount", data.decAmount || 0);
+      this.formatNum('janAmount', data.janAmount || 0);
+      this.formatNum('fabAmount', data.fabAmount || 0);
+      this.formatNum('marAmount', data.marAmount || 0);
+      this.formatNum('aprAmount', data.aprAmount || 0);
+      this.formatNum('mayAmount', data.mayAmount || 0);
+      this.formatNum('junAmount', data.junAmount || 0);
+      this.formatNum('julAmount', data.julAmount || 0);
+      this.formatNum('augAmount', data.augAmount || 0);
+      this.formatNum('sepAmount', data.sepAmount || 0);
+      this.formatNum('octAmount', data.octAmount || 0);
+      this.formatNum('novAmount', data.novAmount || 0);
+      this.formatNum('decAmount', data.decAmount || 0);
     },
     limitInput(name) {
       this[name] = this[name]
         .toString()
-        .replace(/\D/g, "")
+        .replace(/\D/g, '')
         .slice(0, 8);
     },
     // 某个 input 失去焦点时 进行格式化
     formatNum(name, value) {
-      const val = typeof value !== "undefined" ? value : this[name];
+      const val = typeof value !== 'undefined' ? value : this[name];
       this[name] = this.$utils.numInsertSymbol(val);
       return this[name];
     },
     // 某个 input 获取焦点时去除格式化
     unFormatNum(name) {
-      this[name] = this[name].replace(/\D/g, "");
+      this[name] = this[name].replace(/\D/g, '');
     },
     // 提交更新目标数据
     updateTargetData() {
       this.updatePerformTargetList(this.$data).then(() => {
         this.getStoreSaleTarget().then(() => {
-          this.$Toast("修改成功");
+          this.$Toast('修改成功');
           // 因涉及进度的百分比字符串，并且月份的数据格式过于分散，因此采用重调接口
           this.$utils.back();
         });
@@ -231,8 +231,8 @@ export default {
     // 取消修改
     cancel() {
       this.$utils.back();
-    }
-  }
+    },
+  },
 };
 </script>
 <style lang="scss">

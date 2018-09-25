@@ -36,42 +36,42 @@
   </div>
 </template>
 <script>
-import { mapState, mapGetters, mapActions } from "vuex";
+import { mapState, mapGetters, mapActions } from 'vuex';
 
 export default {
-  name: "OrderDetailItemProgress",
+  name: 'OrderDetailItemProgress',
   props: {
-    reload: Number
+    reload: Number,
   },
   data() {
     return {};
   },
   computed: {
     ...mapState({
-      orderProgress: state => state.orderDetailModule.orderProgress
+      orderProgress: state => state.orderDetailModule.orderProgress,
     }),
-    ...mapGetters(["orderDetailStatus"]),
+    ...mapGetters(['orderDetailStatus']),
     progress() {
-      return;
-    }
+
+    },
   },
   watch: {
     reload(newVal) {
       this.getProgreess();
-    }
+    },
   },
   created() {
     this.getProgreess();
   },
   methods: {
-    ...mapActions(["getOrderDetailProgress"]),
-    replaceBr(date = "") {
-      return date.replace(/\s/, "<br />").replace(/\-/g, ".");
+    ...mapActions(['getOrderDetailProgress']),
+    replaceBr(date = '') {
+      return date.replace(/\s/, '<br />').replace(/\-/g, '.');
     },
     getProgreess() {
-      this.$store.dispatch("getOrderDetailProgress");
-    }
-  }
+      this.$store.dispatch('getOrderDetailProgress');
+    },
+  },
 };
 </script>
 <style lang="scss" scoped>

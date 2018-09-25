@@ -2,41 +2,41 @@
   <div class="order-detail-item-keeper">
     <H2 title="跟进人" />
     <ul>
-      <v-infoList v-for="item in list"
+      <v-cell v-for="item in list"
         :key="item.userId"
         :label="item.currentKeeperFlag === 1 ? '当前跟进人' : '历史跟进人'"
         :value="item.keeperName" />
-      <v-infoList label="订单创建人"
+      <v-cell label="订单创建人"
         :value="orderCreater" />
     </ul>
   </div>
 </template>
 <script>
-import H2 from "./order-detail-item-h2";
-import { mapState, mapGetters } from "vuex";
+import H2 from './order-detail-item-h2';
+import { mapState, mapGetters } from 'vuex';
 
 export default {
-  name: "OrderDetailItemKeeper",
+  name: 'OrderDetailItemKeeper',
   components: {
-    H2
+    H2,
   },
   data() {
     return {
-      list: []
+      list: [],
     };
   },
   computed: {
     ...mapState({
       orderCreater: state =>
-        state.orderDetailModule.orderInfo.createStaffNickname
+        state.orderDetailModule.orderInfo.createStaffNickname,
     }),
-    ...mapGetters(["keepers"])
+    ...mapGetters(['keepers']),
   },
   watch: {
     keepers(val) {
-      this.$set(this.$data, "list", val);
-    }
-  }
+      this.$set(this.$data, 'list', val);
+    },
+  },
 };
 </script>
 

@@ -21,19 +21,19 @@ export default {
   name: 'v-img',
   props: {
     src: {
-      type: String
+      type: String,
     },
     loadingType: String,
-    errorType: String
+    errorType: String,
   },
   data() {
     return {
-      status: 'before'
+      status: 'before',
     };
   },
   computed: {
     loadingImg() {
-      switch(this.loadingType) {
+      switch (this.loadingType) {
         case 'logo':
           return require('~img/placeholder/store_logo.png');
         case 'user':
@@ -50,12 +50,12 @@ export default {
           return this.loadingImg;
           break;
       }
-    }
+    },
   },
   watch: {
     src(newVal) {
       this.loadImg();
-    }
+    },
   },
   created() {
     this.loadImg();
@@ -63,7 +63,7 @@ export default {
   methods: {
     loadImg() {
       this.status = 'loading';
-      let img = new Image();
+      const img = new Image();
       img.src = this.src;
       img.onload = () => {
         this.status = 'loaded';
@@ -72,8 +72,8 @@ export default {
         if (!this.error) this.error = this.loading;
         this.status = 'error';
       };
-    }
-  }
+    },
+  },
 };
 </script>
 <style lang="scss">

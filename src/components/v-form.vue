@@ -11,14 +11,14 @@ export default {
     // 调用子组件的验证方法
     submit() {
       let pass = false;
-      this.$children.forEach(item => {
+      this.$children.forEach((item) => {
         console.log(':_____', item.validator());
         if (item.validator) pass = item.validator();
       });
 
       return pass;
-    }
+    },
 
-  }
-}
+  },
+};
 </script>

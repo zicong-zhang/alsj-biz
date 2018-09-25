@@ -18,18 +18,18 @@
 
 <script>
 export default {
-  name: "proceeds-detail-item-header",
+  name: 'proceeds-detail-item-header',
   data() {
     return {
-      activeTab: 0
+      activeTab: 0,
     };
   },
   watch: {
     $route(to, from) {
-      if (to.name === this.$route.name && from.name === "worker") {
+      if (to.name === this.$route.name && from.name === 'worker') {
         this.init();
       }
-    }
+    },
   },
   created() {
     this.init();
@@ -39,14 +39,14 @@ export default {
       this.activeTab = this.$route.query.label;
     },
     back() {
-      this.$store.commit("TURN", "off");
+      this.$store.commit('TURN', 'off');
       this.$router.back();
     },
     changeTab(idx) {
       if (idx === this.activeTab) return;
       this.activeTab = idx;
-    }
-  }
+    },
+  },
 };
 </script>
 <style lang="scss">

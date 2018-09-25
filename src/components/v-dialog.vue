@@ -26,24 +26,24 @@
 
 <script>
 export default {
-  name: "v-dialog",
+  name: 'v-dialog',
   props: {
     show: {
       default: false,
-      type: Boolean
+      type: Boolean,
     },
     // 标题
     title: String,
     // 内容
     content: {
       required: true,
-      type: [String, Number]
+      type: [String, Number],
     },
     // 是否展示取消按钮
-    "show-cancel": {
+    'show-cancel': {
       default: false,
-      type: Boolean
-    }
+      type: Boolean,
+    },
   },
   data() {
     return {};
@@ -51,17 +51,17 @@ export default {
   methods: {
     // 关闭
     onColse() {
-      this.$emit("close");
+      this.$emit('close');
     },
     // 取消
     onCancel() {
-      this.$emit("cancel");
+      this.$emit('cancel');
     },
     // 确定
     onConfirm() {
-      this.$emit("confirm");
-    }
-  }
+      this.$emit('confirm');
+    },
+  },
 };
 </script>
 

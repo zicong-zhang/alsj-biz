@@ -48,11 +48,11 @@ export default {
   name: 'view-test-pulldown',
   props: {
     onRefresh: {
-      type: Function
+      type: Function,
     },
     onLoad: {
-      type: Function
-    }
+      type: Function,
+    },
   },
   data() {
     return {
@@ -62,7 +62,7 @@ export default {
       listLoading: false,
       listFinished: false,
       qty: 0,
-      isPulldownLoading: false
+      isPulldownLoading: false,
     };
   },
   created() {
@@ -98,7 +98,7 @@ export default {
       this.listFinished = true;
       return this.aa()
         .then(() => this.finishRefresh())
-        .catch(() => this.finishRefresh())
+        .catch(() => this.finishRefresh());
       /* setTimeout(() => {
         this.$Toast('刷新成功');
         this.isPulldownLoading = false;
@@ -112,12 +112,12 @@ export default {
     },
     aa() {
       return Promise.all([this.bb(), this.cc()])
-        .then(res => {
+        .then((res) => {
           console.log('res:_____', res);
         })
-        .catch(err => {
+        .catch((err) => {
           console.log('err:_____', err);
-        })
+        });
     },
     bb() {
       return new Promise((res, rej) => {
@@ -134,8 +134,8 @@ export default {
           console.log('cc完成:_____');
         }, 4000);
       });
-    }
-  }
+    },
+  },
 };
 </script>
 <style lang="scss">

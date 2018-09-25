@@ -1,5 +1,5 @@
 <template>
-  <li :class="{'v-info-list': true, left: align === 'left'}">
+  <li :class="{'v-cell': true, left: align === 'left'}">
     <h5>{{ label }}</h5>
     <p :style="{'-webkit-line-clamp': line}"
      @click="clickValue">{{ value }}</p>
@@ -8,35 +8,35 @@
 
 <script>
 export default {
-  name: "v-infoList",
+  name: 'v-cell',
   props: {
     // 左侧标题名
     label: {
-      type: String
+      type: String,
     },
     // 右侧
     value: {
-      type: String
+      type: [String, Number],
     },
     // 对齐方式
     align: {
-      type: String
+      type: String,
     },
     // 右侧行数
     line: {
-      default: 1
-    }
+      default: 1,
+    },
   },
   methods: {
     clickValue() {
-      this.$emit("handler");
-    }
-  }
+      this.$emit('handler');
+    },
+  },
 };
 </script>
 
 <style lang="scss" scoped>
-.v-info-list {
+.v-cell {
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
@@ -56,7 +56,7 @@ h5 {
   margin-right: 22px;
 }
 p {
-  max-width: 80%;
+  // max-width: 80%;
   font-size: 24px;
   line-height: 36px !important;
   display: -webkit-box;

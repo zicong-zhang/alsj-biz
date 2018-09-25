@@ -16,13 +16,13 @@
         <i class="iconfont icon-btn_all_next"></i>
       </H2>
       <ul>
-        <v-infoList label="所在小区"
+        <v-cell label="所在小区"
           align="left"
           :value="orderInfo.linkmanResidence || '无'" />
-        <v-infoList label="户型"
+        <v-cell label="户型"
           align="left"
           :value="orderInfo.linkmanHouseType  || '无'" />
-        <v-infoList label="面积"
+        <v-cell label="面积"
           align="left"
           :value="orderInfo.measurement ?  `${orderInfo.measurement} ㎡` : '无'" />
       </ul>
@@ -31,37 +31,37 @@
 </template>
 
 <script>
-import H2 from "./order-detail-item-h2";
-import { mapGetters } from "vuex";
+import H2 from './order-detail-item-h2';
+import { mapGetters } from 'vuex';
 
 export default {
-  name: "OrderDetailItemHouseType",
+  name: 'OrderDetailItemHouseType',
   components: {
-    H2
+    H2,
   },
   data() {
     return {
-      title: "户型信息"
+      title: '户型信息',
     };
   },
   computed: {
     ...mapGetters(['orderInfo']),
     showType() {
-      let {
+      const {
         linkmanResidence,
         linkmanHouseType,
-        measurement
+        measurement,
       } = this.orderInfo;
       return !linkmanResidence && !linkmanHouseType && !measurement;
-    }
+    },
   },
   methods: {
     toEditHouseType() {
       this.$utils.go({
-        name: 'order-edit-house-type'
-      })
-    }
-  }
+        name: 'order-edit-house-type',
+      });
+    },
+  },
 };
 </script>
 

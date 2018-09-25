@@ -18,32 +18,36 @@ export default {
   name: 'v-header',
   props: {
     title: {
-      type: String
+      type: String,
     },
     'back-reload': {
-      type: Number
+      type: Number,
     },
     opacity: {
-      type: Number
+      type: Number,
     },
     iconBg: {
-      type: Boolean
+      type: Boolean,
     },
     onBack: {
-      type: Function
-    }
+      type: Function,
+    },
   },
   created() {},
   methods: {
     back() {
+      console.log('213132:_____', 213132);
       if (this.onBack) {
         this.onBack();
+      } else if (document.referrer == window.location.href) {
+        this.$utils.back({
+          name: 'worker',
+        });
       } else {
-        this.$store.commit('TURN', 'off');
-        this.$router.back(-1);
+        this.$utils.back();
       }
-    }
-  }
+    },
+  },
 };
 </script>
 

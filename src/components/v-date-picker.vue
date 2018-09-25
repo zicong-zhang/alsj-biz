@@ -13,7 +13,7 @@
 </template>
 <script>
 export default {
-  name: "VDatePicker",
+  name: 'VDatePicker',
   props: {
     // 标签
     label: String,
@@ -21,29 +21,29 @@ export default {
     required: String,
     // 选择器标题
     title: {
-      default: ""
+      default: '',
     },
     // 警告文案
     warn: String,
     // 设置当前选择的日期
     current: {
-      default: ""
-    }
+      default: '',
+    },
   },
   data() {
     return {
-      datePicker: null
+      datePicker: null,
     };
   },
   computed: {
     placeholder() {
-      let placeholder = this.$attrs.placeholder;
-      return placeholder && !this.value && !this.$attrs["default-value"];
-    }
+      const placeholder = this.$attrs.placeholder;
+      return placeholder && !this.value && !this.$attrs['default-value'];
+    },
   },
   created() {
     this.init();
-    console.log("this.$attrs:_____", this.$attrs);
+    console.log('this.$attrs:_____', this.$attrs);
   },
   methods: {
     init() {
@@ -58,29 +58,29 @@ export default {
         max: new Date(maxYear, maxMmonth, maxDay),
         value: this.current || new Date(),
         onSelect: this.selectHandle,
-        onCancel: this.cancelHandle
+        onCancel: this.cancelHandle,
       });
     },
     selectHandle(date, selectedVal, selectedText) {
       this.$createDialog({
-        type: "warn",
+        type: 'warn',
         content: `Selected Item: <br/> - date: ${date} <br/> - value: ${selectedVal.join(
-          ", "
-        )} <br/> - text: ${selectedText.join(" ")}`,
-        icon: "cubeic-alert"
+          ', ',
+        )} <br/> - text: ${selectedText.join(' ')}`,
+        icon: 'cubeic-alert',
       }).show();
     },
     cancelHandle() {
       this.$createToast({
-        type: "correct",
-        txt: "Picker canceled",
-        time: 1000
+        type: 'correct',
+        txt: 'Picker canceled',
+        time: 1000,
       }).show();
     },
     showPicker() {
       this.datePicker.show();
-    }
-  }
+    },
+  },
 };
 </script>
 <style lang="scss">

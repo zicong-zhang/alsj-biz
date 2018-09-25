@@ -1,7 +1,7 @@
 export default {
   state: {
     turn: '', // '' on off
-    storeId: false
+    storeId: false,
   },
   getters: {
 
@@ -17,6 +17,6 @@ export default {
     SET_STORE_ID(state, id) {
       state.storeId = id;
       window.sessionStorage.setItem('STORE_ID', id);
-    }
-  }
-}
+    },
+  },
+};

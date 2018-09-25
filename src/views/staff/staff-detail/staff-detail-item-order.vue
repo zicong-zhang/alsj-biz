@@ -10,35 +10,34 @@
 </template>
 <script>
 import orderListItem from '~views/order/order-list/order-list-item';
-import { mapActions } from "vuex";
+import { mapActions } from 'vuex';
 
 export default {
   name: 'staff-detail-item-order',
   components: {
-    orderListItem
+    orderListItem,
   },
   props: {
-    staffId: String
+    staffId: String,
   },
   data() {
     return {
-      orderList: []
+      orderList: [],
 
-    }
+    };
   },
-  created() {
-    this.getDataList()
+  activated() {
+    this.getDataList();
   },
   methods: {
     ...mapActions(['getOrderListForStaff']),
     getDataList() {
       this.getOrderListForStaff(this.$route.query.id)
-        .then(res => {
-          this.orderList = res.data.list;
-          console.log('res:_____', res);
-        })
-    }
-  }
+        .then((res) => {
+          this.orderList = res.data.list || [];
+        });
+    },
+  },
 };
 </script>
 <style lang="scss">

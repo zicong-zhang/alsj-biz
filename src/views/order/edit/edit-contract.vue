@@ -45,29 +45,29 @@
 import UploadContract from './edit-contract-item-upload';
 
 export default {
-  name: "EditContract",
+  name: 'EditContract',
   components: {
-    UploadContract
+    UploadContract,
   },
   data() {
     // 付款方式选项
     const payTypeList = [
       {
-        text: "线上付款",
-        value: 1
+        text: '线上付款',
+        value: 1,
       },
       {
-        text: "线下付款",
-        value: 2
-      }
+        text: '线下付款',
+        value: 2,
+      },
     ];
     return {
       payTypeList, // 付款方式选项
-      orderAmount: "",
-      contractList: []
+      orderAmount: '',
+      contractList: [],
     };
   },
-  methods: {}
+  methods: {},
 };
 </script>
 

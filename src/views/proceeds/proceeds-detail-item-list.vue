@@ -24,28 +24,28 @@
 
 <script>
 export default {
-  name: "proceeds-detail-item-list",
+  name: 'proceeds-detail-item-list',
   data() {
     return {
-      list: []
+      list: [],
     };
   },
   created() {
-    this.getAllDetail()
+    this.getAllDetail();
   },
   methods: {
     getAllDetail() {
-      this.$http("/statistic/getAllReceiptItemList", {
+      this.$http('/statistic/getAllReceiptItemList', {
         merchantId: 1,
         month: 6,
         pageNum: 1,
         pageSize: 40,
-        year: 2018
-      }).then(res => {
+        year: 2018,
+      }).then((res) => {
         this.list = res.data.list;
-      })
-    }
-  }
+      });
+    },
+  },
 };
 </script>
 <style lang="scss">

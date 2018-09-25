@@ -13,16 +13,14 @@
  * 配置用户权限表
  */
 
-import 'babel-polyfill'
-import 'lib-flexible/flexible'
+import 'babel-polyfill';
+import 'lib-flexible/flexible';
 // 第三方库
-import Vue from 'vue'
-import VueLazyload from 'vue-lazyload'
-import AlloyFinger from 'alloyfinger'
-import AlloyFingerPlugin from 'alloyfinger/vue/alloy_finger.vue'
-import FastClick from 'fastclick'
-// import { VuetronVue } from 'vuetron';
-mui.init();
+import Vue from 'vue';
+import VueLazyload from 'vue-lazyload';
+import AlloyFinger from 'alloyfinger';
+import AlloyFingerPlugin from 'alloyfinger/vue/alloy_finger.vue';
+import FastClick from 'fastclick';
 
 // 工具类
 import router from './router';
@@ -40,6 +38,8 @@ import './sass/base.scss';
 import './sass/common.scss';
 import './sass/transition.scss';
 import './assets/font/iconfont.css';
+// import { VuetronVue } from 'vuetron';
+window.mui.init();
 
 // (function() {
 //   var script = document.createElement('script');
@@ -57,8 +57,8 @@ Vue.config.productionTip = false;
 // Vue.use(VuetronVue);
 Vue.use(VueLazyload);
 Vue.use(AlloyFingerPlugin, {
-  AlloyFinger
-})
+  AlloyFinger,
+});
 
 /* Vue.prototype.$plus = fn => {
   if (window.plus) {
@@ -68,7 +68,7 @@ Vue.use(AlloyFingerPlugin, {
   }
 } */
 if ('addEventListener' in document) {
-  document.addEventListener('DOMContentLoaded', function() {
+  document.addEventListener('DOMContentLoaded', () => {
     FastClick.attach(document.body);
   }, false);
 }
@@ -84,5 +84,5 @@ new Vue({
   el: '#app',
   router,
   store,
-  render: h => h(App)
-})
+  render: h => h(App),
+});

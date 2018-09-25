@@ -1,5 +1,3 @@
-
-import App from '~/App';
 import Vuex from '~/vuex/store';
 import Router from '~/router';
 
@@ -9,14 +7,22 @@ export default {
    */
   go(params, replace) {
     Vuex.commit('TURN', 'on');
-    replace ? Router.replace(params) : Router.push(params);
+    if (replace) {
+      Router.replace(params);
+    } else {
+      Router.push(params);
+    }
   },
   /**
    * 路由返回
    */
-  back() {
+  back(param) {
     Vuex.commit('TURN', 'off');
-    Router.back(-1);
+    if (param) {
+      Router.push(param);
+    } else {
+      Router.back(-1);
+    }
   },
   /**
    * 获取时间
@@ -25,10 +31,10 @@ export default {
    */
   getDate(type = 'current') {
     const current = new Date();
-    let dateObj = {
+    const dateObj = {
       year: current.getFullYear(),
       month: current.getMonth() + 1,
-      day: current.getDate()
+      day: current.getDate(),
     };
 
     if (type === 'current') {
@@ -52,13 +58,12 @@ export default {
     window.sessionStorage.setItem(name, params);
   },
   // 附带参数跳转
-  openUrl(path, params) {
-    params = params || {};
-    var data = '?';
+  openUrl(path, params = {}) {
+    let data = '?';
 
-    for (var attr in params) {
-      data += attr + '=' + params[attr] + '&';
-    }
+    Object.keys(params).forEach(attr => {
+      data += `${attr}=${params[attr]}&`;
+    });
 
     data = encodeURI(data.slice(0, -1));
     window.location.href = path + data;
@@ -69,12 +74,11 @@ export default {
    * @param {String} symbol 插入的符号
    */
   numInsertSymbol(number = 0, symbol = ',') {
-    let num = number.toString();
+    const num = number.toString();
     if (num.length > 3) {
       return num.replace(/(\d)(?=(?:\d{3})+$)/g, `$1${symbol}`);
-    } else {
-      return num;
     }
+    return num;
   },
   /**
    * 格式化数字
@@ -83,17 +87,16 @@ export default {
     if (!num) {
       return 0;
     } else if (num > 10000) {
-      let number = num * 1 / 10000;
+      let number = (num * 1) / 10000;
       number = retain ? number.toFixed(retain) : number;
-      return number + '万';
-    } else {
-      return num;
+      return `${number}万`;
     }
+    return num;
   },
   // 复制数组
   copyArr(arr) {
     if (arr.length === 0) return [];
-    var newArr = JSON.parse(JSON.stringify(arr));
+    const newArr = JSON.parse(JSON.stringify(arr));
     return newArr;
   },
   // 复制对象
@@ -103,26 +106,18 @@ export default {
   /**
    * 限制输入框输入
    */
-  limitInput(text, type, length, regExp) {
-    text = text || '';
+  limitInput(text = '', type, regExp) {
     if (type) {
       switch (type) {
         case 'number':
-          text = text.replace(/\D/g, '');
-          break;
+          return text.replace(/\D/g, '');
         case 'password':
-          text = text.replace(/[^\da-zA-Z]/g, '');
+          return text.replace(/[^\da-zA-Z]/g, '');
         case 'cn':
-          text = text.replace(/[^\u4E00-\u9FA5a-zA-Z\']/g, '');
-          break;
+          return text.replace(/[^\u4E00-\u9FA5a-zA-Z\']/g, '');
         default:
-          text = text.replace(regExp, '');
-          break;
+          return text.replace(regExp, '');
       }
-    }
-
-    if (length) {
-      text = text.slice(0, length);
     }
     return text;
   },
@@ -149,19 +144,19 @@ export default {
    * 加密密码
    */
   encryption(password) {
-    var key = CryptoJS.enc.Utf8.parse('alasgad980f7467f');
-    var iv = CryptoJS.enc.Utf8.parse('alasgad980f7467f');
-    return CryptoJS.AES.encrypt(password, key, {
-      iv: iv,
-      mode: CryptoJS.mode.CBC,
-      padding: CryptoJS.pad.ZeroPadding
+    const key = window.CryptoJS.enc.Utf8.parse('alasgad980f7467f');
+    const iv = window.CryptoJS.enc.Utf8.parse('alasgad980f7467f');
+    return window.CryptoJS.AES.encrypt(password, key, {
+      iv,
+      mode: window.CryptoJS.mode.CBC,
+      padding: window.CryptoJS.pad.ZeroPadding,
     }).toString();
   },
   /**
    * 设置用户信息
    */
   setUserInfo(data) {
-    let info = JSON.parse(JSON.stringify(data));
+    const info = JSON.parse(JSON.stringify(data));
     window.localStorage.setItem('USER_INFO', JSON.stringify(info));
     window.localStorage.setItem('USER_INFO_EXPIRE', Date.now());
   },
@@ -169,7 +164,7 @@ export default {
    * 获取用户信息
    */
   getUserInfo() {
-    let info = window.localStorage.getItem('USER_INFO');
+    const info = window.localStorage.getItem('USER_INFO');
     return info;
   },
   /**
@@ -184,9 +179,9 @@ export default {
    * 登录后的跳转
    */
   loginTo() {
-    let from = this.urlToObj().from;
+    const from = this.urlToObj().from;
     if (from) {
-      window.location.href = (`../../pages/${ from }?` + window.location.search.slice(1));
+      window.location.href = (`../../pages/${from}?${window.location.search.slice(1)}`);
     } else {
       window.location.href = '../../../index.html';
     }
@@ -195,22 +190,22 @@ export default {
    * 判断登录状态是否过期
    */
   judgeLoginStatusExpire() {
-    let expire = window.localStorage.getItem('USER_INFO_EXPIRE');
-    let gap = Date.now() - expire * 1;
-    let time = gap / (1000 * 60 * 60 * 24);
+    const expire = window.localStorage.getItem('USER_INFO_EXPIRE');
+    const gap = Date.now() - (expire * 1);
+    const time = gap / (1000 * 60 * 60 * 24);
     return time > 7;
   },
   /**
    * 跳转去登录页
    */
   goLogin() {
-    let {
+    const {
       pathname,
-      search
+      search,
     } = window.location;
-    let path = pathname.replace(/\/.*pages\/(.*html)/, '$1');
-    let params = search ? `&${ search.slice(1) }` : '';
-    window.location.href = `../../pages/login/login.html?from=${ path }${ params }`;
+    const path = pathname.replace(/\/.*pages\/(.*html)/, '$1');
+    const params = search ? `&${search.slice(1)}` : '';
+    window.location.href = `../../pages/login/login.html?from=${path}${params}`;
   },
   /**
    * 判断是否已登录
@@ -222,13 +217,13 @@ export default {
       _this.$Toast('您尚未登录，请登录后再试', 800)
         .then(() => {
           this.goLogin();
-        })
+        });
       return false;
     } else if (this.judgeLoginStatusExpire()) {
       _this.$Toast('您的登录状态已过期，请重新登录', 800)
         .then(() => {
           this.goLogin();
-        })
+        });
     } else {
       return true;
     }
@@ -237,19 +232,19 @@ export default {
    * 随机数
    */
   randomNum() {
-    let num = parseInt(Math.random() * 10);
+    const num = parseInt(Math.random() * 10);
     return num;
   },
   /**
    * 防键盘阻挡表单元素
    */
   preventKeyboard() {
-    window.addEventListener('resize', function() {
+    window.addEventListener('resize', () => {
       if (
         document.activeElement.tagName === 'INPUT' ||
         document.activeElement.tagName === 'TEXTAREA'
       ) {
-        window.setTimeout(function() {
+        window.setTimeout(() => {
           if ('scrollIntoView' in document.activeElement) {
             document.activeElement.scrollIntoView(false);
           } else {
@@ -263,19 +258,19 @@ export default {
    * 获取定位
    */
   locationStorageMap() {
-    var mapDom = document.createElement('div');
+    const mapDom = document.createElement('div');
     mapDom.style.display = 'none';
     mapDom.id = 'allmap';
     document.querySelector('body').append(mapDom);
     // 百度地图API功能
-    var map = new BMap.Map("allmap");
-    var point = new BMap.Point(116.331398, 39.897445);
+    const map = new BMap.Map('allmap');
+    const point = new BMap.Point(116.331398, 39.897445);
     map.centerAndZoom(point, 12);
 
-    var geolocation = new BMap.Geolocation();
-    geolocation.getCurrentPosition(function(r) {
-      if (this.getStatus() == BMAP_STATUS_SUCCESS) {
-        var mk = new BMap.Marker(r.point);
+    const geolocation = new BMap.Geolocation();
+    geolocation.getCurrentPosition((r) => {
+      if (this.getStatus() === window.BMAP_STATUS_SUCCESS) {
+        const mk = new BMap.Marker(r.point);
         map.addOverlay(mk);
         map.panTo(r.point);
         window.localStorage.setItem('GET_CURRENT_LOCATION', JSON.stringify(r));
@@ -283,8 +278,8 @@ export default {
         this.locationStorageMap();
       }
     }, {
-      enableHighAccuracy: true
-    })
+      enableHighAccuracy: true,
+    });
   },
   /**
    * 获取默认定位 （珠江新城）
@@ -292,8 +287,8 @@ export default {
   getDefaultPosition() {
     return {
       lat: 23.1194300000,
-      lng: 113.3212200000
-    }
+      lng: 113.3212200000,
+    };
   },
   /**
    * 手动创建loading
@@ -301,34 +296,34 @@ export default {
    */
   createLoading(el) {
     setTimeout(() => {
-      let params = {
+      const params = {
         renderer: 'svg',
         loop: true,
         autoplay: true,
         container: el,
-        animationData: LOADING_CONFIG
-      }
+        animationData: LOADING_CONFIG,
+      };
       lottie.loadAnimation(params);
-    }, 200)
+    }, 200);
   },
   /**
    * 格式化时间
    */
   formatDate(dateNum) {
-    var date = new Date(dateNum);
-    var month = date.getMonth() + 1;
-    var day = date.getDate();
-    var hour = date.getHours();
-    var minute = date.getMinutes();
-    var seconds = date.getSeconds();
+    const date = new Date(dateNum);
+    let month = date.getMonth() + 1;
+    let day = date.getDate();
+    let hour = date.getHours();
+    let minute = date.getMinutes();
+    let seconds = date.getSeconds();
 
-    if (month <= 9) month = "0" + month;
-    if (day <= 9) day = "0" + day;
-    if (hour <= 9) hour = "0" + hour;
-    if (minute <= 9) minute = "0" + minute;
-    if (seconds <= 9) seconds = "0" + seconds;
+    if (month <= 9) month = `0${month}`;
+    if (day <= 9) day = `0${day}`;
+    if (hour <= 9) hour = `0${hour}`;
+    if (minute <= 9) minute = `0${minute}`;
+    if (seconds <= 9) seconds = `0${seconds}`;
 
-    var time = `${date.getFullYear()}-${ month }-${ day } ${ hour }:${ minute }:${ seconds }`;
+    const time = `${date.getFullYear()}-${month}-${day} ${hour}:${minute}:${seconds}`;
     return time;
   },
   /**
@@ -340,11 +335,12 @@ export default {
    * 间隔超过一年，显示：xxxx年xx月xx日 xx：xx
    */
   howLongBefore(str, now) {
-    if (typeof str === 'number') {
-      date = str;
-      str = this.formatDate(str);
+    let newStr = str;
+    if (typeof newStr === 'number') {
+      window.date = newStr;
+      newStr = this.formatDate(newStr);
     } else {
-      date = Date.parse(str.replace(/\-/g, '/'));
+      window.date = Date.parse(newStr.replace(/\-/g, '/'));
     }
 
     const oneMinute = 1000 * 60;
@@ -353,35 +349,35 @@ export default {
     const oneMonth = oneDay * 30;
     const oneYear = oneMonth * 12;
 
-    let gap = now - date;
+    const gap = now - window.date;
 
-    let minute = gap / oneMinute;
-    let hour = gap / oneHour;
-    let year = gap / oneYear;
+    const minute = gap / oneMinute;
+    const hour = gap / oneHour;
+    const year = gap / oneYear;
 
     let res = null;
 
     switch (true) {
       case year >= 1:
-        res = this.formatHowLongBefore(str, '$1年$2月$3日$4');
+        res = this.formatHowLongBefore(newStr, '$1年$2月$3日$4');
         break;
       case hour >= 48 && year < 1:
-        res = this.formatHowLongBefore(str, '$2月$3日$4');
+        res = this.formatHowLongBefore(newStr, '$2月$3日$4');
         break;
       case hour >= 24 && hour < 48:
-        res = this.formatHowLongBefore(str, '昨天$4');
+        res = this.formatHowLongBefore(newStr, '昨天$4');
         break;
       case hour >= 1 && hour < 24:
-        res = `${ parseInt(hour) }小时前`;
+        res = `${parseInt(hour)}小时前`;
         break;
       case hour <= 1 && minute > 1:
-        res = `${ parseInt(minute) }分钟前`;
+        res = `${parseInt(minute)}分钟前`;
         break;
       case minute <= 1:
         res = '刚刚';
         break;
       default:
-        res = str;
+        res = newStr;
         break;
     }
 
@@ -399,7 +395,7 @@ export default {
    * 跳转下载app
    */
   downloadApp(system) {
-    let ua = navigator.userAgent.toLowerCase();
+    const ua = navigator.userAgent.toLowerCase();
     let url = null;
     if (/iphone|ipad|ipod/.test(ua)) {
       url = system === 'seller' ?
@@ -414,48 +410,4 @@ export default {
   },
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-}
+};

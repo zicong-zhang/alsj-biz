@@ -31,33 +31,34 @@
   </div>
 </template>
 <script>
-import BScroll from "better-scroll";
+import BScroll from 'better-scroll';
+
 export default {
-  name: "v-scroll",
+  name: 'v-scroll',
   props: {
     // 上拉加载回调 必须接收 Promise 对象
     onPullup: {
-      default: false
+      default: false,
     },
     // 下拉刷新回调 必须接收 Promise 对象
     onPulldown: {
-      default: false
+      default: false,
     },
     // 展示上拉提示文案
     showPullupTxt: {
-      default: false
+      default: false,
     },
     // 展示下拉刷新提示文案
     showPulldownTxt: {
-      default: false
+      default: false,
     },
     // 上拉加载更多结束后展示的文案
     finishTxt: {
-      default: "到达底部啦~"
+      default: '到达底部啦~',
     },
     // 当数据更新后，刷新scroll的延时
     refreshDelay: {
-      default: 30
+      default: 30,
     },
     // 监听该数据的变化，用于刷新bs
     listen: {
@@ -66,32 +67,32 @@ export default {
     // 是否完成上拉加载
     finish: {
       // required: true
-    }
+    },
   },
   data() {
     return {
-      timer: "",
+      timer: '',
       loadingPlay: false,
       finishPullUp: false,
-      prevScrollTop: 0
+      prevScrollTop: 0,
     };
   },
   computed: {
     pullDownConfig() {
       return {
         threshold: this.tipTextHeight + 10, // 顶部下拉的距离
-        stop: this.tipTextHeight // 回弹停留的距离
+        stop: this.tipTextHeight, // 回弹停留的距离
       };
     },
     pullUpConfig() {
       return {
-        threshold: this.scrollContentHeight / 2
+        threshold: this.scrollContentHeight / 2,
       };
-    }
+    },
   },
   /*  watch: {
     listen() {
-      
+
     }
   }, */
   created() {},
@@ -104,24 +105,24 @@ export default {
     initScroll() {
       this.setHeight();
 
-      let scrollConfig = {
+      const scrollConfig = {
         click: true,
         swipeBounceTime: 200,
         bounceTime: 300,
         probeType: 1,
         pullDownRefresh: this.onPulldown && this.pullDownConfig,
-        pullUpLoad: this.onPullup && this.pullUpConfig
+        pullUpLoad: this.onPullup && this.pullUpConfig,
       };
 
       // 上拉加载无定位，下拉刷新要定位
       this.scrollObj = new BScroll(this.$refs.scroll, scrollConfig);
 
-      this.$once("hook:beforeDestroy", () => {
+      this.$once('hook:beforeDestroy', () => {
         this.scrollObj.destroy();
       });
 
       this.bindScroll();
-      
+
       // 触发下拉刷新
       if (this.onPulldown) this.bindPulldown();
 
@@ -129,20 +130,20 @@ export default {
       if (this.onPullup) this.bindPullup();
     },
     bindScroll() {
-      this.scrollObj.on('scroll', pos => {
+      this.scrollObj.on('scroll', (pos) => {
         if (this.tipTextHeight <= pos.y && !this.loadingPlay) {
-            this.loadingPlay = true;
+          this.loadingPlay = true;
         }
         if (pos.y === 0) {
           this.loadingPlay = false;
         }
-      })
+      });
     },
     // 绑定下拉加载
     bindPulldown() {
-      this.scrollObj.on("pullingDown", () => {
+      this.scrollObj.on('pullingDown', () => {
         this.closePullUp();
-        this.onPulldown().then(res => {
+        this.onPulldown().then((res) => {
           this.finishPullUp = false;
           this.openPullUp();
           this.loadingPlay = false;
@@ -154,13 +155,13 @@ export default {
     },
     // 绑定上拉刷新
     bindPullup() {
-      this.scrollObj.on("pullingUp", () => {
+      this.scrollObj.on('pullingUp', () => {
         if (!this.finishPullUp) {
           this.closePullDown();
-          this.onPullup().then(res => {
+          this.onPullup().then((res) => {
             this.openPullDown();
             this.scrollObj.finishPullUp();
-            this.finishPullUp = typeof res === "boolean";
+            this.finishPullUp = typeof res === 'boolean';
             this.refreshHeight();
           });
         }
@@ -169,7 +170,7 @@ export default {
     // 设置高度
     setHeight() {
       this.tipTextHeight = this.showPulldownTxt
-        ? this.$refs["pull-text"].clientHeight
+        ? this.$refs['pull-text'].clientHeight
         : 0;
       this.scrollContentHeight = this.$refs.scrollContent.clientHeight;
     },
@@ -178,7 +179,7 @@ export default {
       clearTimeout(this.timer);
       this.timer = setTimeout(() => {
         clearTimeout(this.timer);
-        this.timer = "";
+        this.timer = '';
         this.scrollObj.refresh();
       }, this.refreshDelay);
     },
@@ -205,8 +206,8 @@ export default {
       if (this.onPullup) {
         this.scrollObj.closePullUp();
       }
-    }
-  }
+    },
+  },
 };
 </script>
 <style lang="scss">

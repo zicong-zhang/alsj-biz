@@ -16,21 +16,21 @@
 </template>
 
 <script>
-import H2 from "./order-detail-item-h2";
-import { mapGetters } from "vuex";
+import H2 from './order-detail-item-h2';
+import { mapGetters } from 'vuex';
 
 export default {
-  name: "OrderDetailItemContract",
+  name: 'OrderDetailItemContract',
   components: {
-    H2
+    H2,
   },
   data() {
     return {
     };
   },
   computed: {
-    ...mapGetters(["contractList", 'orderDetailStatus'])
-  }
+    ...mapGetters(['contractList', 'orderDetailStatus']),
+  },
 };
 </script>
 

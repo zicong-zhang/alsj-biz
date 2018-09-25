@@ -15,15 +15,15 @@
 </template>
 <script>
 export default {
-  name: "HomeTips",
+  name: 'HomeTips',
   data() {
     return {};
   },
   methods: {
     toAuthExplain() {
-      window.location.href = 'http://test.alasga.cn/pro/proxy/web/web/pages/product/product_detail.html?id=28'
-    }
-  }
+      window.location.href = 'http://test.alasga.cn/pro/proxy/web/web/pages/product/product_detail.html?id=28';
+    },
+  },
 };
 </script>
 <style lang="scss">

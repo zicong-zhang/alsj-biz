@@ -26,11 +26,11 @@
 </template>
 <script>
 export default {
-  name: "proceeds-detail-total",
+  name: 'proceeds-detail-total',
   data() {
     return {};
   },
-  methods: {}
+  methods: {},
 };
 </script>
 <style lang="scss">

@@ -37,18 +37,18 @@ export default {
     return {
       nextPage: true,
       imgPlaceholder,
-      isFinishLoad: false
+      isFinishLoad: false,
     };
   },
   computed: {
     ...mapState({
-      customerList: state => state.customerModule.customerList
-    })
+      customerList: state => state.customerModule.customerList,
+    }),
   },
   watch: {
     isFinishLoad(val) {
       console.log('isFinishLoad:_____', val);
-    }
+    },
   },
   created() {
     this.getDataList();
@@ -57,7 +57,7 @@ export default {
     ...mapActions(['getCustomerList']),
     ...mapMutations(['INIT_CUSTOMER_LIST_PAGE_NUM']),
     getDataList() {
-      return this.getCustomerList().then(res => {
+      return this.getCustomerList().then((res) => {
         this.nextPage = res.data.next;
       });
     },
@@ -73,11 +73,11 @@ export default {
       this.$utils.go({
         name: 'customer-info',
         query: {
-          id
-        }
+          id,
+        },
       });
-    }
-  }
+    },
+  },
 };
 </script>
 <style lang="scss">
