@@ -28,7 +28,7 @@ function getPF() {
   const u = navigator.userAgent;
   console.log('u:_____', u);
   const isAndroid = /Android/i.test(u); // g
-  const isIOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); // ios终端
+  const isIOS = /(iPhone|mac|Safari)/i.test(u); // ios终端
   if (isAndroid) {
     pf = 'Android';
   } else if (isIOS) {
@@ -164,7 +164,6 @@ function formatRequestData(data) {
   };
 
   req.data.token = getToken();
-
   return req;
 }
 
@@ -209,8 +208,7 @@ export const filterUrl = (url) => {
 
 export const setRequestData = (data, img) => {
   if (img === '/img') {
-    formatRequestImgData(data);
-  } else {
-    formatRequestData(data);
+    return formatRequestImgData(data);
   }
+  return formatRequestData(data);
 };

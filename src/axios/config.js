@@ -6,13 +6,13 @@ Axios.defaults.timeout = 15000;
 
 // 请求拦截
 Axios.interceptors.request.use((config) => {
-  const path = config.url;
-  config.url = utils.filterUrl(path);
-  config.data = utils.setRequestData(config.data, path);
-
-  return config;
+  const newConfig = { ...config };
+  const path = newConfig.url;
+  newConfig.url = utils.filterUrl(path);
+  newConfig.data = utils.setRequestData(config.data, path);
+  return newConfig;
 }, (error) => {
-  console.log('error1:_____', error);
+  console.log('axiosError:_____', error);
   // Do something with request error
   return Promise.reject(error);
 });

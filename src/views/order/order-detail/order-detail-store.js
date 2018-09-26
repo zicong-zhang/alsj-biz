@@ -204,10 +204,12 @@ export default {
     // 设置功能列表
     SET_FUNCTION_LIST(state, [list, idx]) {
       const demands = state.orderInfo.dimensionList;
+      const newList = [...list];
+
       if (demands.length !== 0) {
-        list.forEach((item) => {
+        newList.forEach((item) => {
           demands.forEach((value) => {
-            if (item.id == value.id) item.active = true;
+            // if (item.id == value.id) item.active = true;
           });
         });
       }

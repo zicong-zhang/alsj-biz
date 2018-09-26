@@ -52,7 +52,7 @@ export default {
     }),
     ...mapGetters(['orderDetailStatus']),
     progress() {
-
+      return '';
     },
   },
   watch: {
@@ -209,11 +209,6 @@ export default {
   }
   span {
     font-size: 24px;
-  }
-  p {
-    span:last-child {
-
-    }
   }
 }
 </style>

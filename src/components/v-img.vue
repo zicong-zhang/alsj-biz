@@ -48,7 +48,6 @@ export default {
           return require('~img/placeholder/user.png');
         default:
           return this.loadingImg;
-          break;
       }
     },
   },

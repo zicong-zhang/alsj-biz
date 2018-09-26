@@ -74,7 +74,6 @@ export default {
       this.charts = echarts.init(this.$refs.chart);
       this.setChartOpt();
       this.$once('hook:deactivated', () => {
-        console.log('1111111:_____', 1111111);
         this.charts.dispose();
       });
     },
@@ -82,8 +81,9 @@ export default {
       this.charts.setOption({
         // 动画类型
         backOut(k) {
+          let val = k;
           const s = 1.70158;
-          return --k * k * ((s + 1) * k + s) + 1;
+          return --val * val * ((s + 1) * val + s) + 1;
         },
         tooltip: {
           trigger: 'axis',
@@ -198,8 +198,6 @@ export default {
 </script>
 <style lang="scss">
 .view-performnace-total {
-  .content {
-  }
   .title {
     background: #fff;
     padding: 0 36px;

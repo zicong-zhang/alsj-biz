@@ -50,7 +50,7 @@ export default {
   }),
   methods: {
     call() {
-      alert('打电话');
+      console.log('打电话');
     },
     toEditCustomer() {
       this.$store.commit('TURN', 'on');

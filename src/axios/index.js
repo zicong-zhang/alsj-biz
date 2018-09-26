@@ -5,7 +5,7 @@ import * as API from './apis';
 const ajaxArr = {}; // 放于 store
 
 
-const http = function (url, data = {}, opt = {}) {
+const http = (url, data = {}, opt = {}) => {
   /* if (opt.noRepeat && ajaxArr[url]) return false;
 
   ajaxArr[url] = true; */
@@ -15,8 +15,8 @@ const http = function (url, data = {}, opt = {}) {
     method: 'post',
     url: `/api${url}`,
     data,
-    transformRequest: [function (data) {
-      return JSON.stringify(data);
+    transformRequest: [res => {
+      return JSON.stringify(res);
     }],
   });
 };

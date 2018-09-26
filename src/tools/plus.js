@@ -10,8 +10,10 @@ const plusHandler = (fn) => {
  * 振动
  * @param {Number} milliseconds 时间长短
  */
-export const vibrate = (milliseconds = 2000) => {
+export default (milliseconds = 2000) => {
   try {
     plusHandler(plus.device.vibrate(milliseconds));
-  } catch (err) {}
+  } catch (err) {
+    console.log('plusError:_____', err);
+  }
 };
