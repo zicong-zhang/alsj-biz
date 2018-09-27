@@ -1,6 +1,11 @@
 <template>
   <div id="app"
     v-cloak>
+    <p v-if="isShowOfflineTip"
+      class="offline-tip">
+      <i class="icon i-jingshigantanhao"></i>
+      <span>网络异常，请检查网络设置</span>
+    </p>
     <transition :name="turn"
       @after-enter="setBackAnimation">
       <keep-alive :exclude="exclude">
@@ -18,6 +23,7 @@ export default {
   name: 'App',
   data() {
     return {
+      isShowOfflineTip: false,
       // 排除缓存
       exclude: [
         'OrderEditCustomer', // 编辑客户信息
@@ -46,11 +52,11 @@ export default {
     //     "USER_TOKEN",
     //     "VE9LRU4tMjg3LTE1MzU3MTc5OTc2MzMtYWJj"
     //   );
+    this.listenNetwork();
     this.setMuiBack();
     this.judgeSessionHasStoreId();
   },
-  mounted() {
-  },
+  mounted() {},
   methods: {
     ...mapMutations(['SET_STORE_ID', 'TURN']),
     back() {
@@ -80,9 +86,48 @@ export default {
         } */
       }
     },
+    listenNetwork() {
+      window.addEventListener(
+        'online',
+        () => {
+          this.isShowOfflineTip = false;
+        },
+        false,
+      );
+
+      window.addEventListener(
+        'offline',
+        () => {
+          this.isShowOfflineTip = true;
+        },
+        false,
+      );
+    },
   },
 };
 </script>
 
-<style>
+<style lang="scss">
+.offline-tip {
+  position: fixed;
+  top: 104px;
+  left: 50%;
+  z-index: 122;
+  transform: translate3d(-50%, 0, 0);
+  width: calc(100% - 72px);
+  height: 80px;
+  display: flex;
+  align-items: center;
+  box-sizing: border-box;
+  border-radius: 8px;
+  background: #e5f2ff;
+  color: #3380cc;
+  font-size: 24px;
+  padding: 0 32px;
+  .icon {
+    font-size: 28px;
+    margin-right: 20px;
+  }
+}
 </style>
+

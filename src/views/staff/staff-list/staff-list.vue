@@ -2,7 +2,8 @@
   <div class="view-staff-list">
     <v-header title="店员">
       <span class="add-staff-btn"
-        slot="right-one">
+        slot="right-one"
+        @click="toAddStaff">
         <i class="icon i-tianjia"></i>
       </span>
     </v-header>
@@ -62,6 +63,11 @@ export default {
           positionTypeName,
         },
       });
+    },
+    toAddStaff() {
+      this.$utils.go({
+        name: 'staff-select',
+      })
     },
   },
 };

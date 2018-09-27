@@ -36,10 +36,9 @@ export default {
   created() {},
   methods: {
     back() {
-      console.log('213132:_____', 213132);
       if (this.onBack) {
         this.onBack();
-      } else if (document.referrer == window.location.href) {
+      } else if (document.referrer == window.location.href || !document.referrer) {
         this.$utils.back({
           name: 'worker',
         });

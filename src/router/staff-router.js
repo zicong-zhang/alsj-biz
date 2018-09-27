@@ -14,6 +14,14 @@ const staffRouter = [{
   meta: {
     title: '店员详情 - 阿拉私家',
   },
+}, {
+  path: '/staff-select',
+  name: 'staff-select',
+  component: () =>
+    import(/* webpackChunkName: "staff-select" */ '~views/staff/add-staff/select-staff'),
+  meta: {
+    title: '添加店员 - 阿拉私家',
+  },
 }];
 
 export default staffRouter;

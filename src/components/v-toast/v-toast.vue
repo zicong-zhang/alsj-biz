@@ -77,7 +77,7 @@ export default {
 
 .toast-component-enter {
   opacity: 0.4;
-  transform: translateY(r(30px));
+  transform: translateY((30px));
 }
 
 .toast-component-leave-active {
