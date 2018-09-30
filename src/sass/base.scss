@@ -51,6 +51,14 @@ html {
     height: 100%;
   }
 }
+.flex {
+  display: flex;
+  flex-flow: column;
+  & > content {
+    flex: 1;
+    height: calc(100% - 88px);
+  }
+}
 
 ul,
 li {
@@ -96,7 +104,7 @@ textarea {
 
 //自动填写密码出现的黄色背景
 input:-webkit-autofill {
-  -webkit-box-shadow: 0 e(0px)e(1000px) white inset !important;
+  box-shadow: 0 e(0px)e(1000px) white inset !important;
 }
 
 button {
