@@ -6,7 +6,7 @@
 
 <script>
 export default {
-  name: 'VCover',
+  name: 'VCover'
 };
 </script>
 

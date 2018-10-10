@@ -37,7 +37,7 @@ export default {
   name: 'view-staff-list',
   data() {
     return {
-      dataList: [],
+      dataList: []
     };
   },
   created() {
@@ -48,7 +48,6 @@ export default {
     getDataList() {
       this.getStaffList().then((res) => {
         this.dataList = res.data.list;
-        console.log('res:_____', res);
       });
     },
     toStaffDetail({ id, avatar, nickname, positionTypeName, roleId, phone }) {
@@ -60,16 +59,16 @@ export default {
           nickname,
           roleId,
           phone,
-          positionTypeName,
-        },
+          positionTypeName
+        }
       });
     },
     toAddStaff() {
       this.$utils.go({
-        name: 'staff-select',
+        name: 'staff-select'
       })
-    },
-  },
+    }
+  }
 };
 </script>
 <style lang="scss">

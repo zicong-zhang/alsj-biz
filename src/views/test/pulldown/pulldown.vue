@@ -48,11 +48,11 @@ export default {
   name: 'view-test-pulldown',
   props: {
     onRefresh: {
-      type: Function,
+      type: Function
     },
     onLoad: {
-      type: Function,
-    },
+      type: Function
+    }
   },
   data() {
     return {
@@ -62,7 +62,7 @@ export default {
       listLoading: false,
       listFinished: false,
       qty: 0,
-      isPulldownLoading: false,
+      isPulldownLoading: false
     };
   },
   created() {
@@ -134,8 +134,8 @@ export default {
           console.log('cc完成:_____');
         }, 4000);
       });
-    },
-  },
+    }
+  }
 };
 </script>
 <style lang="scss">

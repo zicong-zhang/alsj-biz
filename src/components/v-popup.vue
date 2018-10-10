@@ -4,7 +4,7 @@
       v-show="isShow"
       @click.prevent.stop="hide"></div>
     <ul>
-      <li v-show="isShow"
+      <li
         v-for="(item, idx) in list"
         :key="`v-popup${idx}`"
         @click.stop="select(item, idx)">
@@ -19,15 +19,15 @@ export default {
   props: {
     list: {
       type: Array,
-      required: true,
+      required: true
     },
     showText: {
-      type: String,
-    },
+      type: String
+    }
   },
   data() {
     return {
-      isShow: false,
+      isShow: false
     };
   },
   methods: {
@@ -40,8 +40,8 @@ export default {
     select(item, idx) {
       this.hide();
       this.$emit('select', item, idx);
-    },
-  },
+    }
+  }
 };
 </script>
 <style lang="scss">

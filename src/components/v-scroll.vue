@@ -38,27 +38,27 @@ export default {
   props: {
     // 上拉加载回调 必须接收 Promise 对象
     onPullup: {
-      default: false,
+      default: false
     },
     // 下拉刷新回调 必须接收 Promise 对象
     onPulldown: {
-      default: false,
+      default: false
     },
     // 展示上拉提示文案
     showPullupTxt: {
-      default: false,
+      default: false
     },
     // 展示下拉刷新提示文案
     showPulldownTxt: {
-      default: false,
+      default: false
     },
     // 上拉加载更多结束后展示的文案
     finishTxt: {
-      default: '到达底部啦~',
+      default: '到达底部啦~'
     },
     // 当数据更新后，刷新scroll的延时
     refreshDelay: {
-      default: 30,
+      default: 30
     },
     // 监听该数据的变化，用于刷新bs
     listen: {
@@ -67,28 +67,28 @@ export default {
     // 是否完成上拉加载
     finish: {
       // required: true
-    },
+    }
   },
   data() {
     return {
       timer: '',
       loadingPlay: false,
       finishPullUp: false,
-      prevScrollTop: 0,
+      prevScrollTop: 0
     };
   },
   computed: {
     pullDownConfig() {
       return {
         threshold: this.tipTextHeight + 10, // 顶部下拉的距离
-        stop: this.tipTextHeight, // 回弹停留的距离
+        stop: this.tipTextHeight // 回弹停留的距离
       };
     },
     pullUpConfig() {
       return {
-        threshold: this.scrollContentHeight / 2,
+        threshold: this.scrollContentHeight / 2
       };
-    },
+    }
   },
   /*  watch: {
     listen() {
@@ -111,7 +111,7 @@ export default {
         bounceTime: 300,
         probeType: 1,
         pullDownRefresh: this.onPulldown && this.pullDownConfig,
-        pullUpLoad: this.onPullup && this.pullUpConfig,
+        pullUpLoad: this.onPullup && this.pullUpConfig
       };
 
       // 上拉加载无定位，下拉刷新要定位
@@ -206,8 +206,8 @@ export default {
       if (this.onPullup) {
         this.scrollObj.closePullUp();
       }
-    },
-  },
+    }
+  }
 };
 </script>
 <style lang="scss">

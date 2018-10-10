@@ -10,7 +10,7 @@
       <KeeperList/>
       <Contract/>
       <Design/>
-      <Remark/>
+      <!-- <Remark/> -->
     </div>
     <NextBtn v-if="orderDetailStatus <= 7" />
   </div>
@@ -41,13 +41,13 @@ export default {
     Contract,
     Design,
     Remark,
-    NextBtn,
+    NextBtn
   },
   created() {
     this.init();
   },
   computed: {
-    ...mapGetters(['orderDetailStatus']),
+    ...mapGetters(['orderDetailStatus'])
   },
   methods: {
     ...mapActions(['getOrderDetailInfo']),
@@ -55,8 +55,8 @@ export default {
     init() {
       this.SET_ORDER_ID(this.$route.query.id);
       this.getOrderDetailInfo();
-    },
-  },
+    }
+  }
 };
 </script>
 <style lang="scss" scoped>

@@ -72,7 +72,7 @@ import OrderListItem from '~views/order/order-list/order-list-item';
 export default {
   name: 'view-customer-info',
   components: {
-    OrderListItem,
+    OrderListItem
   },
   data() {
     return {
@@ -81,13 +81,13 @@ export default {
       pageNum: 1,
       customerId: '',
       orderList: [],
-      nextOrderList: true,
+      nextOrderList: true
     };
   },
   watch: {
     nextOrderList(newVal) {
       // console.log('nextOrderList:_____', newVal);
-    },
+    }
   },
   created() {
     this.customerId = this.$route.query.id;
@@ -115,7 +115,7 @@ export default {
       if (this.nextOrderList) {
         return this.getOrderListByCustomer({
           customerId: this.customerId,
-          pageNum: this.pageNum,
+          pageNum: this.pageNum
         }).then((res) => {
           if (this.pageNum === 1) this.orderList = [];
           const { list, next } = res.data;
@@ -138,11 +138,11 @@ export default {
           linkmanGender: this.customerInfo.sex,
           linkmanName: this.customerInfo.name,
           linkmanPhone: this.customerInfo.mobile,
-          orderType: this.customerInfo.type,
-        },
+          orderType: this.customerInfo.type
+        }
       });
-    },
-  },
+    }
+  }
 };
 </script>
 <style lang="scss">

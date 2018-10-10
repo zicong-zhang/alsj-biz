@@ -21,7 +21,7 @@ export default {
   name: 'proceeds-detail-item-header',
   data() {
     return {
-      activeTab: 0,
+      activeTab: 0
     };
   },
   watch: {
@@ -29,7 +29,7 @@ export default {
       if (to.name === this.$route.name && from.name === 'worker') {
         this.init();
       }
-    },
+    }
   },
   created() {
     this.init();
@@ -39,14 +39,13 @@ export default {
       this.activeTab = this.$route.query.label;
     },
     back() {
-      this.$store.commit('TURN', 'off');
-      this.$router.back();
+      this.$utils.back();
     },
     changeTab(idx) {
       if (idx === this.activeTab) return;
       this.activeTab = idx;
-    },
-  },
+    }
+  }
 };
 </script>
 <style lang="scss">
@@ -63,6 +62,9 @@ export default {
     height: 88px;
     line-height: 88px;
     padding-left: 36px;
+  }
+  .iconfont {
+    font-size: 28px;
   }
   .tab {
     display: flex;

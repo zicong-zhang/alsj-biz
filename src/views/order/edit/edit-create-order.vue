@@ -45,15 +45,15 @@ export default {
           values: [
             {
               text: '男',
-              value: 1,
+              value: 1
             },
             {
               text: '女',
-              value: 2,
-            },
-          ],
-        },
-      ],
+              value: 2
+            }
+          ]
+        }
+      ]
     };
   },
   created() {
@@ -78,18 +78,18 @@ export default {
         linkmanGender: this.linkmanGender,
         linkmanName: this.linkmanName,
         linkmanPhone: this.linkmanPhone,
-        orderType: this.orderType,
+        orderType: this.orderType
       })
         .then((res) => {
           this.$utils.go({
             name: 'order-detail',
             query: {
-              id: res.data.order.id,
-            },
+              id: res.data.order.id
+            }
           }, 'replace');
         });
-    },
-  },
+    }
+  }
 };
 </script>
 <style lang="scss">

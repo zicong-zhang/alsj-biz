@@ -4,19 +4,19 @@ import http from '../axios';
 // 获取产品中心的产品列表
 export const getProductList = ({
   pageNum,
-  merchantId,
+  merchantId
 }) => http('/merchantGoods/list', {
   merchantId,
   pageNum,
   pageSize: 15,
-  status: 2,
+  status: 2
 });
 
 // 删除产品
 export const delProduct = ({
   merchantGoodsId,
-  merchantId,
+  merchantId
 }) => http('/merchantGoods/deleteBatch', {
   merchantGoodsId,
-  merchantId,
+  merchantId
 });

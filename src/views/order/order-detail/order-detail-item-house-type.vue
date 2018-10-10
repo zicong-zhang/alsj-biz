@@ -37,11 +37,11 @@ import { mapGetters } from 'vuex';
 export default {
   name: 'OrderDetailItemHouseType',
   components: {
-    H2,
+    H2
   },
   data() {
     return {
-      title: '户型信息',
+      title: '户型信息'
     };
   },
   computed: {
@@ -50,18 +50,18 @@ export default {
       const {
         linkmanResidence,
         linkmanHouseType,
-        measurement,
+        measurement
       } = this.orderInfo;
       return !linkmanResidence && !linkmanHouseType && !measurement;
-    },
+    }
   },
   methods: {
     toEditHouseType() {
       this.$utils.go({
-        name: 'order-edit-house-type',
+        name: 'order-edit-house-type'
       });
-    },
-  },
+    }
+  }
 };
 </script>
 

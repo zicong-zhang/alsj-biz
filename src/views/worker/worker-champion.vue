@@ -17,18 +17,18 @@ export default {
   data() {
     return {
       nickname: '',
-      amount: 0,
+      amount: 0
     };
   },
   computed: {
     ...mapState({
-      storeId: state => state.root.storeId,
-    }),
+      storeId: state => state.root.storeId
+    })
   },
   watch: {
     storeId(newVal) {
       this.init();
-    },
+    }
   },
   methods: {
     ...mapActions(['getCurrentMonthSaleChampion']),
@@ -41,10 +41,10 @@ export default {
     },
     toRank() {
       this.$utils.go({
-        name: 'sale-rank',
+        name: 'sale-rank'
       });
-    },
-  },
+    }
+  }
 };
 </script>
 <style lang="scss">

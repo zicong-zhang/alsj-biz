@@ -38,7 +38,7 @@ export default {
       currentDate: '',
       minDate: '', // type: Date
       maxDate: '', // type: Date
-      loading: false, // type Boolean
+      loading: false // type Boolean
     };
   },
   methods: {
@@ -64,8 +64,8 @@ export default {
     },
     onChange(instance) {
       if (typeof this.change === 'function') this.change();
-    },
-  },
+    }
+  }
 };
 </script>
 <style lang="scss">

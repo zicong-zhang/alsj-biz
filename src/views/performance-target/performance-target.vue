@@ -159,7 +159,7 @@ export default {
       octAmount: '',
       novAmount: '',
       decAmount: '',
-      total: '0',
+      total: '0'
     };
   },
   created() {
@@ -169,14 +169,14 @@ export default {
     ...mapActions([
       'getOnePerformanceTargetList', // 获取店铺某一年的业绩目标列表
       'updatePerformTargetList', // 更新店铺某一年业绩目标列表
-      'getStoreSaleTarget', // 获取店铺目标金额, 调用接口刷新数据
+      'getStoreSaleTarget' // 获取店铺目标金额, 调用接口刷新数据
     ]),
     showDatePicker() {
       this.$DatePicker({
         confirm: (dateObj) => {
           this.year = dateObj.getFullYear();
           this.getDataList();
-        },
+        }
       });
     },
     getDataList() {
@@ -231,8 +231,8 @@ export default {
     // 取消修改
     cancel() {
       this.$utils.back();
-    },
-  },
+    }
+  }
 };
 </script>
 <style lang="scss">

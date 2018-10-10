@@ -17,7 +17,6 @@
 
 <script>
 import { mapState, mapMutations } from 'vuex';
-import store from '~/vuex/store';
 
 export default {
   name: 'App',
@@ -33,15 +32,15 @@ export default {
         'sale-champion', // 销售排行榜
         'performance-target', // 业绩目标
         'view-customer-info', // 客户详情
-        'view-edit-create-order', // 开单
-      ],
+        'view-edit-create-order' // 开单
+      ]
     };
   },
   computed: {
     ...mapState({
       storeId: state => state.root.storeId,
-      turn: state => state.root.turn,
-    }),
+      turn: state => state.root.turn
+    })
   },
   created() {
     // 18600000001
@@ -56,12 +55,15 @@ export default {
     this.setMuiBack();
     this.judgeSessionHasStoreId();
   },
-  mounted() {},
+  mounted() {
+    /* setTimeout(() => {
+      window.location.href = 'http://test.alasga.cn/pro/proxy/web/web/pages/product/product_detail.html?id=68'
+    }, 4000); */
+  },
   methods: {
     ...mapMutations(['SET_STORE_ID', 'TURN']),
     back() {
-      this.$store.commit('TURN', 'off');
-      this.$router.back(-1);
+      this.$utils.back();
     },
     setMuiBack() {
       mui.back = this.back;
@@ -102,8 +104,8 @@ export default {
         },
         false,
       );
-    },
-  },
+    }
+  }
 };
 </script>
 

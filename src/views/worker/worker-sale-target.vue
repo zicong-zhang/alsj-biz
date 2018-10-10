@@ -37,13 +37,13 @@ export default {
       storeId: state => state.root.storeId,
       currentAmount: state => state.workerModule.merchantTradeAmount,
       targetAmount: state => state.workerModule.merchantGoalAmount,
-      rate: state => state.workerModule.rate,
-    }),
+      rate: state => state.workerModule.rate
+    })
   },
   watch: {
     storeId() {
       this.init();
-    },
+    }
   },
   methods: {
     ...mapActions(['getStoreSaleTarget']),
@@ -52,15 +52,15 @@ export default {
     },
     toPerformanceTarget() {
       this.$utils.go({
-        name: 'performance-target',
+        name: 'performance-target'
       });
     },
     toPerformanceTotal() {
       this.$utils.go({
-        name: 'performance-total',
+        name: 'performance-total'
       });
-    },
-  },
+    }
+  }
 };
 </script>
 <style lang="scss">

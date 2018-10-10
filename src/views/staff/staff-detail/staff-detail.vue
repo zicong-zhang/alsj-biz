@@ -43,7 +43,7 @@ export default {
   name: 'view-staff-detail',
   components: {
     orderList,
-    staffInfo,
+    staffInfo
   },
   data() {
     return {
@@ -52,9 +52,9 @@ export default {
         avatar: '', // 头像
         nickname: '', // 昵称
         positionTypeName: '', // 职位
-        phone: '',
+        phone: ''
       },
-      active: 0,
+      active: 0
     };
   },
   activated() {
@@ -70,8 +70,8 @@ export default {
     },
     call() {
       window.location.href = `tel:${this.baseInfo.phone}`;
-    },
-  },
+    }
+  }
 };
 </script>
 <style lang="scss">

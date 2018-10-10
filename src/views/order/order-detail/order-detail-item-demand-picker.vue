@@ -1,13 +1,15 @@
 <template>
   <div class="order-detail-item-demand-picker">
-    <div class="cover"
-      v-stop-cover
-      v-if="show"
-      @click.self="closePicker"></div>
+    <transition name="v-cover">
+      <div class="cover"
+        v-stop-cover
+        v-show="show"
+        @click.self="closePicker"></div>
+    </transition>
 
     <transition name="show-picker">
       <div class="demand-picker-container"
-        v-if="show">
+        v-show="show">
 
         <!-- 标题 -->
         <div class="demand-picker-title">
@@ -25,8 +27,8 @@
         <div class="demand-picker-space-list">
           <ul>
             <li :class="{'space-active': activeSpace == idx}"
-              v-for="(item, idx) in spaceList"
-              :key="`space${item.id}`"
+              v-for="(item, idx) in spaces"
+              :key="`space-${item.id}`"
               @click="selectSpace(idx)">
               <p>{{ item.name }}</p>
               <span v-show="item.activeQty">·{{ item.activeQty }}</span>
@@ -37,11 +39,14 @@
         <!-- 功能列表 -->
         <i class="horizon-bar"></i>
         <div class="demand-picker-function-list">
-          <ul v-if="spaceList">
-            <li :class="{'function-active': item.active, 'demand-function-list': true}"
-              v-for="(item, idx) in functionList[activeSpace]"
-              :key="`functionList${item.id}`"
-              @click="selectFunction(item, idx)">{{ item.name }}</li>
+          <ul v-if="spaces">
+            <li :class="{
+                'function-active': selectedFunctionList.includes(item.id),
+                'demand-function-list': true
+              }"
+              v-for="item in functions[activeSpace]"
+              :key="`functionList-${item.id}`"
+              @click="selectFunction(item.id)">{{ item.name }}</li>
           </ul>
         </div>
       </div>
@@ -50,79 +55,109 @@
   </div>
 </template>
 <script>
-import { mapState, mapActions } from 'vuex';
+import { mapGetters, mapActions, mapMutations } from 'vuex';
 
 export default {
   name: 'OrderDetailItemDemandPicker',
   props: {
     show: {
       type: Boolean,
-      defalut: false,
-    },
+      default: false
+    }
   },
   data() {
     return {
       isShowDemandPicker: false,
       dataLoaded: false, // 是否已经请求数据
       activeSpace: 0, // 当前选中的空间名称 的下标
-      spaceList: [],
-      functionList: [],
+      selectedFunctionList: [], // 临时选中的功能
+      allFunctions: [] // 所有功能项 用于提交时通过 id 提取功能项，一维数组
     };
   },
   computed: {
-    spaces() {
-      return this.$store.state.orderDetailModule.spaceList;
-    },
-    functions() {
-      return this.$store.state.orderDetailModule.functionList;
-    },
+    ...mapGetters([
+      'demands', // 曾经提交的定制需求
+      'spaces', // 空间列表
+      'functions' // 功能列表
+    ]),
+    // 曾经提交的定制需求提取的 id
+    alreadySelectedIds() {
+      if (this.demands.length) {
+        return this.demands.map(item => item.id);
+      }
+      return [];
+    }
   },
   watch: {
     // 监听本组件是否第一次展示
     show(newVal) {
       if (!this.dataLoaded && newVal) {
         this.dataLoaded = true;
-        this.getSpaceList();
+        this.getSpaceList().then(this.copyAlreadyIdsToSelected);
+      } else {
+        this.copyAlreadyIdsToSelected();
       }
     },
-    spaces(newVal) {
-      this.spaceList = JSON.parse(JSON.stringify(newVal));
-    },
     functions(newVal) {
-      this.functionList = JSON.parse(JSON.stringify(newVal));
-    },
+      const list = this.functions.flat();
+      this.$set(this.$data, 'allFunctions', list);
+    }
   },
   methods: {
     ...mapActions([
       'getSpaceList', // 获取空间列表
-      'updateDemand', // 保存修改定制需求
+      'updateDemand' // 保存修改定制需求
+    ]),
+    ...mapMutations([
+      'UPDATE_DEMAND' // 修改定制需求展示列表
     ]),
     // 关闭选择器
     closePicker() {
-      this.functionList = JSON.parse(JSON.stringify(this.functions));
+      const list = this.selectedFunctionList;
+      this.selectedFunctionList = [];
+      this.activeSpace = 0;
       this.$emit('close');
+    },
+    copyAlreadyIdsToSelected() {
+      if (this.alreadySelectedIds.length) {
+        this.selectedFunctionList = this.$utils.copyArr(this.alreadySelectedIds);
+      }
     },
     // 选中空间
     selectSpace(idx) {
       this.activeSpace = idx;
     },
     // 选中功能
-    selectFunction(item, idx) {
-      item.active = !item.active;
-      this.functionList[this.activeSpace].splice(idx, item);
+    selectFunction(id) {
+      const idx = this.selectedFunctionList.indexOf(id);
+
+      if (idx > -1) {
+        this.selectedFunctionList.splice(idx, 1);
+      } else {
+        this.selectedFunctionList.push(id);
+      }
     },
     // 保存选中的定制需求
     saveDemand() {
-      this.$emit('close');
-      const arr = [];
-      this.functionList.forEach((item) => {
-        item.forEach((value) => {
-          value.active && arr.push(value);
+      this.updateDemand(this.selectedFunctionList)
+        .then(() => {
+          const list = [];
+          this.allFunctions.forEach(item => {
+            this.selectedFunctionList.forEach(id => {
+              if (id == item.id) list.push(item);
+            });
+          });
+
+          this.UPDATE_DEMAND(list);
+          this.$Toast('修改成功');
+          this.$emit('close');
+        })
+        .catch(err => {
+          this.$emit('close');
+          this.$Toast(err.msg);
         });
-      });
-      this.updateDemand(arr).then(this.$Toast('修改成功'));
-    },
-  },
+    }
+  }
 };
 </script>
 <style lang="scss">

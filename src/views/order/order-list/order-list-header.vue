@@ -33,13 +33,13 @@ export default {
       isShowPopup: false,
       list: ['上门量尺', '设计方案', '签订合同'],
       moreStatus: ['复尺', '下单', '生产', '送货安装', '待确认', '完成', '已取消'],
-      statusName: '更多状态',
+      statusName: '更多状态'
     };
   },
   computed: {
     ...mapState({
-      status: state => state.orderListModule.status,
-    }),
+      status: state => state.orderListModule.status
+    })
   },
   methods: {
     ...mapActions(['getListByStatus']),
@@ -62,8 +62,8 @@ export default {
       const status = item === '已取消' ? 0 : idx + 4;
       this.CHANGE_STATUS(status);
       this.getListByStatus(1);
-    },
-  },
+    }
+  }
 };
 </script>
 <style lang="scss" scoped>

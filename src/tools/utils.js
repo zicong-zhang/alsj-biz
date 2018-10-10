@@ -1,12 +1,14 @@
-import Vuex from '~/vuex/store';
+import Vuex from '~/vuex';
 import Router from '~/router';
+import * as mutationTypes from '~vuex/mutation-types';
 
 export default {
   /**
    * 路由跳转
    */
   go(params, replace) {
-    Vuex.commit('TURN', 'on');
+    Vuex.commit(mutationTypes.TURN, 'on');
+
     if (replace) {
       Router.replace(params);
     } else {
@@ -16,9 +18,16 @@ export default {
   /**
    * 路由返回
    */
-  back(param) {
-    Vuex.commit('TURN', 'off');
-    if (param) {
+  back(param, cb) {
+    if (cb) return cb();
+
+    Vuex.commit(mutationTypes.TURN, 'off');
+
+    if (document.referrer == window.location.href || !document.referrer) {
+      Router.push({
+        name: 'worker'
+      });
+    } else if (param) {
       Router.push(param);
     } else {
       Router.back(-1);
@@ -34,7 +43,7 @@ export default {
     const dateObj = {
       year: current.getFullYear(),
       month: current.getMonth() + 1,
-      day: current.getDate(),
+      day: current.getDate()
     };
 
     if (type === 'current') {
@@ -149,7 +158,7 @@ export default {
     return window.CryptoJS.AES.encrypt(password, key, {
       iv,
       mode: window.CryptoJS.mode.CBC,
-      padding: window.CryptoJS.pad.ZeroPadding,
+      padding: window.CryptoJS.pad.ZeroPadding
     }).toString();
   },
   /**
@@ -201,7 +210,7 @@ export default {
   goLogin() {
     const {
       pathname,
-      search,
+      search
     } = window.location;
     const path = pathname.replace(/\/.*pages\/(.*html)/, '$1');
     const params = search ? `&${search.slice(1)}` : '';
@@ -278,7 +287,7 @@ export default {
         this.locationStorageMap();
       }
     }, {
-      enableHighAccuracy: true,
+      enableHighAccuracy: true
     });
   },
   /**
@@ -287,7 +296,7 @@ export default {
   getDefaultPosition() {
     return {
       lat: 23.1194300000,
-      lng: 113.3212200000,
+      lng: 113.3212200000
     };
   },
   /**
@@ -301,7 +310,7 @@ export default {
         loop: true,
         autoplay: true,
         container: el,
-        animationData: LOADING_CONFIG,
+        animationData: LOADING_CONFIG
       };
       lottie.loadAnimation(params);
     }, 200);
@@ -407,7 +416,7 @@ export default {
         'http://android.myapp.com/myapp/detail.htm?apkName=alsj.com.EhomeCompany';
     }
     window.location.href = url;
-  },
+  }
 
 
 };

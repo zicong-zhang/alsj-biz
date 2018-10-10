@@ -1,14 +1,40 @@
-import http from '~axios';
+const api = {
+  // 获取我的店铺列表
+  getSelfStoreList: '/merchantStaff/getMerchantStaffToken',
+  // 获取店铺信息
+  getStoreInfo: '/merchant/getInfo4Seller',
+  // 获取店铺待收款金额(全部)
+  getDueAmount: '/statistic/getMerchantDueAmount',
+  // 获取店铺实收款金额(本月)
+  getReceiptAmount: '/statistic/getMerchantReceiptAmount',
+  // 获取月销售冠军
+  getCurrentMonthSaleChampion: '/statistic/getMerchantChampion',
+  // 获取店铺目标金额
+  getStoreSaleTarget: '/statistic/getMerchantGoalProcess',
+  // 获取业绩排行榜
+  getPerformanceRank: '/statistic/getDesignerTradeRank',
+  // 获取开单排行榜
+  getBillRank: '/statistic/getBillRank',
+  // 获取店铺某一年的业绩目标列表
+  getOnePerformanceTargetList: '/merchantGoal/getMerchantGoalInfo',
+  // 更新店铺某一年业绩目标列表
+  updatePerformTargetList: '/merchantGoal/saveOrUpdateMerchantGoal',
+  // 获取店铺总业绩列表
+  getPerformanceTotalList: '/statistic/getMerchantTradeAmountList'
+}
 
+export default api;
+
+/*
 // 获取我的店铺列表
 export const getSelfStoreList = () => http('/merchantStaff/getMerchantStaffToken', {});
 // 获取店铺信息
 export const getStoreInfo = merchantId => http('/merchant/getInfo4Seller', {
-  merchantId,
+  merchantId
 });
 // 获取店铺待收款金额(全部)
 export const getDueAmount = merchantId => http('/statistic/getMerchantDueAmount', {
-  merchantId,
+  merchantId
 });
 // 获取店铺实收款金额(本月)
 export const getReceiptAmount = (merchantId) => {
@@ -19,7 +45,7 @@ export const getReceiptAmount = (merchantId) => {
     month: current.getMonth() + 1,
     year: current.getFullYear(),
     pageNum: 1,
-    pageSize: 0,
+    pageSize: 0
   });
 };
 // 获取月销售冠军
@@ -31,7 +57,7 @@ export const getCurrentMonthSaleChampion = (merchantId) => {
     month: current.getMonth() + 1,
     year: current.getFullYear(),
     pageNum: 1,
-    pageSize: 0,
+    pageSize: 0
   });
 };
 // 获取店铺目标金额
@@ -43,40 +69,40 @@ export const getStoreSaleTarget = (merchantId) => {
     month: current.getMonth() + 1,
     year: current.getFullYear(),
     pageNum: 1,
-    pageSize: 0,
+    pageSize: 0
   });
 };
 // 获取业绩排行榜
 export const getPerformanceRank = ({
   merchantId,
   year,
-  month,
+  month
 }) => http('/statistic/getDesignerTradeRank', {
   merchantId,
   year,
   month,
   pageNum: 1,
-  pageSize: 0,
+  pageSize: 0
 });
 // 获取开单排行榜
 export const getBillRank = ({
   merchantId,
   year,
-  month,
+  month
 }) => http('/statistic/getBillRank', {
   merchantId,
   year,
   month,
   pageNum: 1,
-  pageSize: 0,
+  pageSize: 0
 });
 // 获取店铺某一年的业绩目标列表
 export const getOnePerformanceTargetList = ({
   merchantId,
-  goalYear,
+  goalYear
 }) => http('/merchantGoal/getMerchantGoalInfo', {
   merchantId,
-  goalYear,
+  goalYear
 });
 // 更新店铺某一年业绩目标列表
 export const updatePerformTargetList = (merchantId, {
@@ -93,7 +119,7 @@ export const updatePerformTargetList = (merchantId, {
   novAmount,
   decAmount,
   year,
-  id,
+  id
 }) => http('/merchantGoal/saveOrUpdateMerchantGoal', {
   merchantId,
   goalYear: year,
@@ -109,15 +135,16 @@ export const updatePerformTargetList = (merchantId, {
   sepAmount: sepAmount.length > 3 ? +sepAmount.replace(/\D/g, '') : +sepAmount,
   octAmount: octAmount.length > 3 ? +octAmount.replace(/\D/g, '') : +octAmount,
   novAmount: novAmount.length > 3 ? +novAmount.replace(/\D/g, '') : +novAmount,
-  decAmount: decAmount.length > 3 ? +decAmount.replace(/\D/g, '') : +decAmount,
+  decAmount: decAmount.length > 3 ? +decAmount.replace(/\D/g, '') : +decAmount
 });
 // 获取店铺总业绩列表
 export const getPerformanceTotalList = ({
   merchantId,
-  year,
+  year
 }) => http('/statistic/getMerchantTradeAmountList', {
   merchantId,
   year,
   pageNum: 1,
-  pageSize: 0,
+  pageSize: 0
 });
+ */

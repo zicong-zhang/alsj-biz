@@ -31,12 +31,12 @@ export default {
     WorkerGather,
     WorkerChampion,
     WorkerSaleTarget,
-    WorkerActions,
+    WorkerActions
   },
   data() {
     return {
       title: '阿拉私家',
-      showBack: false,
+      showBack: false
     };
   },
   created() {
@@ -50,12 +50,12 @@ export default {
   methods: {
     ...mapActions([
       'getStoreInfo', // 获取店铺信息
-      'getSelfStoreList', // 获取该账号下的所有店铺
+      'getSelfStoreList' // 获取该账号下的所有店铺
     ]),
     ...mapMutations([
-      'SET_STORE_ID', // 设置店铺id
-    ]),
-  },
+      'SET_STORE_ID' // 设置店铺id
+    ])
+  }
 };
 </script>
 <style lang="scss">

@@ -38,12 +38,12 @@ import { mapState } from 'vuex';
 export default {
   name: 'OrderDetailItemRemark',
   components: {
-    H2,
+    H2
   },
   data() {
     return {};
   },
-  methods: {},
+  methods: {}
 };
 </script>
 <style lang="scss">

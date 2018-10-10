@@ -13,6 +13,8 @@
   </div>
 </template>
 <script>
+import * as types from '~vuex/mutation-types';
+
 export default {
   name: 'VFooter',
   data() {
@@ -23,27 +25,27 @@ export default {
           name: '工作台',
           routeName: 'worker',
           icon: require('~img/home/icon_tap_home_normal@2x.png'),
-          iconActive: require('~img/home/icon_tap_home_press@2x.png'),
+          iconActive: require('~img/home/icon_tap_home_press@2x.png')
         },
         {
           name: '消息',
           routeName: 'test-pulldown',
           icon: require('~img/home/icon_tap_msg_normal@2x.png'),
-          iconActive: require('~img/home/icon_tap_msg_press@2x.png'),
+          iconActive: require('~img/home/icon_tap_msg_press@2x.png')
         },
         {
           name: '订单',
           routeName: 'order-list',
           icon: require('~img/home/icon_tap_user_normal@2x.png'),
-          iconActive: require('~img/home/icon_tap_user_press@2x.png'),
-        },
-      ],
+          iconActive: require('~img/home/icon_tap_user_press@2x.png')
+        }
+      ]
     };
   },
   computed: {
     routeName() {
       return this.$route.name;
-    },
+    }
   },
   created() {
     this.active = this.list.indexOf(this.routeName);
@@ -53,12 +55,12 @@ export default {
       console.log('item.routeName, idx:_____', item.routeName, idx);
       if (this.active === idx) return false;
       this.active = idx;
-      this.$store.commit('TURN', '');
+      this.$store.commit(types.TURN, '');
       this.$router.push({
-        name: item.routeName,
+        name: item.routeName
       });
-    },
-  },
+    }
+  }
 };
 </script>
 <style lang="scss">

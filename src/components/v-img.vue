@@ -21,14 +21,14 @@ export default {
   name: 'v-img',
   props: {
     src: {
-      type: String,
+      type: String
     },
     loadingType: String,
-    errorType: String,
+    errorType: String
   },
   data() {
     return {
-      status: 'before',
+      status: 'before'
     };
   },
   computed: {
@@ -49,12 +49,12 @@ export default {
         default:
           return this.loadingImg;
       }
-    },
+    }
   },
   watch: {
     src(newVal) {
       this.loadImg();
-    },
+    }
   },
   created() {
     this.loadImg();
@@ -71,8 +71,8 @@ export default {
         if (!this.error) this.error = this.loading;
         this.status = 'error';
       };
-    },
-  },
+    }
+  }
 };
 </script>
 <style lang="scss">

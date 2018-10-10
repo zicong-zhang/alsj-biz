@@ -1,7 +1,9 @@
+import * as types from '../mutation-types';
+
 export default {
   state: {
     turn: '', // '' on off
-    storeId: false,
+    storeId: false
   },
   getters: {
 
@@ -11,12 +13,13 @@ export default {
   },
   mutations: {
     // 转场动画
-    TURN(state, status) {
+    [types.TURN](state, status) {
       state.turn = status;
     },
-    SET_STORE_ID(state, id) {
+    // 设置店铺 id
+    [types.SET_STORE_ID](state, id) {
       state.storeId = id;
       window.sessionStorage.setItem('STORE_ID', id);
-    },
-  },
+    }
+  }
 };

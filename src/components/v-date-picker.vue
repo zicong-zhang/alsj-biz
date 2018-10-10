@@ -21,25 +21,25 @@ export default {
     required: String,
     // 选择器标题
     title: {
-      default: '',
+      default: ''
     },
     // 警告文案
     warn: String,
     // 设置当前选择的日期
     current: {
-      default: '',
-    },
+      default: ''
+    }
   },
   data() {
     return {
-      datePicker: null,
+      datePicker: null
     };
   },
   computed: {
     placeholder() {
       const placeholder = this.$attrs.placeholder;
       return placeholder && !this.value && !this.$attrs['default-value'];
-    },
+    }
   },
   created() {
     this.init();
@@ -58,7 +58,7 @@ export default {
         max: new Date(maxYear, maxMmonth, maxDay),
         value: this.current || new Date(),
         onSelect: this.selectHandle,
-        onCancel: this.cancelHandle,
+        onCancel: this.cancelHandle
       });
     },
     selectHandle(date, selectedVal, selectedText) {
@@ -67,20 +67,20 @@ export default {
         content: `Selected Item: <br/> - date: ${date} <br/> - value: ${selectedVal.join(
           ', ',
         )} <br/> - text: ${selectedText.join(' ')}`,
-        icon: 'cubeic-alert',
+        icon: 'cubeic-alert'
       }).show();
     },
     cancelHandle() {
       this.$createToast({
         type: 'correct',
         txt: 'Picker canceled',
-        time: 1000,
+        time: 1000
       }).show();
     },
     showPicker() {
       this.datePicker.show();
-    },
-  },
+    }
+  }
 };
 </script>
 <style lang="scss">

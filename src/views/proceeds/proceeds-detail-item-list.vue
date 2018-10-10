@@ -27,7 +27,7 @@ export default {
   name: 'proceeds-detail-item-list',
   data() {
     return {
-      list: [],
+      list: []
     };
   },
   created() {
@@ -40,12 +40,12 @@ export default {
         month: 6,
         pageNum: 1,
         pageSize: 40,
-        year: 2018,
+        year: 2018
       }).then((res) => {
         this.list = res.data.list;
       });
-    },
-  },
+    }
+  }
 };
 </script>
 <style lang="scss">

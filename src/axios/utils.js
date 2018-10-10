@@ -154,13 +154,13 @@ function formatRequestData(data) {
       pf: getPF(),
       ua: getUA(),
       vCode: 0,
-      vName: '1.0.0',
+      vName: '1.0.0'
     },
-    data: { ...data,
+    data: { ...data
     },
     encrypt: 'string',
     requestId: 'string',
-    sign: 'string',
+    sign: 'string'
   };
 
   req.data.token = getToken();

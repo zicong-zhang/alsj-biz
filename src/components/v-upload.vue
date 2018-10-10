@@ -84,21 +84,21 @@ export default {
   name: 'v-upload',
   props: {
     asyncQty: {
-      default: 3,
+      default: 3
     },
     width: {
       type: Number,
-      default: 240,
+      default: 240
     },
     showBtn: {
-      default: true,
+      default: true
     },
     showFile: {
-      default: true,
+      default: true
     },
     files: {
-      default: [],
-    },
+      default: []
+    }
   },
   data() {
     return {
@@ -107,19 +107,19 @@ export default {
       fileList: [],
       isShowDelBtn: false,
       isShowDelDialog: false,
-      delPicIdx: '',
+      delPicIdx: ''
     };
   },
   watch: {
     files(newVal) {
       this.fileList = newVal.map(item => ({
-        path: item,
+        path: item
       }));
-    },
+    }
   },
   created() {
     this.fileList = this.files.map(item => ({
-      path: item,
+      path: item
     }));
   },
   methods: {
@@ -158,7 +158,7 @@ export default {
       const len = this.fileList.length;
       this.$set(this.fileList, len, {
         path: '',
-        progress: 0,
+        progress: 0
       });
 
       const size = pic.size / 1024;
@@ -193,7 +193,7 @@ export default {
             } else {
               this.fileList[length].progress = 100;
             }
-          },
+          }
         })
         .then((res) => {
           const uploader = this.$refs.uploader;
@@ -207,7 +207,7 @@ export default {
       this.$createImagePreview({
         imgs: this.fileList.map(item => item.path),
         'initial-index': idx,
-        loop: false,
+        loop: false
       }).show();
     },
     // 弹出删除图片对话框
@@ -224,8 +224,8 @@ export default {
     delPic(idx) {
       this.isShowDelDialog = false;
       this.$emit('on-del', this.delPicIdx);
-    },
-  },
+    }
+  }
 };
 </script>
 

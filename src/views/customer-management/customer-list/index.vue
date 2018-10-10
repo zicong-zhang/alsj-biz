@@ -12,8 +12,8 @@ import customerList from './customer-list-item-list';
 export default {
   name: 'view-customer-list',
   components: {
-    customerList,
-  },
+    customerList
+  }
 };
 </script>
 <style lang="scss">

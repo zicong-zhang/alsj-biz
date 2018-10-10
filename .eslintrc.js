@@ -71,5 +71,6 @@ module.exports = {
     'import/extensions': 0,
     'no-unused-expressions': 0, // 期望一个赋值或函数调用，而是看到一个表达式
     'no-restricted-syntax': 0, // for in   for of
+    'comma-dangle': ["error", "never"], // 尾随逗号
   }
 }

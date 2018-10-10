@@ -1,23 +1,13 @@
 import Axios from 'axios';
 import config from './config';
-import * as API from './apis';
 
-const ajaxArr = {}; // 放于 store
-
-
-const http = (url, data = {}, opt = {}) => {
-  /* if (opt.noRepeat && ajaxArr[url]) return false;
-
-  ajaxArr[url] = true; */
-
-
+const http = (url, data = {}, opt = {}, method = 'post') => {
   return Axios({
-    method: 'post',
+    method,
     url: `/api${url}`,
     data,
-    transformRequest: [res => {
-      return JSON.stringify(res);
-    }],
+    opt,
+    transformRequest: [res => JSON.stringify(res)]
   });
 };
 

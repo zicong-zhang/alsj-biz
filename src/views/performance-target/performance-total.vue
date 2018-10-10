@@ -31,13 +31,13 @@ export default {
     return {
       year: '',
       chart: '',
-      performanceList: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+      performanceList: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
     };
   },
   computed: {
     dataList() {
       if (!this.performanceList) return [0];
-    },
+    }
   },
   activated() {
     this.year = new Date().getFullYear();
@@ -51,7 +51,7 @@ export default {
         confirm: (value) => {
           this.year = value.getFullYear();
           this.init();
-        },
+        }
       });
     },
     init() {
@@ -89,13 +89,13 @@ export default {
           trigger: 'axis',
           axisPointer: {
             // 坐标轴指示器，坐标轴触发有效
-            type: 'line', // 默认为直线，可选为：'line' | 'shadow'
-          },
+            type: 'line' // 默认为直线，可选为：'line' | 'shadow'
+          }
         },
         grid: {
           x: 48, // 图标距离上下左右的距离
           x2: 18,
-          y: 10,
+          y: 10
         },
         xAxis: {
           type: 'category',
@@ -107,28 +107,28 @@ export default {
             show: true, // 去除网格线
             // 网格线颜色
             lineStyle: {
-              color: ['#f2f2f2'],
-            },
+              color: ['#f2f2f2']
+            }
           },
           // splitArea : {show : true},//保留网格区域
           // 轴的字体样式
           axisLabel: {
             show: true,
             textStyle: {
-              color: '#999',
-            },
+              color: '#999'
+            }
           },
           // 轴线条颜色
           axisLine: {
             lineStyle: {
-              color: '#f2f2f2',
+              color: '#f2f2f2'
               // type: 'solid',
               // width:'2'
-            },
+            }
           },
           axisTick: {
-            show: false, // 是否显示坐标轴刻度。
-          },
+            show: false // 是否显示坐标轴刻度。
+          }
         },
         yAxis: {
           type: 'value',
@@ -138,28 +138,28 @@ export default {
             show: true, // 去除网格线
             // 网格线颜色
             lineStyle: {
-              color: ['#f2f2f2'],
-            },
+              color: ['#f2f2f2']
+            }
           },
           // splitArea : {show : true},//保留网格区域
           // 轴的字体样式
           axisLabel: {
             show: true,
             textStyle: {
-              color: '#999',
-            },
+              color: '#999'
+            }
           },
           // 轴线条颜色
           axisLine: {
             lineStyle: {
-              color: '#fff',
+              color: '#fff'
               // type: 'solid',
               // width:'2'
-            },
+            }
           },
           axisTick: {
-            show: false, // 是否显示坐标轴刻度。
-          },
+            show: false // 是否显示坐标轴刻度。
+          }
         },
         series: [
           {
@@ -170,9 +170,9 @@ export default {
               normal: {
                 color: '#39f', // 设置折线折点颜色
                 lineStyle: {
-                  color: '#39f', // 设置折线线条颜色
-                },
-              },
+                  color: '#39f' // 设置折线线条颜色
+                }
+              }
             },
             areaStyle: {
               normal: {
@@ -180,20 +180,20 @@ export default {
                 color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
                   {
                     offset: 0,
-                    color: 'RGBA(51, 153, 255, 0.2)',
+                    color: 'RGBA(51, 153, 255, 0.2)'
                   },
                   {
                     offset: 1,
-                    color: 'RGBA(51, 153, 255, 0)',
-                  },
-                ]),
-              },
-            },
-          },
-        ],
+                    color: 'RGBA(51, 153, 255, 0)'
+                  }
+                ])
+              }
+            }
+          }
+        ]
       });
-    },
-  },
+    }
+  }
 };
 </script>
 <style lang="scss">

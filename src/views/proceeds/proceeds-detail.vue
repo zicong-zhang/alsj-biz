@@ -18,12 +18,12 @@ export default {
   components: {
     Header,
     Total,
-    List,
+    List
   },
   data() {
     return {};
   },
-  methods: {},
+  methods: {}
 };
 </script>
 <style lang="scss">

@@ -31,19 +31,19 @@ export default {
   name: 'worker-header-item-store-picker',
   props: {
     list: {
-      type: Array,
-    },
+      type: Array
+    }
   },
   computed: {
     ...mapState({
-      storeId: state => state.root.storeId,
-    }),
+      storeId: state => state.root.storeId
+    })
   },
   methods: {
     select(item) {
       this.$emit('select', item);
-    },
-  },
+    }
+  }
 };
 </script>
 <style lang="scss">

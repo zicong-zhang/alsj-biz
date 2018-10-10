@@ -12,8 +12,8 @@
 export default {
   name: 'staff-permission-component',
   props: {
-    item: Object,
-  },
+    item: Object
+  }
 };
 </script>
 <style lang="scss">

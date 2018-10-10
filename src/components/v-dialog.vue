@@ -30,20 +30,20 @@ export default {
   props: {
     show: {
       default: false,
-      type: Boolean,
+      type: Boolean
     },
     // 标题
     title: String,
     // 内容
     content: {
       required: true,
-      type: [String, Number],
+      type: [String, Number]
     },
     // 是否展示取消按钮
     'show-cancel': {
       default: false,
-      type: Boolean,
-    },
+      type: Boolean
+    }
   },
   data() {
     return {};
@@ -60,8 +60,8 @@ export default {
     // 确定
     onConfirm() {
       this.$emit('confirm');
-    },
-  },
+    }
+  }
 };
 </script>
 

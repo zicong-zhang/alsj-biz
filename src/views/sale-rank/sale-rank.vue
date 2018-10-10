@@ -82,14 +82,13 @@
   </div>
 </template>
 <script>
-import { mapState } from 'vuex';
+import { mapState, mapActions } from 'vuex';
 import EmptyModule from './sale-rank-item-empty';
-import { getPerformanceRank, getBillRank, getCurrentMonthSaleChampion } from '~apis/worker';
 
 export default {
   name: 'sale-champion',
   components: {
-    EmptyModule,
+    EmptyModule
   },
   data() {
     return {
@@ -101,13 +100,13 @@ export default {
       performanceList: [], // 业绩列表
       billList: [], // 开单列表
       currentMonth: 1,
-      date: {},
+      date: {}
     };
   },
   computed: {
     ...mapState({
-      merchantId: state => state.root.storeId,
-    }),
+      merchantId: state => state.root.storeId
+    })
   },
   watch: {
     performanceMonth(newVal) {
@@ -119,7 +118,7 @@ export default {
       const month = this.date.month;
       this.currentMonth = newVal === 0 ? month : month - 1;
       this.getBillRank();
-    },
+    }
   },
   created() {
     this.date = this.$utils.getDate('current');
@@ -127,19 +126,24 @@ export default {
     this.init();
   },
   methods: {
+    ...mapActions([
+      'getPerformanceRank',
+      'getBillRank',
+      'getCurrentMonthSaleChampion'
+    ]),
     init() {
-      this.getChampionInfo();
-      this.getPerformanceRank();
-      this.getBillRank();
+      this.getInitChampionInfo();
+      this.getInitPerformanceRank();
+      this.getInitBillRank();
     },
     // 设置排行榜每人占比
     changeItem(list, name) {
       list.forEach((item, idx) => {
-        this.setTtemWidth(item.amount, name, idx);
+        this.setItemWidth(item.amount, name, idx);
       });
     },
     // 设置排行榜占比长度
-    setTtemWidth(amount, name, idx) {
+    setItemWidth(amount, name, idx) {
       const firstItem = this[name][0];
       const scale = firstItem ? amount / firstItem.amount : 0;
 
@@ -159,12 +163,12 @@ export default {
       const req = {
         merchantId: this.merchantId,
         year: this.date.year,
-        month: this.currentMonth,
+        month: this.currentMonth
       };
       return req;
     },
     // 获取业绩排行
-    getPerformanceRank() {
+    getInitPerformanceRank() {
       getPerformanceRank(this.setReq()).then(res => {
         const list = res.data.list;
         this.performanceList = list;
@@ -172,7 +176,7 @@ export default {
       });
     },
     // 获取开单排行
-    getBillRank() {
+    getInitBillRank() {
       getBillRank(this.setReq()).then(res => {
         const list = res.data.list;
         this.billList = list;
@@ -180,12 +184,12 @@ export default {
       });
     },
     // 获取销售冠军信息
-    getChampionInfo() {
+    getInitChampionInfo() {
       getCurrentMonthSaleChampion(this.merchantId).then(res => {
         this.championInfo = res.data.rankBO || {};
       });
-    },
-  },
+    }
+  }
 };
 </script>
 <style lang="scss">

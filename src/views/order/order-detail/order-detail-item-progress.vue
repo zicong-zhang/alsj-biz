@@ -41,24 +41,24 @@ import { mapState, mapGetters, mapActions } from 'vuex';
 export default {
   name: 'OrderDetailItemProgress',
   props: {
-    reload: Number,
+    reload: Number
   },
   data() {
     return {};
   },
   computed: {
     ...mapState({
-      orderProgress: state => state.orderDetailModule.orderProgress,
+      orderProgress: state => state.orderDetailModule.orderProgress
     }),
     ...mapGetters(['orderDetailStatus']),
     progress() {
       return '';
-    },
+    }
   },
   watch: {
     reload(newVal) {
       this.getProgreess();
-    },
+    }
   },
   created() {
     this.getProgreess();
@@ -70,8 +70,8 @@ export default {
     },
     getProgreess() {
       this.$store.dispatch('getOrderDetailProgress');
-    },
-  },
+    }
+  }
 };
 </script>
 <style lang="scss" scoped>

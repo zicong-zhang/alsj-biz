@@ -119,11 +119,11 @@
 
 .v-cover-enter,
 .v-cover-leave-to {
-  opacity: 0;
+  opacity: 0 !important;
 }
 .v-cover-enter-active,
 .v-cover-leave-active {
-  transition: all .3s;
+  transition: all .3s !important;
 }
 /* 图片加载组件 */
 .v-img-enter,

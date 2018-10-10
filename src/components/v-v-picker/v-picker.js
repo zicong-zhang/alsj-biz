@@ -6,7 +6,7 @@ const VPickerConstructor = Vue.extend(VPicker);
 const $Picker = (opt = {
   key: 'text',
   title: '',
-  list: [],
+  list: []
 }) => {
   const instance = new VPickerConstructor().$mount(document.createElement('div'));
 

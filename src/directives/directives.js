@@ -1,4 +1,5 @@
 import Vue from 'vue';
+import * as mutationTypes from '~vuex/mutation-types';
 
 
 /**
@@ -7,7 +8,7 @@ import Vue from 'vue';
 Vue.directive('focus', {
   bind(el, binding, vNode) {
     el.focus();
-  },
+  }
 });
 /**
  * 返回上一页
@@ -15,10 +16,10 @@ Vue.directive('focus', {
 Vue.directive('back', {
   bind(el, binding, vNode) {
     el.addEventListener('click', (e) => {
-      vNode.$store.commit('turn', 'on');
+      vNode.$store.commit(mutationTypes.TURN, 'on');
       vNode.$router.back();
     });
-  },
+  }
 });
 /**
  * 返回上一页并刷新
@@ -38,7 +39,7 @@ Vue.directive('back-reload', {
       }
       return false;
     });
-  },
+  }
 });
 
 /**
@@ -52,7 +53,7 @@ Vue.directive('stop-cover', {
       e.stopPropagation();
       return false;
     });
-  },
+  }
 });
 /**
  * 图片加载失败
@@ -66,5 +67,5 @@ Vue.directive('img-err', {
       // this.src = '../src/assets/img/product_img.jpg';
       this.src = path || defaultUrl;
     });
-  },
+  }
 });

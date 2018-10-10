@@ -12,26 +12,26 @@ export default {
   props: {
     // 左侧标题名
     label: {
-      type: String,
+      type: String
     },
     // 右侧
     value: {
-      type: [String, Number],
+      type: [String, Number]
     },
     // 对齐方式
     align: {
-      type: String,
+      type: String
     },
     // 右侧行数
     line: {
-      default: 1,
-    },
+      default: 1
+    }
   },
   methods: {
     clickValue() {
       this.$emit('handler');
-    },
-  },
+    }
+  }
 };
 </script>
 

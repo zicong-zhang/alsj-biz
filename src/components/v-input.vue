@@ -32,18 +32,18 @@ export default {
   name: 'v-input',
   model: {
     prop: 'value',
-    event: 'input',
+    event: 'input'
   },
   inheritAttrs: false,
   props: {
     // 绑定值
     value: {
       type: [String, Number],
-      required: true,
+      required: true
     },
     // 最大长度
     max: {
-      required: true,
+      required: true
     }, // 验证规则
     rule: Array,
     // 替换匹配的字符
@@ -51,21 +51,21 @@ export default {
     // 标签
     label: String,
     // 是否必填项
-    required: String,
+    required: String
   },
   created() {},
   data() {
     return {
       warn: false,
       isFocus: false,
-      timer: null,
+      timer: null
     };
   },
   computed: {
     inputVal() {
       // 存值，供父组件调用验证方法
       return this.value;
-    },
+    }
   },
   methods: {
     focus() {
@@ -170,8 +170,8 @@ export default {
       }
 
       return pass;
-    },
-  },
+    }
+  }
 };
 </script>
 <style lang="scss">

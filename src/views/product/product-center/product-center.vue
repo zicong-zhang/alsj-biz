@@ -69,7 +69,7 @@ export default {
       productList: [],
       editMode: false, // 编辑模式
       isSelectAll: false,
-      selectedList: [],
+      selectedList: []
     };
   },
   computed: {
@@ -80,7 +80,7 @@ export default {
     // 已选列表长度
     selectLength() {
       return this.selectedList.length;
-    },
+    }
   },
   created() {
     this.init();
@@ -134,8 +134,8 @@ export default {
       } else {
         this.$Toast('请选择需要删除的产品');
       }
-    },
-  },
+    }
+  }
 };
 </script>
 <style lang="scss">

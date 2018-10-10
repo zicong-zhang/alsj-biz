@@ -45,42 +45,42 @@ const residenceList = [
     values: [
       {
         text: '一房',
-        value: '一房',
+        value: '一房'
       },
       {
         text: '二房',
-        value: '二房',
+        value: '二房'
       },
       {
         text: '三房',
-        value: '三房',
+        value: '三房'
       },
       {
         text: '四房',
-        value: '四房',
+        value: '四房'
       },
       {
         text: '五房',
-        value: '五房',
-      },
-    ],
+        value: '五房'
+      }
+    ]
   },
   {
     values: [
       {
         text: '一厅',
-        value: '一厅',
+        value: '一厅'
       },
       {
         text: '二厅',
-        value: '二厅',
+        value: '二厅'
       },
       {
         text: '三厅',
-        value: '三厅',
-      },
-    ],
-  },
+        value: '三厅'
+      }
+    ]
+  }
 ];
 
 export default {
@@ -90,11 +90,11 @@ export default {
       linkmanHouseType: '',
       linkmanResidence: '',
       measurement: '',
-      residenceList,
+      residenceList
     };
   },
   computed: {
-    ...mapGetters(['orderInfo', 'orderId']),
+    ...mapGetters(['orderInfo', 'orderId'])
   },
   created() {
     Object.assign(this.$data, this.orderInfo);
@@ -109,13 +109,13 @@ export default {
         linkmanHouseType: this.linkmanHouseType,
         linkmanResidence: this.linkmanResidence,
         measurement: this.measurement,
-        orderId: this.orderId,
+        orderId: this.orderId
       }).then((data) => {
         this.$Toast('修改成功');
         this.$utils.back();
       });
-    },
-  },
+    }
+  }
 };
 </script>
 <style lang="scss" scoped>

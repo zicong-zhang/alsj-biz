@@ -42,7 +42,8 @@ module.exports = {
       '~img': resolve('src/assets/img'),
       '~apis': resolve('src/apis'),
       '~axios': resolve('src/axios'),
-      '~tools': resolve('src/tools')
+      '~tools': resolve('src/tools'),
+      '~vuex': resolve('src/vuex')
     }
   },
   module: {

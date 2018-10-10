@@ -15,14 +15,14 @@ import { mapActions } from 'vuex';
 export default {
   name: 'staff-detail-item-order',
   components: {
-    orderListItem,
+    orderListItem
   },
   props: {
-    staffId: String,
+    staffId: String
   },
   data() {
     return {
-      orderList: [],
+      orderList: []
 
     };
   },
@@ -36,8 +36,8 @@ export default {
         .then((res) => {
           this.orderList = res.data.list || [];
         });
-    },
-  },
+    }
+  }
 };
 </script>
 <style lang="scss">

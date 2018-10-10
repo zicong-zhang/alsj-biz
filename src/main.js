@@ -1,5 +1,4 @@
-/**
- * TODO
+/** TODO
  * 将 better-scroll 改为 vant 的下拉刷新+自己写的上拉加载更多
  * 清除缓存时要把app.vue的缓存组件数组清空？
  * 判断当前运行环境，动态引入mui，减少不必要的加载时间
@@ -20,6 +19,7 @@ import Vue from 'vue';
 import VueLazyload from 'vue-lazyload';
 import AlloyFinger from 'alloyfinger';
 import AlloyFingerPlugin from 'alloyfinger/vue/alloy_finger.vue';
+import Swiper from 'swiper'
 import FastClick from 'fastclick';
 
 // 工具类
@@ -27,7 +27,7 @@ import router from './router';
 import './directives/directives';
 import './filters/filters';
 import './tools/tools';
-import store from './vuex/store';
+import store from './vuex';
 
 // 全局组件
 import App from './App';
@@ -57,7 +57,7 @@ Vue.config.productionTip = false;
 // Vue.use(VuetronVue);
 Vue.use(VueLazyload);
 Vue.use(AlloyFingerPlugin, {
-  AlloyFinger,
+  AlloyFinger
 });
 
 /* Vue.prototype.$plus = fn => {
@@ -84,5 +84,5 @@ new Vue({
   el: '#app',
   router,
   store,
-  render: h => h(App),
+  render: h => h(App)
 });

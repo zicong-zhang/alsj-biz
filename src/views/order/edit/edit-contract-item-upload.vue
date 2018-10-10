@@ -13,7 +13,7 @@ export default {
   name: 'EditContractItemUpload',
   data() {
     return {};
-  },
+  }
 };
 </script>
 <style lang="scss">

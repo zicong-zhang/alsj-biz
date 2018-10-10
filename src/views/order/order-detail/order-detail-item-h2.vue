@@ -13,12 +13,12 @@ export default {
   name: 'OrderDetailItemH2',
   props: {
     title: {
-      type: String,
-    },
+      type: String
+    }
   },
   data() {
     return {};
-  },
+  }
 };
 </script>
 

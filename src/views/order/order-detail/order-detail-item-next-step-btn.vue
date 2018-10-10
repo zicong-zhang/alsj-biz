@@ -10,7 +10,7 @@ export default {
   name: 'OrderDetailItemNextStepBtn',
   computed: {
     ...mapGetters([
-      'orderDetailStatus', // 订单状态
+      'orderDetailStatus' // 订单状态
     ]),
     text() {
       let txt = '';
@@ -41,7 +41,7 @@ export default {
           break;
       }
       return txt;
-    },
+    }
   },
   methods: {
     ...mapActions(['updateOrderDetailStatus']), // 更新订单进度
@@ -81,12 +81,11 @@ export default {
     },
     // 去录入合同信息
     toEditContract() {
-      this.$store.commit('TURN', 'on');
-      this.$router.push({
-        name: 'order-edit-contract',
-      });
-    },
-  },
+      this.$utils.go({
+        name: 'order-edit-contract'
+      })
+    }
+  }
 };
 </script>
 <style lang="scss">

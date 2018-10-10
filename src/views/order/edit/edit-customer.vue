@@ -62,29 +62,29 @@ const rules = {
   linkmanName: [
     {
       regExp: 'name',
-      warn: '请输入中文名',
-    },
+      warn: '请输入中文名'
+    }
   ],
   linkmanPhone: [
     {
       regExp: 'phone',
-      warn: '请输入正确的11位手机号',
-    },
-  ],
+      warn: '请输入正确的11位手机号'
+    }
+  ]
 };
 const genderList = [
   {
     values: [
       {
         value: '1',
-        text: '男',
+        text: '男'
       },
       {
         value: '2',
-        text: '女',
-      },
-    ],
-  },
+        text: '女'
+      }
+    ]
+  }
 ];
 export default {
   name: 'OrderEditCustomer',
@@ -98,11 +98,11 @@ export default {
       rules,
       genderList,
       isShowPicker: false,
-      sexText: '',
+      sexText: ''
     };
   },
   computed: {
-    ...mapGetters(['orderInfo', 'orderId']),
+    ...mapGetters(['orderInfo', 'orderId'])
   },
   created() {
     Object.assign(this.$data, this.orderInfo);
@@ -125,13 +125,13 @@ export default {
           linkmanGender: this.linkmanGender,
           linkmanName: this.linkmanName,
           linkmanPhon: this.linkmanPhone,
-          orderId: this.orderId,
+          orderId: this.orderId
         }).then(() => {
           this.$utils.back(this);
         });
       }
-    },
-  },
+    }
+  }
 };
 </script>
 <style lang="scss">

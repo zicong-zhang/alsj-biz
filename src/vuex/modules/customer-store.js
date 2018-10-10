@@ -1,9 +1,11 @@
-import * as api from '~apis/customer';
+import api from '~apis/customer';
+import http from '~axios';
+import * as types from '../mutation-types';
 
 export default {
   state: {
     pageNum: 1,
-    customerList: [],
+    customerList: []
   },
   getters: {
 
@@ -13,59 +15,66 @@ export default {
     getCustomerList({
       rootState,
       state,
-      commit,
+      commit
     }) {
-      return api.getCustomerList({
+      return http(api.getCustomerList, {
         merchantId: rootState.root.storeId,
         pageNum: state.pageNum,
-        pageSize: 15,
+        pageSize: 15
       })
-        .then((res) => {
-          commit('UPDATE_CUSTOMER_LIST', res.data);
-          return Promise.resolve(res);
+        .then(res => {
+          commit(types.UPDATE_CUSTOMER_LIST, res.data);
+          return Promise.resolve(res)
         });
     },
     // 获取客户信息
     getCustomerInfo(ctx, customerId) {
-      return api.getCustomerInfo(customerId);
+      return http(api.getCustomerInfo, {
+        customerId
+      })
     },
     // 获取客户对应的订单列表
-    getOrderListByCustomer(ctx, { customerId, pageNum }) {
-      return api.getOrderListByCustomer({
+    getOrderListByCustomer(ctx, {
+      customerId,
+      pageNum
+    }) {
+      return http(api.getOrderListByCustomer, {
         customerId,
         pageNum,
-        pageSize: 2,
-      });
+        pageSize: 2
+      })
     },
-    createOrder({ rootState }, {
+    // 创建订单
+    createOrder({
+      rootState
+    }, {
       customerId,
       linkmanAddress,
       linkmanGender,
       linkmanName,
       linkmanPhone,
-      orderType,
+      orderType
     }) {
-      return api.createOrder({
+      return http(api.createOrder, {
         customerId,
         linkmanAddress,
         linkmanGender,
         linkmanName,
         linkmanPhone,
         orderType,
-        merchantId: rootState.root.storeId,
-      });
-    },
+        merchantId: rootState.root.storeId
+      })
+    }
   },
   mutations: {
     // 更新客户列表 （添加）
-    UPDATE_CUSTOMER_LIST(state, data) {
+    [types.UPDATE_CUSTOMER_LIST](state, data) {
       state.customerList = (state.pageNum === 1 ? [] : state.customerList).concat(data.list);
       state.pageNum += 1;
-      console.log('state.customerList.length:_____', state.customerList.length);
     },
     // 初始化分页的当前页数
-    INIT_CUSTOMER_LIST_PAGE_NUM(state, pageNum = 1) {
+    [types.INIT_CUSTOMER_LIST_PAGE_NUM](state, pageNum = 1) {
       state.pageNum = pageNum;
-    },
-  },
+    }
+  }
 };

@@ -1,28 +1,41 @@
-import http from '~axios';
 
+const api = {
+  // 获取客户列表
+  getCustomerList: '/merchantCustomer/list',
+  // 获取客户信息
+  getOrderListByCustomer: '/order/listByCustomer',
+  // 获取客户对应的订单列表
+  getCustomerInfo: '/merchantCustomer/getInfo',
+  // 创建订单
+  createOrder: '/order/create'
+}
+
+export default api;
+
+/*
 // 获取客户列表
 export const getCustomerList = ({
   merchantId,
   pageNum,
-  pageSize,
+  pageSize
 }) => http('/merchantCustomer/list', {
   merchantId,
   pageNum,
-  pageSize,
+  pageSize
 });
 // 获取客户对应的订单列表
 export const getOrderListByCustomer = ({
   customerId,
   pageNum,
-  pageSize,
+  pageSize
 }) => http('/order/listByCustomer', {
   customerId,
   pageNum,
-  pageSize,
+  pageSize
 });
 // 获取客户信息
 export const getCustomerInfo = merchantCustomerId => http('/merchantCustomer/getInfo', {
-  merchantCustomerId,
+  merchantCustomerId
 });
 // 创建订单
 export const createOrder = ({
@@ -32,7 +45,7 @@ export const createOrder = ({
   linkmanName,
   linkmanPhone,
   merchantId,
-  orderType,
+  orderType
 }) => http('/order/create', {
   customerId,
   linkmanAddress,
@@ -40,5 +53,5 @@ export const createOrder = ({
   linkmanName,
   linkmanPhone,
   merchantId,
-  orderType,
-});
+  orderType
+}); */

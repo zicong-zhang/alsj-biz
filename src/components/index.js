@@ -5,7 +5,7 @@ import {
   DatetimePicker,
   Picker,
   List,
-  PullRefresh,
+  PullRefresh
 } from 'vant';
 
 import VHeader from '~components/v-header';

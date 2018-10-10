@@ -26,23 +26,23 @@ export default {
   data() {
     return {
       dueAmount: 0,
-      receiptAmount: 0,
+      receiptAmount: 0
     };
   },
   computed: {
     ...mapState({
-      storeId: state => state.root.storeId,
-    }),
+      storeId: state => state.root.storeId
+    })
   },
   watch: {
     storeId() {
       this.init();
-    },
+    }
   },
   methods: {
     ...mapActions([
       'getReceiptAmount', // 获取店铺实收款金额(本月)
-      'getDueAmount', // 获取店铺待收款金额(全部)
+      'getDueAmount' // 获取店铺待收款金额(全部)
     ]),
     init() {
       this.getReceiptAmount().then((res) => {
@@ -57,11 +57,11 @@ export default {
       this.$utils.go({
         name: 'proceeds-detail',
         query: {
-          label: label === 0 ? 0 : 1,
-        },
+          label: label === 0 ? 0 : 1
+        }
       });
-    },
-  },
+    }
+  }
 };
 </script>
 <style lang="scss">

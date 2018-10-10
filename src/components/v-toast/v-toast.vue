@@ -17,7 +17,7 @@ export default {
       showText: false,
       showToast: true,
       timeout: 1500,
-      resolve: '',
+      resolve: ''
     };
   },
   mounted() {},
@@ -40,8 +40,8 @@ export default {
     transitionEnd() {
       this.resolve();
       this.showToast = false;
-    },
-  },
+    }
+  }
 };
 </script>
 <style lang="scss" scoped>

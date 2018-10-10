@@ -36,7 +36,7 @@ export default {
       key: 'text',
       isShowToolBar: true,
       onCancel: '',
-      onConfirm: '',
+      onConfirm: ''
     };
   },
   methods: {
@@ -49,8 +49,8 @@ export default {
     },
     confirm(value, idx) {
       if (typeof this.onConfirm === 'function') this.onConfirm(value, idx);
-    },
-  },
+    }
+  }
 };
 </script>
 <style lang="scss">

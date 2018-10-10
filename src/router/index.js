@@ -19,7 +19,7 @@ const routes = [].concat(homeRouter, workerRouter, orderRouter, customerRouter, 
 
 const router = new Router({
   mode: 'history',
-  routes,
+  routes
 });
 
 router.beforeEach((to, from, next) => {

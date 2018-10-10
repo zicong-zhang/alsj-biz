@@ -25,7 +25,8 @@
       </ul>
     </div>
 
-    <Picker :show="isShowPicker" @close="isShowPicker = false"/>
+    <Picker :show="isShowPicker"
+      @close="hideDemandPicker" />
   </div>
 </template>
 
@@ -38,24 +39,27 @@ export default {
   name: 'OrderDetailItemDemand',
   components: {
     H2,
-    Picker,
+    Picker
   },
   data() {
     return {
       title: '定制需求',
       list: [],
-      isShowPicker: false,
+      isShowPicker: false
     };
   },
   computed: {
-    ...mapGetters(['demands']),
+    ...mapGetters(['demands'])
   },
   created() {},
   methods: {
     showDemandPicker() {
       this.isShowPicker = true;
     },
-  },
+    hideDemandPicker() {
+      this.isShowPicker = false;
+    }
+  }
 };
 </script>
 <style lang="scss">
@@ -94,7 +98,7 @@ export default {
     padding-left: 14px;
     position: relative;
     &:before {
-      content: "";
+      content: '';
       display: block;
       width: 4px;
       height: 24px;

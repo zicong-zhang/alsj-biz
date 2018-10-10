@@ -3,7 +3,7 @@
     v-bind="$attrs">
     <slot name="back">
       <span class="back-btn btn"
-        v-finger:tap="back">
+        @click="back">
         <i class="iconfont icon-back"></i>
       </span>
     </slot>
@@ -18,35 +18,27 @@ export default {
   name: 'v-header',
   props: {
     title: {
-      type: String,
+      type: String
     },
-    'back-reload': {
-      type: Number,
+    backReload: {
+      type: Number
     },
     opacity: {
-      type: Number,
+      type: Number
     },
     iconBg: {
-      type: Boolean,
+      type: Boolean
     },
     onBack: {
-      type: Function,
-    },
+      type: Function
+    }
   },
   created() {},
   methods: {
     back() {
-      if (this.onBack) {
-        this.onBack();
-      } else if (document.referrer == window.location.href || !document.referrer) {
-        this.$utils.back({
-          name: 'worker',
-        });
-      } else {
-        this.$utils.back();
-      }
-    },
-  },
+      this.$utils.back();
+    }
+  }
 };
 </script>
 

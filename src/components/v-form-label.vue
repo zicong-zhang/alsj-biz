@@ -11,8 +11,8 @@ export default {
   name: 'v-form-label',
   props: {
     label: String,
-    warn: [String, Boolean],
-  },
+    warn: [String, Boolean]
+  }
 };
 </script>
 <style lang="scss">

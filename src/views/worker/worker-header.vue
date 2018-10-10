@@ -37,18 +37,18 @@ import storeList from './worker-header-item-store-picker';
 export default {
   name: 'HomeHeader',
   components: {
-    storeList,
+    storeList
   },
   data() {
     return {
-      isShowPop: false,
+      isShowPop: false
     };
   },
   computed: {
     ...mapGetters([
       'storeInfo', // 店铺信息
-      'myStoreList', // 我的所有店铺列表
-    ]),
+      'myStoreList' // 我的所有店铺列表
+    ])
   },
   methods: {
     ...mapActions(['getStoreInfo']),
@@ -73,10 +73,10 @@ export default {
     },
     toTest() {
       this.$utils.go({
-        name: 'test-pulldown',
+        name: 'test-pulldown'
       });
-    },
-  },
+    }
+  }
 };
 </script>
 <style lang="scss">

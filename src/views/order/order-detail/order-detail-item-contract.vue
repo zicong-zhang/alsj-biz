@@ -22,15 +22,15 @@ import { mapGetters } from 'vuex';
 export default {
   name: 'OrderDetailItemContract',
   components: {
-    H2,
+    H2
   },
   data() {
     return {
     };
   },
   computed: {
-    ...mapGetters(['contractList', 'orderDetailStatus']),
-  },
+    ...mapGetters(['contractList', 'orderDetailStatus'])
+  }
 };
 </script>
 

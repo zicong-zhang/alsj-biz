@@ -52,16 +52,16 @@ export default {
     // 标记整个列表加载完成
     enabled: {
       type: Boolean,
-      required: true,
+      required: true
     },
     // 刷新事件
     onRefresh: {
-      type: Function,
+      type: Function
     },
     // 加载事件
     onLoad: {
-      type: Function,
-    },
+      type: Function
+    }
   },
   data() {
     return {
@@ -69,7 +69,7 @@ export default {
       listLoading: false, // 列表加载更多中。。。
       disabledLoad: false, // 列表完成加载，两个作用，禁止触发加载更多，标记整个列表加载完成
       isPulldownLoading: false, // 标记完成下拉刷新
-      disabledRefresh: false, // 禁止下拉刷新
+      disabledRefresh: false // 禁止下拉刷新
     };
   },
   watch: {
@@ -84,7 +84,7 @@ export default {
     },
     disabledLoad(newVal) {
       console.log('disabledLoad:_____', newVal);
-    },
+    }
   },
   created() {
     console.log('create...this.disabledLoad:_____', this.disabledLoad, this.enabled);
@@ -179,8 +179,8 @@ export default {
 
       } */
       // }, 1000);
-    },
-  },
+    }
+  }
 };
 </script>
 <style lang="scss">

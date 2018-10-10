@@ -45,31 +45,30 @@ export default {
   name: 'OrderListItem',
   props: {
     item: {
-      type: Object,
-    },
+      type: Object
+    }
   },
   data() {
     return {
-      cancelIcon,
+      cancelIcon
     };
   },
   computed: mapState({
-    status: state => state.orderListModule.status,
+    status: state => state.orderListModule.status
   }),
   created() {},
   methods: {
     finish() {},
     toDetail() {
       this.$emit('log-scrolltop');
-      this.$store.commit('TURN', 'on');
-      this.$router.push({
+      this.$utils.go({
         name: 'order-detail',
         query: {
-          id: this.item.id,
-        },
+          id: this.item.id
+        }
       });
-    },
-  },
+    }
+  }
 };
 </script>
 <style lang="scss">

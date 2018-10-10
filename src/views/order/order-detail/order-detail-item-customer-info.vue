@@ -1,9 +1,9 @@
 <template>
   <div class="order-detail-item-customer-info">
-    <H2 :title="title"
+    <item-title :title="title"
     @click="toEditCustomer">
       <i class="iconfont icon-btn_all_next"></i>
-    </H2>
+    </item-title>
 
     <ul>
       <v-cell label="客户姓名"
@@ -22,7 +22,7 @@
         <h5>客户预算</h5>
         <p class="common-rmb"
           v-if="info.linkmanBudget"
-          key="hasLinkmanBudget">{{ info.linkmanBudget }}</p>
+          key="hasLinkmanBudget">{{ info.linkmanBudget | money(2) }}</p>
         <p v-else
           @click="toEditCustomer"
           key="noLinkmanBudget">添加客户预算</p>
@@ -32,33 +32,32 @@
 </template>
 
 <script>
-import H2 from './order-detail-item-h2';
+import itemTitle from './order-detail-item-h2';
 import { mapState } from 'vuex';
 
 export default {
   name: 'OrderDetailItemCustomerInfo',
   components: {
-    H2,
+    itemTitle
   },
   data() {
     return {
-      title: '客户信息',
+      title: '客户信息'
     };
   },
   computed: mapState({
-    info: state => state.orderDetailModule.orderInfo,
+    info: state => state.orderDetailModule.orderInfo
   }),
   methods: {
     call() {
-      console.log('打电话');
+      window.location.href = `tel:${this.info.linkmanPhone}`;
     },
     toEditCustomer() {
-      this.$store.commit('TURN', 'on');
-      this.$router.push({
-        name: 'order-edit-customer',
-      });
-    },
-  },
+      this.$utils.go({
+        name: 'order-edit-customer'
+      })
+    }
+  }
 };
 </script>
 

@@ -18,25 +18,25 @@ import { mapState, mapGetters } from 'vuex';
 export default {
   name: 'OrderDetailItemKeeper',
   components: {
-    H2,
+    H2
   },
   data() {
     return {
-      list: [],
+      list: []
     };
   },
   computed: {
     ...mapState({
       orderCreater: state =>
-        state.orderDetailModule.orderInfo.createStaffNickname,
+        state.orderDetailModule.orderInfo.createStaffNickname
     }),
-    ...mapGetters(['keepers']),
+    ...mapGetters(['keepers'])
   },
   watch: {
     keepers(val) {
       this.$set(this.$data, 'list', val);
-    },
-  },
+    }
+  }
 };
 </script>
 

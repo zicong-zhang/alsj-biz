@@ -40,12 +40,12 @@ import PermissionItem from '../staff-permission-component';
 export default {
   name: 'staff-detail-item-info',
   components: {
-    PermissionItem,
+    PermissionItem
   },
   data() {
     return {
       info: {},
-      permissionList: [],
+      permissionList: []
     };
   },
   activated() {
@@ -63,8 +63,8 @@ export default {
       this.getStaffPermission(this.$route.query.roleId).then((res) => {
         this.permissionList = res.data.list;
       });
-    },
-  },
+    }
+  }
 };
 </script>
 <style lang="scss">

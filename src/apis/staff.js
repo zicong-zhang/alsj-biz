@@ -4,11 +4,11 @@ import http from '~axios';
 export const getStaffList = ({
   merchantId,
   pageNum,
-  pageSize,
+  pageSize
 }) => http('/merchantStaff/listMerchantStaff', {
   merchantId,
   pageNum,
-  pageSize,
+  pageSize
 });
 
 // 根据店员获取订单列表
@@ -16,26 +16,26 @@ export const getOrderListForStaff = ({
   merchantId,
   pageNum,
   pageSize,
-  staffId,
+  staffId
 }) => http('/order/listByKeeper', {
   merchantId,
   pageNum,
   pageSize,
-  staffId,
+  staffId
 });
 
 // 获取员工详细信息
 export const getStaffDetailInfo = merchantStaffId => http('/merchantStaff/getInfo', {
-  merchantStaffId,
+  merchantStaffId
 });
 
 // 根据角色 id 获取权限列表
 export const getStaffPermission = ({
   roleId,
   pageNum,
-  pageSize,
+  pageSize
 }) => http('/resource/listByRoleId', {
   roleId,
   pageNum,
-  pageSize,
+  pageSize
 });
