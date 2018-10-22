@@ -1,5 +1,6 @@
 import Axios from 'axios';
 import * as utils from './utils';
+import $Toast from '~components/v-toast';
 
 Axios.defaults.headers.post['Content-Type'] = 'application/json';
 Axios.defaults.timeout = 15000;
@@ -33,12 +34,24 @@ Axios.interceptors.request.use(req => {
 // 响应拦截
 Axios.interceptors.response.use(res => {
   const { url, opt } = res.config;
+  const { data, code, msg } = res.data;
 
   if (opt.noRepeat) delete ajaxQueue[url];
 
-  return res.data;
+  // 状态码处理
+  if (code === 200) {
+    return res.data;
+  } else if (code === 100001) {
+    $Toast('登录超时，请重新登录')
+      .then(() => {
+        // utils.clearUserInfo();
+      })
+  } else if (!opt.catch) {
+    $Toast(msg);
+    return Promise.reject();
+  }
 }, error => {
-  console.log('error2:_____', error);
+  console.log('error2:_____添加toast', error);
   return Promise.reject(error);
 });
 

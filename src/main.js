@@ -24,8 +24,8 @@ import FastClick from 'fastclick';
 
 // 工具类
 import router from './router';
-import './directives/directives';
-import './filters/filters';
+import './directives';
+import './filters';
 import './tools/tools';
 import store from './vuex';
 
