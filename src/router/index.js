@@ -11,11 +11,21 @@ import testRouter from './test-router';
 import staffRouter from './staff-router';
 
 const DEV_ENV = process.env.NODE_ENV === 'development';
+
 if (DEV_ENV) {
   Vue.use(Router);
 }
 
-const routes = [].concat(homeRouter, workerRouter, orderRouter, customerRouter, noFoundRouter, productRouter, staffRouter, testRouter);
+const routes = [].concat(
+  homeRouter,
+  workerRouter,
+  orderRouter,
+  customerRouter,
+  noFoundRouter,
+  productRouter,
+  staffRouter,
+  testRouter
+);
 
 const router = new Router({
   mode: 'history',

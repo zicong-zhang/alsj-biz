@@ -2,8 +2,7 @@
   <div class="proceeds-detail-total">
     <!-- 总数 -->
     <div class="total-num">
-      <h2>28.6<span>万</span>
-      </h2>
+      <h2><span>28.6</span><span>万</span></h2>
       <p>2018-05</p>
       <div class="switch-btn">
         <i class="iconfont icon-back"></i>
@@ -35,27 +34,31 @@ export default {
 </script>
 <style lang="scss">
 .proceeds-detail-total {
-  background: #e5f2ff;
   display: flex;
   flex-flow: column;
-  align-items: center;
+  height: 287px;
+  box-sizing: border-box;
+  background: #e5f2ff;
   padding: 0 36px;
-  padding-bottom: 36px;
   .total-num {
     width: 100%;
     margin-bottom: 62px;
     position: relative;
     h2 {
-      font-size: 80px;
-      font-weight: bold;
+      line-height: .8;
       text-align: center;
       padding-top: 62px;
-      margin-bottom: 16px;
+      margin-bottom: 12px;
     }
     span {
-      font-size: 32px;
-      color: #999;
-      margin-left: 6px;
+      &:first-of-type {
+        font-size: 80px;
+      }
+      &:last-of-type {
+        font-size: 32px;
+        color: #999;
+        margin-left: 6px;
+      }
     }
     p {
       text-align: center;
@@ -67,11 +70,15 @@ export default {
     position: absolute;
     left: 0px;
     top: 77px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     width: 64px;
     height: 64px;
     line-height: 64px;
     border-radius: 50%;
     background: #fff;
+    color: #999;
     text-align: center;
     &:last-of-type {
       left: auto;
@@ -87,14 +94,16 @@ export default {
     p {
       width: 50%;
       line-height: 32px;
+      box-sizing: border-box;
       background: $main;
       color: #fff;
-      padding-left: 16px;
+      font-size: 20px;
+      padding: 0 16px;
+      padding-top: 2px;
       &:last-of-type {
         flex: 1;
         text-align: right;
         background: $red;
-        padding-right: 16px;
       }
     }
   }

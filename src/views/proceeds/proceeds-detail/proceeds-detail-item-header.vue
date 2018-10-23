@@ -4,11 +4,11 @@
       <i class="iconfont icon-back"></i>
     </span>
     <ul class="tab">
-      <li :class="{active: activeTab == 0}"
+      <li :class="{active: showModule == 0}"
         @click="changeTab(0)">
         <h2>实收</h2>
       </li>
-      <li :class="{active: activeTab == 1}"
+      <li :class="{active: showModule == 1}"
         @click="changeTab(1)">
         <h2>待收</h2>
       </li>
@@ -17,33 +17,31 @@
 </template>
 
 <script>
+import { mapGetters, mapMutations } from 'vuex';
+
 export default {
   name: 'proceeds-detail-item-header',
-  data() {
-    return {
-      activeTab: 0
-    };
+  computed: {
+    ...mapGetters(['showModule'])
   },
-  watch: {
-    $route(to, from) {
-      if (to.name === this.$route.name && from.name === 'worker') {
-        this.init();
-      }
-    }
-  },
-  created() {
+  activated() {
     this.init();
   },
   methods: {
+    ...mapMutations([
+      // 收款详情
+      'UPDATE_PROCEEDS_SHOW_MODULE'
+    ]),
     init() {
-      this.activeTab = this.$route.query.label;
+      this.UPDATE_PROCEEDS_SHOW_MODULE(this.$route.query.label);
     },
     back() {
       this.$utils.back();
     },
     changeTab(idx) {
       if (idx === this.activeTab) return;
-      this.activeTab = idx;
+
+      this.UPDATE_PROCEEDS_SHOW_MODULE(idx);
     }
   }
 };

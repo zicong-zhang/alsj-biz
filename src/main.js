@@ -1,13 +1,7 @@
 /** TODO
- * 将 better-scroll 改为 vant 的下拉刷新+自己写的上拉加载更多
  * 清除缓存时要把app.vue的缓存组件数组清空？
  * 判断当前运行环境，动态引入mui，减少不必要的加载时间
- * 引入模块化mui
- * 加入plus
- * 修改通用返回事件监听mui
- * 抽取 mutations type
  * 图片上传改用七牛
- * 组件库改用 vant，后期有时间再修改以前使用cube组件的地方
  * webpack 配置 dll 打包
  * 配置用户权限表
  */

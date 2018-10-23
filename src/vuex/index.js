@@ -3,6 +3,7 @@ import Vuex from 'vuex';
 
 import workerModule from './modules/worker-store';
 import orderListModule from './modules/order-list-store';
+import proceedsDetailStore from './modules/proceeds-detail-store';
 import orderDetailModule from './modules/order-detail-store';
 import customerModule from './modules/customer-store';
 import productCenterModule from './modules/product-center-store';
@@ -18,6 +19,7 @@ const store = new Vuex.Store({
   modules: {
     root,
     workerModule,
+    proceedsDetailStore,
     orderListModule,
     orderDetailModule,
     customerModule,

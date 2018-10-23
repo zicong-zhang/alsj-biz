@@ -2,7 +2,7 @@ const orderRouter = [{
   path: '/order-detail',
   name: 'order-detail',
   component: () =>
-    import(/* webpackChunkName: "order-detail" */ '~views/order/order-detail/order-detail'),
+    import(/* webpackChunkName: "order-detail" */ '~views/order/order-detail'),
   meta: {
     title: '订单详情 - 阿拉私家'
   }

@@ -8,11 +8,9 @@
 .vertical-bar {
   display: block;
   width: e(1px);
-  height: e(25px);
+  height: e(28px);
   background: #a1a1a1;
-  -webkit-transform: scale(.5, 1);
   transform: scale(.5, 1);
-  -webkit-transform-origin: center bottom;
   transform-origin: center bottom;
 }
 
@@ -24,6 +22,11 @@ display: block;
   background: #eaeaea;
   transform: scale(1, .5);
   transform-origin: center bottom;
+}
+
+.flex {
+  display: flex;
+  flex-flow: column;
 }
 
 .common-rmb {

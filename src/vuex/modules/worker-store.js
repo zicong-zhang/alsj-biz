@@ -188,15 +188,15 @@ export default {
   },
   mutations: {
     // 设置店铺信息
-    SET_STORE_INFO(state, info) {
+    [types.SET_STORE_INFO](state, info) {
       state.info = info;
     },
     // 设置店铺列表
-    SET_MY_STORE_LIST(state, storeList) {
+    [types.SET_MY_STORE_LIST](state, storeList) {
       state.myStores = storeList;
     },
     // 设置销售目标
-    SET_SALE_TARGET(state, params) {
+    [types.SET_SALE_TARGET](state, params) {
       Object.assign(state, params);
     }
   }

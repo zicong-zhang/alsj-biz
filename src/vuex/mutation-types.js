@@ -28,3 +28,6 @@ export const UPDATE_ORDER_STATUS = 'UPDATE_ORDER_STATUS'; // 更改订单状态
 // 客户管理
 export const UPDATE_CUSTOMER_LIST = 'UPDATE_CUSTOMER_LIST'; // 更新客户列表 （添加）
 export const INIT_CUSTOMER_LIST_PAGE_NUM = 'INIT_CUSTOMER_LIST_PAGE_NUM'; // 初始化分页的当前页数
+
+// 收款详情
+export const UPDATE_PROCEEDS_SHOW_MODULE = 'UPDATE_PROCEEDS_SHOW_MODULE'; // 切换展示 实收 / 待收
