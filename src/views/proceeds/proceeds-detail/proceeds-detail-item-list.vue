@@ -30,6 +30,7 @@ export default {
   props: {
     title: String,
     type: Number,
+    page: Number,
     load: {
       type: Function,
       required: true
@@ -46,13 +47,14 @@ export default {
   },
   methods: {
     init() {
-      this.list = [];
       this.nextPage = true;
       this.$emit('update-page-num', 'init');
       return this.getData();
     },
     getData() {
       return this.load().then(res => {
+        if (this.page == 1) this.list = [];
+
         const { list, next } = res.data;
         this.list = this.list.concat(list);
         this.nextPage = next;

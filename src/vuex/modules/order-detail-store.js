@@ -1,37 +1,8 @@
 import http from '~axios';
 import api from '~apis/order';
 import * as types from '../mutation-types';
+import utils from '~tools/utils';
 
-// 订单流程对应名称
-const progressList = {
-  1: {
-    name: '创建订单'
-  },
-  2: {
-    name: '上门量尺'
-  },
-  3: {
-    name: '设计方案'
-  },
-  4: {
-    name: '签订合同'
-  },
-  5: {
-    name: '复尺'
-  },
-  6: {
-    name: '下单'
-  },
-  7: {
-    name: '生产'
-  },
-  8: {
-    name: '送货安装'
-  },
-  9: {
-    name: '订单已完成'
-  }
-};
 
 export default {
   state: {
@@ -212,8 +183,13 @@ export default {
     },
     // 设置订单进度
     [types.SET_ORDER_DETAIL_PROGRESS](state, arr) {
-      const newArr = JSON.parse(JSON.stringify(progressList));
-      arr.forEach(item => Object.assign(newArr[item.orderStatus], item, {
+      const newArr = { ...JSON.parse(JSON.stringify(utils.getOrderProgress())) };
+      Object.keys(newArr).forEach(key => {
+        newArr[key] = {
+          name: newArr[key]
+        }
+      });
+      arr.forEach(item => Object.assign(newArr[item.orderStatus - 1], item, {
         finish: true
       }));
       state.orderProgress = newArr;

@@ -93,15 +93,17 @@ export default {
     handleRefresh() {
       this.finished = true;
       const now = Date.now();
-      this.onRefresh()
-        .then(() => {
-          console.log('触发刷新');
-          this.onFinishRefresh(now);
-        })
-        .catch(() => {
-          console.log('触发刷新');
-          this.onFinishRefresh(now);
-        });
+      this.$nextTick(() => { // 用于解决 子组件更新父组件传递的 props 时，数据未及时更新，如 pageNum
+        this.onRefresh()
+          .then(() => {
+            console.log('开始刷新');
+            this.onFinishRefresh(now);
+          })
+          .catch(() => {
+            console.log('刷新失败');
+            this.onFinishRefresh(now);
+          });
+      })
     },
     // 完成下拉刷新
     onFinishRefresh(old) {

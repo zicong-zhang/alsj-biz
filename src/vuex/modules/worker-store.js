@@ -46,13 +46,12 @@ export default {
     // 获取店铺实收款金额(本月)
     getReceiptAmount({
       rootState
-    }) {
-      const current = new Date();
-
+    }, date) {
+      const time = new Date(date);
       return http(api.getReceiptAmount, {
         merchantId: rootState.root.storeId,
-        month: current.getMonth() + 1,
-        year: current.getFullYear(),
+        month: time.getMonth() + 1,
+        year: time.getFullYear(),
         pageNum: 1,
         pageSize: 0
       })

@@ -1,8 +1,16 @@
 <template>
   <div class="proceeds-detail-item-actual-income">
-    <Total/>
+    <Total
+      :type="0"
+      :month="month"
+      :year="year"
+      :total-amount="totalAmount"
+      :online-amount="onlineAmount"
+      :offline-amount="offlineAmount"
+    />
     <List
       :type="0"
+      :page="pageNum"
       :list="dataList"
       :load="getDataList"
       title="实收明细"
@@ -28,18 +36,30 @@ export default {
       year: 2018,
       pageNum: 1,
       pageSize: 10,
-      dataList: []
+      dataList: [],
+
+      totalAmount: 0,
+      onlineAmount: 0,
+      offlineAmount: 0
     }
   },
   created() {
     /* const current = this.$utils.getDate('current');
     Object.assign(this.$data, current); */
+    this.getActualIncome();
   },
   methods: {
     ...mapActions([
       // 获取实收列表
-      'getActualIncomeList'
+      'getActualIncomeList',
+      // 获取店铺实收款金额
+      'getReceiptAmount'
     ]),
+    getActualIncome() {
+      const date = `${this.year}/${this.month}`;
+      this.getReceiptAmount(date)
+        .then(res => Object.assign(this.$data, res.data))
+    },
     getDataList() {
       return this.getActualIncomeList({
         month: this.month,

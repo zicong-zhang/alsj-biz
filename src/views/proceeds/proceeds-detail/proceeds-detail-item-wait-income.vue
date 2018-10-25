@@ -1,8 +1,9 @@
 <template>
   <div class="proceeds-detail-item-wait-income">
-    <Total />
+    <Total :type="1" />
     <List
       :type="1"
+      :page="pageNum"
       :list="dataList"
       :load="getDataList"
       title="待收明细"

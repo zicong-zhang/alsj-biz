@@ -50,6 +50,13 @@ export default {
       return dateObj;
     }
   },
+  getOrderProgress(idx) {
+    const progressList = ['创建订单', '上门量尺', '设计方案', '签订合同', '复尺', '下单', '生产', '送货安装', '订单已完成'];
+
+    if (idx) return progressList[idx];
+
+    return progressList;
+  },
   /**
    * 设置session缓存
    */

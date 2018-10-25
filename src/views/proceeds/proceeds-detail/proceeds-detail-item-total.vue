@@ -2,12 +2,18 @@
   <div class="proceeds-detail-total">
     <!-- 总数 -->
     <div class="total-num">
-      <h2><span>28.6</span><span>万</span></h2>
-      <p>2018-05</p>
-      <div class="switch-btn">
+      <h2><span>{{ totalAmount | money }}</span><span>元</span></h2>
+      <p>{{ year }}-{{ month.toString().padStart(2, '0') }}</p>
+      <div
+        v-if="type == 0"
+        class="switch-btn"
+      >
         <i class="iconfont icon-back"></i>
       </div>
-      <div class="switch-btn">
+      <div
+        v-if="type == 0"
+        class="switch-btn"
+      >
         <i class="iconfont icon-btn_all_next"></i>
       </div>
     </div>
@@ -26,6 +32,20 @@
 <script>
 export default {
   name: 'proceeds-detail-total',
+  props: {
+    type: Number,
+    year: {
+      type: Number,
+      default: () => new Date().getFullYear()
+    },
+    month: {
+      type: Number,
+      default: () => new Date().getMonth() + 1
+    },
+    totalAmount: Number,
+    onlineAmount: Number,
+    offlineAmount: Number
+  },
   data() {
     return {};
   },
@@ -56,6 +76,7 @@ export default {
       }
       &:last-of-type {
         font-size: 32px;
+        font-weight: normal;
         color: #999;
         margin-left: 6px;
       }

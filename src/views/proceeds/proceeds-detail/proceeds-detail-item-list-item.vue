@@ -1,13 +1,29 @@
 <template>
   <li class="proceeds-detail-item-list-item">
     <i class="horizon-bar"></i>
-    <div>
+    <!-- 实收 -->
+    <div v-if="type === 0">
       <div class="description">
-        <h3>收到({{ item.customerName }}) {{ item.remark }}</h3>
+        <h3>收到({{ item.customerName }})&nbsp;{{ item.remark }}</h3>
         <span>{{ (item.payDate || '').slice(5, 10) }}</span>
       </div>
       <div class="amount">
-        <h4 class="retainage">+{{ item.amount | money }}</h4>
+        <h4 :class="{
+          retainage: item.payType == 1
+        }">+{{ item.amount | money }}元</h4>
+        <span>{{ item.staffName }}跟进</span>
+      </div>
+    </div>
+    <!-- 待收 -->
+    <div v-else>
+      <div class="description">
+        <h3>{{ item.customerName }}</h3>
+        <span>{{ orderStatusList[item.orderStatus - 1] }}</span>
+      </div>
+      <div class="amount">
+        <h4 :class="{
+          retainage: item.payType == 1
+        }">{{ item.amount | money }}元</h4>
         <span>{{ item.staffName }}跟进</span>
       </div>
     </div>
@@ -18,7 +34,16 @@
 export default {
   name: 'proceeds-detail-item-list-item',
   props: {
-    item: Object
+    item: Object,
+    type: Number
+  },
+  data() {
+    return {
+      orderStatusList: []
+    }
+  },
+  created() {
+    this.orderStatusList = this.$utils.getOrderProgress();
   }
 };
 </script>
@@ -32,6 +57,7 @@ export default {
     }
     h3 {
       font-size: 24px;
+      font-weight: normal;
       color: #333;
       margin-bottom: 18px;
     }
