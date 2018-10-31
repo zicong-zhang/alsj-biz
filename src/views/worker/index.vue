@@ -42,7 +42,7 @@ export default {
   created() {
     this.getSelfStoreList().then((list) => {
       const first = list[0];
-      this.$utils.setSession('STORE_TOKEN', first.token);
+      this.$utils.setSession('STORE_TOKEN', first ? first.token : '');
       this.SET_STORE_ID(first.merchantExt.id);
       this.getStoreInfo();
     });

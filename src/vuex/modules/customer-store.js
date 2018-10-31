@@ -28,9 +28,9 @@ export default {
         });
     },
     // 获取客户信息
-    getCustomerInfo(ctx, customerId) {
+    getCustomerInfo(ctx, merchantCustomerId) {
       return http(api.getCustomerInfo, {
-        customerId
+        merchantCustomerId
       })
     },
     // 获取客户对应的订单列表

@@ -14,7 +14,7 @@
         <!-- 标题 -->
         <div class="demand-picker-title">
           <div>
-            <i class="iconfont icon-btn_all_close1"
+            <i class="icon i-btn_all_close1"
               @click="closePicker"></i>
             <h4>选择客户的定制需求</h4>
             <span class="demand-picker-save-btn"

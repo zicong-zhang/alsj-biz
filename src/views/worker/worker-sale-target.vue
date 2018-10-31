@@ -4,7 +4,7 @@
       @click="toPerformanceTarget">
       <h3>目标进度</h3>
       <p>设置
-        <i class="iconfont icon-rightBtn"></i>
+        <i class="icon i-next"></i>
       </p>
     </div>
     <p class="tip">
@@ -14,7 +14,7 @@
     <div class="plan">
       <p @click="toPerformanceTotal">
         <span>{{ currentAmount | money(2) }}元</span>/{{ targetAmount | money(2) }}元
-        <i class="iconfont icon-btn_all_next"></i>
+        <i class="icon i-next"></i>
       </p>
       <h4>{{ rate }}</h4>
     </div>

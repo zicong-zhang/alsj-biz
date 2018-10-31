@@ -8,11 +8,10 @@
         <li v-for="item in customerList"
           :key="item.id"
           @click="toCustomerDetail(item.id)">
-          <img v-lazy="{
-              src: item.avatar,
-              loading: imgPlaceholder,
-              error: imgPlaceholder
-            }">
+          <v-img
+            :src="item.avatar"
+            loading-type="user"
+          />
           <div class="user-info">
             <h4>{{ item.name }}</h4>
             <span v-if="item.type === 1"
@@ -86,6 +85,14 @@ export default {
   ul {
     padding-top: 16px;
   }
+  .v-img {
+    flex: none;
+    width: 88px;
+    height: 88px;
+    border-radius: 8px;
+    margin: 0;
+    margin-right: 16px;
+  }
   li {
     display: flex;
     height: 144px;
@@ -93,14 +100,6 @@ export default {
     background: #fff;
     box-sizing: border-box;
     padding: 28px 36px;
-    img {
-      flex: none;
-      width: 88px;
-      height: 88px;
-      border-radius: 8px;
-      margin: 0;
-      margin-right: 16px;
-    }
     div {
       flex: 1;
       overflow: hidden;

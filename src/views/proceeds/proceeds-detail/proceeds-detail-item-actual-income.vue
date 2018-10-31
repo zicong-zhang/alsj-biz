@@ -7,6 +7,7 @@
       :total-amount="totalAmount"
       :online-amount="onlineAmount"
       :offline-amount="offlineAmount"
+      @change-month="changeMonth"
     />
     <List
       :type="0"
@@ -14,6 +15,7 @@
       :list="dataList"
       :load="getDataList"
       title="实收明细"
+      ref="listComponent"
       @update-page-num="updatePageNum"
     />
   </div>
@@ -44,8 +46,8 @@ export default {
     }
   },
   created() {
-    /* const current = this.$utils.getDate('current');
-    Object.assign(this.$data, current); */
+    const current = this.$utils.getDate('current');
+    Object.assign(this.$data, current);
     this.getActualIncome();
   },
   methods: {
@@ -70,6 +72,13 @@ export default {
     },
     updatePageNum(init) {
       init ? this.pageNum = 1 : this.pageNum++;
+    },
+    changeMonth(year, month) {
+      console.log('222:_____', 222);
+      this.year = year;
+      this.month = month;
+      this.getActualIncome();
+      this.$nextTick(this.$refs.listComponent.init);
     }
   }
 }

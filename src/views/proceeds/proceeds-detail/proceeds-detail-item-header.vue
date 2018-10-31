@@ -1,7 +1,7 @@
 <template>
   <div class="proceeds-detail-header">
     <span @click="back">
-      <i class="iconfont icon-back"></i>
+      <i class="icon i-back"></i>
     </span>
     <ul class="tab">
       <li :class="{active: showModule == 0}"

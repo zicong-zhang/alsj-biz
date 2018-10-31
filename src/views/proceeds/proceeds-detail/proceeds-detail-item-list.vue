@@ -47,6 +47,7 @@ export default {
   },
   methods: {
     init() {
+      console.log('3333:_____', 3333);
       this.nextPage = true;
       this.$emit('update-page-num', 'init');
       return this.getData();
@@ -70,8 +71,8 @@ export default {
           this.list = res.data.list;
         }); */
     },
-    updatePageNum() {
-      this.$emit('update-page-num');
+    updatePageNum(isInit) {
+      this.$emit('update-page-num', isInit);
     },
     createKey(uuid, idx) {
       const config = ['proceeds-detail-actual-income-', 'proceeds-detail-wait-income-'];

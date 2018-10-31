@@ -1,30 +1,50 @@
 <template>
   <div class="proceeds-detail-total">
     <!-- 总数 -->
-    <div class="total-num">
+    <!-- 实收 -->
+    <div
+      v-if="type == 0"
+      class="total-num"
+    >
       <h2><span>{{ totalAmount | money }}</span><span>元</span></h2>
       <p>{{ year }}-{{ month.toString().padStart(2, '0') }}</p>
       <div
-        v-if="type == 0"
         class="switch-btn"
+        @click="changeActualIncomeMonth('prev')"
       >
-        <i class="iconfont icon-back"></i>
+        <i class="icon i-back"></i>
       </div>
       <div
-        v-if="type == 0"
         class="switch-btn"
+        @click="changeActualIncomeMonth('next')"
       >
-        <i class="iconfont icon-btn_all_next"></i>
+        <i class="icon i-next"></i>
       </div>
+    </div>
+
+    <!-- 待收 -->
+    <div
+      v-else
+      class="total-num"
+    >
+      <h2><span>{{ totalAmount | money }}</span><span>元</span></h2>
+      <p>总待收金额</p>
     </div>
 
     <!-- 进度 -->
     <div class="rate">
-      <p>
-        <span>线上订单16.5万</span>
+      <span>线上订单&nbsp;{{ onlineAmount | money }}元</span>
+      <span>线下订单&nbsp;{{ offlineAmount | money }}元</span>
+
+      <!-- 线上 -->
+      <p :style="{
+        width: `${(onlineAmount / totalAmount) * 100}%`
+      }">
       </p>
-      <p>
-        <span>线下订单16.5万</span>
+      <!-- 线下 -->
+      <p :style="{
+        width: `${(offlineAmount / totalAmount) * 100}%`
+      }">
       </p>
     </div>
   </div>
@@ -49,7 +69,32 @@ export default {
   data() {
     return {};
   },
-  methods: {}
+  methods: {
+    changeActualIncomeMonth(handle) {
+      let { year, month } = this.$props;
+      // 下个月
+      if (handle === 'next') {
+        if (month == 12) {
+          year++;
+          month = 1;
+        } else {
+          month++;
+        }
+      }
+
+      // 上个月
+      if (handle === 'prev') {
+        if (month == 1) {
+          year--;
+          month = 12;
+        } else {
+          month--;
+        }
+      }
+
+      this.$emit('change-month', year, month);
+    }
+  }
 };
 </script>
 <style lang="scss">
@@ -62,13 +107,14 @@ export default {
   padding: 0 36px;
   .total-num {
     width: 100%;
+    height: 162px;
     margin-bottom: 62px;
     position: relative;
     h2 {
       line-height: .8;
       text-align: center;
       padding-top: 62px;
-      margin-bottom: 12px;
+      margin-bottom: 24px;
     }
     span {
       &:first-of-type {
@@ -107,19 +153,30 @@ export default {
     }
   }
   .rate {
+    position: relative;
     display: flex;
     width: 100%;
     height: 32px;
     border-radius: 32px;
     overflow: hidden;
-    p {
-      width: 50%;
+    span {
+      position: absolute;
+      top: 50%;
+      left: 0;
+      transform: translateY(-50%);
       line-height: 32px;
-      box-sizing: border-box;
-      background: $main;
       color: #fff;
       font-size: 20px;
       padding: 0 16px;
+      &:last-of-type {
+        left: auto;
+        right: 0;
+      }
+    }
+    p {
+      width: 50%;
+      box-sizing: border-box;
+      background: $main;
       padding-top: 2px;
       &:last-of-type {
         flex: 1;

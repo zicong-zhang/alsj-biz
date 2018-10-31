@@ -1,6 +1,11 @@
 <template>
   <div class="proceeds-detail-item-wait-income">
-    <Total :type="1" />
+    <Total
+      :type="1"
+      :total-amount="totalAmount"
+      :online-amount="onlineAmount"
+      :offline-amount="offlineAmount"
+    />
     <List
       :type="1"
       :page="pageNum"
@@ -27,14 +32,27 @@ export default {
     return {
       dataList: [],
       pageNum: 1,
-      pageSize: 10
+      pageSize: 15,
+
+      totalAmount: 0,
+      onlineAmount: 0,
+      offlineAmount: 0
     };
+  },
+  created() {
+    this.getWaitIncome();
   },
   methods: {
     ...mapActions([
       // 获取待收列表
-      'getWaitIncomeList'
+      'getWaitIncomeList',
+      // 获取店铺待收款金额(全部)
+      'getDueAmount'
     ]),
+    getWaitIncome() {
+      this.getDueAmount()
+        .then(res => Object.assign(this.$data, res.data))
+    },
     getDataList() {
       return this.getWaitIncomeList({
         pageNum: this.pageNum,

@@ -185,4 +185,7 @@ export default {
   font-size: 24px;
   color: #999;
 }
+.van-pull-refresh {
+  height: 100%;
+}
 </style>

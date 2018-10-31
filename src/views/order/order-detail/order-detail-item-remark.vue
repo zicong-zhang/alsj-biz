@@ -25,7 +25,7 @@
       </li>
     </ul>
     <p class="add-remark">
-      <i class="iconfont icon-jiaru"></i>
+      <i class="icon i-jiaru"></i>
       <span>添加备注</span>
     </p>
   </div>

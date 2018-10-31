@@ -5,7 +5,7 @@
       v-if="showType"
       @click="toEditHouseType">
       <h3>添加户型信息,方便后续工作跟进</h3>
-      <i class="iconfont icon-btn_all_next"></i>
+      <i class="icon i-next"></i>
     </div>
 
     <div class="has-type"
@@ -13,7 +13,7 @@
       v-else>
       <H2 :title="title"
         @click="toEditHouseType">
-        <i class="iconfont icon-btn_all_next"></i>
+        <i class="icon i-next"></i>
       </H2>
       <ul>
         <v-cell label="所在小区"

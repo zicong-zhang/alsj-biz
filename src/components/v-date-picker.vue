@@ -7,7 +7,7 @@
     <div class="input-container">
       <p :class="{placeholder: placeholder}"
         @click="showPicker">{{ $attrs['default-value'] || $attrs.placeholder }}</p>
-      <i class="iconfont icon-bottomnew"></i>
+      <i class="icon i-bottom"></i>
     </div>
   </div>
 </template>

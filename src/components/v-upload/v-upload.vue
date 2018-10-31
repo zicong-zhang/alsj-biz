@@ -8,7 +8,7 @@
         <li v-for="(item, idx) in fileList"
           :key="idx"
           :style="{width: $rem(width)}">
-          <i class="iconfont icon-btn_all_close1 upload-del-btn"
+          <i class="icon i-btn_all_close1 upload-del-btn"
             @click.prevent="showDelPicDialog(idx)"></i>
 
           <div class="img-container"
@@ -26,7 +26,7 @@
         v-if="showBtn"
         :style="{width: $rem(width), paddingLeft: fileList.length ? 0 : $rem(36)}">
         <p @click="showPhoto = true">
-          <i class="iconfont icon-btn_article_share"></i>
+          <i class="icon i-btn_article_share"></i>
           <span>上传</span>
         </p>
 

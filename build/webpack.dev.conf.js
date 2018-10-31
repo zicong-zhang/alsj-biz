@@ -5,10 +5,13 @@ const config = require('../config')
 const merge = require('webpack-merge')
 const path = require('path')
 const baseWebpackConfig = require('./webpack.base.conf')
+const vueLoaderConfig = require('./vue-loader.conf')
+
 const CopyWebpackPlugin = require('copy-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin')
 const portfinder = require('portfinder')
+const HappyPack = require('happypack');
 
 const HOST = process.env.HOST
 const PORT = process.env.PORT && Number(process.env.PORT)
@@ -19,7 +22,6 @@ const devWebpackConfig = merge(baseWebpackConfig, {
   },
   externals: { // value 为 umd 模块名
     // echarts: "echarts",
-    // vue: 'Vue'
   },
   // cheap-module-eval-source-map is faster for development
   devtool: config.dev.devtool,
@@ -49,8 +51,33 @@ const devWebpackConfig = merge(baseWebpackConfig, {
     }
   },
   plugins: [
+    /* new HappyPack({
+      id: 'js',
+      loaders: ['babel-loader?cacheDirectory']
+    }),
+    new HappyPack({
+      id: 'vue',
+      loaders: [{
+        loader: 'vue-loader',
+        options: vueLoaderConfig
+      }]
+    }),
+    new HappyPack({
+      id: 'img',
+      loaders: [{
+        loader: 'url-loader',
+        options: {
+          limit: 10000,
+          name: utils.assetsPath('img/[name].[hash:7].[ext]')
+        }
+      }]
+    }), */
     new webpack.DefinePlugin({
       'process.env': require('../config/dev.env')
+    }),
+    new webpack.DllReferencePlugin({
+      context: __dirname,
+      manifest: require('./vendor-manifest.json')
     }),
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NamedModulesPlugin(), // HMR shows correct file names in console on update.
@@ -59,6 +86,7 @@ const devWebpackConfig = merge(baseWebpackConfig, {
     new HtmlWebpackPlugin({
       filename: 'index.html',
       template: 'index-dev.html',
+      // 将打包好的js文件注入在该html的body底部，保证了script的加载顺序
       inject: true
     }),
     // copy custom static assets

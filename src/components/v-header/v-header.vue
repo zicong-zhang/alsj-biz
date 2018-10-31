@@ -1,10 +1,15 @@
 <template>
-  <header :class="{'header-component': true, fixed: $attrs.fixed }"
-    v-bind="$attrs">
+  <header
+    v-bind="$attrs"
+    :class="{
+      'header-component': true,
+      fixed: $attrs.fixed
+    }"
+  >
     <slot name="back">
       <span class="back-btn btn"
         @click="back">
-        <i class="iconfont icon-back"></i>
+        <i class="icon i-back"></i>
       </span>
     </slot>
     <slot name="right-two"></slot>
@@ -17,25 +22,17 @@
 export default {
   name: 'v-header',
   props: {
-    title: {
-      type: String
-    },
-    backReload: {
-      type: Number
-    },
-    opacity: {
-      type: Number
-    },
-    iconBg: {
-      type: Boolean
-    },
-    onBack: {
-      type: Function
-    }
+    title: String,
+    backReload: Number,
+    opacity: Number,
+    iconBg: Boolean,
+    onBack: Function
   },
   created() {},
   methods: {
     back() {
+      if (this.onBack) return this.onBack();
+
       this.$utils.back();
     }
   }

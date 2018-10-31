@@ -12,9 +12,7 @@ import staffRouter from './staff-router';
 
 const DEV_ENV = process.env.NODE_ENV === 'development';
 
-if (DEV_ENV) {
-  Vue.use(Router);
-}
+Vue.use(Router);
 
 const routes = [].concat(
   homeRouter,
@@ -28,7 +26,7 @@ const routes = [].concat(
 );
 
 const router = new Router({
-  mode: 'history',
+  // mode: 'history',
   routes
 });
 

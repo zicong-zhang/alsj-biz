@@ -7,7 +7,7 @@
       key="no-demand"
       @click="showDemandPicker">
       <h3>选择客户的定制需求</h3>
-      <i class="iconfont icon-btn_all_next"></i>
+      <i class="icon i-next"></i>
     </div>
 
     <!-- 有需求数据 -->
@@ -16,7 +16,7 @@
       v-else>
       <H2 :title="title"
         @click="showDemandPicker">
-        <i class="iconfont icon-btn_all_next"></i>
+        <i class="icon i-next"></i>
       </H2>
       <ul>
         <li class="demand-function-list"

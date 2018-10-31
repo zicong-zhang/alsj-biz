@@ -11,11 +11,11 @@
           <p>{{ baseInfo.positionTypeName }}</p>
         </div>
         <p class="staff-intro-handle">
-          <i class="iconfont icon-comment"></i>
+          <i class="icon i-comment"></i>
         </p>
         <p class="staff-intro-handle"
           @click="call">
-          <i class="iconfont icon-btn_msg_call"></i>
+          <i class="icon i-btn_msg_call"></i>
         </p>
       </div>
       <i class="gap"></i>

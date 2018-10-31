@@ -30,9 +30,9 @@ function getPF() {
   const isAndroid = /Android/i.test(u); // g
   const isIOS = /(iPhone|mac|Safari)/i.test(u); // ios终端
   if (isAndroid) {
-    pf = 'Android';
+    pf = 'android';
   } else if (isIOS) {
-    pf = 'IOS';
+    pf = 'ios';
   } else {
     pf = u;
   }
@@ -41,12 +41,12 @@ function getPF() {
 }
 
 // 获取设备信息
-function getDeviceInfo() {
+function getDeviceInfo(ua) {
   let device = null;
   const pf = getPF();
 
-  if (pf === 'Android') {
-    device = navigator.userAgent.match(/(Android.*)\sbuild/i)[1].replace(/(\;\s)/g, '|');
+  if (pf === 'android') {
+    device = ua.match(/(Android.*)\sbuild/i)[1].replace(/(\;\s)/g, '|');
   }
 
   if (pf === 'ios') {
@@ -69,64 +69,46 @@ function getDeviceInfo() {
 }
 
 // 获取浏览器信息
-function getBrowserInfo() {
-  const ua = window.navigator.userAgent;
-  let browser = null;
-
+function getBrowserInfo(ua) {
   // 判断浏览器
   switch (true) {
     case /dingtalk/i.test(ua): // 必须置于UC前判断
-      browser = 'dingding';
-      break;
+      return 'dingding';
     case /UC/i.test(ua):
-      browser = 'ucBrowser';
-      break;
+      return 'ucBrowser';
     case /baidu/i.test(ua):
-      browser = 'baiduBrowser';
-      break;
+      return 'baiduBrowser';
     case /baiduboxapp/i.test(ua):
-      browser = 'baiduApp';
-      break;
+      return 'baiduApp';
     case /micromessenger/i.test(ua): // 必须置于qq浏览器前判断
-      browser = 'wx';
-      break;
+      return 'wx';
     case /MQQBrowser/i.test(ua):
-      browser = 'QQBrowser';
-      break;
+      return 'QQBrowser';
     case /miuiBrowser/i.test(ua):
-      browser = 'xiaomiBrowser';
-      break;
+      return 'xiaomiBrowser';
     case /vivoBrowser/i.test(ua):
-      browser = 'vivoBrowser';
-      break;
+      return 'vivoBrowser';
     case /oppoBrowser/i.test(ua):
-      browser = 'oppoBrowser';
-      break;
+      return 'oppoBrowser';
     case /MZBrowser/i.test(ua):
-      browser = 'meizuBrowser';
-      break;
+      return 'meizuBrowser';
     case /huawei/i.test(ua):
-      browser = 'huaweiBrowser';
-      break;
+      return 'huaweiBrowser';
     case /Chrome/i.test(ua):
-      browser = 'Chrome';
-      break;
+      return 'Chrome';
     case /Safari/i.test(ua):
-      browser = 'Safari';
-      break;
+      return 'Safari';
     default:
-      browser = ua;
-      break;
+      return ua;
   }
-
-  return browser;
 }
 
 // 客户端标识
 // 格式 设备型号|生产厂商|设备id|mac地址
 function getUA() {
-  const device = getDeviceInfo();
-  const browser = getBrowserInfo();
+  const ua = window.navigator.userAgent;
+  const device = getDeviceInfo(ua);
+  const browser = getBrowserInfo(ua);
   let ip = null;
   try {
     ip = window.returnCitySN.cip;
@@ -156,8 +138,7 @@ function formatRequestData(data) {
       vCode: 0,
       vName: '1.0.0'
     },
-    data: { ...data
-    },
+    data,
     encrypt: 'string',
     requestId: 'string',
     sign: 'string'
@@ -200,9 +181,9 @@ const isInvalidToken = (code) => {
 // 过滤api路径
 export const filterUrl = (url) => {
   const path = url === '/img' ? '/api/upload' : url;
-  if (process.env.NODE_ENV === 'production') {
+  /* if (process.env.NODE_ENV === 'production') {
     return process.env.API_ROOT + path;
-  }
+  } */
   return path;
 };
 

@@ -12,7 +12,7 @@
         @click="showMoreStatus">
         <p>
           <span>{{ statusName }}</span>
-          <i class="iconfont icon-bottomnew"></i>
+          <i class="icon i-bottom"></i>
         </p>
         <v-popup :list="moreStatus"
           v-if="isShowPopup"

@@ -1,10 +1,10 @@
 <template>
   <div class="order-detail-item-progress">
     <div class="title">
-      <i class="iconfont icon-icon_my_orrders"></i>
+      <i class="icon i-icon_my_orrders"></i>
       <p>
         <span>订单：</span>8555883654789</p>
-      <i class="iconfont icon-rightBtn"></i>
+      <i class="icon i-next"></i>
     </div>
     <div class="progress">
       <ul>

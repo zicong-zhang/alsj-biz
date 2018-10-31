@@ -2,8 +2,10 @@
   <div class="v-footer">
     <ul>
       <li v-for="(item, idx) in list"
-        :key="idx"
-        :class="{active: routeName === item.routeName}"
+        :key="`home-footer${idx}`"
+        :class="{
+          active: routeName === item.routeName
+        }"
         @click="changeActive(item, idx)">
         <img v-if="routeName === item.routeName" :src="item.iconActive" />
         <img v-else :src="item.icon" />
@@ -19,7 +21,6 @@ export default {
   name: 'VFooter',
   data() {
     return {
-      active: 0,
       list: [
         {
           name: '工作台',
@@ -48,13 +49,11 @@ export default {
     }
   },
   created() {
-    this.active = this.list.indexOf(this.routeName);
   },
   methods: {
-    changeActive(item, idx) {
-      console.log('item.routeName, idx:_____', item.routeName, idx);
-      if (this.active === idx) return false;
-      this.active = idx;
+    changeActive(item) {
+      console.log('item.routeName, idx:_____', item.routeName, this.routeName);
+      if (this.routeName === item.routeName) return false;
       this.$store.commit(types.TURN, '');
       this.$router.push({
         name: item.routeName

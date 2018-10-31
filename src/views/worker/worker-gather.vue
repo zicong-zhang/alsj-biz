@@ -4,7 +4,7 @@
       <h3 v-if="receiptAmount / 10000 >= 1">{{ receiptAmount / 10000 | money(2) }}万</h3>
       <h3 v-else>{{ receiptAmount | money }}元</h3>
       <p>实收款(本月)&nbsp;
-        <i class="iconfont icon-rightBtn"></i>
+        <i class="icon i-next"></i>
       </p>
     </div>
     <i class="vertical-bar"></i>
@@ -12,7 +12,7 @@
       <h3 v-if="dueAmount / 10000 >= 1">{{ dueAmount / 10000 | money(2) }}万</h3>
       <h3 v-else>{{ dueAmount | money }}元</h3>
       <p>待收款(全部)&nbsp;
-        <i class="iconfont icon-rightBtn"></i>
+        <i class="icon i-next"></i>
       </p>
     </div>
   </div>
@@ -45,9 +45,13 @@ export default {
       'getDueAmount' // 获取店铺待收款金额(全部)
     ]),
     init() {
-      this.getReceiptAmount().then((res) => {
+      const current = this.$utils.getDate('current');
+      const date = `${current.year}/${current.month}`;
+
+      this.getReceiptAmount(date).then((res) => {
         this.receiptAmount = res.data.totalAmount;
       });
+
       this.getDueAmount().then((res) => {
         this.dueAmount = res.data.totalAmount;
       });

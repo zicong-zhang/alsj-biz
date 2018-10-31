@@ -1,19 +1,21 @@
 /** TODO
  * 清除缓存时要把app.vue的缓存组件数组清空？
+ * 动态处理路由组件的失活
  * 判断当前运行环境，动态引入mui，减少不必要的加载时间
+ * 查看mui源码，尝试提取mui.back方法
  * 图片上传改用七牛
- * webpack 配置 dll 打包
+ * webpack 配置 持久化缓存
+ * 查看 nextTick 内部实现方式
  * 配置用户权限表
  */
 
-import 'babel-polyfill';
+// import 'babel-polyfill';
 import 'lib-flexible/flexible';
 // 第三方库
 import Vue from 'vue';
-import VueLazyload from 'vue-lazyload';
 import AlloyFinger from 'alloyfinger';
 import AlloyFingerPlugin from 'alloyfinger/vue/alloy_finger.vue';
-import Swiper from 'swiper'
+// import Swiper from 'swiper'
 import FastClick from 'fastclick';
 
 // 工具类
@@ -31,7 +33,6 @@ import '~components';
 import './sass/base.scss';
 import './sass/common.scss';
 import './sass/transition.scss';
-import './assets/font/iconfont.css';
 // import { VuetronVue } from 'vuetron';
 window.mui.init();
 
@@ -49,7 +50,6 @@ Vue.config.devtools = process.env.NODE_ENV === 'development';
 Vue.config.productionTip = false;
 
 // Vue.use(VuetronVue);
-Vue.use(VueLazyload);
 Vue.use(AlloyFingerPlugin, {
   AlloyFinger
 });

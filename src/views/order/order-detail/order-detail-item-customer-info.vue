@@ -2,7 +2,7 @@
   <div class="order-detail-item-customer-info">
     <item-title :title="title"
     @click="toEditCustomer">
-      <i class="iconfont icon-btn_all_next"></i>
+      <i class="icon i-next"></i>
     </item-title>
 
     <ul>

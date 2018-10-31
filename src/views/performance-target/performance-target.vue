@@ -11,7 +11,7 @@
             @click="showDatePicker">
             <span>月份</span>
             <span>({{ year }})</span>
-            <i class="iconfont icon-bottomnew"></i>
+            <i class="icon i-bottom"></i>
           </div>
 
           <!-- 计划业绩金额 -->

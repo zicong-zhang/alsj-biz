@@ -5,11 +5,15 @@ const webpack = require('webpack')
 const config = require('../config')
 const merge = require('webpack-merge')
 const baseWebpackConfig = require('./webpack.base.conf')
+const vueLoaderConfig = require('./vue-loader.conf')
+
 const CopyWebpackPlugin = require('copy-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const OptimizeCSSPlugin = require('optimize-css-assets-webpack-plugin')
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
+const ParallelUglifyPlugin  = require('webpack-parallel-uglify-plugin');
+const HappyPack = require('happypack');
 
 const env = process.env.NODE_ENV === 'testing'
   ? require('../config/test.env')
@@ -24,10 +28,11 @@ const webpackConfig = merge(baseWebpackConfig, {
     })
   },
   externals: { // value 为 umd 模块名
-    vue: 'Vue',
-    vuex: 'Vuex',
-    'vue-router': 'VueRouter',
-    echarts: "echarts"
+    // vue: 'Vue',
+    // vuex: 'Vuex',
+    // 'vue-router': 'VueRouter',
+    echarts: "echarts",
+    // lottie: 'bodymovin'
   },
   devtool: config.build.productionSourceMap ? config.build.devtool : false,
   output: {
@@ -36,12 +41,36 @@ const webpackConfig = merge(baseWebpackConfig, {
     chunkFilename: utils.assetsPath('js/[name].[chunkhash].asyncChunk.js') // 配合懒加载打包重命名
   },
   plugins: [
-
+    /* new HappyPack({
+      id: 'js',
+      loaders: ['babel-loader?cacheDirectory']
+    }),
+    new HappyPack({
+      id: 'vue',
+      loaders: [{
+        loader: 'vue-loader',
+        options: vueLoaderConfig
+      }]
+    }),
+    new HappyPack({
+      id: 'img',
+      loaders: [{
+        loader: 'url-loader',
+        options: {
+          limit: 10000,
+          name: utils.assetsPath('img/[name].[hash:7].[ext]')
+        }
+      }]
+    }), */
     // http://vuejs.github.io/vue-loader/en/workflow/production.html
     new webpack.DefinePlugin({
       'process.env': env
     }),
-    new UglifyJsPlugin({
+    new webpack.DllReferencePlugin({
+      context: __dirname,
+      manifest: require('./vendor-manifest.json')
+    }),
+    /* new UglifyJsPlugin({
       uglifyOptions: {
         compress: {
           warnings: false,
@@ -49,12 +78,38 @@ const webpackConfig = merge(baseWebpackConfig, {
           drop_console: true // 去除 console
         },
         output: { // 删除打包后的注释
-          comments: false
+          comments: false,
+          beautify: false
         }
       },
       sourceMap: config.build.productionSourceMap,
       parallel: true
+    }), */
+    // 多线程压缩 js
+    // https://www.cnblogs.com/tugenhua0707/p/9569762.html
+    new ParallelUglifyPlugin({
+      // uglifyJS：用于压缩 ES5 代码时的配置，Object 类型，直接透传给 UglifyJS 的参数。
+      // uglifyES：用于压缩 ES6 代码时的配置，Object 类型，直接透传给 UglifyES 的参数。
+      cacheDir: '.uglify-cache',
+      uglifyES : {
+        compress: {
+          warnings: false,
+          // 内嵌定义了但是只用到一次的变量
+          collapse_vars: true,
+          // 提取出出现多次但是没有定义成变量去引用的静态值
+          reduce_vars: true,
+          // 去除 debugger
+          drop_debugger: true,
+          // 去除 console
+          drop_console: true
+        },
+        output: { // 删除打包后的注释
+          comments: false,
+          beautify: false
+        }
+      }
     }),
+
     // extract css into its own file
     new ExtractTextPlugin({
       filename: utils.assetsPath('css/[name].[contenthash].css'),
@@ -104,6 +159,7 @@ const webpackConfig = merge(baseWebpackConfig, {
     // enable scope hoisting
     new webpack.optimize.ModuleConcatenationPlugin(),
     // split vendor js into its own file
+    /* dll 后，虽然 CommonsChunkPlugin 有提取公共代码，但好像没有区别
     new webpack.optimize.CommonsChunkPlugin({
       name: 'vendor',
       minChunks (module) {
@@ -122,7 +178,7 @@ const webpackConfig = merge(baseWebpackConfig, {
     new webpack.optimize.CommonsChunkPlugin({
       name: 'manifest',
       minChunks: Infinity
-    }),
+    }), */
     // This instance extracts shared chunks from code splitted chunks and bundles them
     // in a separate chunk, similar to the vendor chunk
     // see: https://webpack.js.org/plugins/commons-chunk-plugin/#extra-async-commons-chunk
@@ -163,6 +219,7 @@ if (config.build.productionGzip) {
 }
 
 if (config.build.bundleAnalyzerReport) {
+  // https://www.npmjs.com/package/webpack-bundle-analyzer
   const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
   webpackConfig.plugins.push(new BundleAnalyzerPlugin())
 }

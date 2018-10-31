@@ -3,13 +3,12 @@ import * as utils from './utils';
 import $Toast from '~components/v-toast';
 
 Axios.defaults.headers.post['Content-Type'] = 'application/json';
-Axios.defaults.timeout = 3000;
+Axios.defaults.timeout = 12000;
 
 /**
  * {
  *    url: {
  *      pending: false, // 是否请求中
- *      retry: 0 // 重试次数
  *    }
  * }
  */
@@ -22,20 +21,18 @@ Axios.interceptors.request.use(req => {
 
   if (opt.noRepeat) {
     if (ajaxQueue[url] && ajaxQueue[url].pending) {
-      return Promise.reject({
-        msg: '正在请求数据，请勿重复提交'
-      });
+      $Toast('正在请求数据，请勿重复提交');
+      return Promise.reject();
     }
 
     // 队列记录当前请求
     ajaxQueue[url] = {
-      pending: true,
-      retry: 0
+      pending: true
     }
   }
 
   newConfig.url = utils.filterUrl(url);
-  newConfig.data = opt.retry ? data : utils.setRequestData(data, url);
+  newConfig.data = opt.retrying ? data : utils.setRequestData(data, url);
 
   return newConfig;
 }, error => {
@@ -61,22 +58,22 @@ Axios.interceptors.response.use(res => {
   } else if (!opt.catch) {
     $Toast(msg);
     return Promise.reject();
+  } else if (opt.catch) {
+    return Promise.reject(res.data);
   }
 }, ({
   message,
-  config: {
-    url,
-    timeout,
-    opt
-  }
+  config = {}
 }) => {
+  console.warn(message);
+  const opt = config.opt || {};
   const errorTypes = {
     // 断网
     'Network Error': {
       handle() {}
     },
     // 超时
-    [`timeout of ${timeout}ms exceeded`]: {
+    [`timeout of ${config.timeout}ms exceeded`]: {
       handle() {}
     }
   }
@@ -86,16 +83,13 @@ Axios.interceptors.response.use(res => {
     Object.prototype.hasOwnProperty.call(errorTypes, message) &&
     // 请求开启了重试选项
     opt.retry &&
-    ajaxQueue[url] &&
     // 当前已重试次数未超过选项的重试次数
-    ajaxQueue[url].retry < opt.retryCount
+    opt.currentRetry < opt.retryTotal
   ) {
-    ajaxQueue[url].retry++;
-    return Axios(Object.assign(config, {
-      opt: {
-        retrying: true // 改为“重试中”，用于防止 axios 的 transformRequest 将已经转为 json 字符串的 config 再次转换成 json 字符串
-      }
-    }));
+    opt.currentRetry++;
+    const newConfig = { ...config };
+    newConfig.opt.retrying = true; // 改为“重试中”，用于防止 axios 的 transformRequest 将已经转为 json 字符串的 config 再次转换成 json 字符串
+    return Axios(newConfig);
   }
 
   if (!opt.catch) $Toast('网络异常，请稍后重试');

@@ -1,10 +1,10 @@
 <template>
   <div class="home-header-tips">
     <div class="home-tips-module blue">
-      <i class="iconfont icon-icon_wallet_note"></i>
+      <i class="icon i-icon_wallet_note"></i>
       <h3>店铺尚未进行认证，暂不支持使用私家钱包进行在线交易。
         <span @click="toAuthExplain">点击了解更多
-          <i class="iconfont icon-rightBtn"></i>
+          <i class="icon i-next"></i>
         </span>
       </h3>
       <div class="auth-btn">

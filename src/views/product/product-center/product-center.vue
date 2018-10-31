@@ -90,7 +90,7 @@ export default {
     onBack() {
       this.changeMode();
       this.editMode = false;
-      this.$utils.back();
+      this.$nextTick(this.$utils.back);
     },
     init() {
       this.pageNum = 1;

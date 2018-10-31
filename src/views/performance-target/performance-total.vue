@@ -10,7 +10,7 @@
         <div class="picker"
           @click="showDatePicker">
           <span>年份({{ year }})</span>
-          <i class="iconfont icon-bottomnew"></i>
+          <i class="icon i-bottom"></i>
         </div>
         <p>单位：万元</p>
       </div>

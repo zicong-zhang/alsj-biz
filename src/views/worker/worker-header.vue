@@ -7,7 +7,7 @@
     <div class="title"
       @click="showPop">
       <h2 class="show-pop">{{ storeInfo.merchantName }}
-        <i class="iconfont icon-bottomnew"></i>
+        <i class="icon i-bottom"></i>
       </h2>
       <p>
         <span>店铺评分 {{ storeInfo.grade }}分</span>
@@ -56,7 +56,7 @@ export default {
     set() {
       localStorage.setItem(
         'USER_TOKEN',
-        'VE9LRU4tMjg3LTE1MzU3MTc5OTc2MzMtYWJj',
+        'VE9LRU4tMzYyLTE1NDA4NjU2MDQ5MTctYWJj',
       );
     },
     showPop() {
