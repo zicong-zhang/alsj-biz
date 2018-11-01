@@ -123,19 +123,16 @@ export default {
    * 限制输入框输入
    */
   limitInput(text = '', type, regExp) {
-    if (type) {
-      switch (type) {
-        case 'number':
-          return text.replace(/\D/g, '');
-        case 'password':
-          return text.replace(/[^\da-zA-Z]/g, '');
-        case 'cn':
-          return text.replace(/[^\u4E00-\u9FA5a-zA-Z\']/g, '');
-        default:
-          return text.replace(regExp, '');
-      }
+    const config = {
+      number: () => /\D/g,
+      password: () => /[^\da-zA-Z]/g,
+      cn: () => /[^\u4E00-\u9FA5a-zA-Z\']/g
     }
-    return text;
+
+    if (!type) return text;
+    if (regExp) return text.replace(regExp, '');
+
+    return text.replace(config[type], '');
   },
   /**
    * 验证正则

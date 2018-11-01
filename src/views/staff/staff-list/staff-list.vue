@@ -37,6 +37,7 @@ export default {
   name: 'view-staff-list',
   data() {
     return {
+      aa: 0,
       dataList: []
     };
   },
@@ -46,7 +47,8 @@ export default {
   methods: {
     ...mapActions(['getStaffList']),
     getDataList() {
-      this.getStaffList().then((res) => {
+      this.getStaffList().then(res => {
+        this.aa++;
         this.dataList = res.data.list;
       });
     },

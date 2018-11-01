@@ -5,7 +5,6 @@ const webpack = require('webpack')
 const config = require('../config')
 const merge = require('webpack-merge')
 const baseWebpackConfig = require('./webpack.base.conf')
-const vueLoaderConfig = require('./vue-loader.conf')
 
 const CopyWebpackPlugin = require('copy-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
@@ -159,7 +158,7 @@ const webpackConfig = merge(baseWebpackConfig, {
     // enable scope hoisting
     new webpack.optimize.ModuleConcatenationPlugin(),
     // split vendor js into its own file
-    /* dll 后，虽然 CommonsChunkPlugin 有提取公共代码，但好像没有区别
+    // 以下两个 CommonsChunkPlugin 用于 [chunkhash] 持久化缓存
     new webpack.optimize.CommonsChunkPlugin({
       name: 'vendor',
       minChunks (module) {
@@ -178,7 +177,7 @@ const webpackConfig = merge(baseWebpackConfig, {
     new webpack.optimize.CommonsChunkPlugin({
       name: 'manifest',
       minChunks: Infinity
-    }), */
+    }),
     // This instance extracts shared chunks from code splitted chunks and bundles them
     // in a separate chunk, similar to the vendor chunk
     // see: https://webpack.js.org/plugins/commons-chunk-plugin/#extra-async-commons-chunk
