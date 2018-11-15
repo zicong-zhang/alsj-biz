@@ -36,7 +36,7 @@ Axios.interceptors.request.use(req => {
 
   return newConfig;
 }, error => {
-  console.log('axiosError:__未处理___', error);
+  console.log('axiosError:__请求头拦截器错误，未处理___', error);
   return Promise.reject(error);
 });
 
