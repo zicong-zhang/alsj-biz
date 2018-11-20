@@ -186,6 +186,6 @@ export default {
   color: #999;
 }
 .van-pull-refresh {
-  height: 100%;
+  // height: 100%;
 }
 </style>
