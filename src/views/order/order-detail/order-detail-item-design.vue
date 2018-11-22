@@ -42,8 +42,9 @@ export default {
     },
     // 删除图片
     delPic(idx) {
-      this.designList.splice(idx, 1);
-      this.updateDesignPic(this.designList);
+      const newArr = [...this.designList];
+      newArr.splice(idx, 1);
+      this.updateDesignPic(newArr);
     }
   }
 };

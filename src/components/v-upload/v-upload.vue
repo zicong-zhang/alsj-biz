@@ -27,7 +27,7 @@
             class="upload-progress"
             v-if="item.hasOwnProperty('progress') && item.progress !== 100"
           >
-            <p>{{ item.progress }}%</p>
+            <p>{{ parseInt(item.progress) }}%</p>
             <span>正在上传</span>
           </div>
         </li>
@@ -67,7 +67,7 @@
               accept="image/*"
               capture="camera"
               multiple="multiple"
-              @change="takePhoto"
+              @change="selectPhoto"
               @click="hidePhotoMenu"
               v-if="showFileInput"
             />
@@ -79,7 +79,7 @@
               type="file"
               accept="image/*"
               multiple="multiple"
-              @change="takePhoto"
+              @change="selectPhoto"
               @click="hidePhotoMenu"
               v-if="showFileInput"
             />
@@ -105,7 +105,8 @@
 </template>
 
 <script>
-import axios from 'axios';
+import * as qiniu from 'qiniu-js';
+import { mapActions } from 'vuex';
 
 export default {
   name: 'v-upload',
@@ -129,9 +130,11 @@ export default {
   },
   data() {
     return {
+      qiNiuToken: '', // 七牛 token
       showFileInput: true,
       showPhoto: false,
       fileList: [],
+
       isShowDelBtn: false,
       isShowDelDialog: false,
       delPicIdx: ''
@@ -139,89 +142,192 @@ export default {
   },
   watch: {
     files(newVal) {
+      console.log('newVal:_____', newVal);
       this.fileList = newVal.map(item => ({
         path: item
       }));
     }
   },
   created() {
+    this.getQiNiuTokenByVuex();
+
     this.fileList = this.files.map(item => ({
       path: item
     }));
   },
   methods: {
+    ...mapActions(['getQiNiuToken']),
+    getQiNiuTokenByVuex() {
+      this.getQiNiuToken().then(token => {
+        this.qiNiuToken = token;
+      });
+    },
     // 隐藏菜单
     hidePhotoMenu() {
       this.showPhoto = false;
     },
-    takePhoto(e) {
+    /* selectPhoto(e) {
+          this.showFileInput = false;
+          this.showPhoto = false;
+          let count = 0;
+          for (const pic of e.target.files) {
+            count++;
+            if (count > this.asyncQty) break;
+            this.compressImg(pic);
+          }
+        },
+        // 判断是否图片
+        judgePic(file) {
+          // 拦截图片格式
+          const type = file.type;
+          if (type.indexOf('png') == -1 && type.indexOf('jpg') == -1 && type.indexOf('jpeg') == -1) {
+            this.showFileInput = true;
+            this.$Toast('请上传正确的图片');
+            return false;
+          }
+          return true;
+        },
+        // 压缩图片
+        compressImg(pic) {
+          if (!this.judgePic(pic)) return;
+          const len = this.fileList.length;
+          this.$set(this.fileList, len, {
+            path: '',
+            progress: 0
+          });
+
+          const size = pic.size / 1024;
+          // 大于500K压缩
+          if (size > 500) {
+            this.$utils.photoCompress(pic, (500 / size).toFixed(2), base64Codes => {
+              const bl = this.$utils.convertBase64UrlToBlob(base64Codes);
+              this.uploadImg(bl, len);
+            });
+          } else {
+            this.uploadImg(pic, len);
+          }
+        },
+        // 图片上传
+        uploadImg(pic, length) {
+          this.showFileInput = true;
+          const fd = new FormData();
+          fd.append('files', pic);
+          fd.append('token', 'YWxhc2dhLmFwcC5nYXRld2F5LTExLTE1MzAxNjUxOTIwNjYtMTEtYWJj');
+          axios
+            .post('/img', pic, {
+              onUploadProgress: progressEvent => {
+                // 约0.1s执行一次
+                if (progressEvent.lengthComputable) {
+                  // 属性lengthComputable主要表明总共需要完成的工作量和已经完成的工作是否可以被测量
+                  // 如果lengthComputable为false，就获取不到progressEvent.total和progressEvent.loaded
+                  const { loaded, total } = progressEvent;
+                  this.fileList[length].progress = parseInt((loaded / total) * 100);
+                } else {
+                  this.fileList[length].progress = 100;
+                }
+              }
+            })
+            .then(res => {
+              const uploader = this.$refs.uploader;
+              uploader.scrollLeft = uploader.scrollWidth - uploader.clientWidth;
+              this.fileList[length].path = res[0];
+              this.$emit('success', res[0]);
+            });
+        }, */
+
+    // 创建图片唯一key
+    createUUId() {
+      const uuid = () => ((1 + Math.random()) * 0x10000 || 0).toString(16).substring(1);
+      return `${uuid() + uuid()}-${uuid()}-${uuid()}-${uuid()}-${uuid()}${uuid()}${uuid()}${Date.now()}`;
+    },
+    selectPhoto(e) {
       this.showFileInput = false;
       this.showPhoto = false;
-      let count = 0;
-      for (const pic of e.target.files) {
-        count++;
-        if (count > this.asyncQty) break;
-        this.compressImg(pic);
-      }
-    },
-    // 判断是否图片
-    judgePic(file) {
-      // 拦截图片格式
-      const type = file.type;
-      if (type.indexOf('png') == -1 && type.indexOf('jpg') == -1 && type.indexOf('jpeg') == -1) {
-        this.showFileInput = true;
-        this.$Toast('请上传正确的图片');
-        return false;
-      }
-      return true;
-    },
-    // 压缩图片
-    compressImg(pic) {
-      if (!this.judgePic(pic)) return;
+
+      const pic = e.target.files[0];
       const len = this.fileList.length;
+
       this.$set(this.fileList, len, {
         path: '',
         progress: 0
       });
 
-      const size = pic.size / 1024;
-      // 大于500K压缩
-      if (size > 500) {
-        this.$utils.photoCompress(pic, (500 / size).toFixed(2), base64Codes => {
-          const bl = this.$utils.convertBase64UrlToBlob(base64Codes);
-          this.uploadImg(bl, len);
-        });
-      } else {
-        this.uploadImg(pic, len);
-      }
+      this.upload(pic, len);
+      this.$nextTick(() => {
+        this.showFileInput = true;
+      });
     },
-    // 图片上传
-    uploadImg(pic, length) {
-      this.showFileInput = true;
-      const fd = new FormData();
-      fd.append('files', pic);
-      fd.append('token', 'YWxhc2dhLmFwcC5nYXRld2F5LTExLTE1MzAxNjUxOTIwNjYtMTEtYWJj');
-      axios
-        .post('/img', pic, {
-          onUploadProgress: progressEvent => {
-            // 约0.1s执行一次
-            if (progressEvent.lengthComputable) {
-              // 属性lengthComputable主要表明总共需要完成的工作量和已经完成的工作是否可以被测量
-              // 如果lengthComputable为false，就获取不到progressEvent.total和progressEvent.loaded
-              const { loaded, total } = progressEvent;
-              this.fileList[length].progress = parseInt((loaded / total) * 100);
-            } else {
-              this.fileList[length].progress = 100;
-            }
+    upload(file, idx) {
+      // 判断该文件是否为图片
+      if (!/(png|jpg|jpeg)/i.test(file.type)) return;
+
+      const token = this.qiNiuToken;
+      const key = `${this.createUUId()}.jpg`;
+      const config = {
+        useCdnDomain: false,
+        region: qiniu.region.z2
+      };
+      const putExtra = {
+        fname: '',
+        params: {},
+        mimeType: null
+      };
+      // 调用sdk上传接口获得相应的observable，控制上传和暂停
+      const observable = qiniu.upload(file, key, token, putExtra, config);
+      observable.subscribe({
+        next: res => {
+          this.uploading(res, idx);
+        },
+        error: res => {
+          this.uploadError(res, idx);
+        },
+        complete: res => {
+          this.uploadComplete(res, idx);
+        }
+      });
+    },
+    // 更新上传时的信息 会触发多次
+    uploading(res, idx) {
+      console.log('uploading:_____', res);
+      const percent = res.total.percent;
+      this.fileList[idx].progress = percent;
+    },
+    // 上传成功
+    uploadComplete(res, idx) {
+      console.log('uploadComplete:_____', res);
+
+      const imgLink = qiniu.imageMogr2(
+        {
+          'auto-orient': true,
+          strip: true
+        },
+        res.key,
+        'http://test.pic.alasga.cn/'
+      );
+
+      console.log('imgLink:_____', imgLink);
+      this.fileList.splice(idx, 1);
+      this.$emit('success', imgLink, res);
+      // this.fileList[idx].path = imgLink;
+
+      // this.imgSrc = imgLink;
+    },
+    // 上传失败
+    uploadError(err) {
+      console.log('err:_____', err);
+      this.$emit('on-error', err);
+
+      /**
+         * 传输中断时得到以下对象
+         * {
+            code: 0
+            isRequestError: true
+            message: "xhr request failed, code: 0;"
+            reqId: ""
           }
-        })
-        .then(res => {
-          const uploader = this.$refs.uploader;
-          uploader.scrollLeft = uploader.scrollWidth - uploader.clientWidth;
-          this.fileList[length].path = res[0];
-          this.$emit('success', res[0]);
-        });
+          */
     },
+
     // 查看大图
     showPicPreview(idx) {
       this.$ImgPreview(this.fileList.map(item => item.path));

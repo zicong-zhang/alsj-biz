@@ -1,6 +1,7 @@
 // 通用
 export const TURN = 'TURN'; // 转场动画
 export const SET_STORE_ID = 'SET_STORE_ID'; // 设置店铺 id
+export const SET_QI_NIU_TOKEN = 'SET_QI_NIU_TOKEN'; // 设置七牛 token
 
 // 工作台
 export const SET_STORE_INFO = 'SET_STORE_INFO'; // 设置店铺信息
