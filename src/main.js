@@ -1,5 +1,4 @@
 /** TODO
- * 清除缓存时要把app.vue的缓存组件数组清空？
  * 动态处理路由组件的失活
  * 判断当前运行环境，动态引入mui，减少不必要的加载时间
  * 图片上传改用七牛
@@ -12,7 +11,6 @@ import 'lib-flexible/flexible';
 import Vue from 'vue';
 import AlloyFinger from 'alloyfinger';
 import AlloyFingerPlugin from 'alloyfinger/vue/alloy_finger.vue';
-// import Swiper from 'swiper'
 import FastClick from 'fastclick';
 
 // 工具类
@@ -51,13 +49,6 @@ Vue.use(AlloyFingerPlugin, {
   AlloyFinger
 });
 
-/* Vue.prototype.$plus = fn => {
-  if (window.plus) {
-    fn();
-  } else {
-    document.addEventListener("plusready", fn, false);
-  }
-} */
 if ('addEventListener' in document) {
   document.addEventListener('DOMContentLoaded', () => {
     FastClick.attach(document.body);
@@ -77,3 +68,11 @@ new Vue({
   store,
   render: h => h(App)
 });
+
+/* Vue.prototype.$plus = fn => {
+  if (window.plus) {
+    fn();
+  } else {
+    document.addEventListener("plusready", fn, false);
+  }
+} */

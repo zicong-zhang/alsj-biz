@@ -19,7 +19,7 @@ module.exports = {
   output: {
     filename: '[name].dll.js',
     path: path.resolve(__dirname, '../static/js/dll/'),
-    library: '[name]-dll', // 当前Dll的所有内容都会存放在这个参数指定变量名的一个全局变量下，注意与DllPlugin的name参数保持一致
+    library: '[name]_dll', // 当前Dll的所有内容都会存放在这个参数指定变量名的一个全局变量下，注意与DllPlugin的name参数保持一致
     // vendor.dll.js中暴露出的全局变量名。
     // 主要是给DllPlugin中的name使用，
     // 故这里需要和webpack.DllPlugin中的`name: '[name]_library',`保持一致。
@@ -27,7 +27,7 @@ module.exports = {
   plugins: [
     new webpack.DllPlugin({
       path: path.resolve(__dirname, './vendor-manifest.json'), // 本Dll文件中各模块的索引，供DllReferencePlugin读取使用
-      name: '[name]-dll',
+      name: '[name]_dll',
       context: __dirname
     }),
     new ParallelUglifyPlugin({

@@ -27,6 +27,7 @@ import VImg from '~components/v-img';
 import $Picker from './v-v-picker';
 import $DatePicker from './v-date-picker';
 import $Toast from './v-toast';
+import $ImgPreview from './v-img-preview';
 
 Vue.use(DatetimePicker)
   .use(Picker)
@@ -48,7 +49,9 @@ Vue.component('v-loading', VLoading);
 // Vue.component('v-scroll', VScroll);
 Vue.component('v-scroll', VList);
 Vue.component('v-img', VImg);
+Vue.component('v-img-preview', () => import(/* webpackChunkName: "v-img-preview" */ '~components/v-img-preview'));
 
 Vue.prototype.$Toast = $Toast;
 Vue.prototype.$Picker = $Picker;
 Vue.prototype.$DatePicker = $DatePicker;
+Vue.prototype.$ImgPreview = $ImgPreview;

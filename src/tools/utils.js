@@ -23,11 +23,11 @@ export default {
 
     Vuex.commit(mutationTypes.TURN, 'off');
 
-    if (document.referrer == window.location.href || !document.referrer) {
+    /* if (document.referrer == window.location.href || !document.referrer) {
       Router.push({
         name: 'worker'
       });
-    } else if (param) {
+    } else  */if (param) {
       Router.push(param);
     } else {
       Router.back(-1);

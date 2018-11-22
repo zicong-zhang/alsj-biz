@@ -135,3 +135,20 @@
 .v-img-leave-active {
   transition: opacity .35s linear;
 }
+
+/* 缩放展示 */
+.zoom-enter {
+  transform: scale(.7, .7);
+  opacity: .5;
+}
+.zoom-leave-to {
+  transform: translate3d(0, 50%, 0);
+  opacity: 0;
+}
+
+.zoom-enter-active {
+  transition: transform .2s, opacity .2s;
+}
+.zoom-leave-active {
+  transition: transform .2s, opacity .2s;
+}

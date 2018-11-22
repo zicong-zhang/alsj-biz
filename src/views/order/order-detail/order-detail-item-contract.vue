@@ -1,5 +1,8 @@
 <template>
-  <div class="order-detail-item-contract" v-if="orderDetailStatus > 3">
+  <div
+    class="order-detail-item-contract"
+    v-if="orderDetailStatus > 3"
+  >
     <H2 title="定制合同">
       <p slot="right">如有疑问，
         <span>请联系客服</span>
@@ -7,8 +10,11 @@
     </H2>
 
     <ul>
-      <li v-for="(item, idx) in contractList"
-        :key="idx">
+      <li
+        v-for="(item, idx) in contractList"
+        :key="idx"
+        @click="showImg"
+      >
         <img :src="item" />
       </li>
     </ul>
@@ -25,54 +31,58 @@ export default {
     H2
   },
   data() {
-    return {
-    };
+    return {};
   },
   computed: {
     ...mapGetters(['contractList', 'orderDetailStatus'])
+  },
+  methods: {
+    showImg() {
+      this.$ImgPreview(this.contractList);
+    }
   }
 };
 </script>
 
 <style lang="scss">
-.order-detail-item-contract {
-  background: #fff;
-  padding: 0 36px;
-  margin-bottom: 16px;
-  span {
-    color: $main;
-  }
-  ul {
-    display: flex;
-    flex-flow: wrap;
-    padding-top: 22px;
-    padding-bottom: 36px;
-  }
-  li {
-    width: 160px;
-    height: 160px;
-    box-sizing: border-box;
-    border: 4px solid #E5F2FF;
-    border-radius: 16px;
-    margin-right: 16px;
+  .order-detail-item-contract {
+    background: #fff;
+    padding: 0 36px;
     margin-bottom: 16px;
-    position: relative;
-    overflow: hidden;
-  }
-  img {
-    width: 100%;
-    height: auto;
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    z-index: 0;
-    transform: translate(-50%, -50%);
-  }
-  .order-detail-item-h2 {
-    p {
-      font-size: 24px;
-      line-height: 96px;
+    span {
+      color: $main;
+    }
+    ul {
+      display: flex;
+      flex-flow: wrap;
+      padding-top: 22px;
+      padding-bottom: 36px;
+    }
+    li {
+      width: 160px;
+      height: 160px;
+      box-sizing: border-box;
+      border: 4px solid #e5f2ff;
+      border-radius: 16px;
+      margin-right: 16px;
+      margin-bottom: 16px;
+      position: relative;
+      overflow: hidden;
+    }
+    img {
+      width: 100%;
+      height: auto;
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      z-index: 0;
+      transform: translate(-50%, -50%);
+    }
+    .order-detail-item-h2 {
+      p {
+        font-size: 24px;
+        line-height: 96px;
+      }
     }
   }
-}
 </style>
