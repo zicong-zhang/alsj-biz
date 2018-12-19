@@ -45,7 +45,8 @@ export default {
   created() {
     // 18600000001
     // 18102765281
-    localStorage.setItem('USER_TOKEN', 'VE9LRU4tMjg3LTE1NDA4NjYxNzUyNzQtYWJj');
+    // 15812345678 12345678
+    localStorage.setItem('USER_TOKEN', 'VE9LRU4tMjg3LTE1NDUyMDMwMDgyNTktYWJj');
     // localStorage.setItem('USER_TOKEN', 'VE9LRU4tMzYyLTE1MzY5MjczMTgyNzctYWJj');
     // localStorage.setItem(
     //     "USER_TOKEN",
