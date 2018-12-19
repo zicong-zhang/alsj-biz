@@ -170,7 +170,7 @@ export default {
 </script>
 <style lang="scss">
 .v-scroll {
-  height: 100%;
+  // height: 100%;
   @include scroll(y);
 }
 .v-scroll-bottom {

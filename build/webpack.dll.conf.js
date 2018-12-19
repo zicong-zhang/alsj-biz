@@ -1,5 +1,6 @@
 const path = require('path')
 const webpack = require('webpack');
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 const ParallelUglifyPlugin  = require('webpack-parallel-uglify-plugin');
 
 module.exports = {
@@ -19,7 +20,7 @@ module.exports = {
   output: {
     filename: '[name].dll.js',
     path: path.resolve(__dirname, '../static/js/dll/'),
-    library: '[name]_dll', // 当前Dll的所有内容都会存放在这个参数指定变量名的一个全局变量下，注意与DllPlugin的name参数保持一致
+    library: '[name]Dll', // 当前Dll的所有内容都会存放在这个参数指定变量名的一个全局变量下，注意与DllPlugin的name参数保持一致
     // vendor.dll.js中暴露出的全局变量名。
     // 主要是给DllPlugin中的name使用，
     // 故这里需要和webpack.DllPlugin中的`name: '[name]_library',`保持一致。
@@ -27,10 +28,25 @@ module.exports = {
   plugins: [
     new webpack.DllPlugin({
       path: path.resolve(__dirname, './vendor-manifest.json'), // 本Dll文件中各模块的索引，供DllReferencePlugin读取使用
-      name: '[name]_dll',
+      name: '[name]Dll',
       context: __dirname
     }),
-    new ParallelUglifyPlugin({
+    new UglifyJsPlugin({
+      uglifyOptions: {
+        compress: {
+          warnings: false,
+          drop_debugger: true, // 去除 debugger
+          drop_console: true // 去除 console
+        },
+        output: { // 删除打包后的注释
+          comments: false,
+          beautify: false
+        }
+      },
+      sourceMap: false,
+      parallel: true
+    }),
+    /* new ParallelUglifyPlugin({
       // uglifyJS：用于压缩 ES5 代码时的配置，Object 类型，直接透传给 UglifyJS 的参数。
       // uglifyES：用于压缩 ES6 代码时的配置，Object 类型，直接透传给 UglifyES 的参数。
       uglifyES : {
@@ -50,6 +66,6 @@ module.exports = {
           beautify: false
         }
       }
-    }),
+    }), */
   ],
 }
