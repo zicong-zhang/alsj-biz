@@ -1,6 +1,7 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
 
+import loginModule from './modules/login-store';
 import workerModule from './modules/worker-store';
 import orderListModule from './modules/order-list-store';
 import proceedsDetailStore from './modules/proceeds-detail-store';
@@ -16,6 +17,7 @@ const store = new Vuex.Store({
   strict: process.env.NODE_ENV !== 'production',
   modules: {
     root,
+    loginModule,
     workerModule,
     proceedsDetailStore,
     orderListModule,

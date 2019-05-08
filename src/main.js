@@ -29,7 +29,7 @@ import './sass/base.scss';
 import './sass/common.scss';
 import './sass/transition.scss';
 // import { VuetronVue } from 'vuetron';
-window.mui.init();
+// window.mui.init();
 
 // (function() {
 //   var script = document.createElement('script');
@@ -55,11 +55,13 @@ if ('addEventListener' in document) {
   }, false);
 }
 
-// import VConsole from 'vconsole';
-// if (process.env.NODE_ENV !== 'production') {
-//   let vc = new VConsole();
-// }
+/* import VConsole from 'vconsole';
 
+if (process.env.NODE_ENV !== 'production') {
+  const vc = new VConsole();
+}
+
+console.log(document.querySelector('#vp').content); */
 
 /* eslint-disable no-new */
 new Vue({

@@ -1,5 +1,6 @@
 <template>
   <div id="app"
+    class="app"
     v-cloak>
     <p v-if="isShowOfflineTip"
       class="offline-tip">
@@ -46,7 +47,7 @@ export default {
     // 18600000001
     // 18102765281
     // 15812345678 12345678
-    localStorage.setItem('USER_TOKEN', 'VE9LRU4tMjg3LTE1NDUyMDMwMDgyNTktYWJj');
+    // localStorage.setItem('USER_TOKEN', 'VE9LRU4tMjg3LTE1NTIwNDkzNDcyNzgtYWJj');
     // localStorage.setItem('USER_TOKEN', 'VE9LRU4tMzYyLTE1MzY5MjczMTgyNzctYWJj');
     // localStorage.setItem(
     //     "USER_TOKEN",
@@ -80,7 +81,7 @@ export default {
         if (storageStoreId) {
           this.SET_STORE_ID(storageStoreId);
         } else {
-          this.SET_STORE_ID(4425);
+          this.SET_STORE_ID(4518);
         }
         /* else {
           this.$utils.go({

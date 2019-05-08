@@ -3,8 +3,8 @@
     <div class="title">
       <i class="icon i-icon_my_orrders"></i>
       <p>
-        <span>订单：</span>8555883654789</p>
-      <i class="icon i-next"></i>
+        <span>订单：</span>{{ orderInfo.orderCode }}</p>
+      <i class="icon i-next" v-if="false"></i>
     </div>
     <div class="progress">
       <ul>
@@ -22,15 +22,15 @@
       </ul>
     </div>
 
-    <div class="aa">
+    <div class="aa" v-if="orderInfo.actualAmount || orderInfo.orderAmount">
       <p>
         <span>订单金额</span>
-        <span>￥8,880,000.00</span>
+        <span>￥{{ orderInfo.orderAmount | money }}</span>
       </p>
-      <i class="vertical-bar"></i>
+      <i class="vertical-bar" v-if="orderInfo.actualAmount"></i>
       <p>
-        <span>订金额</span>
-        <span>￥8,880,000.00</span>
+        <span>实付金额</span>
+        <span>￥{{ orderInfo.actualAmount | money }}</span>
       </p>
     </div>
   </div>
@@ -50,25 +50,25 @@ export default {
     ...mapState({
       orderProgress: state => state.orderDetailModule.orderProgress
     }),
-    ...mapGetters(['orderDetailStatus']),
+    ...mapGetters(['orderDetailStatus', 'orderInfo']),
     progress() {
       return '';
     }
   },
   watch: {
     reload(newVal) {
-      this.getProgreess();
+      this.getProgress();
     }
   },
   created() {
-    this.getProgreess();
+    this.getProgress();
   },
   methods: {
     ...mapActions(['getOrderDetailProgress']),
     replaceBr(date = '') {
       return date.replace(/\s/, '<br />').replace(/\-/g, '.');
     },
-    getProgreess() {
+    getProgress() {
       this.$store.dispatch('getOrderDetailProgress');
     }
   }
@@ -151,7 +151,7 @@ export default {
     bottom: e(40px);
     transform: translate(-50%, 0);
     text-align: center;
-    width: e(120px);
+    width: e(130px);
     color: #fff;
     font-size: e(24px);
     font-weight: normal;

@@ -1,6 +1,8 @@
 import Axios from 'axios';
 import * as utils from './utils';
+import tools from '~tools/utils';
 import $Toast from '~components/v-toast';
+import Router from '~/router';
 
 Axios.defaults.headers.post['Content-Type'] = 'application/json';
 Axios.defaults.timeout = 12000;
@@ -52,9 +54,10 @@ Axios.interceptors.response.use(res => {
     return res.data;
   } else if (code === 100001) {
     $Toast('登录超时，请重新登录')
-      .then(() => {
-        // utils.clearUserInfo();
-      })
+    tools.clearUserInfo();
+    tools.go({
+      path: '/login'
+    }, 'replace')
   } else if (!opt.catch) {
     $Toast(msg);
     return Promise.reject();

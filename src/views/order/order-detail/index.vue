@@ -6,7 +6,7 @@
       <Progress/>
       <CustomerInfo/>
       <HouseType/>
-      <CustomDemand/>
+      <!-- <CustomDemand/> -->
       <KeeperList/>
       <Contract/>
       <Design/>
@@ -17,7 +17,7 @@
 </template>
 <script>
 import WorkerTips from '~views/worker/worker-tips';
-import Progress from './order-detail-item-progress';
+import Progress from './order-detail-item-progress.vue';
 import CustomerInfo from './order-detail-item-customer-info';
 import HouseType from './order-detail-item-house-type';
 import CustomDemand from './order-detail-item-demand';

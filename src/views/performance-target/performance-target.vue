@@ -144,7 +144,7 @@ export default {
   data() {
     return {
       maxLength: 10, // 输入金额位数限制
-      year: 2018, // 当前选中年份
+      year: 2019, // 当前选中年份
       id: '', // 店铺目标id
 
       janAmount: '',
@@ -163,6 +163,7 @@ export default {
     };
   },
   created() {
+    this.year = new Date().getFullYear();
     this.getDataList();
   },
   methods: {
@@ -172,9 +173,33 @@ export default {
       'getStoreSaleTarget' // 获取店铺目标金额, 调用接口刷新数据
     ]),
     showDatePicker() {
-      this.$DatePicker({
-        confirm: (dateObj) => {
-          this.year = dateObj.getFullYear();
+      const year = new Date().getFullYear();
+      const arr = Array(5).fill(year);
+      const prev = arr.map((item, idx) => {
+        return {
+          text: year - (5 - idx),
+          value: year - (5 - idx)
+        };
+      })
+      const next = arr.map((item, idx) => {
+        return {
+          text: year + idx,
+          value: year + idx
+        };
+      })
+
+      console.log('prev. next:_____', prev.next);
+
+      this.$Picker({
+        title: '选择年份',
+        list: [
+          {
+            values: [...prev, ...next]
+          }
+        ],
+        onConfirm: ([{ value }]) => {
+          console.log('value:_____', value);
+          this.year = value;
           this.getDataList();
         }
       });

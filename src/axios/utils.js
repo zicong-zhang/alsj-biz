@@ -9,7 +9,7 @@ import utils from '~/tools/utils';
 // 获取token
 function getToken() {
   const storeToken = window.sessionStorage.getItem('STORE_TOKEN');
-  const userToken = window.localStorage.getItem('USER_TOKEN');
+  const userToken = utils.getUserToken();
   if (storeToken) {
     return storeToken;
   } else if (userToken) {

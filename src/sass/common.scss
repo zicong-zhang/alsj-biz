@@ -96,3 +96,14 @@ body {
     width: 100%;
   }
 }
+
+
+/* 指令样式 */
+
+/* directive - v-button */
+.d-button {
+  opacity: .6;
+  touch-action: none;
+  -webkit-touch-action: none;
+  user-select: none;
+}

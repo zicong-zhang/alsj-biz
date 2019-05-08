@@ -46,7 +46,7 @@ export default {
 </script>
 <style lang="scss" scoped>
 .toast-component {
-  width: 100%;
+  max-width: 100%;
   height: r(80px);
   position: fixed;
   top: 50%;

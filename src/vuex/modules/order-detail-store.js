@@ -163,12 +163,13 @@ export default {
         'Installed', // 完成送货安装
         'finished' // 完成结束订单
       ]
-      const url = `/order/${config[orderStatus - 1]}/update`;
+      console.log('orderDetailStatus:_____', orderDetailStatus);
+      const url = `/order/${config[orderDetailStatus - 1]}/update`;
 
       return http(url, {
         orderId,
         orderStatus: orderDetailStatus
-      })(orderId, orderDetailStatus)
+      })
         .then(() => {
           ctx.dispatch('getOrderDetailProgress');
           ctx.commit(types.UPDATE_ORDER_STATUS);

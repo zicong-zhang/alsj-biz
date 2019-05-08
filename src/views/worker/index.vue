@@ -35,16 +35,30 @@ export default {
   },
   data() {
     return {
+      isFromLogin: false,
       title: '阿拉私家',
       showBack: false
     };
   },
-  created() {
+  /* watch: {
+    $route(to, from) {
+      if (from.name === 'login') {
+        this.$nextTick(() =>{
+          this.$children.forEach(vNode => vNode.init && vNode.init());
+        })
+      }
+    }
+  }, */
+  activated() {
     this.getSelfStoreList().then((list) => {
       const first = list[0];
       this.$utils.setSession('STORE_TOKEN', first ? first.token : '');
       this.SET_STORE_ID(first.merchantExt.id);
       this.getStoreInfo();
+
+      this.$nextTick(() =>{
+        this.$children.forEach(vNode => vNode.init && vNode.init());
+      })
     });
   },
   methods: {

@@ -7,16 +7,20 @@
         <h3>年度总业绩106万</h3>
       </section>
       <div class="units">
-        <div class="picker"
-          @click="showDatePicker">
+        <div
+          class="picker"
+          @click="showDatePicker"
+        >
           <span>年份({{ year }})</span>
           <i class="icon i-bottom"></i>
         </div>
         <p>单位：万元</p>
       </div>
       <div class="chart-container">
-        <div class="chart"
-          ref="chart"></div>
+        <div
+          class="chart"
+          ref="chart"
+        ></div>
       </div>
     </div>
   </div>
@@ -43,22 +47,49 @@ export default {
     this.year = new Date().getFullYear();
     this.init();
   },
+  beforeDestroy() {},
+  destroyed() {
+    console.log('this:_____', this.year);
+  },
   methods: {
     ...mapActions(['getPerformanceTotalList']),
     showDatePicker() {
-      this.$DatePicker({
-        type: 'year-month',
-        confirm: (value) => {
-          this.year = value.getFullYear();
+      const year = new Date().getFullYear();
+      const arr = Array(5).fill(year);
+      const prev = arr.map((item, idx) => {
+        return {
+          text: year - (5 - idx),
+          value: year - (5 - idx)
+        };
+      })
+      const next = arr.map((item, idx) => {
+        return {
+          text: year + idx,
+          value: year + idx
+        };
+      })
+
+      console.log('prev. next:_____', prev.next);
+
+      this.$Picker({
+        title: '选择年份',
+        list: [
+          {
+            values: [...prev, ...next]
+          }
+        ],
+        onConfirm: ([{ value }]) => {
+          console.log('value:_____', value);
+          this.year = value;
           this.init();
         }
       });
     },
     init() {
-      this.getPerformanceTotalList(this.year).then((res) => {
+      this.getPerformanceTotalList(this.year).then(res => {
         const list = res.data.list;
         if (list.length) {
-          list.forEach((item) => {
+          list.forEach(item => {
             const idx = item.month - 1;
             this.performanceList.splice(idx, 1, item.amount / 10000);
           });
@@ -197,57 +228,57 @@ export default {
 };
 </script>
 <style lang="scss">
-.view-performnace-total {
-  .title {
-    background: #fff;
-    padding: 0 36px;
-    h3 {
-      border-bottom: 1px solid rgba(0, 0, 0, 0.06);
-      font-size: 32px;
-      padding: 32px 0;
-      padding-left: 12px;
-      position: relative;
-      &:before {
-        content: '';
-        position: absolute;
-        left: 0;
-        top: 50%;
-        transform: translateY(-50%);
-        display: block;
-        width: 4px;
-        height: 28px;
-        background: #404040;
-        border-radius: 4px;
+  .view-performnace-total {
+    .title {
+      background: #fff;
+      padding: 0 36px;
+      h3 {
+        border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+        font-size: 32px;
+        padding: 32px 0;
+        padding-left: 12px;
+        position: relative;
+        &:before {
+          content: "";
+          position: absolute;
+          left: 0;
+          top: 50%;
+          transform: translateY(-50%);
+          display: block;
+          width: 4px;
+          height: 28px;
+          background: #404040;
+          border-radius: 4px;
+        }
       }
     }
-  }
-  .units {
-    background: #fff;
-    font-size: 24px;
-    color: #999;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0 36px;
-    i {
+    .units {
+      background: #fff;
       font-size: 24px;
+      color: #999;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 36px;
+      i {
+        font-size: 24px;
+      }
+      p,
+      .picker {
+        padding-top: 24px;
+        padding-bottom: 50px;
+      }
     }
-    p,
-    .picker {
-      padding-top: 24px;
-      padding-bottom: 50px;
+    .chart-container {
+      background: linear-gradient(to right, #2985ff, #3dadff);
+      height: 500px;
+      background: #fff;
+      padding-left: 36px;
+      padding-right: 18px;
+    }
+    .chart {
+      width: 100%;
+      height: 100%;
     }
   }
-  .chart-container {
-    background: linear-gradient(to right, #2985ff, #3dadff);
-    height: 500px;
-    background: #fff;
-    padding-left: 36px;
-    padding-right: 18px;
-  }
-  .chart {
-    width: 100%;
-    height: 100%;
-  }
-}
 </style>

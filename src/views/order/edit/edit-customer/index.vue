@@ -127,7 +127,8 @@ export default {
           linkmanPhon: this.linkmanPhone,
           orderId: this.orderId
         }).then(() => {
-          this.$utils.back(this);
+          console.log('23:_____', 23);
+          this.$utils.back();
         });
       }
     }

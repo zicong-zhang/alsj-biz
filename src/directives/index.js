@@ -1,7 +1,25 @@
 import Vue from 'vue';
 import * as mutationTypes from '~vuex/mutation-types';
 
-
+/**
+ * 按钮按下效果
+ */
+function buttonAddClassName(el) {
+  return e => el.classList.add('d-button');
+}
+function buttonRemoveClassName(el) {
+  return e => el.classList.remove('d-button');
+}
+Vue.directive('button', {
+  bind(el) {
+    el.addEventListener('touchstart', buttonAddClassName(el), false)
+    el.addEventListener('touchend', buttonRemoveClassName(el), false)
+  },
+  unbind(el) {
+    el.removeEventListener('touchstart', buttonAddClassName(el), false)
+    el.removeEventListener('touchend', buttonRemoveClassName(el), false)
+  }
+})
 /**
  * 获取焦点
  */

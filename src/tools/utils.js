@@ -124,9 +124,9 @@ export default {
    */
   limitInput(text = '', type, regExp) {
     const config = {
-      number: () => /\D/g,
-      password: () => /[^\da-zA-Z]/g,
-      cn: () => /[^\u4E00-\u9FA5a-zA-Z\']/g
+      number: /\D/g,
+      password: /[^\da-zA-Z]/g,
+      cn: /[^\u4E00-\u9FA5a-zA-Z\']/g
     }
 
     if (!type) return text;
@@ -170,23 +170,28 @@ export default {
    */
   setUserInfo(data) {
     const info = JSON.parse(JSON.stringify(data));
-    window.localStorage.setItem('USER_INFO', JSON.stringify(info));
-    window.localStorage.setItem('USER_INFO_EXPIRE', Date.now());
+    window.sessionStorage.setItem('USER_INFO', JSON.stringify(info));
+    window.sessionStorage.setItem('USER_TOKEN', info.token);
   },
   /**
    * 获取用户信息
    */
   getUserInfo() {
-    const info = window.localStorage.getItem('USER_INFO');
+    const info = window.sessionStorage.getItem('USER_INFO');
     return info;
+  },
+  /**
+   * 获取用户 token
+   */
+  getUserToken() {
+    return window.sessionStorage.getItem('USER_TOKEN') || '';
   },
   /**
    * 清除用户信息
    */
   clearUserInfo() {
-    window.localStorage.removeItem('USER_INFO');
-    window.localStorage.removeItem('USER_TOKEN');
-    window.localStorage.removeItem('USER_INFO_EXPIRE');
+    window.sessionStorage.removeItem('USER_INFO');
+    window.sessionStorage.removeItem('USER_TOKEN');
   },
   /**
    * 登录后的跳转
